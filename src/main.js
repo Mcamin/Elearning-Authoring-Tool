@@ -18,10 +18,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 
-// Using ES6 imports
-import mongoose from 'mongoose';
+// Using Node.js `require()`
+const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/eat_awt', {
+await mongoose.connect('mongodb://localhost/eat_awt', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
