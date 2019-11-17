@@ -1,45 +1,34 @@
 {
-  "name": "eat",
+  "name": "EAT",
   "version": "0.1.0",
   "private": true,
+  "description": "An Authoring Tool for LMS compliant courses",
+  "author": "ahmed amine mchayaa, patrick, david",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "vue-cli-service serve --open",
+    "lint-fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "bootstrap-vue": "^2.1.0",
     "core-js": "^3.3.2",
-    "mdbvue": "^6.0.1",
     "vue": "^2.6.10",
-    "bootstrap-vue": "latest"
+    "vue-router-prefetch": "^1.6.0",
+    "webpack": "latest",
+    "vue-router": "^3.1.3",
+    "vue2-transitions": "^0.2.3",
+    "register-service-worker": "^1.5.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.0.0",
-    "@vue/cli-plugin-eslint": "^4.0.0",
-    "@vue/cli-service": "^4.0.0",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-plugin-pwa": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
   },
   "browserslist": [
     "> 1%",
