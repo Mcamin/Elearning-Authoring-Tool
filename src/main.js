@@ -18,6 +18,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 
+// Using ES6 imports
+import mongoose from 'mongoose';
+
+mongoose.connect('mongodb://localhost/eat_awt', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+
 new Vue({
   router,
   render: h => h(App),
