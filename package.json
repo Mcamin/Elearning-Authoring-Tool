@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
-    "vue": "^2.6.10"
+    "mdbvue": "^6.0.1",
+    "vue": "^2.6.10",
+    "bootstrap-vue": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.0.0",
