@@ -1,8 +1,8 @@
 export default [
   {
     title: "Playground Page",
-    description: "this is a dummy description",
-
+    description: "MONGO JUNGE  description",
+    type:"TestType",
     targetPage: "playground",
 
   },
