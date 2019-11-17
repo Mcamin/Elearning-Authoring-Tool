@@ -1,25 +1,21 @@
 <template>
-  <div class="card" :class="[type && `card-${type}`]">
-    <div class="card-image" v-if="$slots.image">
-      <slot name="image"></slot>
-    </div>
-    <div class="card-header" v-if="$slots.header || title" :class="headerClasses">
-      <slot name="header">
-        <h4 class="card-title">{{title}}</h4>
-        <p class="card-category" v-if="subTitle">{{subTitle}}</p>
-      </slot>
-    </div>
-    <div class="card-body" v-if="$slots.default">
-      <slot></slot>
-    </div>
-    <div class="card-image" v-if="$slots['image-bottom']">
-      <slot name="image-bottom"></slot>
-    </div>
-    <slot name="raw-content"></slot>
-    <div class="card-footer" :class="footerClasses" v-if="$slots.footer">
-      <slot name="footer"></slot>
-    </div>
-  </div>
+  <b-col cols="3" class="card" :class="[type && `card-${type}`]">
+    <b-card
+      :title="title"
+      img-src="https://picsum.photos/600/300/?image=25"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+    >
+      <b-card-text :description="description">
+        {{description}}
+      </b-card-text>
+
+      <b-button href="#" variant="primary">Go somewhere</b-button>
+    </b-card>
+  </b-col>
 </template>
 <script>
   export default {
@@ -29,9 +25,9 @@
         type: String,
         description: "Card title"
       },
-      subTitle: {
+      description: {
         type: String,
-        description: "Card subtitle"
+        description: "Course description"
       },
       type: {
         type: String,
