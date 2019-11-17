@@ -1,8 +1,8 @@
 <template>
   <footer class="footer">
-    <b-container fluid >
+    <b-container fluid>
       <div class="copyright">
-        ©<a href="#" target="_blank" rel="noopener">Fraunhofer FOKUS</a> {{year}}.
+        ©<a href="#" target="_blank" rel="noopener">Fraunhofer FOKUS</a> {{year}}
       </div>
       <b-nav>
         <b-nav-item  href="#"><i class="tim-icons"></i></b-nav-item>
@@ -24,3 +24,16 @@
         }
     };
 </script>
+
+<style lang="scss">
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3rem;     /* Footer height */
+    background-color: #17a2b8;
+  }
+  .copyright {
+    text-align: center;
+  }
+</style>
