@@ -1,42 +1,41 @@
 export default [
   {
     title: "Certified chierd digital officer Page",
-    description: "MONGO JUNGE  description",
-    type:"TestType",
-    targetPage: "playground",
+    languages:"TestType",
+    targetPage: "#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
 
   },
   {
     title: "Exercise Page",
-    description: "this is a dummy description",
-
-    targetPage: "exercise",
-
-  },
-  {
-    title: "Multiple choice Exercise",
-    description: "this is a dummy description",
-
-    targetPage:"",
+    languages:"TestType",
+    targetPage: "#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
 
   },
   {
     title: "Multiple choice Exercise",
-    description: "this is a dummy description",
-    targetPage:"",
-
+    languages:"TestType",
+    targetPage:"#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
+  },
+  {
+    title: "Multiple choice Exercise",
+    languages:"TestType",
+    targetPage:"#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
   },
   {
     title: "Not Found",
-    description: "Not found Page",
-    state: 3,
-    targetPage:"notFound",
-
+    languages:"TestType",
+    targetPage:"#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
   },
   {
     title: "Distributed Page",
-    description: "A page loaded from server",
-    targetPage:"distributed",
+    languages:"hello",
+    targetPage:"#",
+    imagePath:"https://picsum.photos/600/300/?image=25",
   },
 
 ]
