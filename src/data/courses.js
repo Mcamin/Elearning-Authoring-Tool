@@ -1,6 +1,6 @@
 export default [
   {
-    title: "Playground Page",
+    title: "Certified chierd digital officer Page",
     description: "MONGO JUNGE  description",
     type:"TestType",
     targetPage: "playground",

@@ -5,7 +5,7 @@ import Wrapper from "@/layout/Dashboard/Wrapper";
 
 
 // Admin pages
-const Dashboard = () => import(/* webpackChunkName: "dashboard" */"../pages/Dashboard.vue");
+const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 
 const routes = [
     {
