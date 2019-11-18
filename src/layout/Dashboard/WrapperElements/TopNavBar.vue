@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <b-navbar toggleable="lg" type="dark" >
+
+    <b-navbar toggleable="lg" type="dark"  sticky>
       <b-navbar-brand href="#">{{routeName}}</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -30,14 +30,14 @@
             <template slot="button-content">
               <div class="photo"><img src="img/anime3.png"></div>
             </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item href="#profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Settings</b-dropdown-item>
             <b-dropdown-item href="#">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-  </div>
+
 </template>
 
 <script>

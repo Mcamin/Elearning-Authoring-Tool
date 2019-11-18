@@ -4,6 +4,7 @@
     position: relative;
     width: 100%;
     margin-bottom: 30px;
+   min-height: 300px;
     box-shadow: $box-shadow;
 
 
@@ -15,7 +16,7 @@
       margin-bottom: .75rem;
     }
 
-    .card-body{
+  .card-body{
       padding: 15px;
 
       &.table-full-width{
