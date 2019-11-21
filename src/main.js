@@ -4,27 +4,21 @@ import router from "./router/index";
 import './registerServiceWorker'
 import BootstrapVue from 'bootstrap-vue';
 
-
+import dashboard from "./plugins/dashboard";
 import Vue from 'vue'
 import App from './App.vue'
 Vue.use(VueRouter);
+
 Vue.use(RouterPrefetch);
 Vue.use(BootstrapVue);
+Vue.use(dashboard);
 
 
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 
-// Using Node.js `require()`
-const mongoose = require('mongoose');
 
-await mongoose.connect('mongodb://localhost/eat_awt', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
 
 
 new Vue({
