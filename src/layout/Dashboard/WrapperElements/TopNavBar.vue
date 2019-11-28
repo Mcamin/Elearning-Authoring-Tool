@@ -30,7 +30,7 @@
             <template slot="button-content">
               <div class="photo"><img src="img/anime3.png"></div>
             </template>
-            <b-dropdown-item href="#profile">Profile</b-dropdown-item>
+            <b-dropdown-item router-link to="/profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Settings</b-dropdown-item>
             <b-dropdown-item href="#">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
