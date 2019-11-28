@@ -102,7 +102,7 @@
     .input-group{
         .form-control{
             padding: $padding-vertical - 1 $padding-horizontal - 1 $padding-vertical - 1 $padding-horizontal - 1;
-
+            color:black;
             & + .input-group-prepend .input-group-text,
             & + .input-group-append .input-group-text{
                 padding: $padding-vertical - 1 $padding-horizontal - 1 $padding-vertical - 1 0;
