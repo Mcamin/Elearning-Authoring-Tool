@@ -7,6 +7,7 @@ import Wrapper from "@/layout/Dashboard/Wrapper";
 // Admin pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
+const CreateNewCourse = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/CreateNewCourse.vue");
 
 const routes = [
     {
@@ -24,7 +25,11 @@ const routes = [
             name: "profile",
             component: Profile
           },
-
+          {
+            path: "createcourse",
+            name: "createcourse",
+            component: CreateNewCourse
+          }
         ]
     },
     { path: "*", component: NotFound },
