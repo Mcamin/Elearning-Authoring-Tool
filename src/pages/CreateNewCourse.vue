@@ -1,5 +1,9 @@
 <template>
-  <div>Create a new course</div>
+ <b-col>
+   <b-row>
+     <!--Drag and drop elements-->
+   </b-row>
+ </b-col>
 </template>
 
 <script>
