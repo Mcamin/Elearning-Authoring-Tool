@@ -1,16 +1,20 @@
 <template>
   <div id="app">
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view :key="path"></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  components: {
+    import * as $route from "vue-router";
+    export default {
+        data:{
+            path:$route.fullPath
+        },
+        name: 'app',
+        components: {
 
-  }
-}
+        }
+    }
 </script>
 <style lang="scss">
 </style>

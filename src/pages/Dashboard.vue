@@ -23,7 +23,7 @@
 <script>
 import Courses from "@/data/courses.js"
 import Card from "../components/Cards/CourseCard";
-import NewCourseCard from "../components/Cards/NewCourseCard";
+import NewCourseCard from "../components/Cards/AddContentModal";
 
   export default {
     components: {

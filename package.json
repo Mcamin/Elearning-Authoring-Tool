@@ -33,6 +33,8 @@
     "@vue/cli-service": "^3.4.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
+    "vue-perfect-scrollbar": "^0.2.1",
+    "vue-sidebar-menu": "^4.4.3",
     "vue-template-compiler": "^2.6.10"
   },
   "browserslist": [

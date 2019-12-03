@@ -4,7 +4,7 @@ import router from "./router/index";
 import './registerServiceWorker'
 import BootstrapVue from 'bootstrap-vue';
 
-import dashboard from "./plugins/dashboard";
+import Dashboard from "./plugins/dashboard";
 import Vue from 'vue'
 import App from './App.vue'
 Vue.use(VueRouter);

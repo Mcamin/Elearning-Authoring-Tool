@@ -10,8 +10,8 @@
   </div>
 </template>
 <script>
-  import EditProfileForm from './Profile/EditProfileForm';
-  import UserCard from './Profile/UserCard'
+  import EditProfileForm from '../components/Forms/EditProfileForm';
+  import UserCard from '../components/Cards/UserCard'
   export default {
     components: {
       EditProfileForm,
