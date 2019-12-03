@@ -42,7 +42,7 @@
 
 <script>
     import { CollapseTransition } from 'vue2-transitions';
-    import Modal from '@/components/Modal';
+    import Modal from '@/components/Modals/Modal';
     export default {
         name: "TopNavBar",
         components: {

@@ -7,7 +7,10 @@ import Wrapper from "@/layout/Dashboard/Wrapper";
 // Admin pages
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
-const CreateNewCourse = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/CreateNewCourse.vue");
+const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
+const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
+const SignIn = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/SignIn.vue");
+const Course = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Course.vue");
 
 const routes = [
     {
@@ -26,9 +29,24 @@ const routes = [
             component: Profile
           },
           {
-            path: "createcourse",
-            name: "createcourse",
-            component: CreateNewCourse
+            path: "newcourse",
+            name: "newcourse",
+            component: Course
+          },
+          {
+            path: "library",
+            name: "library",
+            component: Library
+          },
+          {
+            path: "SignIn",
+            name: "signin",
+            component: SignIn
+          },
+          {
+            path: "playground",
+            name: "playground",
+            component: Playground
           }
         ]
     },
