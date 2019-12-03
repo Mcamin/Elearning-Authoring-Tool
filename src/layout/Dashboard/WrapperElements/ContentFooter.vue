@@ -15,7 +15,6 @@
        </b-col>
 
       </b-row>
-
       </footer>
     </b-container>
 

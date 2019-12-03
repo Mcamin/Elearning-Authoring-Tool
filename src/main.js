@@ -11,11 +11,6 @@ Vue.use(VueRouter);
 
 Vue.use(RouterPrefetch);
 Vue.use(BootstrapVue);
-Vue.use(dashboard);
-
-
-
-
 Vue.config.productionTip = false;
 
 
