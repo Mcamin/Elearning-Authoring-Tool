@@ -3,8 +3,8 @@ import RouterPrefetch from 'vue-router-prefetch'
 import router from "./router/index";
 import './registerServiceWorker'
 import BootstrapVue from 'bootstrap-vue';
-
 import Dashboard from "./plugins/dashboard";
+
 import Vue from 'vue'
 import App from './App.vue'
 Vue.use(VueRouter);
