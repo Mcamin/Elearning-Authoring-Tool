@@ -11,6 +11,8 @@ const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pag
 const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
 const SignIn = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/SignIn.vue");
 const Course = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Course.vue");
+const NewQuiz = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/NewLesson.vue");
+const NewLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/NewQuiz.vue");
 
 const routes = [
     {
@@ -47,6 +49,16 @@ const routes = [
             path: "playground",
             name: "playground",
             component: Playground
+          },
+          {
+            path: "newquiz",
+            name: "NewQuiz",
+            component: NewQuiz
+          },
+          {
+            path: "newlesson",
+            name: "newLesson",
+            component: NewLesson
           }
         ]
     },

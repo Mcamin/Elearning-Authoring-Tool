@@ -2,7 +2,7 @@
     <b-container>
       <b-row>
         <b-col>
-          <b-button v-b-modal="'add-content'">Show Modal</b-button>
+          <b-button v-b-modal="'add-unit'">Show Modal</b-button>
           <AddContentModel></AddContentModel>
         </b-col>
       </b-row>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import AddContentModel from "../components/Modals/AddContentModal";
+  import AddContentModel from "../components/Modals/AddUnitModal";
 
   export default {
         name: "Playground",
