@@ -51,7 +51,7 @@
                   />
                 </b-form-group>
 
-                <b-button type="submit" variant="primary" router-link to="/createcourse" @click.native="handleSubmit">Submit</b-button>
+                <b-button type="submit" variant="primary" router-link to="/newcourse" @click.native="handleSubmit">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
               <b-card class="mt-3" header="Form Data Result">
