@@ -2,6 +2,7 @@
 // GeneralViews
 import NotFound from '@/pages/NotFoundPage.vue';
 import Wrapper from "@/layout/Dashboard/Wrapper";
+import CreateNewCourse from "../pages/CreateNewCourse";
 
 
 // Admin pages
@@ -23,7 +24,7 @@ const routes = [
             {
                 path: "dashboard",
                 name: "dashboard",
-                component: Dashboard
+              component: Dashboard
             },
           {
             path: "profile",
@@ -33,7 +34,7 @@ const routes = [
           {
             path: "newcourse",
             name: "newcourse",
-            component: Course
+            component: CreateNewCourse
           },
           {
             path: "library",
