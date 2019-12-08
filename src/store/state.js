@@ -1,5 +1,6 @@
-import courses from '../data/newcourse'
+import courses from '../data/coursesArray'
 
 export default {
+  newCourse:{},
   courses
 }

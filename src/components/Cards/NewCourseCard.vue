@@ -65,7 +65,7 @@
 </template>
 <script>
   import {mapState, mapActions, ActionContext as store} from 'vuex'
-  import newcourse from "../../data/newcourse";
+  import newcourse from "../../data/coursesArray";
 
   export default {
         data() {

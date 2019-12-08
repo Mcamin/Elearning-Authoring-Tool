@@ -1,14 +1,18 @@
 <template>
 
     <b-navbar toggleable="lg" type="dark"  sticky>
-      <b-navbar-brand href="#">{{routeName}}</b-navbar-brand>
+      <router-link to="/dashboard">
+        <font-awesome-icon :icon="['fas', 'th-large']" size="lg" />
+      </router-link>
+      <b-navbar-brand href="#" class="ml-2">{{routeName}}</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="searchModalVisible = true"> <i class="tim-icons icon-zoom-split"></i>
+          <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="searchModalVisible = true">
+            <font-awesome-icon :icon="['fas', 'search']" size="lg" />
           </b-nav-item>
           <modal :show.sync="searchModalVisible"
                  class="modal-search"
@@ -19,7 +23,7 @@
           </modal>
           <b-nav-item-dropdown no-caret	 text="" right>
             <template slot="button-content">
-              <i class="tim-icons icon-sound-wave"></i>
+              <font-awesome-icon :icon="['fas', 'bell']" size="lg" />
             </template>
             <b-dropdown-item href="#">Notifcation 1</b-dropdown-item>
             <b-dropdown-item href="#">Notification 2</b-dropdown-item>
@@ -28,7 +32,8 @@
           </b-nav-item-dropdown>
           <b-nav-item-dropdown text="" right>
             <template slot="button-content">
-              <div class="photo"><img src="img/anime3.png"></div>
+              <span>User</span>
+             <!-- <div class="photo"><img src="img/anime3.png"></div>-->
             </template>
             <b-dropdown-item router-link to="/profile">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Settings</b-dropdown-item>
@@ -42,12 +47,23 @@
 
 <script>
     import { CollapseTransition } from 'vue2-transitions';
-    import Modal from '@/components/Modals/Modal';
+    import Modal from '@/components/Modals/SearchModal';
+    import { library } from '@fortawesome/fontawesome-svg-core'
+    import { faThLarge,faSearch,faBell} from '@fortawesome/free-solid-svg-icons'
+    import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+    library.add(
+        faThLarge,
+        faSearch,
+        faBell
+    );
+
     export default {
         name: "TopNavBar",
         components: {
             CollapseTransition,
-            Modal
+            Modal,
+            'font-awesome-icon': FontAwesomeIcon,
         },
         computed: {
             routeName() {
@@ -80,6 +96,14 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="css" >
+  .navbar
+  { padding: 10px 30px 10px 15px;
+    width: 100%;
+    z-index: 1050;
+    background: #1f7d67;
+  color: white}
+  .navbar >a{
+    color: white!important;
+  }
 </style>

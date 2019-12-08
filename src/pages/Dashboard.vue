@@ -9,7 +9,7 @@
       <b-col md="3">
         <new-course-card></new-course-card>
       </b-col>
-      <b-col md="3" v-for="course in courses">
+      <b-col md="3" v-for="course in courses" :key="courses.title">
         <card
           :title="course.title"
           :languages="course.languages"
@@ -21,7 +21,7 @@
   </b-container>
 </template>
 <script>
-import Courses from "@/data/courses.js"
+import Courses from "@/data/coursesMetadata.js"
 import Card from "../components/Cards/CourseCard";
 import NewCourseCard from "../components/Cards/NewCourseCard";
 
