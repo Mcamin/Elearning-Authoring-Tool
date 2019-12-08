@@ -77,10 +77,95 @@
 
                   </b-row>
                   <b-row>
-                    <b-col class="mb-3">
+                    <b-col class="mb-2">
                       <b-card no-body>
                         <b-tabs card>
                           <b-tab no-body title="LIFECYCLE">
+                            <b-container>
+                              <b-row >
+
+                                <b-col>
+                                  <b-card no-body  class="my-3">
+                                    <b-card-body>
+
+                                      <b-card-text>
+                                        <b-container>
+                                          <b-row>
+                                            <b-col class="mb-3">
+                                              <h5 >Structure</h5>
+                                              <span>Description</span>
+                                            </b-col>
+                                            <b-col class="mb-3">
+                                              <span>SOURCE</span><br>
+                                              <b-dropdown id="dropdown-1" text="SLHw" class="mt-2">
+                                                <b-dropdown-item>First Action</b-dropdown-item>
+                                                <b-dropdown-item>Second Action</b-dropdown-item>
+                                                <b-dropdown-item>Third Action</b-dropdown-item>
+                                              </b-dropdown>
+                                            </b-col>
+                                            <b-col class="mb-3">
+                                              <span>STATE</span><br>
+                                              <b-dropdown id="dropdown-1" text="SLHw" class="mt-2">
+                                                <b-dropdown-item>First Action</b-dropdown-item>
+                                                <b-dropdown-item>Second Action</b-dropdown-item>
+                                                <b-dropdown-item>Third Action</b-dropdown-item>
+                                              </b-dropdown>
+                                            </b-col>
+
+                                          </b-row>
+
+                                        </b-container>
+
+
+
+                                      </b-card-text>
+                                    </b-card-body>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+                              <b-row >
+
+                                <b-col>
+                                  <b-card no-body  class="my-3">
+                                    <b-card-body>
+
+                                      <b-card-text>
+                                        <b-container>
+                                          <b-row>
+                                            <b-col class="mb-3">
+                                              <h5 >Structure</h5>
+                                              <span>Description</span>
+                                            </b-col>
+                                            <b-col class="mb-3">
+                                              <span>SOURCE</span><br>
+                                              <b-dropdown id="dropdown-1" text="SLHw" class="mt-2">
+                                                <b-dropdown-item>First Action</b-dropdown-item>
+                                                <b-dropdown-item>Second Action</b-dropdown-item>
+                                                <b-dropdown-item>Third Action</b-dropdown-item>
+                                              </b-dropdown>
+                                            </b-col>
+                                            <b-col class="mb-3">
+                                              <span>STATE</span><br>
+                                              <b-dropdown id="dropdown-1" text="SLHw" class="mt-2">
+                                                <b-dropdown-item>First Action</b-dropdown-item>
+                                                <b-dropdown-item>Second Action</b-dropdown-item>
+                                                <b-dropdown-item>Third Action</b-dropdown-item>
+                                              </b-dropdown>
+                                            </b-col>
+
+                                          </b-row>
+
+                                        </b-container>
+
+
+
+                                      </b-card-text>
+                                    </b-card-body>
+                                  </b-card>
+                                </b-col>
+                              </b-row>
+                            </b-container>
+
 
                           </b-tab>
 
