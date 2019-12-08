@@ -2,8 +2,8 @@
     <b-container class="mt-3">
       <b-row align-v="center">
         <b-col   align-self="center">
-            <b-card
-              no-body>
+          <!--HTML Card-->
+         <b-card no-body  class="mb-5">
               <b-card-body>
 
                 <b-card-text>
@@ -24,7 +24,7 @@
 
                     </b-row>
                     <b-row>
-                      <b-col class="mb-3">
+                      <b-col class="mb-5">
                         <el-tag
                           :key="tag"
                           v-for="tag in dynamicTags"
@@ -63,6 +63,57 @@
 
             </b-card>
 
+          <!--Metadata Card-->
+          <b-card no-body class="mb-3">
+            <b-card-body>
+
+              <b-card-text>
+                <b-container fluid>
+                  <b-row>
+                    <b-col class="mb-3">
+                      <h6>Metadata</h6>
+                      <span class="font-italic">Before publishing the course, meta data need to be inserted.</span>
+                    </b-col>
+
+                  </b-row>
+                  <b-row>
+                    <b-col class="mb-3">
+                      <b-card no-body>
+                        <b-tabs card>
+                          <b-tab no-body title="LIFECYCLE">
+
+                          </b-tab>
+
+                          <b-tab no-body title="TECHNICAL">
+
+                          </b-tab>
+
+                          <b-tab no-body title="EDUCATIONAL">
+
+                          </b-tab>
+
+                          <b-tab title="ANNOTATION">
+
+                          </b-tab>
+                        </b-tabs>
+                      </b-card>
+
+                    </b-col>
+
+                  </b-row>
+                </b-container>
+
+
+
+              </b-card-text>
+            </b-card-body>
+
+
+
+
+
+          </b-card>
+
         </b-col>
       </b-row>
     </b-container>
@@ -73,7 +124,7 @@
     import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle} from '@fortawesome/free-solid-svg-icons'
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
     import { VueEditor } from "vue2-editor";
-    import {Tag} from 'element-ui'
+    import {Tag,Button,Input} from 'element-ui'
 
     library.add(
         faPen,
@@ -115,7 +166,9 @@
       components:{
           'font-awesome-icon': FontAwesomeIcon,
           VueEditor,
-          [Tag.name]: Tag
+          Tag,
+          Input,
+          Button
 
       }
     }
