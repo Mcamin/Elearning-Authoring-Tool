@@ -64,7 +64,7 @@
             </b-card>
 
           <!--Metadata Card-->
-          <b-card no-body class="mb-3">
+          <b-card no-body class="mb-5">
             <b-card-body>
 
               <b-card-text>
