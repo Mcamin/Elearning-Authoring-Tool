@@ -9,7 +9,7 @@ export default  [
         description:"section 1 description",
         modules:[
           {title:"Lesson 1",
-          type:"lesson"
+            type:"lesson"
           },
           {title:"Interaction 1",
             type:"interaction"
