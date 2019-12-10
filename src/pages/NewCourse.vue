@@ -1,7 +1,7 @@
 <template>
-  <b-container class="mt-3">
-    <b-row align-v="center">
-      <b-col  align-self="center">
+  <b-container class=" mt-3 bg-dark" >
+    <b-row class=" bg-warning"  align-v="center" align-h="center">
+      <b-col align-self="center" class="h-100">
         <Accordion/>
           <AddContentModel/>
       </b-col>

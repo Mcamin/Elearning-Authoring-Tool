@@ -1,22 +1,14 @@
 <template>
-  <b-container >
-    <b-row align-h="end" class="mb-2">
-      <b-col cols="4" >
-            <span class="float-right">show : 9 / 24 / 36</span>
-      </b-col>
-    </b-row>
+  <b-container>
     <b-row>
-      <b-col md="3">
+      <b-col cols="6" >
         <new-course-card/>
+
       </b-col>
-      <b-col md="3" v-for="course in courses" :key="courses.title">
-        <card
-          :title="course.title"
-          :languages="course.languages"
-          :target="course.targetPage"
-          :imageSrc="course.imagePath"
-        />
+        <b-col cols="6">
+          <new-course-card/>
       </b-col>
+
     </b-row>
   </b-container>
 </template>

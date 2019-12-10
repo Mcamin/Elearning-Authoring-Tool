@@ -1,9 +1,10 @@
 export default  [
-  {
+  { id: "1000000",
     title:"Web Dev",
     description:"This is a new Course",
     language:"en, de, fr, es",
     tags:["Web","Project","Hello","World"],
+    imagePath:"https://picsum.photos/600/300/?image=25",
     sections:[
       {title:"section 1",
         description:"section 1 description",

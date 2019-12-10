@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 Vue.use(RouterPrefetch);
 Vue.use(BootstrapVue);
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 new Vue({
   router,
