@@ -1,15 +1,14 @@
 <template>
-  <div class="wrapper">
-    <div class="main-panel">
+
+    <div class="main-panel ">
  <transition name="fade" mode="out-in" appear>
         <!--<Sidebar />-->
       </transition>
-      <top-navigation-bar></top-navigation-bar>
+      <top-navigation-bar/>
       <dashboard-content>
       </dashboard-content>
-   <content-footer></content-footer>
+      <content-footer/>
   </div>
-</div>
 </template>
 <style lang="scss">
 </style>

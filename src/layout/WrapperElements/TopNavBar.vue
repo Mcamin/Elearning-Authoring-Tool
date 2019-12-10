@@ -1,12 +1,13 @@
 <template>
 
-    <b-navbar toggleable="lg" type="dark"  sticky>
+    <b-navbar toggleable="lg" type="dark"   class ="px-lg-5" sticky>
+
       <router-link to="/dashboard">
         <font-awesome-icon :icon="['fas', 'th-large']" size="lg" />
       </router-link>
       <b-navbar-brand href="#" class="ml-2">{{routeName}}</b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"/>
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
@@ -35,9 +36,10 @@
               <span>User</span>
              <!-- <div class="photo"><img src="img/anime3.png"></div>-->
             </template>
-            <b-dropdown-item router-link to="/profile">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Settings</b-dropdown-item>
-            <b-dropdown-item href="#">Logout</b-dropdown-item>
+            <b-dropdown-item router-link to="/profile"> MY PROFILE</b-dropdown-item>
+            <b-dropdown-item router-link to="/library">LIBRARY</b-dropdown-item>
+            <b-dropdown-item router-link to="/settings">SETTINGS</b-dropdown-item>
+            <b-dropdown-item router-link to="/login">LOGOUT</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

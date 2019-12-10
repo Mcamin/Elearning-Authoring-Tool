@@ -7,6 +7,9 @@ import CreateNewCourse from "../pages/NewCourse";
 
 
 // Admin pages
+const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Login.vue");
+const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
+
 const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
@@ -18,13 +21,18 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/playground",
+        redirect: "/login",
         children: [
-            {
-                path: "dashboard",
-                name: "dashboard",
-              component: Dashboard
-            },
+          {
+            path: "home",
+            name: "home",
+            component: Home
+          },
+          {
+            path: "dashboard",
+            name: "dashboard",
+            component: Dashboard
+          },
           {
             path: "profile",
             name: "profile",
@@ -43,6 +51,10 @@ const routes = [
 
         ]
     },
+  { path: "/login",
+    name: "login",
+    component: Login,
+  },
     { path: "*", component: NotFound },
 ];
 
