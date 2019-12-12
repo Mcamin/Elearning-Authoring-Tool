@@ -1,22 +1,22 @@
 <template>
-    <div class="app-sidebar sidebar-shadow" @mouseover="toggleSidebarHover('add','closed-sidebar-open')" @mouseleave="toggleSidebarHover('remove','closed-sidebar-open')">
-        <div class="app-header__logo">
-            <div class="logo-src"/>
-            <div class="header__pane ml-auto">
-                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" v-bind:class="{ 'is-active' : isOpen }" @click="toggleBodyClass('closed-sidebar')">
+  <div class="app-sidebar sidebar-shadow" @mouseover="toggleSidebarHover('add','closed-sidebar-open')" @mouseleave="toggleSidebarHover('remove','closed-sidebar-open')">
+    <div class="app-header__logo">
+      <div class="logo-src"/>
+      <div class="header__pane ml-auto">
+        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" v-bind:class="{ 'is-active' : isOpen }" @click="toggleBodyClass('closed-sidebar')">
                     <span class="hamburger-box">
                         <span class="hamburger-inner"></span>
                     </span>
-                </button>
-            </div>
-        </div>
-        <div class="app-sidebar-content">
-            <VuePerfectScrollbar class="app-sidebar-scroll" v-once>
-                <sidebar-menu showOneChild :menu="menu"/>
-            </VuePerfectScrollbar>
-        </div>
-
+        </button>
+      </div>
     </div>
+    <div class="app-sidebar-content">
+      <VuePerfectScrollbar class="app-sidebar-scroll" v-once>
+        <sidebar-menu showOneChild :menu="menu"/>
+      </VuePerfectScrollbar>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -259,3 +259,25 @@
         }
     }
 </script>
+
+<style>
+  .app-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 20;
+    overflow: hidden;
+    width: 280px;
+    position: fixed;
+    height: 100vh;
+    -webkit-box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
+    box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    padding: 60px 0 0;
+  }
+</style>

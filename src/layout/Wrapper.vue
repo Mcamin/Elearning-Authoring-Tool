@@ -1,14 +1,30 @@
 <template>
+  <main>
+    <!--Navigation-bar-->
+    <transition name="fade" mode="out-in" appear>
+   <top-navigation-bar/>
+    </transition>
+    <!--end Navigation-bar-->
 
-    <div class="main-panel ">
- <transition name="fade" mode="out-in" appear>
-        <!--<Sidebar />-->
-      </transition>
-      <top-navigation-bar/>
-      <dashboard-content>
-      </dashboard-content>
+    <!--Sidebar-->
+    <transition name="fade" mode="out-in" appear>
+   <Sidebar/>
+    </transition>
+    <!--end Sidebar-->
+
+    <!--Main-Wrapper-->
+          <dashboard-content/>
+    <!--end Main-Wrapper-->
+
+    <!--Footer-->
+    <transition name="fade" mode="out-in" appear>
       <content-footer/>
-  </div>
+    </transition>
+    <!--end Footer-->
+
+
+
+  </main>
 </template>
 <style lang="scss">
 </style>
@@ -17,12 +33,14 @@
 import ContentFooter from "./WrapperElements/ContentFooter.vue";
 import TopNavigationBar from "./WrapperElements/TopNavBar";
 import DashboardContent from "./WrapperElements/ContentWrapper.vue";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
-//import Sidebar from "./WrapperElements/Sidebar";
+import Sidebar from "./WrapperElements/Sidebar";
 export default {
 components: {
+    VuePerfectScrollbar,
     ContentFooter,
-//    Sidebar,
+    Sidebar,
     DashboardContent,
     TopNavigationBar,
 
