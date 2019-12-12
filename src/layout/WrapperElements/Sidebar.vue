@@ -1,4 +1,5 @@
 <template>
+  <b-col md="2" >
     <div class="app-sidebar sidebar-shadow" @mouseover="toggleSidebarHover('add','closed-sidebar-open')" @mouseleave="toggleSidebarHover('remove','closed-sidebar-open')">
         <div class="app-header__logo">
             <div class="logo-src"/>
@@ -15,8 +16,8 @@
                 <sidebar-menu showOneChild :menu="menu"/>
             </VuePerfectScrollbar>
         </div>
-
     </div>
+  </b-col>
 </template>
 
 <script>

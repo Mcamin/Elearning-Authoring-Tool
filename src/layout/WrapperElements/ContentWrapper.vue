@@ -1,10 +1,10 @@
 <template>
-    <div class="content p-5 bg-success">
+    <main  class="content p-5 container-fluid  align-self-center bg-success">
         <fade-transition :duration="100" mode="out-in">
             <!-- your content here -->
             <router-view></router-view>
         </fade-transition>
-    </div>
+    </main>
 </template>
 <script>
     import {FadeTransition} from 'vue2-transitions';

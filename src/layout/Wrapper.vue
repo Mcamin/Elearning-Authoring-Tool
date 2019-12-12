@@ -1,14 +1,21 @@
 <template>
 
-    <div class="main-panel ">
+    <main class=" container-fluid p-0 vh-100   bg-dark">
  <transition name="fade" mode="out-in" appear>
-        <!--<Sidebar />-->
-      </transition>
+
+ </transition>
       <top-navigation-bar/>
-      <dashboard-content>
-      </dashboard-content>
+      <b-container fluid class="h-100">
+        <b-row class=" justify-content-center h-100">
+          <Sidebar/>
+
+          <b-col class="h-100 d-flex align-self-stretch bg-info">
+            <dashboard-content/>
+          </b-col>
+        </b-row>
+      </b-container>
       <content-footer/>
-  </div>
+  </main>
 </template>
 <style lang="scss">
 </style>
@@ -18,11 +25,11 @@ import ContentFooter from "./WrapperElements/ContentFooter.vue";
 import TopNavigationBar from "./WrapperElements/TopNavBar";
 import DashboardContent from "./WrapperElements/ContentWrapper.vue";
 
-//import Sidebar from "./WrapperElements/Sidebar";
+import Sidebar from "./WrapperElements/Sidebar";
 export default {
 components: {
     ContentFooter,
-//    Sidebar,
+    Sidebar,
     DashboardContent,
     TopNavigationBar,
 
