@@ -4,10 +4,17 @@
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
         <b-col  class="text-left">
-          <span>{{title}}</span>
-          <a href="#" class="ml-2">
-            <font-awesome-icon :icon="['fas', 'pen']"  />
-          </a>
+          <b-container class="d-flex">
+            <span v-if="!editClicked" class="align-self-center">{{title}}</span>
+            <a v-if="!editClicked" href="#" @click="toggleTitleInput" class="ml-2">
+              <font-awesome-icon :icon="['fas', 'pen']"  />
+            </a>
+
+            <b-form-input class="w-25 mr-2" v-if="editClicked" v-model="title" :placeholder="title"/>
+            <b-button v-if="editClicked"  @click="toggleTitleInput">OK</b-button>
+
+          </b-container>
+
 
         </b-col>
         <b-col  class="text-right">
@@ -62,8 +69,7 @@
         return{
           title:"Section 1",
           collapsed:true,
-
-
+            editClicked:false
         }
       },
       components:{
@@ -74,6 +80,11 @@
           type:Object
         }
       },
+        methods:{
+            toggleTitleInput(){
+                this.editClicked= !this.editClicked
+            }
+        },
       mounted() {
         this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
           this.collapsed=isJustShown;
