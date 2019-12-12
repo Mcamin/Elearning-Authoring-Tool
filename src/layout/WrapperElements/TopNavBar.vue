@@ -100,12 +100,29 @@
 
 <style lang="css" >
   .navbar
-  { padding: 10px 30px 10px 15px;
+  {
     width: 100%;
     z-index: 1050;
     background: #1f7d67;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-left: 280px;
+    height: 60px;
+    -webkit-transition: all .2s;
+    transition: all .2s;
   color: white}
   .navbar >a{
     color: white!important;
   }
+
+
 </style>

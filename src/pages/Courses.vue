@@ -1,5 +1,5 @@
 <template>
-  <b-container >
+  <b-container fluid class=" p-4">
     <b-row align-h="end" class="mb-2">
       <b-col cols="4" >
             <span class="float-right">show : 9 / 24 / 36</span>
@@ -7,14 +7,18 @@
     </b-row>
     <b-row>
       <b-col md="3">
-        <new-course-card/>
+        <card
+          title="Create a new Course"
+          url="/newcourse"
+        />
       </b-col>
       <b-col md="3" v-for="course in courses" :key="courses.title">
         <card
           :title="course.title"
-          :languages="course.languages"
-          :target="course.targetPage"
-          :imageSrc="course.imagePath"
+          :course-category="course.title"
+          :course-languages="course.languages"
+          :url="course.targetPage"
+          :img="course.imagePath"
         />
       </b-col>
     </b-row>
@@ -22,7 +26,7 @@
 </template>
 <script>
 import Courses from "@/data/coursesMetadata.js"
-import Card from "../components/Cards/CourseCardOld";
+import Card from "../components/Cards/CourseCard";
 import NewCourseCard from "../components/Cards/NewCourseCard";
 
   export default {

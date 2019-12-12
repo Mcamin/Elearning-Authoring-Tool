@@ -1,6 +1,6 @@
 <template>
-  <b-container class=" mt-3 bg-dark" >
-    <b-row class=" bg-warning"  align-v="center" align-h="center">
+  <b-container fluid class=" mt-3  px-5 " >
+    <b-row   align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <Accordion/>
           <AddContentModel/>

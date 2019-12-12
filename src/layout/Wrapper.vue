@@ -1,5 +1,5 @@
 <template>
-  <main class=" container-fluid p-0 vh-100  bg-dark">
+  <main>
     <!--Navigation-bar-->
     <transition name="fade" mode="out-in" appear>
    <top-navigation-bar/>
@@ -8,18 +8,12 @@
 
     <!--Sidebar-->
     <transition name="fade" mode="out-in" appear>
-     <!-- <Sidebar/>-->
+   <Sidebar/>
     </transition>
     <!--end Sidebar-->
 
     <!--Main-Wrapper-->
-    <b-container fluid>
-      <b-row >
-        <b-col class=" d-flex align-items-stretch  bg-info">
           <dashboard-content/>
-        </b-col>
-      </b-row>
-    </b-container>
     <!--end Main-Wrapper-->
 
     <!--Footer-->

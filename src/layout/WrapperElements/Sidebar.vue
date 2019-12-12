@@ -259,3 +259,25 @@
         }
     }
 </script>
+
+<style>
+  .app-sidebar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 20;
+    overflow: hidden;
+    width: 280px;
+    position: fixed;
+    height: 100vh;
+    -webkit-box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
+    box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    padding: 60px 0 0;
+  }
+</style>

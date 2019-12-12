@@ -10,7 +10,7 @@ import CreateNewCourse from "../pages/NewCourse";
 const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Login.vue");
 const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
 
-const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
+const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
 const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
@@ -29,9 +29,9 @@ const routes = [
             component: Home
           },
           {
-            path: "dashboard",
-            name: "dashboard",
-            component: Dashboard
+            path: "courses",
+            name: "courses",
+            component: Courses
           },
           {
             path: "profile",

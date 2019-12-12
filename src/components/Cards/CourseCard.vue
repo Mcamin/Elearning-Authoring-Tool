@@ -1,7 +1,7 @@
 <template>
-  <b-col  cols="5" md="6" sm="1" class="mb-4">
-  <router-link to="/library" class="card__link">
-    <article class="card card--1">
+
+  <router-link :to="url" class="card__link">
+    <article class="card card--1 my-3">
       <div class="card__info-hover">
         <div class="card__clock-info" v-if="courseDuration">
           <svg class="card__clock"  viewBox="0 0 24 24" >
@@ -21,7 +21,6 @@
       </div>
     </article>
   </router-link>
-  </b-col>
 </template>
 
 <script>
@@ -102,6 +101,7 @@
   }
   .card {
     margin-right: 25px;
+    height: 500px;
     transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
     background-color: #fff;
     position: relative;
