@@ -22,7 +22,7 @@
 </template>
 <script>
 import Courses from "@/data/coursesMetadata.js"
-import Card from "../components/Cards/CourseCard";
+import Card from "../components/Cards/CourseCardOld";
 import NewCourseCard from "../components/Cards/NewCourseCard";
 
   export default {

@@ -1,20 +1,35 @@
 <template>
+  <main class=" container-fluid p-0 vh-100  bg-dark">
+    <!--Navigation-bar-->
+    <transition name="fade" mode="out-in" appear>
+   <top-navigation-bar/>
+    </transition>
+    <!--end Navigation-bar-->
 
-    <main class=" container-fluid p-0 vh-100   bg-dark">
- <transition name="fade" mode="out-in" appear>
+    <!--Sidebar-->
+    <transition name="fade" mode="out-in" appear>
+     <!-- <Sidebar/>-->
+    </transition>
+    <!--end Sidebar-->
 
- </transition>
-      <top-navigation-bar/>
-      <b-container fluid class="h-100">
-        <b-row class=" justify-content-center h-100">
-          <Sidebar/>
+    <!--Main-Wrapper-->
+    <b-container fluid>
+      <b-row >
+        <b-col class=" d-flex align-items-stretch  bg-info">
+          <dashboard-content/>
+        </b-col>
+      </b-row>
+    </b-container>
+    <!--end Main-Wrapper-->
 
-          <b-col class="h-100 d-flex align-self-stretch bg-info">
-            <dashboard-content/>
-          </b-col>
-        </b-row>
-      </b-container>
+    <!--Footer-->
+    <transition name="fade" mode="out-in" appear>
       <content-footer/>
+    </transition>
+    <!--end Footer-->
+
+
+
   </main>
 </template>
 <style lang="scss">
@@ -24,10 +39,12 @@
 import ContentFooter from "./WrapperElements/ContentFooter.vue";
 import TopNavigationBar from "./WrapperElements/TopNavBar";
 import DashboardContent from "./WrapperElements/ContentWrapper.vue";
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
 
 import Sidebar from "./WrapperElements/Sidebar";
 export default {
 components: {
+    VuePerfectScrollbar,
     ContentFooter,
     Sidebar,
     DashboardContent,

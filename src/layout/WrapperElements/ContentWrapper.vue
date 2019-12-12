@@ -1,5 +1,5 @@
 <template>
-    <main  class="content p-5 container-fluid  align-self-center bg-success">
+    <main  class="content p-5 container-fluid   bg-success">
         <fade-transition :duration="100" mode="out-in">
             <!-- your content here -->
             <router-view></router-view>

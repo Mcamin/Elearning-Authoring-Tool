@@ -1,7 +1,7 @@
 <template>
 
       <footer class="footer py-2">
-        <b-container fluid  >
+        <b-container fluid>
       <b-row align-v="center">
         <b-col  md="6" sm="12">
           <div class="copyright text-center float-lg-left">
