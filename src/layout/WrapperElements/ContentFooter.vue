@@ -52,7 +52,7 @@
     left: 0
     color: white
     bottom: 0
-    background-color: #1f7d67
+    background-color: #219678
     a
       color: white
 </style>

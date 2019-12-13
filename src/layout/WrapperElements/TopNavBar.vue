@@ -103,7 +103,7 @@
   {
     width: 100%;
     z-index: 1050;
-    background: #1f7d67;
+    background: #219678;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
