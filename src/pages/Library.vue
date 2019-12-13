@@ -1,15 +1,21 @@
 <template>
-  <b-container fluid>
-    <b-row  align-h="center" class="bg-dark vh-100"  align-content="center">
-      <b-col  class="  h-100 bg-danger " align="center" align-self="center" >
-        <div >
-          This is the login Page
-        </div>
-
-      </b-col>
-      <b-col >
-        <div>
-          This is the login Page.
+  <b-container fluid class="p-5 mx-4">
+    <b-row  align-h="center"   align-content="center">
+      <b-col  align="center" align-self="center" >
+        <div class="accordion">
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
+          <Accordion/>
         </div>
 
       </b-col>
@@ -18,8 +24,10 @@
 </template>
 
 <script>
+  import Accordion from "../components/Accordions/Accordion";
     export default {
-        name: "Library"
+        name: "Library",
+        components: {Accordion}
     }
 </script>
 

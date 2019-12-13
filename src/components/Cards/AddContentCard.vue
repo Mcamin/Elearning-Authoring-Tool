@@ -1,6 +1,6 @@
 
 <template>
-<b-card no-body class="mb-3">
+<b-card no-body >
   <template v-slot:header>
     <b-row>
       <b-col>

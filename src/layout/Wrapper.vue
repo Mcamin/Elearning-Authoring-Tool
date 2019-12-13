@@ -7,8 +7,8 @@
     <!--end Navigation-bar-->
 
     <!--Sidebar-->
-    <transition name="fade" mode="out-in" appear>
-   <Sidebar/>
+    <transition v-if="isLibrayPage" name="fade" mode="out-in" appear>
+      <Sidebar/>
     </transition>
     <!--end Sidebar-->
 
@@ -47,6 +47,11 @@ components: {
 
 },
 methods: {
-}
+},
+    computed: {
+        isLibrayPage() {
+            return this.$route.name=="library";
+        }
+    }
 };
 </script>

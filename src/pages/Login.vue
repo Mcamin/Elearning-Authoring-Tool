@@ -76,7 +76,7 @@
 
 <style scoped>
 .bg-login{
-  background-image: url('../assets/img/bg-01.jpg');
+  background-image: url('../assets/img/login/login.jpg');
   width: calc(100% - 560px);
   background-repeat: no-repeat;
   background-size: cover;

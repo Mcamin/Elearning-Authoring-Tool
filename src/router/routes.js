@@ -6,10 +6,11 @@ import Wrapper from "@/layout/Wrapper";
 import CreateNewCourse from "../pages/NewCourse";
 
 
+
 // Admin pages
 const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Login.vue");
+const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
 const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
-
 const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
@@ -47,6 +48,11 @@ const routes = [
             path: "playground",
             name: "playground",
             component: Playground
+          },
+          {
+            path: "library",
+            name: "library",
+            component: Library
           },
 
         ]

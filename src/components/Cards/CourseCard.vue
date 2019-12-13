@@ -46,7 +46,7 @@
 
 
   .card--1 .card__img, .card--1 .card__img--hover {
-    background-image: url('../../static/home/library.jpg');
+    background-image: url('../../assets/img/home/library.jpg');
   }
 
 
