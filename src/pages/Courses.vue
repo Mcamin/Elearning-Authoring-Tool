@@ -8,8 +8,9 @@
     <b-row>
       <b-col md="3">
         <card
+          v-b-modal="'modal-new-course'"
           title="Create a new Course"
-          url="/newcourse"
+          url=""
         />
       </b-col>
       <b-col md="3" v-for="course in courses" :key="courses.title">
@@ -22,12 +23,13 @@
         />
       </b-col>
     </b-row>
+    <new-course-card></new-course-card>
   </b-container>
 </template>
 <script>
 import Courses from "@/data/coursesMetadata.js"
 import Card from "../components/Cards/CourseCard";
-import NewCourseCard from "../components/Cards/NewCourseCard";
+import NewCourseCard from "../components/Modals/NewCourseModal";
 
   export default {
     components: {

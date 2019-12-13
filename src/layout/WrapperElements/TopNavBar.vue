@@ -2,7 +2,7 @@
 
     <b-navbar toggleable="lg" type="dark"   class ="px-lg-5" sticky>
 
-      <router-link to="/dashboard">
+      <router-link to="/">
         <font-awesome-icon :icon="['fas', 'th-large']" size="lg" />
       </router-link>
       <b-navbar-brand href="#" class="ml-2">{{routeName}}</b-navbar-brand>

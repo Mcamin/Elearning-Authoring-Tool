@@ -1,15 +1,5 @@
 <template>
-  <a href="#NewCourse">
-  <b-card no-body >
-    <template v-slot:header>
-      <h4 class="mb-0">Create a new course</h4>
-    </template>
-
-    <!-- https://bootstrap-vue.js.org/docs/components/form -->
-    <!-- TODO: Input Tags as Array -->
-    <b-card-body style="text-align: center;" >
-      <span v-b-modal.modal-xl><i class="tim-icons icon-simple-add"/></span>
-      <b-modal id="modal-xl" title="Create new course:">
+      <b-modal id="modal-new-course" centered title="Create new course:" hide-footer size="lg">
             <div>
               <b-form @submit.prevent="handleSubmit" @reset.prevent="handleReset" v-if="show">
                 <!-- Title of Course-->
@@ -54,14 +44,8 @@
                 <b-button type="submit" variant="primary" router-link to="/newcourse" @click.native="handleSubmit">Submit</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
-              <b-card class="mt-3" header="Form Data Result">
-                <pre class="m-0">{{ formData }}</pre>
-              </b-card>
             </div>
       </b-modal>
-    </b-card-body>
-  </b-card>
-  </a>
 </template>
 <script>
   import {mapState, mapActions, ActionContext as store} from 'vuex'
