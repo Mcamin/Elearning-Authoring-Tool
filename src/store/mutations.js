@@ -1,10 +1,9 @@
 export default {
+
   appendCourse: (state, course) => {
-    state.courses.push(course)
+     state.courses = course
   },
   createCourse: (state, course) => {
     state.newCourse = course
   },
-
-
 }
