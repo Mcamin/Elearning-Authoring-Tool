@@ -1,32 +1,66 @@
 
 // GeneralViews
 import NotFound from '@/pages/NotFoundPage.vue';
-import Wrapper from "@/layout/Dashboard/Wrapper";
+import Wrapper from "@/layout/Wrapper";
+
+import CreateNewCourse from "../pages/NewCourse";
+
 
 
 // Admin pages
-const Dashboard = () => import(/* webpackChunkName: "dashboard" */"@/pages/Dashboard.vue");
+const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Login.vue");
+const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
+const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
+const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
+const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
+const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
+
+
 
 const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/dashboard",
+        redirect: "/login",
         children: [
-            {
-                path: "dashboard",
-                name: "dashboard",
-                component: Dashboard
-            },
+          {
+            path: "home",
+            name: "home",
+            component: Home
+          },
+          {
+            path: "courses",
+            name: "courses",
+            component: Courses
+          },
           {
             path: "profile",
             name: "profile",
             component: Profile
           },
+          {
+            path: "newcourse",
+            name: "newcourse",
+            component: NewCourse
+          },
+          {
+            path: "playground",
+            name: "playground",
+            component: Playground
+          },
+          {
+            path: "library",
+            name: "library",
+            component: Library
+          },
 
         ]
     },
+  { path: "/login",
+    name: "login",
+    component: Login,
+  },
     { path: "*", component: NotFound },
 ];
 

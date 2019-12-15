@@ -1,4 +1,4 @@
-# EAT: an Elearning Authoring tool build in Vue.js 
+# EAT: an Elearning Authoring tool build in Vue.js
 
 ## Table of Contents
 
@@ -17,7 +17,17 @@
 ## Project Motivation <a name="motivation"></a>
 
 ## File Description <a name="motivation"></a>
+#### Color Schema :
+    #707070
+    #F5F5F5
+    #219678
+    #FFFFFF
+    #F5F5F5
+    #219678 - #12C799
 
+#### Pages :
+The App implement the following pages :
+  * Sign in Page : The Page
 ## Instructions <a name="instructions"></a>
 
 #### Project setup
