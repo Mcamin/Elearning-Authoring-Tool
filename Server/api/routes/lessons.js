@@ -3,6 +3,13 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Lesson  = require('../models/lesson');
 const multer = require('multer');
+const crypto  = require('crypto');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require ('gridfs-stream');
+
+
+
+
 const storage = multer.diskStorage({
   destination: function(req, file, cb){
     cb(null, 'uploads/lessons');
