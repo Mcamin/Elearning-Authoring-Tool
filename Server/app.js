@@ -7,9 +7,9 @@ const lessonRoutes = require('./api/routes/lessons');
 const quizRoutes = require('./api/routes/quizzes');
 
 //Connect to DB
-mongoose.connect(
-  'mongodb+srv://'+process.env.MONGO_USR+':'
-  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true  } )
+const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'
+  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoURI,{ useNewUrlParser: true, useUnifiedTopology: true  } );
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
