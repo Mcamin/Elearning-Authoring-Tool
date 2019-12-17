@@ -1,6 +1,6 @@
 <template>
   <b-container fluid class=" mt-5  px-5 ">
-    <p>New Course Title: {{ getNewCourses }}</p>
+    <p>New Course Title: {{ getNewCourse }}</p>
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
