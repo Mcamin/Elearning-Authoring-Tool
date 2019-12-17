@@ -64,6 +64,7 @@
             show: true
           }
         },
+
         methods: {
           ...mapActions([
             'addCourse'
