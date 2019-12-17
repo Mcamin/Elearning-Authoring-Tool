@@ -2,13 +2,13 @@
   <b-modal id="add-unit" centered size="lg" hide-footer hide-header>
 
     <template v-slot:default>
-      <router-link  to="/">
-
+      <router-link  to="/addLesson">
      <AddContentCard :header="lesson.header" :icon="lesson.icon">
        <p slot="description" v-html="lesson.description" />
      </AddContentCard>
       </router-link>
-      <router-link  to="/">
+       <br>
+      <router-link  to="/addQuiz">
       <AddContentCard :header="quiz.header" :icon="quiz.icon">
         <p slot="description" v-html="quiz.description"/>
       </AddContentCard>

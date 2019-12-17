@@ -15,6 +15,7 @@ const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
 const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
+const AddLesson = () => import(/* webpackChunkName: "addlesson" */ "@/pages/AddLesson.vue");
 
 
 
@@ -53,6 +54,11 @@ const routes = [
             path: "library",
             name: "library",
             component: Library
+          },
+          {
+            path: "addLesson",
+            name: "addLesson",
+            component: AddLesson
           },
 
         ]

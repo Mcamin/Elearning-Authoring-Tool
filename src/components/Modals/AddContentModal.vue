@@ -2,7 +2,7 @@
   <b-modal id="add-unit" centered size="lg" hide-footer hide-header>
 
     <template v-slot:default>
-      <router-link  to="/addLesson" >
+      <router-link  to="/addLesson">
      <AddContentCard :header="lesson.header" :icon="lesson.icon">
        <p slot="description" v-html="lesson.description" />
      </AddContentCard>
