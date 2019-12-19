@@ -14,8 +14,7 @@ const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Hom
 const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
-const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
-const AddLesson = () => import(/* webpackChunkName: "addlesson" */ "@/pages/AddLesson.vue");
+const AddLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/AddLesson.vue");
 
 
 
@@ -46,18 +45,13 @@ const routes = [
             component: NewCourse
           },
           {
-            path: "playground",
-            name: "playground",
-            component: Playground
-          },
-          {
             path: "library",
             name: "library",
             component: Library
           },
           {
-            path: "addLesson",
-            name: "addLesson",
+            path: "addlesson",
+            name: "addlesson",
             component: AddLesson
           },
 
