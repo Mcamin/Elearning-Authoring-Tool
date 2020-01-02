@@ -5,16 +5,15 @@
       <b-row>
         <b-col  class="text-left">
           <b-container class="d-flex">
-            <span v-if="!editClicked" class="align-self-center">{{title}}</span>
-            <a v-if="!editClicked" href="#" @click="toggleTitleInput" class="ml-2">
-              <font-awesome-icon :icon="['fas', 'pen']"  />
+            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title"
+                   type="text">
+            <a class="ml-2" href="#">
+              <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="xs"
+                                 v-if="!isEditing"/>
+
+              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="xs" v-else-if="isEditing"/>
             </a>
-
-            <b-form-input class="w-25 mr-2" v-if="editClicked" v-model="title" :placeholder="title"/>
-            <b-button v-if="editClicked"  @click="toggleTitleInput">OK</b-button>
-
           </b-container>
-
 
         </b-col>
         <b-col  class="text-right">
@@ -51,7 +50,7 @@
 <script>
 
   import { library } from '@fortawesome/fontawesome-svg-core'
-  import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+  import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
   library.add(
@@ -60,16 +59,18 @@
     faCog,
     faSortUp,
     faSortDown,
-    faPlusCircle
-
+    faPlusCircle,
+    faSave
   );
     export default {
       name: "Accordion",
       data(){
         return{
-          title:"Section 1",
           collapsed:true,
-            editClicked:false
+          isEditing: false,
+          lesson: {
+            title: 'LessonTitle'
+          }
         }
       },
       components:{
@@ -82,7 +83,8 @@
       },
         methods:{
             toggleTitleInput(){
-                this.editClicked= !this.editClicked
+              this.lesson.title = this.$refs['lesson_title'].value;
+              this.isEditing = !this.isEditing;
             }
         },
       mounted() {
@@ -101,4 +103,9 @@
 .fa-plus-circle{
     color:darkcyan;
   }
+.view {
+  border-color: transparent;
+  background-color: initial;
+  color: initial
+}
 </style>

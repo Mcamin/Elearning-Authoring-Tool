@@ -17,7 +17,7 @@
                       <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="xs"
                                          v-if="!isEditing"/>
 
-                      <font-awesome-icon :icon="['fas', 'save']" @click="save" size="s" v-else-if="isEditing"/>
+                      <font-awesome-icon :icon="['fas', 'save']" @click="save" size="xs" v-else-if="isEditing"/>
 
                     </a>
                     <a class="ml-2" href="#">
@@ -31,26 +31,14 @@
                 </b-row>
                 <b-row>
                   <b-col class="mb-5">
-                    <el-tag
-                      :disable-transitions="false"
-                      :key="tag"
-                      @close="handleClose(tag)"
-                      closable
-                      v-for="tag in dynamicTags">
-                      {{tag}}
-                    </el-tag>
-                    <el-input
-                      @blur="handleInputConfirm"
-                      @keyup.enter.native="handleInputConfirm"
-                      class="input-new-tag"
-                      ref="saveTagInput"
-                      size="mini"
-                      v-if="inputVisible"
-                      v-model="inputValue"
-                    >
-                    </el-input>
-                    <el-button @click="showInput" class="button-new-tag" size="small" v-else>+ New Tag</el-button>
-
+                    <div>
+                      <vue-tags-input
+                        v-model="tag"
+                        :tags="tags"
+                        :allow-edit-tags="true"
+                        @tags-changed="newTags => tags = newTags"
+                      />
+                    </div>
 
                   </b-col>
 
@@ -207,6 +195,7 @@
   import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
   import {VueEditor} from "vue2-editor";
   import {Button, Input, Tag} from 'element-ui'
+  import VueTagsInput from '@johmun/vue-tags-input';
 
   library.add(
     faPen,
@@ -219,12 +208,13 @@
     name: "AddLesson",
     data() {
       return {
-        dynamicTags: ['Tag 1', 'Tag 2', 'Tag 3'],
+        tag:'',
+        tags: [],
         inputVisible: false,
         inputValue: '',
         isEditing: false,
         lesson: {
-          title: '...'
+          title: 'LessonTitle'
         }
       };
     },
@@ -250,7 +240,6 @@
       },
       save() {
         this.lesson.title = this.$refs['lesson_title'].value;
-        console.log("TEST");
         this.isEditing = !this.isEditing;
       }
     },
@@ -259,8 +248,8 @@
       VueEditor,
       Tag,
       Input,
-      Button
-
+      Button,
+      VueTagsInput,
     }
   }
 </script>

@@ -2,6 +2,7 @@
 // GeneralViews
 import NotFound from '@/pages/NotFoundPage.vue';
 import Wrapper from "@/layout/Wrapper";
+import {mapActions, mapGetters} from 'vuex'
 
 import CreateNewCourse from "../pages/NewCourse";
 
@@ -15,8 +16,6 @@ const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
 const AddLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/AddLesson.vue");
-
-
 
 const routes = [
     {
@@ -40,9 +39,10 @@ const routes = [
             component: Profile
           },
           {
-            path: "newcourse",
+            path: "/newcourse/:title",
             name: "newcourse",
-            component: NewCourse
+            component: NewCourse,
+            props: true
           },
           {
             path: "library",

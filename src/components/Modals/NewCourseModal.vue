@@ -41,7 +41,8 @@
                   />
                 </b-form-group>
 
-                <b-button type="submit" variant="primary" router-link to="/newcourse" @click.native="handleSubmit">Submit</b-button>
+                <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit" variant="primary" @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
+
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
             </div>
