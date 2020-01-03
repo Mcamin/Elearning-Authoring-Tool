@@ -11,7 +11,6 @@
                     placeholder="Web Development"
                   />
                 </b-form-group>
-
                 <!-- Description of Course-->
                 <b-form-group id="input-group-2" label="Description" label-for="input-2">
                   <b-form-input

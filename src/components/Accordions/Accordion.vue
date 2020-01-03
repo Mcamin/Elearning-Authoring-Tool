@@ -5,16 +5,12 @@
       <b-row>
         <b-col  class="text-left">
           <b-container class="d-flex">
-            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title"
-                   type="text">
+            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="section.title" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput">
             <a class="ml-2" href="#">
-              <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="xs"
-                                 v-if="!isEditing"/>
-
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="xs" v-else-if="isEditing"/>
+              <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
+              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
             </a>
           </b-container>
-
         </b-col>
         <b-col  class="text-right">
           <a href="#"  class="ml-2">
@@ -40,8 +36,6 @@
         <b-button block  href="#" v-b-modal="'add-unit'">
           <font-awesome-icon :icon="['fas', 'plus-circle']" size="2x" />
         </b-button>
-
-
       </b-card-body>
     </b-collapse>
   </b-card>
@@ -68,8 +62,8 @@
         return{
           collapsed:true,
           isEditing: false,
-          lesson: {
-            title: 'LessonTitle'
+          section: {
+            title: 'SectionTitle'
           }
         }
       },
@@ -83,7 +77,7 @@
       },
         methods:{
             toggleTitleInput(){
-              this.lesson.title = this.$refs['lesson_title'].value;
+              this.section.title = this.$refs['section_title'].value;
               this.isEditing = !this.isEditing;
             }
         },

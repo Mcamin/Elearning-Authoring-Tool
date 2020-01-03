@@ -5,29 +5,22 @@
         <!--HTML Card-->
         <b-card class="mb-5" no-body>
           <b-card-body>
-
             <b-card-text>
               <b-container fluid>
                 <b-row>
                   <b-col class="mb-3">
-
-                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title"
-                           type="text">
+                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title" type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
-                      <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="xs"
-                                         v-if="!isEditing"/>
-
-                      <font-awesome-icon :icon="['fas', 'save']" @click="save" size="xs" v-else-if="isEditing"/>
-
+                      <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
+                      <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="xs" v-else-if="isEditing"/>
                     </a>
                     <a class="ml-2" href="#">
-                      <font-awesome-icon :icon="['fas', 'trash']" size="xs"/>
+                      <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
                     </a>
                     <a class="ml-2" href="#">
-                      <font-awesome-icon :icon="['fas', 'cog']" size="xs"/>
+                      <font-awesome-icon :icon="['fas', 'cog']" size="lg"/>
                     </a>
                   </b-col>
-
                 </b-row>
                 <b-row>
                   <b-col class="mb-5">
@@ -39,25 +32,16 @@
                         @tags-changed="newTags => tags = newTags"
                       />
                     </div>
-
                   </b-col>
-
                 </b-row>
               </b-container>
-
-
               <vue-editor v-model="content"></vue-editor>
-
             </b-card-text>
           </b-card-body>
-
-
         </b-card>
-
         <!--Metadata Card-->
         <b-card class="mb-5" no-body>
           <b-card-body>
-
             <b-card-text>
               <b-container fluid>
                 <b-row>
@@ -65,7 +49,6 @@
                     <h6>Metadata</h6>
                     <span class="font-italic">Before publishing the course, meta data need to be inserted.</span>
                   </b-col>
-
                 </b-row>
                 <b-row>
                   <b-col class="mb-2">
@@ -238,7 +221,7 @@
         this.inputVisible = false;
         this.inputValue = '';
       },
-      save() {
+      toggleTitleInput() {
         this.lesson.title = this.$refs['lesson_title'].value;
         this.isEditing = !this.isEditing;
       }
