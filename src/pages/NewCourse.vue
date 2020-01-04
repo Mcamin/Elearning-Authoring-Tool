@@ -27,5 +27,10 @@
                 'getNewCourse'
             ])
         },
+        methods: {
+          ...mapActions([
+            'addSection'
+          ])
+      },
     };
 </script>

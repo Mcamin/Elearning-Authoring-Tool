@@ -6,4 +6,8 @@ export default {
   createCourse: (state, course) => {
     state.newCourse = course
   },
+
+  appendSection: (state, sectionName) => {
+    state.newCourse.sections.push({title: sectionName})
+  }
 }

@@ -5,7 +5,8 @@
       <router-link to="/">
         <font-awesome-icon :icon="['fas', 'th-large']" size="lg" />
       </router-link>
-      <b-navbar-brand href="#" class="ml-2">{{routeName}}</b-navbar-brand>
+      <b-navbar-brand href="#" class="ml-2" v-if="routeName!=='Newcourse'">{{routeName}}</b-navbar-brand>
+      <b-navbar-brand href="#" class="ml-2" v-else>{{getNewCourse.course.title}}</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"/>
 
@@ -44,7 +45,6 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-
 </template>
 
 <script>
@@ -53,6 +53,7 @@
     import { library } from '@fortawesome/fontawesome-svg-core'
     import { faThLarge,faSearch,faBell} from '@fortawesome/free-solid-svg-icons'
     import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+    import {mapGetters} from "vuex";
 
     library.add(
         faThLarge,
@@ -68,13 +69,17 @@
             'font-awesome-icon': FontAwesomeIcon,
         },
         computed: {
+            ...mapGetters([
+              'getNewCourse'
+            ]),
             routeName() {
                 const { name } = this.$route;
-                return this.capitalizeFirstLetter(name);
+                  return this.capitalizeFirstLetter(name);
             }
         },
         data() {
             return {
+                coursetitle: getNewCourse,
                 activeNotifications: false,
                 showMenu: false,
                 searchModalVisible: false,

@@ -5,5 +5,9 @@ export default {
 
   addCourse: ({ commit }, payload) => {
     commit('appendCourse', payload)
+  },
+
+  addSection: ({ commit }, payload) => {
+    commit('appendSection', payload)
   }
 }
