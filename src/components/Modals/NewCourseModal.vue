@@ -60,7 +60,7 @@
               tags: '',
               language: []
             },
-            language: [{ text: 'Select One', value: null }, 'English', 'German', 'Russian'],
+            language: [{ text: 'Select One' }, 'English', 'German', 'Russian'],
             show: true
           }
         },

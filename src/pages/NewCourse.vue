@@ -19,6 +19,7 @@
     import {mapActions, mapGetters} from 'vuex'
     import Accordion from "../components/Accordions/Accordion";
     import AddContentModel from "../components/Modals/AddUnitModal";
+    import store from '../store/index'
 
     export default {
         components: {Accordion, AddContentModel},
@@ -32,5 +33,8 @@
             'addSection'
           ])
       },
+      mounted(){
+          store.dispatch('addSection')
+      }
     };
 </script>
