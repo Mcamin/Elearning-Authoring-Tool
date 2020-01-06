@@ -8,7 +8,7 @@ export default {
   },
 
   appendSection: (state, sectionName) => {
-    let sec = {title: "TESTSECTION"}
-    state.newCourse.sections.push(sec)
+    //let sec = {title: "TESTSECTION"}
+    //state.courses.course.sections.push(sec)
   }
 }

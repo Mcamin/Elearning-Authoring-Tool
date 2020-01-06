@@ -46,6 +46,7 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { mapGetters, mapActions} from "vuex";
 
   library.add(
     faPen,
@@ -75,12 +76,17 @@
           type:Object
         }
       },
-        methods:{
-            toggleTitleInput(){
-              this.section.title = this.$refs['section_title'].value;
-              this.isEditing = !this.isEditing;
-            }
-        },
+      methods:{
+          toggleTitleInput(){
+            this.section.title = this.$refs['section_title'].value;
+            this.isEditing = !this.isEditing;
+          }
+      },
+      computed: {
+        ...mapGetters([
+          'getNewCourse'
+        ])
+      },
       mounted() {
         this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
           this.collapsed=isJustShown;

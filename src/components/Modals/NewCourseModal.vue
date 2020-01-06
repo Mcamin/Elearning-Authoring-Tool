@@ -58,7 +58,8 @@
               title: '',
               description: '',
               tags: '',
-              language: []
+              language: [],
+              sections: []
             },
             language: [{ text: 'Select One' }, 'English', 'German', 'Russian'],
             show: true
@@ -70,13 +71,14 @@
             'addCourse'
           ]),
           handleSubmit() {
-            const { title, description, tags, language } = this.formData
+            const { title, description, tags, language, sections} = this.formData
             const payload = {
               course: {
                 title,
                 description,
                 tags,
-                language
+                language,
+                sections
               }
             }
             this.addCourse(payload)
@@ -95,9 +97,9 @@
           }
         },
         computed : {
-          ...mapState(
-            ['courses']
-          )
+          ...mapState([
+            'courses'
+          ])
         }
     };
 </script>

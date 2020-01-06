@@ -19,14 +19,14 @@
     import {mapActions, mapGetters} from 'vuex'
     import Accordion from "../components/Accordions/Accordion";
     import AddContentModel from "../components/Modals/AddUnitModal";
-    import store from '../store/index'
+    import store from '../store/index';
 
     export default {
         components: {Accordion, AddContentModel},
         computed: {
-            ...mapGetters([
-                'getNewCourse'
-            ])
+          ...mapGetters([
+              'getNewCourse'
+          ])
         },
         methods: {
           ...mapActions([
