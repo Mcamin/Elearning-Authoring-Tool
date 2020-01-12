@@ -22,12 +22,12 @@
                 </b-form-group>
 
                 <!-- Tags of Course -->
-                <b-form-group id="input-group-3" label="Tags" label-for="input-3">
-                  <b-form-input
-                    id="input-3"
-                    v-model="formData.tags"
-                    placeholder="Web,HTML,Angular"
-                    required
+                <b-form-group id="input-group-5" label="Tags" label-for="input-5">
+                  <vue-tags-input
+                    v-model="tag"
+                    :tags="tags"
+                    :allow-edit-tags="true"
+                    @tags-changed="newTags => tags = newTags"
                   />
                 </b-form-group>
 
@@ -55,7 +55,7 @@
                   <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
                   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>
-                
+
                 <!-- Submit button with route to /titleOfCourse -->
                 <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit" variant="primary" @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
 
@@ -66,16 +66,25 @@
       </b-modal>
 </template>
 <script>
-  import {mapState, mapActions, ActionContext as store} from 'vuex'
+  import {mapState, mapActions, ActionContext as store} from 'vuex';
   import newcourse from "../../data/coursesArray";
+  import { Input, Tag } from 'element-ui'
+  import VueTagsInput from '@johmun/vue-tags-input';
+
 
   export default {
         data() {
           return {
+            tag:'',
+            tags: [],
             formData: {
               title: '',
               description: '',
-              tags: '',
+              tag: '',
+              tags: [],
+              inputVisible: false,
+              inputValue: '',
+              isEditing: false,
               language: [],
               sections: []
             },
@@ -89,7 +98,9 @@
             show: true
           }
         },
-
+      components: {
+          VueTagsInput,
+        },
         methods: {
           ...mapActions([
             'addCourse'
@@ -118,6 +129,28 @@
             this.$nextTick(() => {
               this.show = true
             })
+          },
+          handleClose(tag) {
+            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+          },
+          showInput() {
+            this.inputVisible = true;
+            this.$nextTick(_ => {
+              this.$refs.saveTagInput.$refs.input.focus();
+            });
+          },
+
+          handleInputConfirm() {
+            let inputValue = this.inputValue;
+            if (inputValue) {
+              this.dynamicTags.push(inputValue);
+            }
+            this.inputVisible = false;
+            this.inputValue = '';
+          },
+          toggleTitleInput() {
+            this.lesson.title = this.$refs['lesson_title'].value;
+            this.isEditing = !this.isEditing;
           }
         },
         computed : {
