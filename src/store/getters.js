@@ -1,5 +1,5 @@
 export default {
-  getNewCourse: (state) => {
-    return state.courses
-  }
+
+// get a course by id
+
 }

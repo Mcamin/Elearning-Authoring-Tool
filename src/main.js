@@ -4,7 +4,7 @@ import router from "./router/index";
 import './registerServiceWorker'
 import dashboard from "./plugins/dashboard";
 import BootstrapVue from 'bootstrap-vue';
-
+import 'element-ui/lib/theme-chalk/index.css';
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'

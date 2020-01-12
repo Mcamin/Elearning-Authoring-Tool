@@ -3,20 +3,22 @@
             <div>
               <b-form @submit.prevent="handleSubmit" @reset.prevent="handleReset" v-if="show">
                 <!-- Title of Course-->
-                <b-form-group id="input-group-1" label="Title:" label-for="input-1">
+                <b-form-group id="input-group-1" label="Title:" label-for="input-title">
                   <b-form-input
-                    id="input-1"
+                    id="input-title"
                     v-model="formData.title"
                     required
                     placeholder="Web Development"
                   />
                 </b-form-group>
                 <!-- Description of Course-->
-                <b-form-group id="input-group-2" label="Description" label-for="input-2">
-                  <b-form-input
-                    id="input-2"
+                <b-form-group id="input-group-2" label="Description" label-for="input-description">
+                  <b-form-textarea
+                    id="input-description"
                     v-model="formData.description"
                     required
+                    rows="2"
+                    max-rows="6"
                     placeholder="This course is..."
                   />
                 </b-form-group>
@@ -31,14 +33,26 @@
                   />
                 </b-form-group>
 
-                <b-form-group id="input-group-4" label="Language:" label-for="input-4">
+                <b-form-group id="input-group-4" label="Language:" label-for="input-language">
                   <b-form-select
-                    id="input-4"
+                    id="input-language"
                     v-model="formData.language"
                     :options="language"
                     required
                   />
                 </b-form-group>
+                <el-upload
+                  class="upload-demo"
+                  drag
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :file-list="fileList"
+                  multiple>
+                  <i class="el-icon-upload"></i>
+                  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
+                  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
+                </el-upload>
 
                 <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit" variant="primary" @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
 
@@ -48,8 +62,8 @@
       </b-modal>
 </template>
 <script>
-  import {mapState, mapActions, ActionContext as store} from 'vuex'
-  import newcourse from "../../data/coursesArray";
+  import Upload from 'element-ui'
+  import {mapState, mapActions} from 'vuex'
 
   export default {
         data() {
@@ -57,30 +71,28 @@
             formData: {
               title: '',
               description: '',
-              tags: '',
-              language: [],
-              sections: []
+              tags: [],
+              language:"",
             },
             language: [{ text: 'Select One' }, 'English', 'German', 'Russian'],
             show: true
           }
         },
-
+  components: {
+          Upload,
+  },
         methods: {
           ...mapActions([
             'addCourse'
           ]),
           handleSubmit() {
-            const { title, description, tags, language, sections} = this.formData
+            const { title, description, tags, language} = this.formData;
             const payload = {
-              course: {
                 title,
                 description,
                 tags,
-                language,
-                sections
-              }
-            }
+                language
+            };
             this.addCourse(payload)
           },
           handleReset() {

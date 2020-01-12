@@ -5,7 +5,9 @@
       <b-row>
         <b-col  class="text-left">
           <b-container class="d-flex">
-            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="section.title" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput">
+            <label>
+              <input :class="{view: !isEditing}" :disabled="!isEditing" :value="sectionTitle" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput"/>
+            </label>
             <a class="ml-2" href="#">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
               <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
@@ -63,29 +65,32 @@
         return{
           collapsed:true,
           isEditing: false,
-          section: {
-            title: 'SectionTitle'
-          }
+        }
+      },
+      props: {
+        sectionTitle:{
+          Type:String,
+          required: true,
+          Description:"the section title "
+
         }
       },
       components:{
         'font-awesome-icon': FontAwesomeIcon,
       },
-      props:{
-        config:{
-          type:Object
-        }
-      },
+
       methods:{
+        ...mapActions([
+          'updateSectionTitle'
+        ]),
           toggleTitleInput(){
-            this.section.title = this.$refs['section_title'].value;
+            const payload = {
+              oldTitle:this.sectionTitle,
+              newTitle:this.$refs['section_title'].value,
+            };
+            this.updateSectionTitle(payload);
             this.isEditing = !this.isEditing;
           }
-      },
-      computed: {
-        ...mapGetters([
-          'getNewCourse'
-        ])
       },
       mounted() {
         this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {

@@ -1,11 +1,15 @@
+<!-- TODO:
+Add the default section to the sections -->
 <template>
   <b-container fluid class=" mt-5  px-5 ">
-    <p>New Course Title: {{ getNewCourse }}</p>
-    <p>TITLE: {{ getNewCourse.course.title }} </p>
+    <p>TITLE: {{ this.$store.state.course.title }} </p>
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
         <Accordion/>
+        <b-button block  href="#" v-b-modal="'add-unit'">
+          <font-awesome-icon :icon="['fas', 'plus-circle']" size="2x" />
+        </b-button>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
         <AddContentModel/>
@@ -16,25 +20,54 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex'
+
+  import { library } from '@fortawesome/fontawesome-svg-core'
+  import {faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+  library.add(
+    faPlusCircle,
+  );
+
+
     import Accordion from "../components/Accordions/Accordion";
     import AddContentModel from "../components/Modals/AddUnitModal";
-    import store from '../store/index';
+
 
     export default {
-        components: {Accordion, AddContentModel},
+      data () {
+        return {
+          sections:this.$store.state.course.sections
+      }
+      } ,
+        components: {
+          Accordion,
+          AddContentModel,
+          'font-awesome-icon': FontAwesomeIcon
+        },
+
         computed: {
-          ...mapGetters([
-              'getNewCourse'
-          ])
+
         },
         methods: {
-          ...mapActions([
-            'addSection'
-          ])
       },
       mounted(){
-          store.dispatch('addSection')
+        // add a default section new section to the store
       }
     };
 </script>
+
+<style>
+  .btn{
+    background: transparent;
+    border: 1px dashed darkcyan;
+  }
+  .fa-plus-circle{
+    color:darkcyan;
+  }
+  .view {
+    border-color: transparent;
+    background-color: initial;
+    color: initial
+  }
+</style>
