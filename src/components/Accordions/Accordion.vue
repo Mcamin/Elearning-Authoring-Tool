@@ -5,10 +5,10 @@
       <b-row>
         <b-col  class="text-left">
           <b-container class="d-flex">
-            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="section.title" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput">
+            <input :class="{view: !isEditing}" :disabled="!isEditing" :value="sections.title" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput" @input="secTitle">
             <a class="ml-2" href="#">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
+              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" />
             </a>
           </b-container>
         </b-col>
@@ -63,9 +63,11 @@
         return{
           collapsed:true,
           isEditing: false,
-          section: {
-            title: 'SectionTitle'
-          }
+          course: {
+            sections: {
+              title: 'SectionTitle'
+              }
+            }
         }
       },
       components:{
@@ -76,21 +78,34 @@
           type:Object
         }
       },
-      methods:{
-          toggleTitleInput(){
-            this.section.title = this.$refs['section_title'].value;
-            this.isEditing = !this.isEditing;
+      methods: {
+        toggleTitleInput() {
+          this.sections.title = this.$refs['section_title'].value;
+          this.isEditing = !this.isEditing;
+        },
+        ...mapActions([
+          'addSectionTitle'
+        ]),
+        secTitle() {
+          const { title } = this.sections.title
+          const payload = {
+              sections:{
+                title
+              }
           }
-      },
-      computed: {
-        ...mapGetters([
-          'getNewCourse'
-        ])
-      },
-      mounted() {
-        this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
-          this.collapsed=isJustShown;
-        })
+          this.addSectionTitle(payload)
+        },
+
+        computed: {
+          ...mapGetters([
+            'getNewCourse'
+          ])
+        },
+        mounted() {
+          this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
+            this.collapsed = isJustShown;
+          })
+        }
       }
     }
 </script>

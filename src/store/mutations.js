@@ -7,7 +7,14 @@ export default {
     state.newCourse = course
   },
 
-  appendSection: (state, sectionName) => {
+  appendSection: (state, sections) => {
+    state.courses.course = sections
+    //let sec = {title: "TESTSECTION"}
+    //state.courses.course.sections.push(sec)
+  },
+  appendSectionTitle: (state, secTitle) => {
+    //state.courses.course = sections
+    //state.courses.course.sections.title = secTitle
     //let sec = {title: "TESTSECTION"}
     //state.courses.course.sections.push(sec)
   }

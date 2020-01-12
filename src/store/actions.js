@@ -9,5 +9,10 @@ export default {
 
   addSection: ({ commit }, payload) => {
     commit('appendSection', payload)
+  },
+
+  addSectionTitle: ({ commit }, secTitle) => {
+    commit('appendSectionTitle', secTitle)
   }
 }
+

@@ -1,7 +1,7 @@
 <template>
   <b-container fluid class=" mt-5  px-5 ">
-    <p>New Course Title: {{ getNewCourse }}</p>
-    <p>TITLE: {{ getNewCourse.course.title }} </p>
+    <p>New Course Title: {{  }}</p>
+    <p>TITLE: {{  }} </p>
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
@@ -23,14 +23,11 @@
 
     export default {
         components: {Accordion, AddContentModel},
-        computed: {
-          ...mapGetters([
-              'getNewCourse'
-          ])
-        },
+
         methods: {
           ...mapActions([
-            'addSection'
+            'addSection',
+            'addSectionTitle'
           ])
       },
       mounted(){
