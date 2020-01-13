@@ -25,7 +25,7 @@
                 <b-form-group id="input-group-5" label="Tags" label-for="input-5">
                   <vue-tags-input
                     v-model="tag"
-                    :tags="tags"
+                    :tags="formData.tags"
                     :allow-edit-tags="true"
                     @tags-changed="newTags => tags = newTags"
                   />
@@ -76,11 +76,9 @@
         data() {
           return {
             tag:'',
-            tags: [],
             formData: {
               title: '',
               description: '',
-              tag: '',
               tags: [],
               inputVisible: false,
               inputValue: '',
