@@ -11,6 +11,7 @@
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
         <AddSectionModal/>
+        <AddContentModal/>
         <!-- End  Add Content Accordion-->
       </b-col>
     </b-row>
@@ -21,6 +22,7 @@
   import Accordion from "../components/Accordions/Accordion";
   import AddSectionModal from "../components/Modals/AddSectionModal";
   import AddBtn from "../components/Buttons/AddBtn";
+  import AddContentModal from "../components/Modals/AddContentModal";
 
     export default {
         name: "playground",
@@ -30,6 +32,7 @@
           }
       },
       components: {
+        AddContentModal,
         Accordion,
         AddSectionModal,
         AddBtn

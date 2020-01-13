@@ -26,16 +26,10 @@
           <a href="#" class="ml-2">
             <font-awesome-icon :icon="['fas', 'cog']" />
           </a>
-          
-          <b-btn block href="#" v-b-toggle.accordion1 variant="secondary">
-              Time Period
-            <span class="when-opened">
-                <font-awesome-icon icon="chevron-down" />
-            </span>
-            <span class="when-closed">
-                <font-awesome-icon icon="chevron-right" />
-            </span>
-          </b-btn>
+
+          <a href="#" @click.prevent="toggleCollapse(sectionID)" class="ml-2">
+            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" />
+          </a>
 
         </b-col>
         <!--End Right settings -->
@@ -44,7 +38,7 @@
     </b-card-header>
      <!--End header -->
     <!--Content-->
-    <b-collapse :id="`accordion-${sectionID}`" v-model="collapsed" :accordion="`myaccordion-${sectionID}`" role="tabpanel">
+    <b-collapse :id="`${sectionID}`"  :accordion="`myaccordion-${sectionID}`" role="tabpanel">
       <b-card-body>
         <!--Module-->
         <slot name="Module"/>
@@ -52,24 +46,40 @@
         <!--Lesson-->
         <slot name="Lesson_Interaction_Gloassary"/>
         <!--Add Element to the Accordion-->
+        <AddBtn :func="'add-unit'"/>
       </b-card-body>
     </b-collapse>
     <!--End Content-->
+
+
   </b-card>
 </template>
 
 <script>
 
+  import { library } from '@fortawesome/fontawesome-svg-core'
+  import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { mapGetters, mapActions, mapState} from "vuex";
-  import { uuid } from 'vue-uuid';
-  
+  import {  mapActions} from "vuex";
+  import AddBtn from "../Buttons/AddBtn";
+
+
+  library.add(
+    faPen,
+    faTrash,
+    faCog,
+    faSortUp,
+    faSortDown,
+    faPlusCircle,
+    faSave
+  );
+
     export default {
       name: "Accordion",
       data(){
         return{
-          collapsed:true,
           isEditing: false,
+          collapsed: false
 
         }
       },
@@ -88,6 +98,7 @@
 
       },
       components:{
+        AddBtn,
         'font-awesome-icon': FontAwesomeIcon,
       },
 
@@ -103,17 +114,18 @@
             };
             this.updateSectionTitle(payload);
             this.isEditing = !this.isEditing;
-          }
-      },
-      mounted() {
-        this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
-          this.collapsed=isJustShown;
-          console.log(collapseId);
-        })
-      },
+          },
+        toggleCollapse(id) {
+          this.$root.$emit('bv::toggle::collapse', id);
+          this.collapsed = ! this.collapsed;
+        }
+      }
     }
 </script>
 
 <style scoped>
-
+  .collapsed > .when-opened,
+  :not(.collapsed) > .when-closed {
+    display: none;
+  }
 </style>

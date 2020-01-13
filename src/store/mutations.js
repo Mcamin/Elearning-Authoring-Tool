@@ -6,7 +6,6 @@ export default {
   createSectionTitle: (state,payload) => {
     let temp = state.course.sections.find(
       section => section.title === payload.oldTitle);
-    console.log(temp);
     state.course.sections[state.course.sections.indexOf(temp)].title =payload.newTitle;
 
   },
