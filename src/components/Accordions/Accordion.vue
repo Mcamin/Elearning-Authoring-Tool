@@ -6,14 +6,13 @@
         <!-- Left Settings -->
         <b-col  class="text-left">
           <b-container class="d-flex">
-
             <label>
               <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="sectionTitle"
                      ref="section_title" v-on:keyup.enter="toggleTitleInput"/>
             </label>
             <a class="ml-2" href="#">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
+              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" />
             </a>
           </b-container>
         </b-col>
@@ -76,6 +75,7 @@
       components:{
         'font-awesome-icon': FontAwesomeIcon,
       },
+
 
       methods:{
         ...mapActions([

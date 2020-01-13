@@ -35,6 +35,7 @@ Add the default section to the sections -->
 
 
     export default {
+
       data () {
         return {
           sections:this.$store.state.course.sections
