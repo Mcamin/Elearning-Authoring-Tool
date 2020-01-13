@@ -2,6 +2,7 @@
       <b-modal id="modal-new-course" centered title="Create new course:" hide-footer size="lg">
             <div>
               <b-form @submit.prevent="handleSubmit" @reset.prevent="handleReset" v-if="show">
+
                 <!-- Title of Course-->
                 <b-form-group id="input-group-1" label="Title:" label-for="input-title">
                   <b-form-input
@@ -11,10 +12,12 @@
                     placeholder="Web Development"
                   />
                 </b-form-group>
+
                 <!-- Description of Course-->
                 <b-form-group id="input-group-2" label="Description" label-for="input-description">
                   <b-form-textarea
                     id="input-description"
+
                     v-model="formData.description"
                     required
                     rows="2"
@@ -23,24 +26,31 @@
                   />
                 </b-form-group>
 
-                <!-- Tags of Course-->
-                <b-form-group id="input-group-3" label="Tags" label-for="input-3">
-                  <b-form-input
-                    id="input-3"
-                    v-model="formData.tags"
-                    placeholder="Web,HTML,Angular"
-                    required
+                <!-- Tags of Course -->
+                <b-form-group id="input-group-5" label="Tags" label-for="input-5">
+                  <vue-tags-input
+                    v-model="tag"
+                    :tags="formData.tags"
+                    :allow-edit-tags="true"
+                    @tags-changed="newTags => tags = newTags"
                   />
                 </b-form-group>
 
-                <b-form-group id="input-group-4" label="Language:" label-for="input-language">
+
+                <!-- Language selection -->
+                <b-form-group id="input-group-4" label="Language:" label-for="input-4">
                   <b-form-select
                     id="input-language"
-                    v-model="formData.language"
+                    v-model="selected"
+
                     :options="language"
                     required
                   />
                 </b-form-group>
+
+                
+                <!-- Upload -->
+                
                 <el-upload
                   class="upload-demo"
                   drag
@@ -54,39 +64,60 @@
                   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>
 
+                <!-- Submit button with route to /titleOfCourse -->
                 <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit" variant="primary" @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
 
+                <!-- Reset button -->
                 <b-button type="reset" variant="danger">Reset</b-button>
               </b-form>
             </div>
       </b-modal>
 </template>
 <script>
-  import Upload from 'element-ui'
-  import {mapState, mapActions} from 'vuex'
+
+  import {mapState, mapActions, ActionContext as store} from 'vuex';
+  import newcourse from "../../data/coursesArray";
+  import { Input, Tag } from 'element-ui'
+  import VueTagsInput from '@johmun/vue-tags-input';
+
+
 
   export default {
         data() {
           return {
+            tag:'',
             formData: {
               title: '',
               description: '',
               tags: [],
-              language:"",
+
+              inputVisible: false,
+              inputValue: '',
+              isEditing: false,
+              language: [],
+              sections: []
             },
-            language: [{ text: 'Select One' }, 'English', 'German', 'Russian'],
+            selected: null,
+            language: [
+              { value: null, text: 'Please select a language' },
+              { text: 'English'},
+              { text: 'German'},
+              { text: 'Russian'}
+              ],
             show: true
           }
         },
-  components: {
-          Upload,
-  },
+      components: {
+          VueTagsInput,
+        },
+
         methods: {
           ...mapActions([
             'addCourse'
           ]),
           handleSubmit() {
-            const { title, description, tags, language} = this.formData;
+
+            const { title, description, tags, language, sections } = this.formData
             const payload = {
                 title,
                 description,
@@ -106,6 +137,28 @@
             this.$nextTick(() => {
               this.show = true
             })
+          },
+          handleClose(tag) {
+            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+          },
+          showInput() {
+            this.inputVisible = true;
+            this.$nextTick(_ => {
+              this.$refs.saveTagInput.$refs.input.focus();
+            });
+          },
+
+          handleInputConfirm() {
+            let inputValue = this.inputValue;
+            if (inputValue) {
+              this.dynamicTags.push(inputValue);
+            }
+            this.inputVisible = false;
+            this.inputValue = '';
+          },
+          toggleTitleInput() {
+            this.lesson.title = this.$refs['lesson_title'].value;
+            this.isEditing = !this.isEditing;
           }
         },
         computed : {

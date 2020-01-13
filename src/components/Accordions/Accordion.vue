@@ -3,17 +3,22 @@
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
+        <!-- Left Settings -->
         <b-col  class="text-left">
           <b-container class="d-flex">
             <label>
-              <input :class="{view: !isEditing}" :disabled="!isEditing" :value="sectionTitle" ref="section_title" type="text" v-on:keyup.enter="toggleTitleInput"/>
+              <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="sectionTitle"
+                     ref="section_title" v-on:keyup.enter="toggleTitleInput"/>
             </label>
             <a class="ml-2" href="#">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
+              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" />
             </a>
           </b-container>
         </b-col>
+        <!-- End Left Settings -->
+
+        <!--Right Settings-->
         <b-col  class="text-right">
           <a href="#"  class="ml-2">
             <font-awesome-icon :icon="['fas', 'trash']"  />
@@ -33,8 +38,11 @@
           </b-btn>
 
         </b-col>
+        <!--End Right settings -->
+
       </b-row>
     </b-card-header>
+     <!--End header -->
     <!--Content-->
     <b-collapse :id="`accordion-${sectionID}`" v-model="collapsed" :accordion="`myaccordion-${sectionID}`" role="tabpanel">
       <b-card-body>
@@ -43,31 +51,19 @@
         <!-- End Module-->
         <!--Lesson-->
         <slot name="Lesson_Interaction_Gloassary"/>
-        <b-button block  href="#" v-b-modal="'add-unit'">
-          <font-awesome-icon :icon="['fas', 'plus-circle']" size="2x" />
-        </b-button>
+        <!--Add Element to the Accordion-->
       </b-card-body>
     </b-collapse>
+    <!--End Content-->
   </b-card>
 </template>
 
 <script>
 
-  import { library } from '@fortawesome/fontawesome-svg-core'
-  import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import { mapGetters, mapActions, mapState} from "vuex";
   import { uuid } from 'vue-uuid';
-
-  library.add(
-    faPen,
-    faTrash,
-    faCog,
-    faSortUp,
-    faSortDown,
-    faPlusCircle,
-    faSave
-  );
+  
     export default {
       name: "Accordion",
       data(){
@@ -86,13 +82,15 @@
         sectionTitle:{
           Type:String,
           required: true,
-          Description:"the section title "
+          Description:"The section title recieved from the parent component"
 
-        }
+        },
+
       },
       components:{
         'font-awesome-icon': FontAwesomeIcon,
       },
+
 
       methods:{
         ...mapActions([
@@ -117,16 +115,5 @@
 </script>
 
 <style scoped>
-.btn{
-  background: transparent;
-  border: 1px dashed darkcyan;
-}
-.fa-plus-circle{
-    color:darkcyan;
-  }
-.view {
-  border-color: transparent;
-  background-color: initial;
-  color: initial
-}
+
 </style>

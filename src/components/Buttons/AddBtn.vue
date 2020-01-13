@@ -25,5 +25,16 @@
 </script>
 
 <style scoped>
-
+  .btn{
+    background: transparent;
+    border: 1px dashed darkcyan;
+  }
+  .fa-plus-circle{
+    color:darkcyan;
+  }
+  .view {
+    border-color: transparent;
+    background-color: initial;
+    color: initial
+  }
 </style>

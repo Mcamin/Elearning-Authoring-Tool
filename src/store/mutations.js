@@ -18,8 +18,6 @@ export default {
   appendCourse: (state, course) => {
      state.courses.push(course);
   },
-
-
   appendSection: (state, section) => {
     state.course.sections.push(section)
   }
