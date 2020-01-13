@@ -1,21 +1,24 @@
+//Update or mutate a state
+import getters from "./getters";
+
 export default {
 
-  appendCourse: (state, course) => {
-     state.courses = course
-  },
-  createCourse: (state, course) => {
-    state.newCourse = course
-  },
+  createSectionTitle: (state,payload) => {
+    let temp = state.course.sections.find(
+      section => section.title === payload.oldTitle);
+    console.log(temp);
+    state.course.sections[state.course.sections.indexOf(temp)].title =payload.newTitle;
 
-  appendSection: (state, sections) => {
-    state.courses.course = sections
-    //let sec = {title: "TESTSECTION"}
-    //state.courses.course.sections.push(sec)
   },
-  appendSectionTitle: (state, secTitle) => {
-    //state.courses.course = sections
-    //state.courses.course.sections.title = secTitle
-    //let sec = {title: "TESTSECTION"}
-    //state.courses.course.sections.push(sec)
+  saveCopy: (state, course) => {
+    state.course = course;
+    // make an api call (post) to save the course details
+    // in the database or save them into a local file
+},
+  appendCourse: (state, course) => {
+     state.courses.push(course);
+  },
+  appendSection: (state, section) => {
+    state.course.sections.push(section)
   }
 }

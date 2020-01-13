@@ -19,14 +19,14 @@
 						Login to continue
 					</span>
 
-            <el-tabs v-model="activePane" stretch=true class="px-5">
+            <el-tabs v-model="activePane"  stretch=true class="px-5">
               <el-tab-pane label="Sign In" name="first">
                 <el-input placeholder="Email or Username" v-model="email" class="mb-1 "/>
                 <el-input placeholder="Password" v-model="password" show-password class="mb-1 "/>
                 <el-button  @click.native="redirectToHome"  type="success" native-type="button"  class="mt-3 px-5 py-2 w-100" >Log in</el-button>
 
               </el-tab-pane>
-              <el-tab-pane label="Sign Up" name="second">
+              <el-tab-pane label="Sign Up" stretch=true name="second">
                 <el-input placeholder="Email" v-model="email" class="mb-1 "/>
                 <el-input placeholder="Username" v-model="username" class="mb-1 "/>
                 <el-input placeholder="Password" v-model="password" show-password class="mb-1 "/>

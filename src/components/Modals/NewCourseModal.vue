@@ -2,21 +2,26 @@
       <b-modal id="modal-new-course" centered title="Create new course:" hide-footer size="lg">
             <div>
               <b-form @submit.prevent="handleSubmit" @reset.prevent="handleReset" v-if="show">
-                <!-- Title of Course -->
-                <b-form-group id="input-group-1" label="Title:" label-for="input-1">
+
+                <!-- Title of Course-->
+                <b-form-group id="input-group-1" label="Title:" label-for="input-title">
                   <b-form-input
-                    id="input-1"
+                    id="input-title"
                     v-model="formData.title"
                     required
                     placeholder="Web Development"
                   />
                 </b-form-group>
-                <!-- Description of Course -->
-                <b-form-group id="input-group-2" label="Description" label-for="input-2">
-                  <b-form-input
-                    id="input-2"
+
+                <!-- Description of Course-->
+                <b-form-group id="input-group-2" label="Description" label-for="input-description">
+                  <b-form-textarea
+                    id="input-description"
+
                     v-model="formData.description"
                     required
+                    rows="2"
+                    max-rows="6"
                     placeholder="This course is..."
                   />
                 </b-form-group>
@@ -31,15 +36,18 @@
                   />
                 </b-form-group>
 
+
                 <!-- Language selection -->
                 <b-form-group id="input-group-4" label="Language:" label-for="input-4">
                   <b-form-select
-                    id="input-4"
+                    id="input-language"
                     v-model="selected"
+
                     :options="language"
                     required
                   />
                 </b-form-group>
+
                 
                 <!-- Upload -->
                 
@@ -66,10 +74,12 @@
       </b-modal>
 </template>
 <script>
+
   import {mapState, mapActions, ActionContext as store} from 'vuex';
   import newcourse from "../../data/coursesArray";
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
+
 
 
   export default {
@@ -80,6 +90,7 @@
               title: '',
               description: '',
               tags: [],
+
               inputVisible: false,
               inputValue: '',
               isEditing: false,
@@ -99,21 +110,20 @@
       components: {
           VueTagsInput,
         },
+
         methods: {
           ...mapActions([
             'addCourse'
           ]),
           handleSubmit() {
+
             const { title, description, tags, language, sections } = this.formData
             const payload = {
-              course: {
                 title,
                 description,
                 tags,
-                language,
-                sections
-              }
-            }
+                language
+            };
             this.addCourse(payload)
           },
           handleReset() {

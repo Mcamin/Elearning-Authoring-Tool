@@ -5,6 +5,22 @@
       {
         "polyfills": ["es7.object.entries", "es6.promise"]
       }
+
+    ],
+    [
+      "es2015",
+      {
+      "modules": false
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
     ]
   ]
 }

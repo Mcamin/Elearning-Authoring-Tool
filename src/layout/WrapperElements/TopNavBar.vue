@@ -6,14 +6,14 @@
         <font-awesome-icon :icon="['fas', 'th-large']" size="lg" />
       </router-link>
       <b-navbar-brand href="#" class="ml-2" v-if="routeName!=='Newcourse'">{{routeName}}</b-navbar-brand>
-      <b-navbar-brand href="#" class="ml-2" v-else>{{getNewCourse.course.title}}</b-navbar-brand>
+      <b-navbar-brand href="#" class="ml-2" v-else>{{this.$store.state.course.title}}</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"/>
 
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="searchModalVisible = true">
+          <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="">
             <font-awesome-icon :icon="['fas', 'search']" size="lg" />
           </b-nav-item>
           <modal :show.sync="searchModalVisible"
@@ -69,9 +69,6 @@
             'font-awesome-icon': FontAwesomeIcon,
         },
         computed: {
-            ...mapGetters([
-              'getNewCourse'
-            ]),
             routeName() {
                 const { name } = this.$route;
                   return this.capitalizeFirstLetter(name);
@@ -79,7 +76,7 @@
         },
         data() {
             return {
-                coursetitle: getNewCourse,
+                coursetitle: this.$store.state.course.title,
                 activeNotifications: false,
                 showMenu: false,
                 searchModalVisible: false,
