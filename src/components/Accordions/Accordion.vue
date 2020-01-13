@@ -38,7 +38,7 @@
     </b-card-header>
      <!--End header -->
     <!--Content-->
-    <b-collapse :id="`${sectionID}`"  :accordion="`myaccordion-${sectionID}`" role="tabpanel">
+    <b-collapse :id="`${sectionID}`"   visible  :accordion="`myaccordion-${sectionID}`" role="tabpanel">
       <b-card-body>
         <!--Module-->
         <slot name="Module"/>
