@@ -12,7 +12,7 @@ Add the default section to the sections -->
         </b-button>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
-        <AddContentModel/>
+        <AddContentModal/>
         <!-- End  Add Content Accordion-->
       </b-col>
     </b-row>
@@ -38,8 +38,8 @@ Add the default section to the sections -->
       data () {
         return {
           sections:this.$store.state.course.sections
-      }
-      } ,
+        }
+      },
         components: {
           Accordion,
           AddContentModel,

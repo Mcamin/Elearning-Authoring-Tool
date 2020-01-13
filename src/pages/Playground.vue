@@ -4,13 +4,13 @@
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
         <div v-for="(section, index) in sections" :key="index">
-          <component  is="Accordion" :sectionTitle="section.title">
+          <component is="Accordion" :sectionTitle="section.title" :sectionID="section.id">
           </component>
         </div>
          <AddBtn :func="'add-section'"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
-        <AddSectionModel/>
+        <AddSectionModal/>
         <!-- End  Add Content Accordion-->
       </b-col>
     </b-row>
@@ -19,7 +19,7 @@
 
 <script>
   import Accordion from "../components/Accordions/Accordion";
-  import AddSectionModel from "../components/Modals/AddSectionModal";
+  import AddSectionModal from "../components/Modals/AddSectionModal";
   import AddBtn from "../components/Buttons/AddBtn";
 
     export default {
@@ -31,7 +31,7 @@
       },
       components: {
         Accordion,
-        AddSectionModel,
+        AddSectionModal,
         AddBtn
       },
     }

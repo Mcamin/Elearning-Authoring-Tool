@@ -21,14 +21,22 @@
           <a href="#" class="ml-2">
             <font-awesome-icon :icon="['fas', 'cog']" />
           </a>
-          <a href="#" @click="collapsed = !collapsed" class="ml-2">
-            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" />
-          </a>
+          
+          <b-btn block href="#" v-b-toggle.accordion1 variant="secondary">
+              Time Period
+            <span class="when-opened">
+                <font-awesome-icon icon="chevron-down" />
+            </span>
+            <span class="when-closed">
+                <font-awesome-icon icon="chevron-right" />
+            </span>
+          </b-btn>
+
         </b-col>
       </b-row>
     </b-card-header>
     <!--Content-->
-    <b-collapse id="accordion-1" v-model="collapsed" accordion="my-accordion" role="tabpanel">
+    <b-collapse :id="`accordion-${sectionID}`" v-model="collapsed" :accordion="`myaccordion-${sectionID}`" role="tabpanel">
       <b-card-body>
         <!--Module-->
         <slot name="Module"/>
@@ -48,7 +56,8 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import { faPen, faTrash,faCog,faSortUp,faSortDown ,faPlusCircle, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import { mapGetters, mapActions} from "vuex";
+  import { mapGetters, mapActions, mapState} from "vuex";
+  import { uuid } from 'vue-uuid';
 
   library.add(
     faPen,
@@ -65,9 +74,15 @@
         return{
           collapsed:true,
           isEditing: false,
+
         }
       },
       props: {
+        sectionID:{
+          Type:String,
+          required: true,
+          Description:"the section uuid "
+        },
         sectionTitle:{
           Type:String,
           required: true,
@@ -95,8 +110,9 @@
       mounted() {
         this.$root.$on('bv::collapse::state', (collapseId, isJustShown) => {
           this.collapsed=isJustShown;
+          console.log(collapseId);
         })
-      }
+      },
     }
 </script>
 

@@ -21,7 +21,7 @@
 <script>
   import AddContentCard from "../Cards/AddContentCard";
     export default {
-        name: "AddContentModel",
+        name: "AddContentModal",
         data() {
             return{
                 lesson:{
