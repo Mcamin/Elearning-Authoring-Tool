@@ -2,7 +2,7 @@
     <div   class="app-main__outer pb-5">
         <fade-transition :duration="100" mode="out-in">
             <!-- your content here -->
-            <router-view></router-view>
+            <router-view/>
         </fade-transition>
     </div>
 </template>

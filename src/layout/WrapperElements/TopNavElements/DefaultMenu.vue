@@ -1,18 +1,11 @@
 <template>
 
-    <!-- Right aligned nav items -->
+    <!-- Se -->
     <b-navbar-nav class="ml-auto">
-      <b-button size="sm" v-if="routeName ==='Addlesson'" @click.prevent="saveCourse()" class="my-2" type="submit" >Save</b-button>
       <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="">
         <font-awesome-icon :icon="['fas', 'search']" size="lg" />
       </b-nav-item>
-      <modal :show.sync="searchModalVisible"
-             class="modal-search"
-             id="searchModal"
-             :centered="false"
-             :show-close="true">
-        <input slot="header" v-model="searchQuery" type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-      </modal>
+
       <b-nav-item-dropdown no-caret	 text="" right>
         <template slot="button-content">
           <font-awesome-icon :icon="['fas', 'bell']" size="lg" />
@@ -22,6 +15,8 @@
         <b-dropdown-item href="#">Notifcation 3</b-dropdown-item>
         <b-dropdown-item href="#">Notification 4</b-dropdown-item>
       </b-nav-item-dropdown>
+
+
       <b-nav-item-dropdown text="" right>
         <template slot="button-content">
           <span>User</span>
@@ -47,7 +42,10 @@
     faBell
   );
     export default {
-        name: "AddLessonNavElm"
+        name: "AddLessonNavElm",
+      components:{
+        'font-awesome-icon': FontAwesomeIcon,
+      }
     }
 </script>
 

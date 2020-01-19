@@ -10,9 +10,17 @@
 
       <!--Right Collapsible Menu  -->
       <b-collapse id="nav-collapse" is-nav>
+
+        <!-- Course  Menu --->
         <CourseMenu v-if="isCoursePage"/>
+        <!-- End Course Menu --->
+
+        <!-- Module Menu --->
         <ModuleMenu v-else-if="isModulePage"/>
+        <!-- End Module Menu --->
+        <!--  Default Menu --->
         <DefaultMenu v-else/>
+        <!-- End Default Menu --->
       </b-collapse>
       <!--End Right Collapsible Menu  -->
     </b-navbar>
@@ -23,7 +31,7 @@
     import CourseMenu from "./TopNavElements/CourseMenu";
     import ModuleMenu from "./TopNavElements/ModuleMenu";
     import DefaultMenu from "./TopNavElements/DefaultMenu";
-    import checkRouter from "./utils/helpers"
+    import {checkRouter} from "../../plugins/helpers"
 
 
     export default {
@@ -36,10 +44,12 @@
         },
       computed:{
         isCoursePage(){
-            return checkRouter('course');
+            return checkRouter(this.$route.name,'newcourse');
           },
         isModulePage(){
-          return checkRouter('course');
+          return checkRouter(this.$route.name,'addlesson') ||
+            checkRouter(this.$route.name,'addquiz') ||
+            checkRouter(this.$route.name,'addgloassary');
         }
 
       }

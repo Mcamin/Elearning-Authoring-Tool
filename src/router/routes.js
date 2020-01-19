@@ -21,13 +21,18 @@ const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pag
 const routes = [
     {
         path: "/",
-        component: Playground,
-        redirect: "/playground",
+        component: Wrapper,
+        redirect: "/home",
         children: [
           {
             path: "home",
             name: "home",
-            component: Home
+            component: Home,
+            meta:{
+              breadcrumb:[
+                {name: 'Home'}
+              ]
+            }
           },
           {
             path: "playground",
@@ -37,23 +42,48 @@ const routes = [
           {
             path: "courses",
             name: "courses",
-            component: Courses
+            component: Courses,
+            meta:{
+              breadcrumb:[
+                {name: 'Home',link:'home'},
+                {name: 'Courses'},
+              ]
+            }
           },
           {
             path: "profile",
             name: "profile",
-            component: Profile
+            component: Profile,
+            meta:{
+              breadcrumb:[
+                {name: 'Home',link:'home'},
+                {name: 'Profile'},
+              ]
+            }
           },
           {
             path: "/newcourse/:title",
             name: "newcourse",
             component: NewCourse,
-            props: true
+            props: true,
+            meta:{
+              breadcrumb:[
+                {name: 'Home',link:'home'},
+                {name: 'Courses',link:'Courses'},
+                {name: ':title'},
+              ]
+            }
           },
           {
             path: "library",
             name: "library",
-            component: Library
+            component: Library,
+            meta:{
+              breadcrumb:[
+                {name: 'Home',link:'home'},
+                {name: 'Library',link:'library'},
+              ]
+            }
           },
           {
             path: "addlesson",
