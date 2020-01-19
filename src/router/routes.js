@@ -21,8 +21,8 @@ const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pag
 const routes = [
     {
         path: "/",
-        component: Wrapper,
-        redirect: "/home",
+        component: Playground,
+        redirect: "/playground",
         children: [
           {
             path: "home",

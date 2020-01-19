@@ -28,7 +28,7 @@
     display: -ms-flexbox;
     display: flex;
     z-index: 8;
-    padding: 0px 0 0 280px;
+   /* padding: 0px 0 0 280px;*/
     -webkit-transition: all .2s;
     transition: all .2s;
   }

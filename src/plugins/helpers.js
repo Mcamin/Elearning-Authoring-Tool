@@ -1,3 +1,6 @@
+export const checkRouter = (path) =>{
+  return this.$route.path === path;
+};
 
 export const applyDrag = (arr, dragResult) => {
   const { removedIndex, addedIndex, payload } = dragResult
@@ -15,7 +18,7 @@ export const applyDrag = (arr, dragResult) => {
   }
 
   return result
-}
+};
 
 export const generateItems = (count, creator) => {
   const result = []
@@ -23,4 +26,4 @@ export const generateItems = (count, creator) => {
     result.push(creator(i))
   }
   return result
-}
+};
