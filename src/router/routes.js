@@ -30,7 +30,7 @@ const routes = [
             component: Home,
             meta:{
               breadcrumb:[
-                {name: 'Home'}
+                {text: 'Home', active:true}
               ]
             }
           },
@@ -45,8 +45,8 @@ const routes = [
             component: Courses,
             meta:{
               breadcrumb:[
-                {name: 'Home',link:'home'},
-                {name: 'Courses'},
+                {text: 'Home',to:{name:'home'}},
+                {text: 'Courses',active:true},
               ]
             }
           },
@@ -56,8 +56,8 @@ const routes = [
             component: Profile,
             meta:{
               breadcrumb:[
-                {name: 'Home',link:'home'},
-                {name: 'Profile'},
+                {text: 'Home',to:{name:'home'}},
+                {text: 'Profile',active:true},
               ]
             }
           },
@@ -68,9 +68,9 @@ const routes = [
             props: true,
             meta:{
               breadcrumb:[
-                {name: 'Home',link:'home'},
-                {name: 'Courses',link:'Courses'},
-                {name: ':title'},
+                {text: 'Home',to:{name:'home'}},
+                {text: 'Courses',to:{name:'courses'}},
+                {text: '',active: true},
               ]
             }
           },
@@ -80,15 +80,24 @@ const routes = [
             component: Library,
             meta:{
               breadcrumb:[
-                {name: 'Home',link:'home'},
-                {name: 'Library',link:'library'},
+                {text: 'Home',to:{name:'home'}},
+                {text: 'Library',active: true},
               ]
             }
           },
           {
-            path: "addlesson",
+            path: "/addlesson",
             name: "addlesson",
-            component: AddLesson
+            component: AddLesson,
+            meta:{
+              breadcrumb:[
+                {text: 'Home',to:{name:'home'}},
+                {text: 'Courses',to:{name:'courses'}},
+                {text: 'CourseName',to:{name:'newcourse'}},
+                {text: 'LessonName',active: true},
+              ]
+            }
+
           },
 
         ]

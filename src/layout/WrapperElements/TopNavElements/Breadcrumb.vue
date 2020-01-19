@@ -8,10 +8,9 @@
   <!--End Home Button-->
 
   <!--Breadcrumb Button-->
-  <b-navbar-brand href="#" class="ml-2" v-if="routeName!=='Newcourse'">{{routeName}}</b-navbar-brand>
-    <b-navbar-brand href="#" class="ml-2" v-else>{{this.$store.state.course.title}}</b-navbar-brand>
-  <!-- End Breadcrumb Button-->
 
+  <!-- End Breadcrumb Button-->
+    <b-breadcrumb :items="getBreadcrumbItems"/>
   </div>
 
 </template>
@@ -36,12 +35,10 @@
         },
       },
       computed: {
-        routeName() {
-          const { name } = this.$route;
-          return this.capitalizeFirstLetter(name);
-        }
+        getBreadcrumbItems() {
+          return this.$route.meta.breadcrumb;
       },
-    }
+    }}
 </script>
 
 <style scoped>
