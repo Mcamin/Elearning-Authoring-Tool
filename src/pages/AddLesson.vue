@@ -187,6 +187,9 @@
     faSave
   );
 
+  import {bus} from "../main";
+  import {mapActions} from "vuex";
+
   export default {
     name: "AddLesson",
     data() {
@@ -202,6 +205,9 @@
       };
     },
     methods: {
+      ...mapActions([
+        'saveLesson'
+      ]),
       handleClose(tag) {
         this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
       },
@@ -233,6 +239,13 @@
       Input,
       Button,
       VueTagsInput,
+    },
+    created() {
+      bus.$on('saveLesson',()=>{
+       const payload = this.lesson ;
+        this.saveLesson(payload);
+
+      });
     }
   }
 </script>

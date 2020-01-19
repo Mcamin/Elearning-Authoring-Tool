@@ -12,7 +12,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import UUID from 'vue-uuid';
- 
+
 Vue.use(UUID);
 Vue.use(ElementUI);
 Vue.use(VueRouter);
@@ -20,6 +20,8 @@ Vue.use(RouterPrefetch);
 Vue.use(BootstrapVue);
 
 Vue.config.productionTip = true;
+
+export const bus = new Vue();
 
 new Vue({
   router,

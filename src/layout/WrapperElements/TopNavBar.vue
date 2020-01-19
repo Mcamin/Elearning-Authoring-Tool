@@ -13,6 +13,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
+          <b-button size="sm" v-if="routeName ==='Addlesson'" @click.prevent="saveCourse()" class="my-2" type="submit" >Save</b-button>
           <b-nav-item id="search-button" data-toggle="modal" data-target="#searchModal" @click="">
             <font-awesome-icon :icon="['fas', 'search']" size="lg" />
           </b-nav-item>
@@ -60,6 +61,7 @@
         faSearch,
         faBell
     );
+ import {bus} from "../../main";
 
     export default {
         name: "TopNavBar",
@@ -84,6 +86,11 @@
             };
         },
         methods: {
+            saveCourse(){
+              bus.$emit("saveLesson");
+
+            },
+
             capitalizeFirstLetter(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             },

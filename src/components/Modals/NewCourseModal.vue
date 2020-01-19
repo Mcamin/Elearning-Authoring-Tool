@@ -48,9 +48,9 @@
                   />
                 </b-form-group>
 
-                
+
                 <!-- Upload -->
-                
+
                 <el-upload
                   class="upload-demo"
                   drag
@@ -95,7 +95,6 @@
               inputValue: '',
               isEditing: false,
               language: [],
-              sections: []
             },
             selected: null,
             language: [
@@ -113,18 +112,23 @@
 
         methods: {
           ...mapActions([
-            'addCourse'
+            'addCourse',
+           'saveTemporaryCourse'
           ]),
           handleSubmit() {
 
-            const { title, description, tags, language, sections } = this.formData
+            const { title, description, tags, language } = this.formData
             const payload = {
                 title,
                 description,
                 tags,
-                language
+                language,
+                sections: [{title:"New Section"}]
             };
-            this.addCourse(payload)
+            this.addCourse(payload);
+            this.saveTemporaryCourse(payload);
+
+
           },
           handleReset() {
             // Reset our form values

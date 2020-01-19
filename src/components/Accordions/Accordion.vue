@@ -8,7 +8,7 @@
           <b-container class="d-flex">
             <label>
               <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="sectionTitle"
-                     ref="section_title" v-on:keyup.enter="toggleTitleInput"/>
+                     ref="section_title" v-on:keyup.enter="toggleTitleInput">
             </label>
             <a class="ml-2" href="#">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
@@ -124,8 +124,9 @@
 </script>
 
 <style scoped>
-  .collapsed > .when-opened,
-  :not(.collapsed) > .when-closed {
-    display: none;
+  .view {
+    border-color: transparent;
+    background-color: initial;
+    color: initial
   }
 </style>

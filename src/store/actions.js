@@ -19,6 +19,9 @@ export default {
   addSection: ({ commit }, payload) => {
     commit('appendSection', payload)
   },
+  saveLesson: ({ commit }, payload) => {
+    commit('appendLesson', payload)
+  },
 
   addSectionTitle: ({ commit }, secTitle) => {
     commit('appendSectionTitle', secTitle)

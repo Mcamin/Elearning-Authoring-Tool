@@ -5,7 +5,7 @@ Add the default section to the sections -->
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
-        <div v-for="(section, index) in sections" :key="index">
+        <div v-for="(section, index) in getSections" :key="index">
           <component is="Accordion" :sectionTitle="section.title" :sectionID="section.id">
           </component>
         </div>
@@ -26,13 +26,18 @@ Add the default section to the sections -->
   import AddSectionModal from "../components/Modals/AddSectionModal";
   import AddBtn from "../components/Buttons/AddBtn";
   import AddContentModal from "../components/Modals/AddContentModal";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "newCourse",
     data () {
       return {
-        sections: this.$store.state.course.sections
       }
+    },
+    computed: {
+     ...mapGetters([
+       'getSections'
+     ])
     },
     components: {
       AddContentModal,
@@ -40,6 +45,7 @@ Add the default section to the sections -->
       AddSectionModal,
       AddBtn
     },
+
   }
 </script>
 

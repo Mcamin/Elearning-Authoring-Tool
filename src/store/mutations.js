@@ -19,5 +19,8 @@ export default {
   },
   appendSection: (state, section) => {
     state.course.sections.push(section)
-  }
+  },
+  appendLesson: (state, lesson) => {
+    state.course.lesson = lesson
+  },
 }
