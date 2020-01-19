@@ -21,6 +21,7 @@ Vue.use(BootstrapVue);
 
 Vue.config.productionTip = true;
 
+// Used to communicate event between components
 export const bus = new Vue();
 
 new Vue({

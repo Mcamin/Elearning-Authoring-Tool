@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
 import routes from "./routes";
-
+import {notEmptyObject} from '../plugins/helpers'
 // configure router
 const router = new VueRouter({
     routes, // short for routes: routes
@@ -13,6 +13,19 @@ const router = new VueRouter({
             return { x: 0, y: 0 }
         }
     }
+});
+
+//Update Breadcrumb metadata from parameters
+router.beforeEach((to, from, next) => {
+  //check if router name is addlesson or addquiz or add gloassary
+  //update section breadcrumb
+  //update course bredcrumb
+  //else
+  //if(to.name==='newcourse')
+  if(notEmptyObject(to.params)) {
+ // to.meta.breadcrumb[to.meta.breadcrumb.length-1].text =   to.params.title;
+  }
+  next();
 });
 
 export default router;

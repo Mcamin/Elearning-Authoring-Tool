@@ -30,6 +30,12 @@ Add the default section to the sections -->
 
   export default {
     name: "newCourse",
+    components: {
+      AddContentModal,
+      Accordion,
+      AddSectionModal,
+      AddBtn
+    },
     data () {
       return {
       }
@@ -38,14 +44,7 @@ Add the default section to the sections -->
      ...mapGetters([
        'getSections'
      ])
-    },
-    components: {
-      AddContentModal,
-      Accordion,
-      AddSectionModal,
-      AddBtn
-    },
-
+    }
   }
 </script>
 

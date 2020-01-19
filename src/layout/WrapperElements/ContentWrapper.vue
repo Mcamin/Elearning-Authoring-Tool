@@ -2,7 +2,7 @@
     <div   class="app-main__outer pb-5">
         <fade-transition :duration="100" mode="out-in">
             <!-- your content here -->
-            <router-view></router-view>
+            <router-view/>
         </fade-transition>
     </div>
 </template>
@@ -28,7 +28,7 @@
     display: -ms-flexbox;
     display: flex;
     z-index: 8;
-    padding: 0px 0 0 280px;
+   /* padding: 0px 0 0 280px;*/
     -webkit-transition: all .2s;
     transition: all .2s;
   }
