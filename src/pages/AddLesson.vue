@@ -12,7 +12,7 @@
                     <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title" type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
-                      <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="xs" v-else-if="isEditing"/>
+                      <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
                     </a>
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
