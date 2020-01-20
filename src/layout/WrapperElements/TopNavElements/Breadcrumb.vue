@@ -12,7 +12,6 @@
   <!-- End Breadcrumb Button-->
     <b-breadcrumb :items="getBreadcrumbItems"/>
   </div>
-
 </template>
 
 <script>

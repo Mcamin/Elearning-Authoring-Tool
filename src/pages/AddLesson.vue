@@ -9,10 +9,13 @@
               <b-container fluid>
                 <b-row>
                   <b-col class="mb-3">
-                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title" type="text" v-on:keyup.enter="toggleTitleInput">
+                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lesson.title" ref="lesson_title"
+                           type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
-                      <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing"/>
-                      <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing"/>
+                      <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg"
+                                         v-if="!isEditing"/>
+                      <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg"
+                                         v-else-if="isEditing"/>
                     </a>
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
@@ -26,10 +29,10 @@
                   <b-col class="mb-5">
                     <div>
                       <vue-tags-input
-                        v-model="tag"
-                        :tags="tags"
                         :allow-edit-tags="true"
+                        :tags="tags"
                         @tags-changed="newTags => tags = newTags"
+                        v-model="tag"
                       />
                     </div>
                   </b-col>
@@ -57,11 +60,9 @@
                         <b-tab no-body title="LIFECYCLE">
                           <b-container>
                             <b-row>
-
                               <b-col>
                                 <b-card class="my-3" no-body>
                                   <b-card-body>
-
                                     <b-card-text>
                                       <b-container>
                                         <b-row>
@@ -85,23 +86,17 @@
                                               <b-dropdown-item>Third Action</b-dropdown-item>
                                             </b-dropdown>
                                           </b-col>
-
                                         </b-row>
-
                                       </b-container>
-
-
                                     </b-card-text>
                                   </b-card-body>
                                 </b-card>
                               </b-col>
                             </b-row>
                             <b-row>
-
                               <b-col>
                                 <b-card class="my-3" no-body>
                                   <b-card-body>
-
                                     <b-card-text>
                                       <b-container>
                                         <b-row>
@@ -125,48 +120,29 @@
                                               <b-dropdown-item>Third Action</b-dropdown-item>
                                             </b-dropdown>
                                           </b-col>
-
                                         </b-row>
-
                                       </b-container>
-
-
                                     </b-card-text>
                                   </b-card-body>
                                 </b-card>
                               </b-col>
                             </b-row>
                           </b-container>
-
-
                         </b-tab>
-
                         <b-tab no-body title="TECHNICAL">
-
                         </b-tab>
-
                         <b-tab no-body title="EDUCATIONAL">
-
                         </b-tab>
-
                         <b-tab title="ANNOTATION">
-
                         </b-tab>
                       </b-tabs>
                     </b-card>
-
                   </b-col>
-
                 </b-row>
               </b-container>
-
-
             </b-card-text>
           </b-card-body>
-
-
         </b-card>
-
       </b-col>
     </b-row>
   </b-container>
@@ -179,6 +155,8 @@
   import {VueEditor} from "vue2-editor";
   import {Button, Input, Tag} from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
+  import {bus} from "../main";
+  import {mapActions} from "vuex";
 
   library.add(
     faPen,
@@ -187,14 +165,11 @@
     faSave
   );
 
-  import {bus} from "../main";
-  import {mapActions} from "vuex";
-
   export default {
     name: "AddLesson",
     data() {
       return {
-        tag:'',
+        tag: '',
         tags: [],
         inputVisible: false,
         inputValue: '',
@@ -241,8 +216,8 @@
       VueTagsInput,
     },
     created() {
-      bus.$on('saveLesson',()=>{
-       const payload = this.lesson ;
+      bus.$on('saveLesson', () => {
+        const payload = this.lesson;
         this.saveLesson(payload);
 
       });

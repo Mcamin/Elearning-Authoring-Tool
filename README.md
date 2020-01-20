@@ -40,6 +40,10 @@ npm install
 npm run serve
 ```
 
+#### Run API:
+```
+npm run api
+```
 #### Compiles and minifies for production
 ```
 npm run build

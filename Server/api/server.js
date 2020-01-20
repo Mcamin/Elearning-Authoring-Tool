@@ -58,3 +58,5 @@ app.post('/api/note/delete/:id', (req,res) => {
 const PORT = 5000;
 app.listen(PORT);
 console.log('api runnging on port ' + PORT + ': ');
+
+// https://dzone.com/articles/fullstack-vue-app-with-node-express-and-mongodb

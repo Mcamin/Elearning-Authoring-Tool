@@ -21,10 +21,9 @@
       <content-footer/>
     </transition>
     <!--End Footer-->
-
-
   </main>
 </template>
+
 <script>
 
   import ContentFooter from "./WrapperElements/ContentFooter.vue";
@@ -41,8 +40,6 @@
       Sidebar,
       DashboardContent,
       TopNavigationBar,
-
-
     },
     methods: {},
     computed: {

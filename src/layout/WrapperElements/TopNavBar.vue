@@ -60,5 +60,4 @@
   .navbar{
     background: #219678;
   }
-
 </style>
