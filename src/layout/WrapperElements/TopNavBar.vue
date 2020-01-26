@@ -57,8 +57,6 @@
 </script>
 
 <style lang="css" >
-  .navbar{
-    background: #219678;
-  }
+
 
 </style>

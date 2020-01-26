@@ -1,29 +1,47 @@
 <template>
-  <main>
+
+
+
+  <b-container fluid class="wrapper d-flex flex-column vh-100 px-0">
     <!--Navigation-bar-->
     <transition name="fade" mode="out-in" appear>
-      <top-navigation-bar/>
+    <header>
+        <top-navigation-bar/>
+    </header>
     </transition>
-    <!--End Navigation-bar-->
+      <!--End Navigation-bar-->
+    <b-container fluid class="main-content px-0">
 
-    <!--Sidebar-->
-    <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>
-      <Sidebar/>
-    </transition>
-    <!--End Sidebar-->
+      <b-row class="h-100 mx-0">
 
-    <!--Main-Wrapper-->
-    <dashboard-content/>
-    <!--End Main-Wrapper-->
-
-    <!--Footer-->
-    <transition name="fade" mode="out-in" appear>
-      <content-footer/>
-    </transition>
-    <!--End Footer-->
+          <!--Sidebar
+ <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>-->
+          <el-aside class="h-100 p-0 col-2"><Sidebar/></el-aside>
+          <!--</transition>
+  End Sidebar-->
 
 
-  </main>
+            <el-main class="h-100 p-0">
+              <!--Main-Wrapper-->
+              <dashboard-content/>
+              <!--End Main-Wrapper-->
+            </el-main>
+
+
+      </b-row>
+      <el-footer>
+        <!--Footer-->
+        <transition name="fade" mode="out-in" appear>
+          <content-footer/>
+        </transition>
+        <!--End Footer-->
+      </el-footer>
+    </b-container>
+
+
+
+
+  </b-container>
 </template>
 <script>
 

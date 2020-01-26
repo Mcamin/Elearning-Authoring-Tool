@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class=" p-4">
+  <b-container fluid class=" p-4 my-2">
     <b-row align-h="end" class="mb-2">
       <b-col cols="4" >
             <span class="float-right">show : 9 / 24 / 36</span>

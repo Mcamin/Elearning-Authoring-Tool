@@ -65,10 +65,10 @@
                 </el-upload>
 
                 <!-- Submit button with route to /titleOfCourse -->
-                <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit" variant="primary" @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
+                <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
 
                 <!-- Reset button -->
-                <b-button type="reset" variant="danger">Reset</b-button>
+                <b-button type="reset" >Reset</b-button>
               </b-form>
             </div>
       </b-modal>

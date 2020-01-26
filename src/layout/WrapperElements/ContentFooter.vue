@@ -1,6 +1,6 @@
 <template>
 
-      <footer class="footer py-2">
+
         <b-container fluid>
       <b-row align-v="center">
         <b-col  md="6" sm="12">
@@ -17,8 +17,6 @@
 
       </b-row>
     </b-container>
-      </footer>
-
 
 </template>
 <style>
@@ -47,12 +45,11 @@
 
 <style lang="sass">
   footer
-    position: fixed
-    width: 100%
-    left: 0
-    color: white
-    bottom: 0
     background-color: #219678
+    width: 100%
+    color: white
     a
       color: white
+
+
 </style>

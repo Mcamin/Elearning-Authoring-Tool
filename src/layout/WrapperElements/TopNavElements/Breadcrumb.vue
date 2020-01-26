@@ -45,4 +45,11 @@
   a{
     color: white;
   }
+  .breadcrumb{
+    background: transparent;
+    display: -webkit-inline-flex;
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
+  }
 </style>

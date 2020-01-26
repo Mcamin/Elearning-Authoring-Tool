@@ -1,7 +1,7 @@
 <!-- TODO:
 Add the default section to the sections -->
 <template>
-  <b-container fluid class=" mt-5  px-5" >
+  <b-container fluid class="p-5 my-2" >
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->

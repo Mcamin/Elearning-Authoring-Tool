@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="p-5 mx-4">
+  <b-container fluid class="p-5 my-2">
     <b-row  align-h="center"   align-content="center">
       <b-col  align="center" align-self="center" >
         <div class="accordion">

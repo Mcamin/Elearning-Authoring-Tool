@@ -1,7 +1,7 @@
 <template>
-  <b-container class="mt-3">
-    <b-row align-v="center">
-      <b-col align-self="center">
+  <b-container  class="h-100">
+    <b-row class="mt-5 mx-5">
+      <b-col class="mb-4 mx-auto">
         <!--HTML Card-->
         <b-card class="mb-5" no-body>
           <b-card-body>
