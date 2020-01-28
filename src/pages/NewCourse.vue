@@ -9,7 +9,7 @@ Add the default section to the sections -->
           <component is="Accordion" :sectionTitle="section.title" :sectionID="section.id">
           </component>
         </div>
-        <AddBtn :func="'add-section'"/>
+        <AddBtn :func="'add-section-module'"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
         <AddSectionModal/>
@@ -23,7 +23,7 @@ Add the default section to the sections -->
 <script>
 
   import Accordion from "../components/Accordions/Accordion";
-  import AddSectionModal from "../components/Modals/AddSectionModal";
+  import AddSectionModal from "../components/Modals/AddSectionModuleModal";
   import AddBtn from "../components/Buttons/AddBtn";
   import AddContentModal from "../components/Modals/AddContentModal";
   import {mapGetters} from "vuex";

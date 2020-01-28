@@ -80,13 +80,3 @@
     }
 </script>
 
-<style lang="sass">
-.el-divider
-  background-color: #707070 !important
-.el-divider--vertical
-  height: 1.5em !important
-.el-input
-  width: 150px
-
-
-</style>
