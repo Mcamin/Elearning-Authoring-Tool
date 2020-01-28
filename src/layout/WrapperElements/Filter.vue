@@ -2,7 +2,7 @@
   <b-row class=" filter-wrapper mb-4">
     <b-col class="text-right">
       <span class="mx-2">Filter: </span>
-      <el-select class="mx-1" v-model="value" :placeholder="filterBy[0].label">
+      <el-select class="mx-1" v-model="sortValue" :placeholder="filterBy[0].label">
         <el-option
           v-for="item in filterBy"
           :key="item.value"
@@ -12,7 +12,7 @@
       </el-select>
 
       <span  class="mx-2">Sort by: </span>
-      <el-select  class="mx-1" v-model="value" :placeholder="sortBy[0].label">
+      <el-select  class="mx-1" v-model="filterValue" :placeholder="sortBy[0].label">
         <el-option
           v-for="item in sortBy"
           :key="item.value"
@@ -70,7 +70,11 @@
               value: 'ITSoftware',
               label: 'IT & Software'
             },
+
           ],
+          sortValue: '',
+          filterValue:''
+
         }
       }
     }
