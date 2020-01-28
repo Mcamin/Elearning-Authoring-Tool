@@ -1,30 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
-const Lesson  = require('../models/lesson');
-const multer = require('multer');
-const crypto  = require('crypto');
-const GridFsStorage = require('multer-gridfs-storage');
-const Grid = require ('gridfs-stream');
+const mongoose = require("mongoose");
 
-
-
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb){
-    cb(null, 'uploads/lessons');
-  },
-  filename: function(req, file, cb){
-    cb(null, new Date().toISOString()+file.originalname);
-  }
-})
-const upload = multer({storage:storage})
-//Get all lessons
-router.get('/', (req, res, next) =>{
-  res.status(200).json({
-    message:'Handling GET requests to /lessons'
-  });
-});
+const Lesson = require("../models/lesson");
 
 //Get a single lesson
 router.get('/:lessonId', (req, res, next) =>{
@@ -50,25 +28,29 @@ router.patch('/:lessonId', (req, res, next) =>{
   });
 });
 
-//Create a lesson
-router.post('/', (req, res, next) =>{
-  const lesson =  new Lesson({
-    _id: mongoose.Types.ObjectId(),
-    title: req.body.name,
-    content: req.body.content,
+router.post("/", (req, res, next) => {
+  const lesson = new Lesson({
+    _id: new mongoose.Types.ObjectId(),
+    title: req.body.title,
+    description: req.body.description
+  });
 
-  });
-  lesson.save()
-        .then(res =>{
-          console.log(res);
-        })
-  .catch(err => console.log(err));
-  res.status(201).json({
-    message:'Handling POST requests to /products',
-    createdLesson: lesson
-  });
+  lesson
+    .save()
+    .then(result => {
+      console.log(result);
+      res.status(201).json({
+        message: "Handling POST requests to /lesson",
+        createdProduct: result
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
 });
-
-
+//Create a lesson
 
 module.exports = router;

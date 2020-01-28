@@ -3,59 +3,50 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
 const lessonRoutes = require('./api/routes/lessons');
 const quizRoutes = require('./api/routes/quizzes');
 
 //Connect to DB
 //const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'
 //  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(
+  'mongodb+srv://r2d2:eat2020@cluster0-nozlp.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true , useUnifiedTopology: true });
 
-const mongoURI = 'mongodb://localhost:27017/eating';
-mongoose.connect(mongoURI,{ useNewUrlParser: true, useUnifiedTopology: true  } );
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-let db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(){
-  console.log('Connected')
-});
-
-//app.use(morgan('dev'));
-//app.use(bodyParser.urlencoded({extended: false}));
-//app.use(bodyParser.json());
-
-// Handling Cors
-/*
-app.use((req,res,next) => {
-  res.header('Access-Control-Allow-Origin','*');
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
   res.header(
-    'Account-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-  //check the option request and send the allowed requests
-  if(req.method === 'OPTIONS'){
-    res.header('Access-Control-Allow-Methods','GET, PUT, POST, PATCH, DELETE');
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});
   }
   next();
 });
-*/
-//Routes to handle requests
-//app.use('/lessons',lessonRoutes);
-//app.use('/quizzes',quizRoutes);
-/*
-app.use((req,res,next) => {
-  const error = new Error('Not Found');
+
+// Routes which should handle requests
+app.use("/lessons", lessonRoutes);
+app.use("/quizzes", quizRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
 
-app.use((error,req,res,next) => {
+app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
-    error:{
+    error: {
       message: error.message
     }
-  })
+  });
 });
-*/
-//module.exports = app;
+
+module.exports = app;
