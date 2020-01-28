@@ -9,7 +9,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --open",
-    "lint-fix": "vue-cli-service lint --fix"
+    "lint-fix": "vue-cli-service lint --fix",
+    "api": "node Server/api/server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -17,10 +18,16 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@johmun/vue-tags-input": "^2.1.0",
+    "axios": "^0.19.1",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.2.0",
     "core-js": "^3.6.3",
+    "cors": "^2.8.5",
     "element-ui": "^2.13.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.8.9",
     "register-service-worker": "^1.5.2",
     "vue": "^2.6.11",
     "vue-input-tag": "^2.0.6",

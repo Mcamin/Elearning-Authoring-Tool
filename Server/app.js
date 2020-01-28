@@ -1,5 +1,5 @@
 const express = require('express');
-const  app = express();
+const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -7,15 +7,24 @@ const lessonRoutes = require('./api/routes/lessons');
 const quizRoutes = require('./api/routes/quizzes');
 
 //Connect to DB
-const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'
-  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+//const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'
+//  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+
+const mongoURI = 'mongodb://localhost:27017/eating';
 mongoose.connect(mongoURI,{ useNewUrlParser: true, useUnifiedTopology: true  } );
 
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(){
+  console.log('Connected')
+});
+
+//app.use(morgan('dev'));
+//app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.json());
 
 // Handling Cors
+/*
 app.use((req,res,next) => {
   res.header('Access-Control-Allow-Origin','*');
   res.header(
@@ -29,11 +38,11 @@ app.use((req,res,next) => {
   }
   next();
 });
-
+*/
 //Routes to handle requests
-app.use('/lessons',lessonRoutes);
-app.use('/quizzes',quizRoutes);
-
+//app.use('/lessons',lessonRoutes);
+//app.use('/quizzes',quizRoutes);
+/*
 app.use((req,res,next) => {
   const error = new Error('Not Found');
   error.status = 404;
@@ -48,6 +57,5 @@ app.use((error,req,res,next) => {
     }
   })
 });
-
-
-module.exports = app;
+*/
+//module.exports = app;
