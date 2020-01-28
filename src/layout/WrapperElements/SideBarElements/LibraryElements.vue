@@ -1,9 +1,7 @@
 <template>
   <el-menu
     default-active="2"
-    class=" flex-fill  pt-5"
-    @open="handleOpen"
-    @close="handleClose">
+    class=" flex-fill  pt-5">
     <el-menu-item-group title="CONTENT">
       <el-menu-item class="ml-5" index="1">LESSONS</el-menu-item>
       <el-menu-item class="ml-5" index="2">QUIZZES</el-menu-item>

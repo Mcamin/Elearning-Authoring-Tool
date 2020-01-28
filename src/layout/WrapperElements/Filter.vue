@@ -1,5 +1,5 @@
 <template>
-  <b-row class="mb-4">
+  <b-row class=" filter-wrapper mb-4">
     <b-col class="text-right">
       <span class="mx-2">Filter: </span>
       <el-select class="mx-1" v-model="value" :placeholder="filterBy[0].label">
