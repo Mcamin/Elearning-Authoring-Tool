@@ -1,18 +1,6 @@
 <template>
   <b-container fluid class="p-5 my-2">
-    <b-row>
-      <b-col>
-        <el-select v-model="value" :placeholder="sortBy[0].value">
-          <el-option
-            v-for="item in sortBy"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </b-col>
 
-    </b-row>
     <b-row  align-h="center"   align-content="center">
       <b-col  align="center" align-self="center" >
         <div class="accordion">
