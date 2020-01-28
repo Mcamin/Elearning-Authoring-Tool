@@ -16,7 +16,7 @@
 
           <!--Sidebar
  <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>-->
-          <el-aside class="h-100 p-0 col-2"><Sidebar/></el-aside>
+          <el-aside class=" d-flex flex-column h-100 p-0 col-2" v-if="isLibraryPage || isLNewCoursePage"><Sidebar/></el-aside>
           <!--</transition>
   End Sidebar-->
 
@@ -66,6 +66,9 @@
     computed: {
       isLibraryPage() {
         return checkRouter(this.$route.name, "library");
+      },
+      isLNewCoursePage() {
+        return checkRouter(this.$route.name, "newcourse");
       }
     }
   };
