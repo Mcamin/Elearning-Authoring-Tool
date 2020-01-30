@@ -9,7 +9,8 @@ export default  [
       {title:"section 1",
         description:"section 1 description",
         modules:[
-          {title:"Lesson 1",
+          {id: 'module_id',
+            title:"Lesson 1",
             type:"lesson"
           },
           {title:"Interaction 1",

@@ -15,7 +15,7 @@
             required: true,
             description: "The function to trigger"
           }
-          },
+        },
         components: {
           'font-awesome-icon': FontAwesomeIcon
         }

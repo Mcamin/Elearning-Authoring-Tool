@@ -1,10 +1,6 @@
 <template>
-  <b-container fluid class=" p-4">
-    <b-row align-h="end" class="mb-2">
-      <b-col cols="4" >
-            <span class="float-right">show : 9 / 24 / 36</span>
-      </b-col>
-    </b-row>
+  <b-container fluid class=" p-4 my-2">
+    <FilterElement/>
     <b-row>
       <b-col md="3">
         <card
@@ -23,18 +19,20 @@
         />
       </b-col>
     </b-row>
-    <new-course-card></new-course-card>
+    <NewCourseModal/>
   </b-container>
 </template>
 <script>
 import Courses from "@/data/coursesMetadata.js"
 import Card from "../components/Cards/CourseCard";
-import NewCourseCard from "../components/Modals/NewCourseModal";
+import NewCourseModal from "../components/Modals/NewCourseModal";
+import FilterElement from "../layout/WrapperElements/Filter"
 
   export default {
     components: {
         Card,
-        NewCourseCard
+        NewCourseModal,
+      FilterElement
     },
     data() {
       return{

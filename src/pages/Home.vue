@@ -1,11 +1,11 @@
 <template>
-  <b-container>
-    <b-row align-h="center">
-      <b-col  cols="5" md="6" sm="1" class="mb-4">
-      <CourseCard :title="library.title" :url="library.url":img="library.img"/>
+  <b-container  class="h-100">
+    <b-row class="align-items-center h-100">
+      <b-col  cols="5" md="6" sm="1" class="mb-4 mx-auto">
+      <CourseCard :title="library.title" :url="library.url" :img="library.img"/>
       </b-col>
-        <b-col  cols="5" md="6" sm="1" class="mb-4">
-        <CourseCard :title="courses.title" :url="courses.url":img="courses.img"/>
+        <b-col  cols="5" md="6" sm="1" class="mb-4 mx-auto">
+        <CourseCard :title="courses.title" :url="courses.url" :img="courses.img"/>
           </b-col>
     </b-row>
   </b-container>

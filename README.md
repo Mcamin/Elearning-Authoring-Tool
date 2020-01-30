@@ -40,6 +40,10 @@ npm install
 npm run serve
 ```
 
+#### Run API:
+```
+npm run api
+```
 #### Compiles and minifies for production
 ```
 npm run build
@@ -52,3 +56,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+npm i -g npm-check-updates
+npm-check-updates -u
+npm install

@@ -12,7 +12,6 @@
   <!-- End Breadcrumb Button-->
     <b-breadcrumb :items="getBreadcrumbItems"/>
   </div>
-
 </template>
 
 <script>
@@ -44,5 +43,12 @@
 <style scoped>
   a{
     color: white;
+  }
+  .breadcrumb{
+    background: transparent;
+    display: -webkit-inline-flex;
+  }
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: #fff;
   }
 </style>
