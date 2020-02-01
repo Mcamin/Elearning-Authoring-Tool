@@ -9,8 +9,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --open",
-    "lint-fix": "vue-cli-service lint --fix",
-    "api": "node Server/api/server.js"
+    "lint-fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.26",
@@ -27,6 +26,7 @@
     "element-theme-chalk": "^2.13.0",
     "element-ui": "^2.13.0",
     "express": "^4.17.1",
+    "express-vue": "^5.14.1",
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
     "register-service-worker": "^1.6.2",

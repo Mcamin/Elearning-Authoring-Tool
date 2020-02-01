@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const lessonSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  _id: mongoose.Types.ObjectId,
   question: String,
   answers: Object,
   correctAnswers: String,

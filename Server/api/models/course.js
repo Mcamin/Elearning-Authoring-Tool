@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-
 const lessonSchema = mongoose.Schema({
   _id: mongoose.Types.ObjectId,
   title: String,
-  description: String
+  content: String,
 });
 
-module.exports = mongoose.model('Lesson',lessonSchema);
-
+module.exports = mongoose.model('Course',courseSchema);

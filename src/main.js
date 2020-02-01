@@ -14,7 +14,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import UUID from 'vue-uuid';
+import Mongo from '../Server/app'
 
+Vue.use(Mongo);
 Vue.use(UUID);
 Vue.use(ElementUI);
 Vue.use(VueRouter);
