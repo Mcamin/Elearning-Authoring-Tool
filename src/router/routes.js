@@ -22,7 +22,7 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/newcourse",
+        redirect: "/courses",
         children: [
           {
             path: "home",
