@@ -1,5 +1,5 @@
 <template>
-  <b-button block  href="#" v-b-modal="func">
+  <b-button block  href="#"  @click.prevent="emitCallerID()" >
     <font-awesome-icon :icon="['fas', 'plus-circle']"  size="lg" />
   </b-button>
 </template>
@@ -7,15 +7,24 @@
 <script>
 
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
+  import {bus} from "../../main";
    export default {
-        name: "AddBtn", props:{
-          func:{
-            type:String,
-            required: true,
-            description: "The function to trigger"
-          }
+        name: "AddBtn",
+     props:{
+       callerID:{
+         type:String,
+         required:true,
+         description: "The caller ID: parent, sectionID, moduleID"
+       }
         },
+     methods:{
+       emitCallerID(){
+            if (this.callerID != null){
+              bus.$emit('update-caller-id', this.callerID);
+
+            }
+          }
+     },
         components: {
           'font-awesome-icon': FontAwesomeIcon
         }

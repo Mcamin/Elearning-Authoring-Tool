@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import AddContentCard from "../Cards/AddUnitCard";
+  import AddContentCard from "../../Cards/AddUnitCard";
     export default {
         name: "AddContentModel",
         data() {

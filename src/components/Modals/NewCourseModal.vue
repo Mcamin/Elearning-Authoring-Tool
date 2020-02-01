@@ -79,6 +79,7 @@
   import newcourse from "../../data/coursesArray";
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
+  import { uuid } from 'vue-uuid';
 
 
 
@@ -117,13 +118,16 @@
           ]),
           handleSubmit() {
 
-            const { title, description, tags, language } = this.formData
+            const { title, description, tags, language } = this.formData;
             const payload = {
+              id:uuid.v1(),
                 title,
                 description,
                 tags,
                 language,
-                sections: [{title:"New Section"}]
+                sections: [
+                  { id:uuid.v1(),
+                    title:"New Section"}]
             };
             this.addCourse(payload);
             this.saveTemporaryCourse(payload);
