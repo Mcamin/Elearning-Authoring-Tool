@@ -15,7 +15,7 @@ const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Hom
 const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
-const AddLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/AddLesson.vue");
+const CreateLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/CreateLesson.vue");
 const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
 
 const routes = [
@@ -87,9 +87,9 @@ const routes = [
             }
           },
           {
-            path: "/addlesson",
-            name: "addlesson",
-            component: AddLesson,
+            path: "/createlesson",
+            name: "createlesson",
+            component: CreateLesson,
             meta:{
               breadcrumb:[
                 {text: 'Home',to:{name:'home'}},
