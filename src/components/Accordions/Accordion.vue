@@ -33,25 +33,18 @@
 
         </b-col>
         <!--End Right settings -->
-
       </b-row>
     </b-card-header>
      <!--End header -->
+
     <!--Content-->
     <b-collapse :id="`${sectionID}`"   visible  :accordion="`myaccordion-${sectionID}`" role="tabpanel">
       <b-card-body>
-        <!--Module-->
-        <slot name="Module"/>
-        <!-- End Module-->
-        <!--Lesson-->
-        <slot name="Lesson_Interaction_Gloassary"/>
         <!--Add Element to the Accordion-->
         <AddBtn :func="'add-unit'"/>
       </b-card-body>
     </b-collapse>
     <!--End Content-->
-
-
   </b-card>
 </template>
 
@@ -92,8 +85,7 @@
         sectionTitle:{
           Type:String,
           required: true,
-          Description:"The section title recieved from the parent component"
-
+          Description:"The section title received from the parent component"
         },
 
       },
