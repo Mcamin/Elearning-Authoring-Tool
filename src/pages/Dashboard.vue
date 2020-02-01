@@ -38,5 +38,7 @@ import NewCourseCard from "../components/Cards/NewCourseCard";
 
   };
 </script>
+
 <style>
+
 </style>
