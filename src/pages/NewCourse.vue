@@ -12,7 +12,7 @@ Add the default section to the sections -->
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
-        <AddSectionModal :callerId="this.callerID"/>
+        <AddModal :callerId="this.callerID"/>
         <!-- End  Add Content Accordion-->
       </b-col>
     </b-row>
@@ -22,7 +22,7 @@ Add the default section to the sections -->
 <script>
 
   import Accordion from "../components/Accordions/Accordion";
-  import AddSectionModal from "../components/Modals/AddSectionModuleModal";
+  import AddModal from "../components/Modals/AddModal";
   import AddBtn from "../components/Buttons/AddBtn";
   import {mapGetters} from "vuex";
   import {bus} from "../main";
@@ -37,7 +37,7 @@ Add the default section to the sections -->
     components: {
 
       Accordion,
-      AddSectionModal,
+      AddModal,
       AddBtn
     },
     computed: {
