@@ -1,14 +1,9 @@
 <template>
     <b-modal id="add-section-module" centered :title="strings.headerTitle" hide-footer size="lg">
       <b-container>
-        <el-steps :active="params.stepper" finish-status="success" align-center>
-          <el-step/>
-          <el-step/>
-          <el-step/>
-          <el-step/>
-        </el-steps>
 
-        <b-row v-if="params.stepper===0" class=" text-center mb-3 mt-5">
+
+        <b-row v-if="params.stepper===0" class=" text-center mb-3 mt-3">
 
           <!-- Add Section -->
           <b-col>
@@ -396,34 +391,67 @@
       },
       methods:{
         addSectionClicked(){
+          this.strings.headerTitle= 'Add/Import a Module';
           this.params.stepper++;
           this.params.showAddModule = true;
           },
+
         addModuleClicked(){
-          //check the stepper value
+          this.strings.headerTitle= 'Add Content to the Module';
           this.params.stepper++;
           this.params.showAddContent = true;
         },
+
+        addLessonClicked(){
+          this.strings.headerTitle= 'Add/Import a Lesson';
+          this.params.stepper++;
+          this.params.showAddContent = false;
+          this.params.showLesson = true;
+        },
+        addInteractionClicked(){
+          this.strings.headerTitle= 'Add/Import an Interaction';
+          this.params.stepper++;
+          this.params.showAddContent = false;
+          this.params.showInteractions = true;
+        },
+        addGlossaryClicked(){
+          this.strings.headerTitle= 'Add/Import a Glossary';
+          this.params.stepper++;
+          this.params.showAddContent = false;
+          this.params.showGlossary = true;
+        },
+        createLessonClicked(){
+          this.$router.push({ name: 'createlesson', params: {}})
+        },
+        createInteractionClicked(){
+          this.$router.push({ name: 'createinteraction', params: { }})
+        },
+        createGlossaryClicked(){
+          this.$router.push({ name: 'createglossary', params: { }})
+        },
         importSectionModuleClicked(){
+          this.$router.push({ name: 'importpage', params: { }})
           // Open Section/Module Search Page
         },
         importModuleClicked(){
+          this.$router.push({ name: 'importpage', params: {}})
           // Open Module Search Page
         },
-        addLessonClicked(){
-          this.params.stepper++;
-          this.params.showLesson = true
+        importInteractionClicked(){
+          this.$router.push({ name: 'importpage', params: {}})
+          //Open Interaction Search Page
         },
-        addInteractionClicked(){
-          this.params.stepper++;
-          this.params.showInteractions = true
+        importLessonClicked(){
+          this.$router.push({ name: 'importpage', params: {}})
+          //Open Lesson Search Page
         },
-        addGlossaryClicked(){
-          this.params.stepper++;
-          this.params.showGlossary = true
+        importGlossaryClicked(){
+          this.$router.push({ name: 'importpage', params: {}})
+          //Open Glossary Search Page
         },
         resetParams(){
-          this.params.stepper= 0;
+          this.strings.headerTitle = 'Add a new Section/Module';
+          this.params.stepper = 0;
           this.params.showAddModule=false;
           this.params.showAddContent=false;
           this.params.showInteractions= false;
