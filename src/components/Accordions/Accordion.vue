@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="mb-3">
+  <b-card no-body class="accordion-wrapper mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>

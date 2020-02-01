@@ -16,7 +16,9 @@
 
           <!--Sidebar
  <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>-->
-          <el-aside class=" d-flex flex-column h-100 p-0 col-2" v-if="isLibraryPage || isLNewCoursePage"><Sidebar/></el-aside>
+          <template v-if="isLibraryPage || isLNewCoursePage">
+            <Sidebar/>
+          </template>
           <!--</transition>
   End Sidebar-->
 

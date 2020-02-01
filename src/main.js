@@ -8,9 +8,7 @@ import './assets/sass/index.sass'
 import 'element-ui/lib/index.js'
 
 import BootstrapVue from 'bootstrap-vue';
-
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 
 import Vue from 'vue'
 import App from './App.vue'
