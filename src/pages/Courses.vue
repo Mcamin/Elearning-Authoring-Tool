@@ -26,7 +26,7 @@
 import Courses from "@/data/coursesMetadata.js"
 import Card from "../components/Cards/CourseCard";
 import NewCourseModal from "../components/Modals/NewCourseModal";
-import FilterElement from "../layout/WrapperElements/Filter"
+import FilterElement from "../layout/WrapperElements/FilterElement"
 
   export default {
     components: {

@@ -38,7 +38,7 @@
     faThList
   );
     export default {
-        name: "Filter",
+        name: "FilterElement",
       components:{
         'font-awesome-icon': FontAwesomeIcon,
       },

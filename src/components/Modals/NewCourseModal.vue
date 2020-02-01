@@ -114,25 +114,27 @@
             return tmpTag.text});
           console.log(this.formData);
           const payload = {
+            id:uuid.v1(),
               title,
               description,
               tagstext,
               languageSelected,
               courseImage,
-              sections: [{title:"New Section"}]
+              sections: [{id:uuid.v1(),
+                title:"New Section"}]
           };
           this.addCourse(payload);
           this.saveTemporaryCourse(payload);
         },
         handleReset() {
           // Reset our form values
-          this.form.title = ''
-          this.form.description = ''
-          this.form.tags = []
-          this.form.language = []
-          this.form.courseImage=[]
+          this.form.title = '';
+          this.form.description = '';
+          this.form.tags = [];
+          this.form.language = [];
+          this.form.courseImage=[];
           // Trick to reset/clear native browser form validation state
-          this.show = false
+          this.show = false;
           this.$nextTick(() => {
             this.show = true
           })
