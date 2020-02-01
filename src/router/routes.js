@@ -22,7 +22,7 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/home",
+        redirect: "/newcourse",
         children: [
           {
             path: "home",
@@ -62,7 +62,8 @@ const routes = [
             }
           },
           {
-            path: "/newcourse/:title",
+            /*path: "/newcourse/:title",*/
+            path: "/newcourse",
             name: "newcourse",
             component: NewCourse,
             props: true,
