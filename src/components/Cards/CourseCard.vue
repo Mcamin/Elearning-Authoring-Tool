@@ -42,11 +42,8 @@
   @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
   @import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
-
-
-
   .card--1 .card__img, .card--1 .card__img--hover {
-    background-image: url('../../assets/img/home/library.jpg');
+    background: #219678;
   }
 
 
@@ -72,10 +69,7 @@
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 235px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-
+    height: 200px;
   }
 
   .card__info-hover {
@@ -87,25 +81,22 @@
   }
 
   .card__img--hover {
-    transition: 0.2s all ease-out;
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
     position: absolute;
-    height: 235px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    height: 100px;
     top: 0;
 
   }
   .card {
-    margin-right: 25px;
-    height: 500px;
+    margin-right: 2px;
+    height: 400px;
     transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
     background-color: #fff;
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
   }
