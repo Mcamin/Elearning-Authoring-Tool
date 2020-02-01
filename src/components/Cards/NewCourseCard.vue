@@ -42,6 +42,7 @@
                   />
                 </b-form-group>
 
+                <!-- Language of Course-->
                 <b-form-group id="input-group-4" label="Language:" label-for="input-4">
                   <b-form-select
                     id="input-4"
