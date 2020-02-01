@@ -7,7 +7,7 @@
         <b-col  class="text-left">
           <b-container class="d-flex">
             <label>
-              <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="sectionTitle"
+              <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="accordionTitle"
                      ref="section_title" v-on:keyup.enter="toggleTitleInput">
             </label>
             <a class="ml-2" href="#">
@@ -41,7 +41,7 @@
     <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
         <!--Add Element to the Accordion-->
-        <AddBtn :func="'add-module'" :callerID="this.accordionID" />
+        <AddBtn :func="'add-module'" :callerID="accordionID" />
       </b-card-body>
     </b-collapse>
     <!--End Content-->
@@ -80,7 +80,7 @@
         accordionID:{
           Type:String,
           required: true,
-          Description:"the section uuid "
+          Description:"the section uuid"
         },
         accordionTitle:{
           Type:String,

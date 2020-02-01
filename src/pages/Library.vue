@@ -26,7 +26,7 @@
 
 <script>
   import Accordion from "../components/Accordions/Accordion";
-  import FilterElement from "../layout/WrapperElements/Filter"
+  import FilterElement from "../layout/WrapperElements/FilterElement"
     export default {
         name: "Library",
         components: {Accordion,FilterElement},
