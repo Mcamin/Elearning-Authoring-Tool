@@ -6,14 +6,13 @@ Add the default section to the sections -->
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
         <div v-for="(section, index) in getSections" :key="index">
-          <component is="Accordion" :sectionTitle="section.title" :sectionID="section.id">
+          <component is="Accordion" :accordionTitle="section.title" :accordionID="section.id">
           </component>
         </div>
-        <AddBtn :func="'add-section-module'"/>
+        <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
-        <AddSectionModal/>
-        <AddContentModal/>
+        <AddModal :callerId="this.callerID"/>
         <!-- End  Add Content Accordion-->
       </b-col>
     </b-row>
@@ -23,27 +22,35 @@ Add the default section to the sections -->
 <script>
 
   import Accordion from "../components/Accordions/Accordion";
-  import AddSectionModal from "../components/Modals/AddSectionModuleModal";
+  import AddModal from "../components/Modals/AddModal";
   import AddBtn from "../components/Buttons/AddBtn";
-  import AddContentModal from "../components/Modals/AddContentModal";
   import {mapGetters} from "vuex";
+  import {bus} from "../main";
 
   export default {
     name: "newCourse",
-    components: {
-      AddContentModal,
-      Accordion,
-      AddSectionModal,
-      AddBtn
-    },
-    data () {
+    data(){
       return {
+        callerID:"parent"
       }
+    },
+    components: {
+
+      Accordion,
+      AddModal,
+      AddBtn
     },
     computed: {
      ...mapGetters([
        'getSections'
      ])
+    },
+    created() {
+      //Trigger Modal and pass it the right parameters
+      bus.$on('update-caller-id', (id) => {
+        this.callerID =id;
+        this.$root.$emit('bv::show::modal', 'add-module');
+      });
     }
   }
 </script>

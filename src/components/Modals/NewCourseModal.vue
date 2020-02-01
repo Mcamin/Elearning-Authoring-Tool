@@ -74,6 +74,7 @@
   import newcourse from "../../data/coursesArray";
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
+  import { uuid } from 'vue-uuid';
 
   export default {
       components: {
