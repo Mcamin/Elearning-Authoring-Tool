@@ -13,12 +13,14 @@
 
       </div>
       <div class="card__img"></div>
-        <div class="card__img--hover"></div>
-      <div class="card__info">
-        <span class="card__category" v-if="courseCategory">{{courseCategory}}</span>
-        <h3 class="card__title">{{title}}</h3>
-        <span class="card__by" v-if="courseLanguages">{{courseLanguages}}</span>
-      </div>
+        <div class="card__img--hover">
+          <div class="card__info">
+            <!-- <span class="card__category" v-if="courseCategory">{{courseCategory}}</span> -->
+            <h3 class="card__title">{{title}}</h3>
+            <span class="card__by" v-if="courseLanguages">{{courseLanguages}}</span>
+          </div>
+        </div>
+
     </article>
   </router-link>
 </template>
@@ -46,14 +48,13 @@
     background: #219678;
   }
 
-
   .card__clock {
     width: 15px;
     vertical-align: middle;
     fill: #AD7D52;
   }
   .card__time {
-    font-size: 12px;
+    font-size: 10px;
     color: #AD7D52;
     vertical-align: middle;
     margin-left: 5px;
@@ -81,7 +82,6 @@
   }
 
   .card__img--hover {
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -100,17 +100,31 @@
     overflow: hidden;
     box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
   }
+
+  .card h3 {
+    color: white;
+    font-size: 10px;
+  }
+
+  .card a {
+    color: white;
+    font-size: 8px;
+  }
+
   .card:hover {
     box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
-    transform: scale(1.10, 1.10);
+
   }
 
   .card__info {
     z-index: 2;
-    background-color: #fff;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     padding: 16px 24px 24px 24px;
+  }
+
+  .card__info h3{
+    font-size: 16px;
   }
 
   .card__category {
@@ -119,7 +133,7 @@
     font-size: 13px;
     letter-spacing: 2px;
     font-weight: 500;
-    color: #868686;
+    color: white;
   }
 
   .card__title {
@@ -128,10 +142,15 @@
     font-family: 'Roboto Slab', serif;
   }
 
+  .card__title h3 {
+    font-size: 12px;
+  }
+
   .card__by {
     font-size: 12px;
     font-family: 'Raleway', sans-serif;
     font-weight: 500;
+    color: white;
   }
 
   .card__author {
