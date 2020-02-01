@@ -1,5 +1,5 @@
 <template>
-    <b-modal id="add-section-module" centered :title="strings.headerTitle" hide-footer size="lg">
+    <b-modal id="add-module" centered :title="strings.headerTitle" hide-footer size="lg">
       <b-container>
 
 
@@ -319,7 +319,7 @@
 
 
     export default {
-        name: "AddContentModel",
+        name: "AddModel",
       components:{
       'font-awesome-icon': FontAwesomeIcon},
       data() {
@@ -388,6 +388,12 @@
             },
           },
         }
+      },
+      props:{
+          callerId:{
+            type:String,
+            required: true
+          }
       },
       methods:{
         addSectionClicked(){
