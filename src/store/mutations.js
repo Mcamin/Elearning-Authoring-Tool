@@ -10,15 +10,16 @@ export default {
 
   },
   saveCopy: (state, course) => {
-    state.course = course;
+    state.course= course;
     // make an api call (post) to save the course details
     // in the database or save them into a local file
 },
   appendCourse: (state, course) => {
-     state.courses.push(course);
+    state.courses.push(course);
+
   },
   appendSection: (state, section) => {
-    state.course.sections.push(section)
+    state.course.sections = [... state.course.sections, {section}];
   },
   appendLesson: (state, lesson) => {
     state.course.lesson = lesson

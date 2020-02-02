@@ -113,7 +113,6 @@
           const { id,title, description, tags, languageSelected, courseImage } = this.formData;
           let tagstext = tags.map(tmpTag=> {
             return tmpTag.text});
-          console.log(this.formData);
           const payload = {
               id,
               title,
