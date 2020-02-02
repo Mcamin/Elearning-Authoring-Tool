@@ -12,9 +12,10 @@ export default {
     return state.courses.filter(course => course.id=== id)[0];
   },
   getCourseContent:state => id => {
-    let course = state.courses.filter(course => course.id=== id)[0];
-  console.log(JSON.stringify(state.course));
-    let content_kv = Object.entries(course.contentIndex);
+    let course = state.courses.filter(o => o.id=== id)[0];
+    console.log(typeof (course));
+    if(course !== undefined){
+   /*   let content_kv = Object.entries(course.contentIndex);
     for (let [k, v] of content_kv) {
       if(k.charAt(0)==='s')
       {
@@ -22,7 +23,8 @@ export default {
       else
         course.content[v]= state.modules.filter(section => section.id=== k)[0];
 
-    }
-    return course.content
+    }*/
+   return course;}
+    else return null;
   },
 }
