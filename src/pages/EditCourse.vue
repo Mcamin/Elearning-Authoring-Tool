@@ -4,14 +4,17 @@ Add the default section to the sections -->
   <b-container fluid class="p-5 my-2" >
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
-  {{courseContentdata}}
         <!-- Add  course Accordion-->
 
-       <div v-for="(content, index) in courseContentdata" :key="index">
+       <template v-for="content in courseContentdata">
 
           <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
+              <template v-if="content.modules" v-for="m in content.modules"   v-slot:module>
+              <component is="Accordion" :accordionTitle="m.title" :accordionID="m.id">
+              </component>
+              </template>
           </component>
-        </div>
+        </template>
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->

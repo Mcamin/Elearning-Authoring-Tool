@@ -41,6 +41,8 @@
     <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
         <!--Add Element to the Accordion-->
+        <slot name="module"/>
+        <slot name="content"/>
         <AddBtn :func="'add-module'" :callerID="accordionID" />
       </b-card-body>
     </b-collapse>
