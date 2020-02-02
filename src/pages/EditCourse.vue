@@ -4,9 +4,9 @@ Add the default section to the sections -->
   <b-container fluid class="p-5 my-2" >
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
-
+  {{courseContentdata}}
         <!-- Add  course Accordion-->
-      <!--<div v-for="(content, index) in courseContentdata" :key="index">
+     <!--<div v-for="(content, index) in courseContentdata" :key="index">
           <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
           </component>
         </div>-->
