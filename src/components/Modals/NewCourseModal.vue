@@ -106,7 +106,8 @@
       methods: {
         ...mapActions([
           'addCourse',
-          'saveTemporaryCourse'
+          'saveTemporaryCourse',
+            'addSection'
         ]),
         handleSubmit() {
 
@@ -114,19 +115,21 @@
           let tagstext = tags.map(tmpTag=> {
             return tmpTag.text}),
               sectionID ="s-"+uuid.v1();
-          const payload = {
+          const payload= {
               id,
               title,
               description,
               tagstext,
               languageSelected,
               thumbnail:{filename:"",path:courseImage},
-              contentIndex:[{[sectionID]:0}],
+              contentIndex:{[sectionID]:0},
               content: [{id:sectionID,
                 title:"New Section"}]
           };
+          this.addSection({id:sectionID, title:"New Section"});
           this.addCourse(payload);
           this.saveTemporaryCourse(payload);
+
         },
         handleReset() {
           // Reset our form values

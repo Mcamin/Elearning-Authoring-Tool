@@ -1,46 +1,5 @@
 
-let fetchContent= (IndexObject, callback) => {
-  // Get Content Index
-  let content_kv = Object.entries(IndexObject),
-      tempArray = [];
-  for (let [key, value] of content_kv) {
-    switch (key.charAt(0)){
-      case "s":
-        let section = callback.getSectionByID(key);
-        if(section !== undefined){
-          section.modules = fetchContent(section.modulesIndex,callback);
-          tempArray[value] = section;
-        }
-        break;
-      case "m":
-        let module = callback.getModuleByID(key);
-        if(module !== undefined){
-          module.content = fetchContent(module.contentIndex,callback);
-          tempArray[value] = module;
-        }
-        break;
-      case "l":
-        let lesson = callback.getLessonByID(key);
-        if(lesson !== undefined){
-          tempArray[value] = lesson;
-        }
-        break;
-      case "q":
-        let interaction = callback.getInteractionByID(key);
-        if(interaction !== undefined){
-          tempArray[value] = interaction;
-        }
-        break;
-      case "g":
-        let glossary = callback.getGlossaryByID(key);
-        if(glossary !== undefined){
-          tempArray[value] = glossary;
-        }
-        break;
-    }
-  }
-  return tempArray;
-};
+
 
 export default {
 
@@ -117,16 +76,59 @@ export default {
     return state.glossaries.filter(glossary => glossary.id=== id)[0];
   },
 
-// Get Course Content
+
+  // Get Course Content
+  fetchContent: (state,getters) => (IndexObject) => {
+    // Get Content Index
+    let content_kv = Object.entries(IndexObject),
+      tempArray = [];
+    for (let [key, value] of content_kv) {
+      switch (key.charAt(0)){
+        case "s":
+          let section = getters.getSectionByID(key);
+          if(section !== undefined){
+            if(section.modulesIndex)
+            section.modules = getters.fetchContent(section.modulesIndex);
+            tempArray[value] = section;
+          }
+          break;
+        case "m":
+          let module = getters.getModuleByID(key);
+          if(module !== undefined){
+            if(module.contentIndex)
+            module.content = getters.fetchContent(module.contentIndex);
+            tempArray[value] = module;
+          }
+          break;
+        case "l":
+          let lesson = getters.getLessonByID(key);
+          if(lesson !== undefined){
+            tempArray[value] = lesson;
+          }
+          break;
+        case "q":
+          let interaction = getters.getInteractionByID(key);
+          if(interaction !== undefined){
+            tempArray[value] = interaction;
+          }
+          break;
+        case "g":
+          let glossary = getters.getGlossaryByID(key);
+          if(glossary !== undefined){
+            tempArray[value] = glossary;
+          }
+          break;
+      }
+    }
+    return tempArray;
+  },
+  // Get Course Content
   getCourseContent:(state,getters) => id => {
     let course = getters.getCourseByID(id);
     if(course !== undefined){
-      // Get Content Index
-      let content_kv = Object.entries(course.contentIndex);
-        // Loop over Index Object k,v
-      course.content = fetchContent(course.contentIndex,getters);
-
-   return course.content;
+      // Loop over Index Object k,v
+      course.content = getters.fetchContent(course.contentIndex);
+      return course.content;
     }
   },
 }
