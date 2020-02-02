@@ -13,7 +13,7 @@ export default {
   },
   getCourseContent:state => id => {
     let course = state.courses.filter(course => course.id=== id)[0];
-
+  console.log(JSON.stringify(state.course));
     let content_kv = Object.entries(course.contentIndex);
     for (let [k, v] of content_kv) {
       if(k.charAt(0)==='s')
