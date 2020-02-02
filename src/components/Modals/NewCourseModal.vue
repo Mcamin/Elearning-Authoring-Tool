@@ -60,7 +60,7 @@
                 </el-upload>
 
                 <!-- Submit button with route to /titleOfCourse -->
-                <router-link :to="{ name: 'newcourse', params: {title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
+                <router-link :to="{ name: 'edit-course', params: {id: formData.id, title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
 
                 <!-- Reset button -->
                 <b-button type="reset" >Reset</b-button>
@@ -71,7 +71,7 @@
 <script>
 
   import {mapState, mapActions, ActionContext as store} from 'vuex';
-  import newcourse from "../../data/coursesArray";
+  import newcourse from "../../data/sections";
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
   import { uuid } from 'vue-uuid';
@@ -84,6 +84,7 @@
         return {
           tag:'',
           formData: {
+            id:uuid.v1(),
             title: '',
             description: '',
             tags:[],
@@ -109,12 +110,12 @@
         ]),
         handleSubmit() {
 
-          const { title, description, tags, languageSelected, courseImage } = this.formData;
+          const { id,title, description, tags, languageSelected, courseImage } = this.formData;
           let tagstext = tags.map(tmpTag=> {
             return tmpTag.text});
           console.log(this.formData);
           const payload = {
-            id:uuid.v1(),
+              id,
               title,
               description,
               tagstext,

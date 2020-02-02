@@ -4,11 +4,12 @@ Add the default section to the sections -->
   <b-container fluid class="p-5 my-2" >
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
+
         <!-- Add  course Accordion-->
-        <div v-for="(section, index) in getSections" :key="index">
-          <component is="Accordion" :accordionTitle="section.title" :accordionID="section.id">
+      <!--<div v-for="(content, index) in courseContentdata" :key="index">
+          <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
           </component>
-        </div>
+        </div>-->
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
@@ -28,23 +29,31 @@ Add the default section to the sections -->
   import {bus} from "../main";
 
   export default {
-    name: "newCourse",
+    name: "EditCourse",
     data(){
       return {
-        callerID:"parent"
+        callerID:"parent",
       }
     },
     components: {
-
       Accordion,
       AddModal,
       AddBtn
     },
-    computed: {
-     ...mapGetters([
-       'getSections'
-     ])
-    },
+
+      methods:{
+          getCourseContentFromStore(id) {
+              return this.getCourseContent(id);
+          }
+      },
+      computed: {
+          ...mapGetters([
+              'getCourseContent'
+          ]),
+          courseContentdata() {
+            return this.getCourseContentFromStore(this.$route.params.id);
+          }
+  },
     created() {
       //Trigger Modal and pass it the right parameters
       bus.$on('update-caller-id', (id) => {

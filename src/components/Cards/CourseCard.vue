@@ -24,6 +24,8 @@
 </template>
 
 <script>
+    export default {
+        name: "CourseCard",
   import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import { library } from "@fortawesome/fontawesome-svg-core";
@@ -42,8 +44,8 @@
         },
         name: "CardTest",
         props:{
+            id:"",
             title:"",
-            courseCategory:"",
             courseCategory:"",
             courseLanguages:"",
             courseDuration:"",

@@ -3,19 +3,20 @@
     <FilterElement/>
     <b-row>
       <b-col md="3">
-        <card
+        <CourseCard
           v-b-modal="'modal-new-course'"
           title="Create a new Course"
           url=""
         />
       </b-col>
-      <b-col md="3" v-for="course in courses" :key="courses.title">
-        <card
+      <b-col md="3" v-for="(course, index) in getCourses" :key="index">
+        <CourseCard
+          :id="course.id"
           :title="course.title"
           :course-category="course.title"
           :course-languages="course.languages"
-          :url="course.targetPage"
-          :img="course.imagePath"
+          :url="{ name: 'edit-course', params: { id: course.id ,title: course.title} }"
+          :img="course.thumbnail.url"
         />
       </b-col>
     </b-row>
@@ -23,22 +24,29 @@
   </b-container>
 </template>
 <script>
-import Courses from "@/data/coursesMetadata.js"
-import Card from "../components/Cards/CourseCard";
+
+import CourseCard from "../components/Cards/CourseCard";
 import NewCourseModal from "../components/Modals/NewCourseModal";
 import FilterElement from "../layout/WrapperElements/FilterElement"
+import {mapGetters} from "vuex";
 
   export default {
     components: {
-        Card,
+        CourseCard,
         NewCourseModal,
       FilterElement
     },
     data() {
       return{
-      courses: Courses
+
+
       }
     },
+      computed: {
+          ...mapGetters([
+              'getCourses'
+          ])
+      },
 
   };
 </script>
