@@ -1,12 +1,27 @@
 
 export default  [
-  { id: "lesson1",
-    title:"Lesson 1",
+  { id: "quiz1",
+    title:"Quiz 1",
     content:{
     },
   },
-  { id: "lesson2",
-    title:"Lesson 2",
+  { id: "quiz2",
+    title:"Quiz 2",
+    content:{
+    },
+  },
+  { id: "quiz2",
+    title:"Quiz 2",
+    content:{
+    },
+  },
+  { id: "quiz2",
+    title:"Quiz 2",
+    content:{
+    },
+  },
+  { id: "quiz2",
+    title:"Quiz 2",
     content:{
     },
   },
