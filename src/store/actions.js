@@ -1,4 +1,18 @@
+import axios from "axios";
+
+
 export default {
+
+  /*API Calls*/
+  loadSections: ({commit}) =>{
+    axios.get('https://jsonplaceholder.typicode.com/todos')
+    .then(obj =>{
+      commit('saveCopy', obj)
+    }).catch(error =>{console.log(error)})
+  },
+
+
+
   // Save course while still editing
   saveTemporaryCourse: ({commit}, course) => {
    commit('saveCopy', course)

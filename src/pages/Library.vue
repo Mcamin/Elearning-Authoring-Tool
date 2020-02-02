@@ -33,6 +33,9 @@
                      this.index = key;
             });
         },
+      mounted(){
+        /*this.$store.dispatch('loadSections') ;*/
+      },
         computed:{
             ...mapState([
                 'sections',

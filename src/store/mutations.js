@@ -3,6 +3,10 @@ import getters from "./getters";
 
 export default {
 
+  setSections(state,sections){
+    state.sections = sections;
+  },
+
   createSectionTitle: (state,payload) => {
     let temp = state.course.sections.find(
       section => section.title === payload.oldTitle);
