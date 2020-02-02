@@ -6,7 +6,7 @@
         <CourseCard
           v-b-modal="'modal-new-course'"
           title="Create a new Course"
-          url="#"
+          url=""
         />
       </b-col>
       <b-col md="3" v-for="(course, index) in getCourses" :key="index">
@@ -15,7 +15,7 @@
           :title="course.title"
           :course-category="course.title"
           :course-languages="course.languages"
-          url="edit-course"
+          :url="{ name: 'edit-course', params: { id: course.id } }"
           :img="course.thumbnail.url"
         />
       </b-col>
@@ -38,6 +38,7 @@ import {mapGetters} from "vuex";
     },
     data() {
       return{
+
 
       }
     },

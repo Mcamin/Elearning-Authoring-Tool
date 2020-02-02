@@ -4,9 +4,10 @@ Add the default section to the sections -->
   <b-container fluid class="p-5 my-2" >
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
+
         <!-- Add  course Accordion-->
-        <div v-for="(section, index) in courseContentdata" :key="index">
-          <component is="Accordion" :accordionTitle="section.title" :accordionID="section.id">
+      <div v-for="(content, index) in courseContentdata" :key="index">
+          <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
           </component>
         </div>
         <AddBtn caller-i-d="parent"/>
@@ -49,7 +50,9 @@ Add the default section to the sections -->
           ...mapGetters([
               'getCourseContent'
           ]),
-          courseContentdata:()=>{return this.getCourseContentFromStore(this.$route.params.id)}
+          courseContentdata() {
+            return this.getCourseContentFromStore(this.$route.params.id);
+          }
   },
     created() {
       //Trigger Modal and pass it the right parameters

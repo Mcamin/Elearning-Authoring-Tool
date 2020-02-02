@@ -9,7 +9,7 @@ export default  [
     },
     modules:[]
   },
-  { id: "section1",
+  { id: "section2",
     title:"Web Dev",
     description:"This is a new section",
     modulesIndex:{
