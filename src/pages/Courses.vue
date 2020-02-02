@@ -15,7 +15,7 @@
           :title="course.title"
           :course-category="course.title"
           :course-languages="course.languages"
-          :url="{ name: 'edit-course', params: { id: course.id } }"
+          :url="{ name: 'edit-course', params: { id: course.id ,title: course.title} }"
           :img="course.thumbnail.url"
         />
       </b-col>
