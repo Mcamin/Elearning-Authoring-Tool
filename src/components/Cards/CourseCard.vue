@@ -1,6 +1,6 @@
 <template>
 
-  <router-link :to="url" class="card__link">
+  <router-link :to="{ name: url, params: { id: id } }" class="card__link">
     <article class="card card--1 my-3">
       <div class="card__info-hover">
         <div class="card__clock-info" v-if="courseDuration">
@@ -29,6 +29,7 @@
     export default {
         name: "CourseCard",
         props:{
+            id:"",
             title:"",
             courseCategory:"",
             courseLanguages:"",

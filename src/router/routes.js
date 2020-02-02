@@ -56,9 +56,8 @@ const routes = [
             }
           },
           {
-            /*path: "/newcourse/:title",*/
-            path: "/newcourse",
-            name: "newcourse",
+            path: "/edit-course/:id",
+            name: "edit-course",
             component: NewCourse,
             props: true,
             meta:{

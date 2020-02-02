@@ -6,15 +6,16 @@
         <CourseCard
           v-b-modal="'modal-new-course'"
           title="Create a new Course"
-          url=""
+          url="#"
         />
       </b-col>
       <b-col md="3" v-for="(course, index) in getCourses" :key="index">
         <CourseCard
+          :id="course.id"
           :title="course.title"
           :course-category="course.title"
           :course-languages="course.languages"
-          :url="course.thumbnail.url"
+          url="edit-course"
           :img="course.thumbnail.url"
         />
       </b-col>
