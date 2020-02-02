@@ -2,7 +2,6 @@
 
   <router-link :to="url" class="card__link">
     <article class="card card--1 my-3">
-      <div class="card__info-hover">
         <div class="card__clock-info" v-if="courseDuration">
           <svg class="card__clock"  viewBox="0 0 24 24" >
             <path d="M12,20A7,7 0 0,1 5,13A7,7 0 0,1 12,6A7,7 0 0,1 19,13A7,7 0 0,1 12,20M19.03,7.39L20.45,5.97C20,5.46
@@ -10,8 +9,6 @@
              21,13C21,10.88 20.26,8.93 19.03,7.39M11,14H13V8H11M15,1H9V3H15V1Z" />
           </svg><span class="card__time">{{courseDuration}}</span>
         </div>
-
-      </div>
       <div class="card__img"></div>
         <div class="card__img--hover">
           <div class="card__info">
@@ -20,22 +17,38 @@
             <span class="card__by" v-if="courseLanguages">{{courseLanguages}}</span>
           </div>
         </div>
-
+      <div v-if="title !== 'Create a new Course'" class="cardbackground" v-bind:style="{ backgroundImage: 'url(' + image + ')' }"></div>
+      <div v-else><font-awesome-icon :icon="['fas', 'plus-circle']" size="lg" /></div>
     </article>
   </router-link>
 </template>
 
 <script>
-    export default {
+  import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { library } from "@fortawesome/fontawesome-svg-core";
+
+  library.add(
+    faPlusCircle,
+  );
+  export default {
+        data() {
+          return {
+            image: "http://1.bp.blogspot.com/-8PfnHfgrH4I/TylX2v8pTMI/AAAAAAAAJJ4/TICBoSEI57o/s1600/search_by_image_image.png"
+          }
+        },
+        components:{
+          'font-awesome-icon': FontAwesomeIcon
+        },
         name: "CardTest",
         props:{
             title:"",
+            courseCategory:"",
             courseCategory:"",
             courseLanguages:"",
             courseDuration:"",
             url:"",
             img:""
-
         }
     }
 </script>
@@ -70,7 +83,7 @@
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 200px;
+    height: 100px;
   }
 
   .card__info-hover {
@@ -89,7 +102,6 @@
     position: absolute;
     height: 100px;
     top: 0;
-
   }
   .card {
     margin-right: 2px;
@@ -117,9 +129,6 @@
   }
 
   .card__info {
-    z-index: 2;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
     padding: 16px 24px 24px 24px;
   }
 
@@ -173,5 +182,10 @@
     opacity: 1;
   }
 
+  .cardbackground{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
 
 </style>
