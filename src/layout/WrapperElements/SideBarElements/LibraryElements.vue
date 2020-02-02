@@ -4,11 +4,11 @@
     class=" flex-fill  pt-5">
     <el-menu-item-group title="CONTENT">
       <el-menu-item class="ml-5" index="1">LESSONS</el-menu-item>
-      <el-menu-item class="ml-5" index="2">QUIZZES</el-menu-item>
+      <el-menu-item class="ml-5" index="2">QUIZZES (Interactions)</el-menu-item>
     </el-menu-item-group>
     <el-menu-item-group title="STRUCTURE">
-      <el-menu-item class="ml-5" index="3">LEARNING UNITS</el-menu-item>
-      <el-menu-item class="ml-5" index="4">LEARNING FIELDS</el-menu-item>
+      <el-menu-item class="ml-5" index="3">LEARNING UNITS (Modules)</el-menu-item>
+      <el-menu-item class="ml-5" index="4">LEARNING FIELDS (Sections)</el-menu-item>
     </el-menu-item-group>
   </el-menu>
 </template>

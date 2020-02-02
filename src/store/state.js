@@ -1,4 +1,4 @@
-import courses from '../data/testcourse'
+import courses from '../data/courses'
 
 export default {
   course:{

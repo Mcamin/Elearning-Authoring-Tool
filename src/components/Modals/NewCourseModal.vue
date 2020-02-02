@@ -71,7 +71,7 @@
 <script>
 
   import {mapState, mapActions, ActionContext as store} from 'vuex';
-  import newcourse from "../../data/coursesArray";
+  import newcourse from "../../data/sections";
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
   import { uuid } from 'vue-uuid';

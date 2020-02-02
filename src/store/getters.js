@@ -4,4 +4,7 @@ export default {
   getSections: (state) => {
     return state.course.sections;
   },
+  getCourses: (state) => {
+    return state.courses;
+  },
 }

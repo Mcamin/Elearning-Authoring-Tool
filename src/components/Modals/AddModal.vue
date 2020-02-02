@@ -1,8 +1,7 @@
 <template>
-    <b-modal id="add-module" centered :title="strings.headerTitle" hide-footer size="lg">
-      <b-container>
+    <b-modal id="add-module" centered :title="strings.headerTitle" hide-footer size="xl">
 
-
+      <b-container fluid>
         <b-row v-if="params.stepper===0" class=" text-center mb-3 mt-3">
 
           <!-- Add Section -->

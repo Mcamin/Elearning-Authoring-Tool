@@ -27,7 +27,7 @@
 
 <script>
     export default {
-        name: "CardTest",
+        name: "CourseCard",
         props:{
             title:"",
             courseCategory:"",

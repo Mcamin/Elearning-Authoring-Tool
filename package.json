@@ -5,7 +5,7 @@
   "description": "An Authoring Tool for LMS compliant courses",
   "author": "ahmed amine mchayaa, patrick, david",
   "scripts": {
-    "serve": "vue-cli-service serve  ",
+    "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --open",
@@ -26,7 +26,6 @@
     "element-theme-chalk": "^2.13.0",
     "element-ui": "^2.13.0",
     "express": "^4.17.1",
-    "express-vue": "^5.14.1",
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
     "register-service-worker": "^1.6.2",

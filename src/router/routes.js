@@ -4,7 +4,7 @@ import NotFound from '@/pages/NotFoundPage.vue';
 import Wrapper from "@/layout/Wrapper";
 
 
-import CreateNewCourse from "../pages/NewCourse";
+import CreateNewCourse from "../pages/EditCourse";
 
 
 
@@ -13,10 +13,9 @@ const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Lo
 const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
 const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
 const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
-const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/NewCourse.vue");
+const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/EditCourse.vue");
 const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
 const CreateLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/CreateLesson.vue");
-const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Playground.vue");
 
 const routes = [
     {
@@ -33,11 +32,6 @@ const routes = [
                 {text: 'Home', active:true}
               ]
             }
-          },
-          {
-            path: "playground",
-            name: "playground",
-            component: Playground
           },
           {
             path: "courses",
