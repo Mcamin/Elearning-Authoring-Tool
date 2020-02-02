@@ -6,10 +6,10 @@ Add the default section to the sections -->
       <b-col align-self="center" class="h-100">
 
         <!-- Add  course Accordion-->
-      <!--<div v-for="(content, index) in courseContentdata" :key="index">
+      <div v-for="(content, index) in courseContentdata" :key="index">
           <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
           </component>
-        </div>-->
+        </div>
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->

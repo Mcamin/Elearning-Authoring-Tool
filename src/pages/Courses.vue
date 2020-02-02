@@ -1,6 +1,7 @@
 <template>
-  <b-container fluid class=" p-4 my-2">
+  <b-container  class=" p-4 my-2">
     <FilterElement/>
+
     <b-row>
       <b-col md="3">
         <CourseCard

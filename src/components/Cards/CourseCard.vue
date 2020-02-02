@@ -10,39 +10,47 @@
           </svg><span class="card__time">{{courseDuration}}</span>
         </div>
       <div class="card__img"></div>
-        <div class="card__img--hover">
+        <div v-if="title === 'Create a new Course'" class="card__img--hover" style="background-color: grey !important">
           <div class="card__info">
             <!-- <span class="card__category" v-if="courseCategory">{{courseCategory}}</span> -->
             <h3 class="card__title">{{title}}</h3>
             <span class="card__by" v-if="courseLanguages">{{courseLanguages}}</span>
           </div>
         </div>
-      <div v-if="title !== 'Create a new Course'" class="cardbackground" v-bind:style="{ backgroundImage: 'url(' + image + ')' }"></div>
-      <div v-else><font-awesome-icon :icon="['fas', 'plus-circle']" size="lg" /></div>
+          <div v-else class="card__img--hover">
+          <div class="card__info">
+            <!-- <span class="card__category" v-if="courseCategory">{{courseCategory}}</span> -->
+            <h3 class="card__title">{{title}}</h3>
+            <span class="card__by" v-if="courseLanguages">{{courseLanguages}}</span>
+          </div>
+          </div>
+      <div v-if="title === 'Go To Library'" class="libraryCardbackground" v-bind:style="{ backgroundImage: 'url(' + imagelibrary + ')'}"></div>
+      <div v-else-if="title === 'Go To Courses'" class="coursesCardbackground" v-bind:style="{ backgroundImage: 'url(' + imagecourses + ')'}"></div>
+      <div v-else-if="title === 'Create a new Course'"><font-awesome-icon :icon="['fas', 'plus-circle']" class="addCourseIcon" size="4x" style="color:grey" /></div>
+      <div v-else class="cardbackground" v-bind:style="{ backgroundImage: 'url(' + img + ')' }"></div>
     </article>
   </router-link>
 </template>
 
 <script>
-    export default {
-        name: "CourseCard",
-  import { faPlusCircle} from '@fortawesome/free-solid-svg-icons'
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import { faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
   import { library } from "@fortawesome/fontawesome-svg-core";
-
   library.add(
     faPlusCircle,
   );
   export default {
+        name: "CourseCard",
         data() {
           return {
-            image: "http://1.bp.blogspot.com/-8PfnHfgrH4I/TylX2v8pTMI/AAAAAAAAJJ4/TICBoSEI57o/s1600/search_by_image_image.png"
+            image: "https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png",
+            imagelibrary: "https://upload.wikimedia.org/wikipedia/commons/2/21/Biblioth%C3%A8que_de_l%27Assembl%C3%A9e_Nationale_%28Lunon%29.jpg",
+            imagecourses: "https://www.questpond.com/img/2.png"
           }
         },
         components:{
           'font-awesome-icon': FontAwesomeIcon
         },
-        name: "CardTest",
         props:{
             id:"",
             title:"",
@@ -107,12 +115,14 @@
   }
   .card {
     margin-right: 2px;
-    height: 400px;
+    height: 335px;
     transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
     background-color: #fff;
     position: relative;
     overflow: hidden;
     box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+    max-width: 245px;
+    max-height: 335px;
   }
 
   .card h3 {
@@ -186,8 +196,24 @@
 
   .cardbackground{
     width: 100%;
+    height: 80%;
+    background-size: cover;
+  }
+
+  .libraryCardbackground{
+    width: 100%;
     height: 100%;
     background-size: cover;
   }
 
+  .coursesCardbackground{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+  }
+
+  .addCourseIcon{
+    margin-left: 40%;
+    margin-top: 30%;
+  }
 </style>
