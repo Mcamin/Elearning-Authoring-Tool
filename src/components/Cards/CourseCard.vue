@@ -1,5 +1,4 @@
 <template>
-
   <router-link :to="url" class="card__link">
     <article class="card card--1 my-3">
         <div class="card__clock-info" v-if="courseDuration">
