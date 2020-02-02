@@ -9,7 +9,6 @@
           </b-col>
     </b-row>
   </b-container>
-
 </template>
 <script>
 
@@ -21,15 +20,14 @@ import CourseCard  from "../components/Cards/CourseCard";
     },
     data() {
       return{
-
           library:{
               title:"Go To Library",
               url:"/library",
-              img:"./static/home/library.jpg"},
+              img:"https://upload.wikimedia.org/wikipedia/commons/2/21/Biblioth%C3%A8que_de_l%27Assembl%C3%A9e_Nationale_%28Lunon%29.jpg"},
           courses:{
               title:"Go To Courses",
               url:"/courses",
-              img:"./static/home/courses.jpg"},
+              img:"https://www.questpond.com/img/2.png"},
       }
     },
 
