@@ -14,14 +14,13 @@ const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/
 const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
 const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/EditCourse.vue");
-const Profile = () => import(/* webpackChunkName: "common" */ "@/pages/Profile.vue");
-const CreateLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/CreateLesson.vue");
-
+const EditLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/EditLesson.vue");
+const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Trash/Playground.vue");
 const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/courses",
+        redirect: "/playground",
         children: [
           {
             path: "home",
@@ -45,6 +44,12 @@ const routes = [
             }
           },
           {
+            path: "playground",
+            name: "playground",
+            component: Playground,
+
+          },
+          /*{
             path: "profile",
             name: "profile",
             component: Profile,
@@ -54,7 +59,7 @@ const routes = [
                 {text: 'Profile',active:true},
               ]
             }
-          },
+          },*/
           {
             path: "/edit-course/:id",
             name: "edit-course",
@@ -80,9 +85,9 @@ const routes = [
             }
           },
           {
-            path: "/createlesson",
-            name: "createlesson",
-            component: CreateLesson,
+            path: "/edit-lesson",
+            name: "edit-lesson",
+            component: EditLesson,
             meta:{
               breadcrumb:[
                 {text: 'Home',to:{name:'home'}},

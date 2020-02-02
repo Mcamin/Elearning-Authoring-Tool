@@ -1,7 +1,4 @@
 <template>
-
-
-
   <b-container fluid class="wrapper d-flex flex-column vh-100 px-0">
     <!--Navigation-bar-->
     <transition name="fade" mode="out-in" appear>

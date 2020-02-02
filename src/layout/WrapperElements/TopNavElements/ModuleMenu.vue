@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import {mapActions} from "vuex";
-    import {bus} from "../../../main";
+
+    import {bus} from "@/main";
 
     export default {
       name: "CourseMenu",

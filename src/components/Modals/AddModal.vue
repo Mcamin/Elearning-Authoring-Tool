@@ -363,11 +363,15 @@
             },
             createLesson:{
               title: 'Create Lesson',
-              description: 'Create a new lesson'
+              description: 'Create a new lesson',
+                descriptionalt:"Create a lesson from a wide range of e blocks. " +
+                    "You can access existing lessons from your repository",
             },
             createInteraction:{
               title: 'Create Interaction',
-              description: 'Create a new interaction'
+              description: 'Create a new interaction',
+                descriptionalt:"Test the learner's knowledge with a quiz. You can " +
+                    "access quizzes aestions from your repository",
             },
             createGlossary:{
               title: 'Create Glossary',
