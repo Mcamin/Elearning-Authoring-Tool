@@ -112,15 +112,17 @@
 
           const { id,title, description, tags, languageSelected, courseImage } = this.formData;
           let tagstext = tags.map(tmpTag=> {
-            return tmpTag.text});
+            return tmpTag.text}),
+              sectionID ="s-"+uuid.v1();
           const payload = {
               id,
               title,
               description,
               tagstext,
               languageSelected,
-              courseImage,
-              sections: [{id:uuid.v1(),
+              thumbnail:{filename:"",path:courseImage},
+              contentIndex:[{[sectionID]:0}],
+              content: [{id:sectionID,
                 title:"New Section"}]
           };
           this.addCourse(payload);

@@ -70,7 +70,7 @@
         return checkRouter(this.$route.name, "library");
       },
       isLNewCoursePage() {
-        return checkRouter(this.$route.name, "newcourse");
+        return checkRouter(this.$route.name, "edit-course");
       }
     }
   };

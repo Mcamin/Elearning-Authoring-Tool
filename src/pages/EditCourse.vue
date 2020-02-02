@@ -7,11 +7,11 @@ Add the default section to the sections -->
   {{courseContentdata}}
         <!-- Add  course Accordion-->
 
-     <!--<div v-for="(content, index) in courseContentdata" :key="index">
+       <div v-for="(content, index) in courseContentdata" :key="index">
 
           <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
           </component>
-        </div>-->
+        </div>
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->

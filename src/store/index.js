@@ -7,8 +7,20 @@ import actions from './actions'
 import getters from './getters'
 
 Vue.use(Vuex)
-
+/*const moduleB = {
+  state: { ... },
+  mutations: { ... },
+  actions: { ... }
+}*/
 export default new Vuex.Store({
+
+  /*modules: {
+    a: moduleA,
+    b: moduleB
+  }
+  store.state.a
+  store.state.b
+  */
   state,
   mutations,
   actions,

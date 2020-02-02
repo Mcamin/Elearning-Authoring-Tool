@@ -1,7 +1,8 @@
 <template>
   <el-aside class=" d-flex flex-column h-100 p-0 col-2" >
+    <LibraryElements/>
     <template v-if="isLibraryPage">
-      <LibraryElements/>
+<!--      <LibraryElements/>-->
     </template>
   </el-aside>
 </template>
@@ -23,7 +24,7 @@
           return checkRouter(this.$route.name, "library");
         },
         isLNewCoursePage() {
-          return checkRouter(this.$route.name, "newcourse");
+          return checkRouter(this.$route.name, "edit-course");
         }
       }
     }

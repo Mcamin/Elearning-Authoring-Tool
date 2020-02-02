@@ -10,7 +10,7 @@
           url=""
         />
       </b-col>
-      <b-col md="3" v-for="(course, index) in getCourses" :key="index">
+      <b-col md="3" v-for="(course, index) in getAllCourses" :key="index">
         <CourseCard
           :id="course.id"
           :title="course.title"
@@ -45,7 +45,7 @@ import {mapGetters} from "vuex";
     },
       computed: {
           ...mapGetters([
-              'getCourses'
+              'getAllCourses'
           ])
       },
 
