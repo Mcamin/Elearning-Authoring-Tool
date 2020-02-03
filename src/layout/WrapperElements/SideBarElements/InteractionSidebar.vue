@@ -18,7 +18,7 @@
    </b-row>
    <b-row  class="mx-0 h-100" style="overflow: auto">
      <b-col class="px-0">
-       <Container @drop="onDrop">
+       <Container @drop="onDrop"  drag-handle-selector=".column-drag-handle">
          <Question/>
          <Question/>
          <Question/>
