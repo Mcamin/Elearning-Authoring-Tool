@@ -1,6 +1,6 @@
 <template>
-  <el-aside class=" d-flex flex-column h-100 p-0 col-2" >
-    <LibraryElements/>
+  <el-aside class=" d-flex flex-column h-100 p-0 col-3" >
+    <InteractionSidebar/>
     <template v-if="isLibraryPage">
 <!--      <LibraryElements/>-->
     </template>
@@ -13,9 +13,11 @@
     import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
     import LibraryElements from "./SideBarElements/LibraryElements";
     import {checkRouter} from "../../plugins/helpers";
+    import InteractionSidebar from "@/layout/WrapperElements/SideBarElements/InteractionSidebar";
 
     export default {
         components: {
+            InteractionSidebar,
           LibraryElements,
 
         },

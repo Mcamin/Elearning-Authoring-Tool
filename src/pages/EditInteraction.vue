@@ -1,16 +1,7 @@
 <template>
-<b-container  style="background-color:red " class="pt-5 h-100">
+<b-container  fluid style="background-color:red " class="pt-5 h-100">
   <!--- Question Component-->
-<b-row style="background-color: black" class="py-3 mx-5">
-  <b-col>
-    <el-input
-      type="textarea"
-      autosize
-      placeholder="Enter a question title here..."
-      v-model="question">
-    </el-input>
-</b-col>
-</b-row>
+     <Question message="hello world"/>
   <!-- End Question -->
 <!-- Answers Component-->
   <b-row style="background-color: blue" class="py-3 mx-5">
@@ -53,8 +44,11 @@
 </template>
 
 <script>
+
+    import Question from "@/components/Interaction/Question";
     export default {
         name: "EditInteraction",
+        components: {Question},
         data () {
             return {
                 question:'',
