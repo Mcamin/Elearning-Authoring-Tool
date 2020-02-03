@@ -1,4 +1,5 @@
 <template>
+  <Draggable >
   <b-card no-body>
     <b-card-body class="pl-0 pr-2">
       <b-card-text>
@@ -13,9 +14,11 @@
       </b-card-text>
     </b-card-body>
   </b-card>
+  </Draggable>
 </template>
 
 <script>
+    import {Draggable } from "vue-smooth-dnd";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faBars, faTrash} from '@fortawesome/free-solid-svg-icons'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
@@ -26,6 +29,7 @@
     export default {
         name: "Question",
         components:{
+            Draggable,
             'font-awesome-icon': FontAwesomeIcon
         }
 

@@ -18,12 +18,14 @@
    </b-row>
    <b-row  class="mx-0 h-100" style="overflow: auto">
      <b-col class="px-0">
-      <Question/>
-       <Question/>
-       <Question/>
-       <Question/>
-       <Question/>
-       <Question/>
+       <Container @drop="onDrop">
+         <Question/>
+         <Question/>
+         <Question/>
+         <Question/>
+         <Question/>
+         <Question/>
+       </Container>
 
 
 
@@ -40,8 +42,9 @@
 
 <script>
 
-
+    import {Container } from "vue-smooth-dnd";
   import Question from "@/components/Interaction/Question"
+    import { applyDrag } from "@/plugins/helpers";
 
 
   export default {
@@ -51,8 +54,14 @@
       }
     },
       components:{
+          Container,
           Question,
 
+      },
+      methods:{
+          onDrop(dropResult) {
+              this.items = applyDrag(this.items, dropResult);
+          }
       }
   }
 </script>
