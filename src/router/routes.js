@@ -9,13 +9,14 @@ import CreateNewCourse from "../pages/EditCourse";
 
 
 // Admin pages
-const Login = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Login.vue");
-const Library = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Library.vue");
-const Home = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Home.vue");
-const Courses = () => import(/* webpackChunkName: "dashboard" */"@/pages/Courses.vue");
-const NewCourse = () => import(/* webpackChunkName: "dashboard" */"@/pages/EditCourse.vue");
-const EditLesson = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/EditLesson.vue");
-const Playground = () => import(/* webpackChunkName: "createnewcourse" */ "@/pages/Trash/Playground.vue");
+const Login = () => import(/* webpackChunkName: "Login" */ "@/pages/Login.vue");
+const Library = () => import(/* webpackChunkName: "Library" */ "@/pages/Library.vue");
+const Home = () => import(/* webpackChunkName: "Home" */ "@/pages/Home.vue");
+const Courses = () => import(/* webpackChunkName: "Courses" */"@/pages/Courses.vue");
+const NewCourse = () => import(/* webpackChunkName: "EditCourse" */"@/pages/EditCourse.vue");
+const EditInteraction = () => import(/* webpackChunkName: "EditLesson" */ "@/pages/EditInteraction.vue");
+const EditLesson = () => import(/* webpackChunkName: "EditInteraction" */ "@/pages/EditLesson.vue");
+const Playground = () => import(/* webpackChunkName: "Playground" */ "@/pages/Trash/Playground.vue");
 const routes = [
     {
         path: "/",
@@ -47,6 +48,12 @@ const routes = [
             path: "playground",
             name: "playground",
             component: Playground,
+
+          },
+          {
+            path: "edit-interaction",
+            name: "edit-interaction",
+            component: EditInteraction,
 
           },
           /*{

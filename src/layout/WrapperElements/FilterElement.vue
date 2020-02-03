@@ -25,13 +25,14 @@
       </el-select>
       <!-- End Sort -->
 
-      <el-divider class="mx-2" direction="vertical"/>
+
+      <el-divider v-if="!isLibraryPage" class="mx-2" direction="vertical"/>
 
       <!-- View Options -->
-      <b-link @click.prevent="triggerListView()" class="mx-2" href="#">
+      <b-link v-if="!isLibraryPage" @click.prevent="triggerListView()" class="mx-2" href="#">
         <font-awesome-icon :icon="['fas', 'th-list']" size="lg"/>
       </b-link>
-      <b-link @click.prevent="triggerCardView()" class="mx-2" href="#">
+      <b-link  v-if="!isLibraryPage" @click.prevent="triggerCardView()" class="mx-2" href="#">
         <font-awesome-icon :icon="['fas', 'th']" size="lg"/>
       </b-link>
       <!-- End View Options -->
@@ -40,6 +41,7 @@
 </template>
 
 <script>
+    import {checkRouter} from "../../plugins/helpers";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faTh, faThList} from '@fortawesome/free-solid-svg-icons'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
@@ -92,7 +94,11 @@
                         label: 'IT & Software'
                     },
                 ];
-            }
+            },
+            isLibraryPage (){
+                return checkRouter(this.$route.name, "library");
+            },
+
 
         },
         methods: {
@@ -101,7 +107,7 @@
             },
             triggerCardView: () => {
                 bus.$emit('card-view');
-            }
+            },
         }
     }
 </script>

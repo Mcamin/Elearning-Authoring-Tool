@@ -12,12 +12,12 @@
       <b-row class="h-100 mx-0">
 
           <!--Sidebar
- <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>-->
-          <template v-if="isLibraryPage || isLNewCoursePage">
+ <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>
+          <template v-if="isLibraryPage || isLNewCoursePage">-->
             <Sidebar/>
-          </template>
-          <!--</transition>
-  End Sidebar-->
+        <!-- </template>
+     </transition>
+End Sidebar-->
 
 
             <el-main class="h-100 p-0">
