@@ -1,7 +1,10 @@
 <template>
-      <b-modal id="modal-new-course" centered title="Create new course:" hide-footer size="lg">
+      <b-modal
+        id="modal-new-course"
+        centered title="Create new course:"
+        hide-footer size="lg">
             <div>
-              <b-form @submit.prevent="handleSubmit" @reset.prevent="handleReset" v-if="show">
+              <b-form @submit.prevent="handleSubmit" @reset="handleReset" v-if="show">
 
                 <!-- Title of Course-->
                 <b-form-group id="input-group-1" label="Title:" label-for="input-title">
@@ -26,7 +29,14 @@
                 </b-form-group>
 
                 <!-- Tags of Course -->
-
+                <b-form-group id="input-group-5" label="Tags" label-for="input-5">
+                  <vue-tags-input
+                    v-model="tag"
+                    :tags="formData.tags"
+                    :allow-edit-tags="true"
+                    @tags-changed="newTags => formData.tags = newTags"
+                  />
+                </b-form-group>
 
                 <!-- Language selection -->
                 <b-form-group id="input-group-4" label="Language:" label-for="input-4">
@@ -37,16 +47,8 @@
                     required
                   />
                 </b-form-group>
-                <b-form-group id="input-group-5" label="Tags" label-for="input-5">
-                  <vue-tags-input
-                    v-model="tag"
-                    :tags="formData.tags"
-                    :allow-edit-tags="true"
-                    @tags-changed="newTags => formData.tags = newTags"
-                  />
-                </b-form-group>
-                <!-- Upload -->
 
+                <!-- Upload -->
                 <el-upload
                   class="upload-demo"
                   drag
@@ -59,11 +61,12 @@
                   <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
                 </el-upload>
 
-                <!-- Submit button with route to /titleOfCourse -->
-                <router-link :to="{ name: 'edit-course', params: {id: formData.id, title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Submit</b-button></router-link>
-
-                <!-- Reset button -->
-                <b-button type="reset" >Reset</b-button>
+                <div class="create_buttons">
+                  <!-- Reset button -->
+                  <b-button type="reset">Reset</b-button>
+                  <!-- Submit button with route to /titleOfCourse -->
+                  <router-link :to="{ name: 'edit-course', params: {id: formData.id, title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Create</b-button></router-link>
+                </div>
               </b-form>
             </div>
       </b-modal>
@@ -129,14 +132,15 @@
           this.addSection({id:sectionID, title:"New Section"});
           this.addCourse(payload);
           this.saveTemporaryCourse(payload);
-
         },
         handleReset() {
+
           // Reset our form values
           this.form.title = '';
           this.form.description = '';
           this.form.tags = [];
-          this.form.language = [];
+          this.form.newTag = [];
+          this.form.language = '';
           this.form.courseImage=[];
           // Trick to reset/clear native browser form validation state
           this.show = false;
