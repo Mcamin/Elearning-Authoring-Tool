@@ -13,9 +13,9 @@
 
           <!--Sidebar
  <transition v-if="isLibraryPage" name="fade" mode="out-in" appear>
-          <template v-if="isLibraryPage || isLNewCoursePage">-->
+          <template v-if="isLibraryPage || isLNewCoursePage">
             <Sidebar/>
-        <!-- </template>
+         </template>
      </transition>
 End Sidebar-->
 
