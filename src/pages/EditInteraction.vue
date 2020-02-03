@@ -28,14 +28,9 @@
   <!-- End Answers Component-->
 
  <!--- Feedback Component -->
-  <b-row style="background-color: green" class="py-3 mx-5">
+  <b-row style="background-color: #fef3f3" class="py-3 mx-5">
     <b-col>
-      <el-input
-        type="textarea"
-        autosize
-        placeholder="Enter answer feedback (optional) ..."
-        v-model="feedback">
-      </el-input>
+      <Description></Description>
     </b-col>
   </b-row>
   <!--- End Feedback -->
@@ -45,9 +40,10 @@
 <script>
 
     import Question from "@/components/Interaction/Question";
+    import Description from "@/components/Interaction/Description";
     export default {
         name: "EditInteraction",
-        components: {Question},
+        components: {Description, Question},
         data () {
             return {
                 question:'',
