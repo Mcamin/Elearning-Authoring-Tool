@@ -1,7 +1,6 @@
 <template>
 <b-container  fluid style="background-color:red " class="pt-5 h-100">
-  <!--- Question Component-->
-     <Question message="hello world"/>
+
   <!-- End Question -->
 <!-- Answers Component-->
   <b-row style="background-color: blue" class="py-3 mx-5">
