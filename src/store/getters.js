@@ -1,18 +1,29 @@
-
-
+//helper function
+import {dynamicSort} from '../plugins/helpers'
 
 export default {
 
 /* Courses Array Module getters */
   // Get all Courses
-  getAllCourses: (state) => {
+  getAllCourses: state => {
     return state.courses;
   },
   // Get a Course by ID
-  getCourseByID:state => id =>{
+  getCourseByID: state => id =>{
     return state.courses.filter(course => course.id=== id)[0];
   },
+  // Get the courses by a category
+  getCoursesByCategory: state => category =>{
+    return state.courses.filter(course => course.category=== category);
+  },
 
+  ascendingCoursesSort: state => {
+    return state.courses.sort(dynamicSort("title"));
+  },
+
+  descendingCoursesSort: state => {
+    return state.courses.sort(dynamicSort("-title"));
+  },
 
  /* Section Array Sections getters */
 

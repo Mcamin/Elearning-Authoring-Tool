@@ -28,7 +28,7 @@
       <el-divider class="mx-2" direction="vertical"/>
 
       <!-- View Options -->
-      <b-link @click.prevent="triggetListView()" class="mx-2" href="#">
+      <b-link @click.prevent="triggerListView()" class="mx-2" href="#">
         <font-awesome-icon :icon="['fas', 'th-list']" size="lg"/>
       </b-link>
       <b-link @click.prevent="triggerCardView()" class="mx-2" href="#">
@@ -43,12 +43,11 @@
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faTh, faThList} from '@fortawesome/free-solid-svg-icons'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-
+    import {bus} from '@/main'
     library.add(
         faTh,
         faThList
     );
-    import {bus} from "@/main";
 
     export default {
         name: "FilterElement",
@@ -97,11 +96,11 @@
 
         },
         methods: {
-            triggetListView: () => {
+            triggerListView: () => {
                 bus.$emit('list-view');
             },
             triggerCardView: () => {
-                bus.$emit('list-view');
+                bus.$emit('card-view');
             }
         }
     }

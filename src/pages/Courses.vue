@@ -1,7 +1,7 @@
 <template>
-  <b-container  class=" p-4 my-2">
+  <b-container class=" p-4 my-2">
     <FilterElement/>
-    <b-row>
+    <b-row v-if="setView==='card-view'">
       <b-col md="3">
         <CourseCard
           v-b-modal="'modal-new-course'"
@@ -20,49 +20,79 @@
         />
       </b-col>
     </b-row>
+    <b-row v-else>
+      <b-col >
+        {{setView}}
+      </b-col>
+    </b-row>
     <NewCourseModal/>
   </b-container>
 </template>
 <script>
 
-import CourseCard from "../components/Cards/CourseCard";
-import NewCourseModal from "../components/Modals/NewCourseModal";
-import FilterElement from "../layout/WrapperElements/FilterElement"
-import {Notification} from 'element-ui'
+    import CourseCard from "@/components/Cards/CourseCard";
+    import NewCourseModal from "@/components/Modals/NewCourseModal";
+    import FilterElement from "@/layout/WrapperElements/FilterElement"
+    import {Notification} from 'element-ui'
+    import {bus} from '@/main'
+    import {mapGetters} from "vuex";
 
-import {mapGetters} from "vuex";
+    export default {
+        name:"courses",
+        components: {
+            CourseCard,
+            NewCourseModal,
+            FilterElement
+        },
+        data() {
+            return {
+                viewMode:'card-view'
+            }
+        },
+        computed: {
+            ...mapGetters([
+                'getAllCourses',
+                'getCoursesByCategory',
+                'ascendingCoursesSort',
+                'descendingCoursesSort'
+            ]),
+            setView () {
+                switch (this.viewMode) {
+                    //Load Lessons
+                    case 'card-view':
+                        return 'card-view';
+                        break;
+                    //Load Interactions
+                    case 'list-view':
+                        return 'list-view';
+                        break;
+                }
+            }
+        },
 
-  export default {
-    components: {
-        CourseCard,
-        NewCourseModal,
-      FilterElement
-    },
-    data() {
-      return{
+        created() {
+            bus.$on('list-view', () => {
 
+                this.viewMode='list-view';
 
-      }
-    },
-      computed: {
-          ...mapGetters([
-              'getAllCourses'
-          ])
-      },
+            });
+            bus.$on('card-view', () => {
+                this.viewMode='card-view';
+                console.log( this.viewMode);
+            });
 
-      created() {
-        this.$notify({
-          title: 'Title',
-          message: 'I\'m at the top left corner',
-          position: 'top-left',
-          type: 'info',
-          duration: 0,
+            this.$notify({
+                title: 'Title',
+                message: 'I\'m at the top left corner',
+                position: 'top-left',
+                type: 'info',
+                duration: 0,
 
-        });
+            });
 
-    }
+        }
 
-  };
+    };
 </script>
 <style>
 
