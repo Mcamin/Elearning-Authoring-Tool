@@ -40,10 +40,23 @@
     <!--Content-->
     <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
-        <!--Add Element to the Accordion-->
-        <slot name="module"/>
-        <slot name="content"/>
-        <AddBtn :func="'add-module'" :callerID="accordionID" />
+         <!--Render Section Content: Modules-->
+        <template v-if="isSection && contentArray" v-for="module in contentArray">
+          <component is="Accordion" :accordionTitle="module.title"
+                     :accordionID="module.id" :contentArray="module.content"/>
+        </template>
+
+        <!--Render Module Content: Quizzes and interactions-->
+        <template v-if="isModule && contentArray" v-for="c in contentArray" >
+          <component is="Accordion" :accordionTitle="c.title" :accordionID="c.id">
+          </component>
+        </template>
+
+
+
+
+
+        <AddBtn v-if='isSection || isModule' :func="'add-module'" :callerID="accordionID" />
       </b-card-body>
     </b-collapse>
     <!--End Content-->
@@ -79,15 +92,20 @@
         }
       },
       props: {
+          contentArray:{
+            Type: Array,
+            required:true,
+            Description: "the element content"
+          },
         accordionID:{
           Type:String,
           required: true,
-          Description:"the section uuid"
+          Description:"the element uuid"
         },
         accordionTitle:{
           Type:String,
           required: true,
-          Description:"The section title received from the parent component"
+          Description:"The element title received from the parent component"
         },
 
       },
@@ -113,7 +131,16 @@
           this.$root.$emit('bv::toggle::collapse', id);
           this.collapsed = ! this.collapsed;
         }
-      }
+      },
+        computed:{
+            isSection() {
+                return this.accordionID.charAt(0) === 's'
+             },
+            isModule() {
+                return  this.accordionID.charAt(0) === 'm'
+            }
+        }
+
     }
 </script>
 

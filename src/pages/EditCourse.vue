@@ -8,13 +8,18 @@ Add the default section to the sections -->
 
        <template v-for="content in courseContentdata">
 
-          <component is="Accordion" :accordionTitle="content.title" :accordionID="content.id">
-              <template v-if="content.modules" v-for="m in content.modules"   v-slot:module>
-              <component is="Accordion" :accordionTitle="m.title" :accordionID="m.id">
-              </component>
-              </template>
-          </component>
+           <!--Render Section  -->
+          <component v-if="isSection(content.id)" is="Accordion" :accordionTitle="content.title"
+                     :accordionID="content.id" :contentArray="content.modules"/>
+
+         <!--Render Module  -->
+         <component v-else is="Accordion" :accordionTitle="content.title"
+                    :accordionID="content.id" :contentArray="content.content"/>
+
+
         </template>
+
+
         <AddBtn caller-i-d="parent"/>
         <!--End  Add  course Accordion-->
         <!-- Add  content  Accordion-->
@@ -49,7 +54,10 @@ Add the default section to the sections -->
       methods:{
           getCourseContentFromStore(id) {
               return this.getCourseContent(id);
-          }
+          },
+          isSection(id) {
+              return id.charAt(0) == 's'
+          },
       },
       computed: {
           ...mapGetters([
@@ -57,9 +65,10 @@ Add the default section to the sections -->
           ]),
           courseContentdata() {
             return this.getCourseContentFromStore(this.$route.params.id);
-          }
+          },
   },
     created() {
+
       //Trigger Modal and pass it the right parameters
       bus.$on('update-caller-id', (id) => {
         this.callerID =id;
