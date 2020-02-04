@@ -1,8 +1,11 @@
 <template>
   <el-aside class=" d-flex flex-column h-100 p-0 col-3" >
-    <InteractionSidebar/>
+
     <template v-if="isLibraryPage">
-<!--      <LibraryElements/>-->
+      <LibraryElements/>
+    </template>
+    <template v-else>
+      <InteractionSidebar/>
     </template>
   </el-aside>
 </template>

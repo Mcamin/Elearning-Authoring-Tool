@@ -2,7 +2,15 @@
   <b-container fluid class=" mt-5  px-5 ">
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
-        <CourseList>Y</CourseList>
+
+          <div>
+            <div class="simple-page">
+
+            </div>
+          </div>
+
+
+
       </b-col>
     </b-row>
   </b-container>
@@ -10,10 +18,19 @@
 
 <script>
 
-import CourseList from "@/components/Cards/CourseList";
-  export default {
-      name:"playground",
-    components: {CourseList},
 
-  };
+
+
+export default {
+    name: "playground",
+    components: {  },
+    data() {
+        return {
+            items: generateItems(50, i => ({ id: i, data: "Draggable " + i }))
+        };
+    },
+    methods: {
+
+    }
+};
 </script>

@@ -48,8 +48,10 @@
 
         <!--Render Module Content: Quizzes and interactions-->
         <template v-if="isModule && contentArray" v-for="c in contentArray" >
-          <component is="Accordion" :accordionTitle="c.title" :accordionID="c.id">
-          </component>
+          <b-link :to="elementPage(c.id)">
+            <component is="Accordion" :accordionTitle="c.title" :accordionID="c.id"/>
+          </b-link>
+
         </template>
 
 
@@ -94,7 +96,7 @@
       props: {
           contentArray:{
             Type: Array,
-            required:true,
+            required:false,
             Description: "the element content"
           },
         accordionID:{
@@ -130,7 +132,13 @@
         toggleCollapse(id) {
           this.$root.$emit('bv::toggle::collapse', id);
           this.collapsed = ! this.collapsed;
-        }
+        },
+          elementPage(id){
+              if (id.charAt(0) === 'q')
+                  return '/edit-interaction'
+              else
+                  return '/edit-lesson'
+          }
       },
         computed:{
             isSection() {
@@ -138,7 +146,7 @@
              },
             isModule() {
                 return  this.accordionID.charAt(0) === 'm'
-            }
+            },
         }
 
     }
