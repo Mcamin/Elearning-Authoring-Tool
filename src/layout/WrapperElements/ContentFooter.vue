@@ -1,7 +1,5 @@
 <template>
-
-
-        <b-container fluid>
+  <b-container fluid>
       <b-row align-v="center">
         <b-col  md="6" sm="12">
           <div class="copyright text-center float-lg-left">
@@ -14,7 +12,6 @@
          <b-nav-item  href="/"> <font-awesome-icon :icon="['fab','twitter']" size="lg"/></b-nav-item>
        </b-nav>
        </b-col>
-
       </b-row>
     </b-container>
 

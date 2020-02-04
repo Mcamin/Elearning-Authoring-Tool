@@ -2,9 +2,9 @@
   <b-container fluid class="wrapper d-flex flex-column vh-100 px-0">
     <!--Navigation-bar-->
     <transition name="fade" mode="out-in" appear>
-      <header>
+
         <top-navigation-bar/>
-      </header>
+
     </transition>
     <!--End Navigation-bar-->
     <b-container fluid class="main-content px-0">
@@ -45,7 +45,7 @@
 <script>
 
     import ContentFooter from "./WrapperElements/ContentFooter.vue";
-    import TopNavigationBar from "./WrapperElements/TopNavBar";
+    import TopNavigationBar from "./WrapperElements/Header";
     import DashboardContent from "./WrapperElements/ContentWrapper.vue";
     import VuePerfectScrollbar from 'vue-perfect-scrollbar'
     import Sidebar from "./WrapperElements/Sidebar";
