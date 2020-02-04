@@ -90,11 +90,10 @@
                 dangerouslyUseHTMLString: true,
             });
           },
-      beforeRouteLeave (to, from, next) {
-          this.$notify.closeAll();
-          console.log('BLUBBBB');
-          next();
-      }
+        beforeRouteLeave (to, from, next) {
+            this.$notify.closeAll();
+            next();
+        }
     };
 </script>
 <style>
