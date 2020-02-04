@@ -86,14 +86,15 @@
                 message: 'This is the place to administrate courses. </br></br> Start creating a new course or select existing ones.',
                 position: 'top-left',
                 type: 'info',
-                duration: 3000,
+                duration: 0,
                 dangerouslyUseHTMLString: true,
-
             });
-
-
-        }
-
+          },
+      beforeRouteLeave (to, from, next) {
+          this.$notify.closeAll();
+          console.log('BLUBBBB');
+          next();
+      }
     };
 </script>
 <style>
