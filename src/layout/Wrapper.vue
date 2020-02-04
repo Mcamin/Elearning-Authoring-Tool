@@ -12,7 +12,7 @@
       <b-row class="h-100 mx-0">
 
         <!--Sidebar-->
-        <transition v-if="isLibraryPage || isEditCoursePage || isEditInteractionPage" name="fade" mode="out-in" appear>
+        <transition v-if="isLibraryPage  || isEditInteractionPage" name="fade" mode="out-in" appear>
           <template >
             <Sidebar/>
           </template>
