@@ -116,10 +116,10 @@
                     ],
                     content: `
           <h2>
-            Floating Menu
+            Feedback
           </h2>
           <p>
-            This is an example of a medium-like editor. Enter a new line and some buttons will appear.
+            Enter a Feecback Here ...
           </p>
         `,
                 }),
