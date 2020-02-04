@@ -92,7 +92,6 @@
           },
       beforeRouteLeave (to, from, next) {
           this.$notify.closeAll();
-          console.log('BLUBBBB');
           next();
       }
     };
