@@ -4,7 +4,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#">Export Course</b-nav-item>
+        <b-nav-item href="#" disabled>Export Course</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

@@ -5,13 +5,15 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
+      <!-- Breadcrumb -->
       <b-navbar-nav>
         <b-nav-item href="#" disabled>{{IsPage}}</b-nav-item>
       </b-navbar-nav>
+      <!-- End Breadcrumb -->
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <!-- Profile : Home | Courses | Library  -->
+        <!-- Profile -->
         <b-nav-item-dropdown right>
           <template v-slot:button-content>
             <em>User</em>

@@ -1,13 +1,13 @@
 <template>
-  <b-container fluid class="h-100 home-wrapper">
-    <b-row class="d-flex align-items-center h-100">
+  <b-container fluid class="h-100 home-wrapper px-0">
+    <b-row class="d-flex align-items-center h-100 pl-4 mx-0">
       <b-col  cols="6" class="">
-       <h1> Welcome to the Elearning Authoring Tool</h1>
-        <h4>Create an Engaging Course or Start Adding Content to the Library</h4>
-        <b-container fluid >
+       <h1 class="primary-color"> Welcome to the Elearning <br> Authoring Tool</h1>
+        <h4>Create an Engaging Course or <br> Start Adding Content to the Library</h4>
+        <b-container fluid class="px-0" >
           <b-row class="mt-5">
-            <b-col><b-button  pill :to="courses.url">{{courses.title}}</b-button></b-col>
-            <b-col><b-button pill :to="library.url">{{library.title}}</b-button></b-col>
+            <b-col><b-button class="mr-2"  pill :to="courses.url">{{courses.title}}</b-button>
+         <b-button  class="mx-2"  pill :to="library.url">{{library.title}}</b-button></b-col>
           </b-row>
         </b-container>
       </b-col>
