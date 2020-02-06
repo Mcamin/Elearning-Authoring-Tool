@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid>
-      <b-row align-v="center">
+  <b-container fluid class="h-100">
+      <b-row align-v="center" class="h-100">
         <b-col  md="6" sm="12">
           <div class="copyright text-center float-lg-left">
             © <a href="https://www.fokus.fraunhofer.de/en" target="_blank" rel="noopener">Fraunhofer FOKUS {{year}}</a>
