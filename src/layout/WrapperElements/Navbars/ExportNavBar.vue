@@ -1,5 +1,5 @@
 <template>
-  <b-navbar toggleable="lg" type="dark"  sticky class="mx-lg-4">
+  <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>

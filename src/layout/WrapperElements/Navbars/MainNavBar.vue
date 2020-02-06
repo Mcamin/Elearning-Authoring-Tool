@@ -1,12 +1,12 @@
 <template>
-  <b-navbar toggleable="lg" type="dark"  sticky class="mx-lg-4">
-    <b-navbar-brand href="#">LOGO</b-navbar-brand>
+  <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
+    <b-navbar-brand to="/">LOGO</b-navbar-brand>
     <el-divider direction="vertical" ></el-divider>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#">Dashboard |Library | Welcome Page </b-nav-item>
+        <b-nav-item href="#" disabled>{{IsPage}}</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -26,8 +26,29 @@
 </template>
 
 <script>
+  import {checkRouter} from "@/plugins/helpers"
     export default {
-        name: "MainNavbar"
+        name: "MainNavBar",
+      data(){
+          return {
+            title:{
+              home: "DASHBOARD",
+              courses: "COURSES",
+              library: "LIBRARY"
+            }
+          }
+      },
+      computed:{
+          IsPage(){
+            if(checkRouter(this.$route.name, "library"))
+            return this.title.library;
+            else if (checkRouter(this.$route.name, "home"))
+              return  this.title.home;
+            else
+              return this.title.courses;
+          }
+      }
+
     }
 </script>
 
