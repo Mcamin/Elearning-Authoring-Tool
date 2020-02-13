@@ -46,6 +46,30 @@ app.post("/module_1", (req, res) => {
   });   // moodleDate.valid_request
 });       // app.post("/module_2");
 
+app.get("/grade/:sessionID/:grade", (req, res) => {
+  const session = sessions[req.params.sessionID];
+  var grade = req.params.grade;
+  var resp;
+
+  if (grade < 60) {
+    resp = `${grade} is too low. How about sixty instead?`;
+    grade = 60;
+  } else if (grade > 90) {
+    resp = `${grade} is too high. How about ninety instead?`;
+    grade = 90;
+  } else {
+    resp = `${grade} sounds reasonable, sure.`;
+  }
+
+  session.outcome_service.send_replace_result(grade/100, (err, isValid) => {
+    if (!isValid)
+      resp += `<br/>Update failed ${err}`;
+
+    res.send(resp);
+  });
+
+});    // app.get("/grade...")
+
 // start srver on localhost
 
 app.listen(3000, 'localhost', function() {
