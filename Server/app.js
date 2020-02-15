@@ -8,16 +8,16 @@ const lessonRoutes = require('./api/routes/lessons');
 const quizRoutes = require('./api/routes/quizzes');
 
 //Connect to DB
-//const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'
-//  +process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(
-  'mongodb+srv://r2d2:eat2020@cluster0-nozlp.mongodb.net/test?retryWrites=true&w=majority',{ useNewUrlParser: true , useUnifiedTopology: true });
+const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'+process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoURI,{ useNewUrlParser: true , useUnifiedTopology: true });
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Handling Cors
 app.use((req, res, next) => {
+  // Set to the EAT url
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -34,6 +34,7 @@ app.use((req, res, next) => {
 app.use("/lessons", lessonRoutes);
 app.use("/quizzes", quizRoutes);
 
+// Handling Errors
 app.use((req, res, next) => {
   const error = new Error("Not found");
   error.status = 404;

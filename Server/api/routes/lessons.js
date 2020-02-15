@@ -10,8 +10,14 @@ router.get('/:lessonId', (req, res, next) =>{
   Lesson.findById(id)
   .exec()
   .then(doc => {
-    console.log(doc);
-    res.status(200).json(doc);
+    console.log("retrieved from DB \n",doc);
+    if(doc)
+    {
+      res.status(200).json(doc);
+    }else{
+      res.status(404).json({message:"No valid entry found for provided ID"});
+    }
+
   })
   .catch(err => {
     console.log(err);
@@ -19,15 +25,61 @@ router.get('/:lessonId', (req, res, next) =>{
   });
 });
 
-//Update a single lesson
-router.patch('/:lessonId', (req, res, next) =>{
-  const id = req.params.lessonId;
-  res.status(200).json({
-    message: 'updated the lesson',
-    id:id
+//Get all lessons
+router.get('/', (req, res, next) =>{
+  const pageOptions = {
+    page: parseInt(req.body.page, 10) || 0,
+    limit: parseInt(req.body.limit, 10) || 10
+  }
+  Lesson.find()
+  .skip(pageOptions.page * pageOptions.limit)
+  .limit(pageOptions.limit)
+  .exec()
+  .then(docs => {
+    console.log(docs);
+    res.status(200).json(docs);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({error:err});
   });
 });
 
+// Update a single lesson
+router.patch('/:lessonId', (req, res, next) =>{
+  const id = req.params.lessonId;
+  const updateOps = {};
+  for (const ops of req.body)
+      updateOps[ops.propName] = ops.value;
+  Lesson.update({_id: id},{$set:updateOps})
+  .exec()
+  .then(result =>{
+    console.log(result)
+    res.status(200).json({result});
+  })
+  .catch(error => {
+    console.log(error);
+    res.status(500).json({error:error});
+  });
+
+});
+
+// Delete a lesson
+router.delete("/:lessonId", (req, res, next) =>{
+ const id= req.params.lessonId;
+ Lesson
+ .remove({_id: id})
+  .exec()
+  .then(result => {
+    res.status(200).json(result);
+  })
+  .catch(error =>{
+    console.log(error);
+    res.status(500).json({error:error});
+  })
+});
+
+// Create a lesson
 router.post("/", (req, res, next) => {
   const lesson = new Lesson({
     _id: new mongoose.Types.ObjectId(),
@@ -40,7 +92,7 @@ router.post("/", (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "Handling POST requests to /lesson",
+        message: "Lesson Created",
         createdProduct: result
       });
     })
@@ -51,6 +103,6 @@ router.post("/", (req, res, next) => {
       });
     });
 });
-//Create a lesson
+
 
 module.exports = router;
