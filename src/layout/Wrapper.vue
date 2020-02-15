@@ -44,7 +44,7 @@
 </template>
 <script>
 
-    import ContentFooter from "./WrapperElements/ContentFooter.vue";
+    import ContentFooter from "./WrapperElements/Footer.vue";
     import TopNavigationBar from "./WrapperElements/Header";
     import DashboardContent from "./WrapperElements/ContentWrapper.vue";
     import VuePerfectScrollbar from 'vue-perfect-scrollbar'

@@ -1,12 +1,17 @@
 <template>
-  <b-container  class="h-100">
-    <b-row class="align-items-center h-100">
-      <b-col  cols="5" md="6" sm="1" class="mb-4 mx-auto ">
-      <CourseCard :title="library.title" :url="library.url" :img="library.img"/>
+  <b-container fluid class="h-100 home-wrapper px-0">
+    <b-row class="d-flex align-items-center h-100 pl-4 mx-0">
+      <b-col  cols="6" class="">
+       <h1 class="primary-color"> Welcome to the Elearning <br> Authoring Tool</h1>
+        <h4>Create an Engaging Course or <br> Start Adding Content to the Library</h4>
+        <b-container fluid class="px-0" >
+          <b-row class="mt-5">
+            <b-col><b-button class="mr-2"  pill :to="courses.url">{{courses.title}}</b-button>
+         <b-button  class="mx-2"  pill :to="library.url">{{library.title}}</b-button></b-col>
+          </b-row>
+        </b-container>
       </b-col>
-        <b-col  cols="5" md="6" sm="1" class="mb-4 mx-auto ">
-        <CourseCard :title="courses.title" :url="courses.url" :img="courses.img"/>
-          </b-col>
+
     </b-row>
   </b-container>
 </template>
@@ -20,14 +25,14 @@ import CourseCard  from "../components/Cards/CourseCard";
     },
     data() {
       return{
-          library:{
-              title:"Go To Library",
-              url:"/library",
-              img:"https://upload.wikimedia.org/wikipedia/commons/2/21/Biblioth%C3%A8que_de_l%27Assembl%C3%A9e_Nationale_%28Lunon%29.jpg"},
-          courses:{
-              title:"Go To Courses",
-              url:"/courses",
-              img:"https://www.questpond.com/img/2.png"},
+          library: {
+            title: "Go To Library",
+            url: "/library",
+          },
+          courses: {
+            title: "Go To Courses",
+            url: "/courses",
+          }
       }
     },
 
