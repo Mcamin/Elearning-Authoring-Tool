@@ -1,0 +1,52 @@
+<html>
+<head>
+  <script>
+    //PARAMS**GO**HERE
+  </script>
+</head>
+<script>
+  document.write(`Hello ${params.user}`);
+
+  function radioValue()
+  {
+    var i1=0;
+    var iAnz=0;
+    for (var i=0;i<=document.Form1.radButton.length-1; i++)
+    {
+      i1=i+1;
+      if(document.Form1.radButton[i].checked==true)
+      {
+        iAnz++;
+        return document.Form1.radButton[i].value;
+      }
+    }
+  }
+
+</script>
+<body>
+<h2>Graded Module</h2>
+<p/>
+Please read this paragraph to learn something very important.
+<p/>
+<h4>Select your Gender</h4>
+<form name="Form1" method="post" class="demoForm" id="demoForm">
+  <fieldset>
+    <legend>Demo: Get Value of Selected</legend>
+
+    <p>Select a shipping method:</p>
+    <p>
+      Radio-Button 1<input type="Radio" name="radButton" value="Button Eins"><br>
+      Radio-Button 2<input type="Radio" name="radButton" value="Button Zwei"><br>
+      Radio-Button 3<input type="Radio" name="radButton" value="Button Drei"><br>
+      Radio-Button 4<input type="Radio" name="radButton" value="Button Vier"><br>
+      Radio-Button 5<input type="Radio" name="radButton" value="Button Fünf"><br>
+    </p>
+<br/>
+<button type="button" onClick="
+			var path = `/radio/${params.sessionID}/${radioValue()}`;
+			document.location = path;
+		">Submit radio</button>
+  </fieldset>
+</form>
+</body>
+</html>
