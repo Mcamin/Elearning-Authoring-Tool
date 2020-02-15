@@ -1,18 +1,9 @@
 <template>
   <b-container fluid class=" mt-5  px-5 ">
-    <b-row align-v="center" align-h="center">
-      <b-col align-self="center" class="h-100">
+    <DeleteModal :item="item"/>
+    <b-button v-b-modal="'delete-modal'">Show Modal</b-button>
+    <editor-content :editor="editor" />
 
-          <div>
-            <div class="simple-page">
-
-            </div>
-          </div>
-
-
-
-      </b-col>
-    </b-row>
   </b-container>
 </template>
 
@@ -20,17 +11,39 @@
 
 
 
+  // Import the editor
+  import { Editor, EditorContent } from 'tiptap'
 
+
+
+
+
+
+import DeleteModal from "../../components/Modals/DeleteModal";
 export default {
     name: "playground",
-    components: {  },
+    components: {DeleteModal,EditorContent  },
     data() {
         return {
-            items: generateItems(50, i => ({ id: i, data: "Draggable " + i }))
+            item:{
+              title: "Css",
+              type: "Modal"
+            },
+          editor:null
         };
     },
-    methods: {
-
-    }
+  mounted() {
+    this.editor = new Editor({
+      content: '<p>This is just a boring paragraph</p>',
+    })
+  },
+  beforeDestroy() {
+    this.editor.destroy()
+  },
 };
 </script>
+<style>
+  .ProseMirror{
+    border: 1px solid #219678;
+  }
+</style>

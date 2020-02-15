@@ -18,7 +18,8 @@
 
 <script>
     export default {
-        name: "ExportNavBar"
+        name: "ExportNavBar",
+
     }
 </script>
 

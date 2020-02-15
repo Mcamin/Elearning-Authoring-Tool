@@ -12,5 +12,8 @@ export default {
   interactions,
   modules,
   lessons,
-  glossaries
+  glossaries,
+  //The Object to use to manipulate a lesson
+  selectedLesson:{title:"Selected Lesson", content:"",metadata:""},
+  selectedCourse:{title:"Selected Course", content: [],metadata:""}
 }

@@ -170,6 +170,7 @@
     data() {
       return {
         tag: '',
+        content,
         tags: [],
         inputVisible: false,
         inputValue: '',

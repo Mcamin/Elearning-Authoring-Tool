@@ -14,15 +14,15 @@
     faPlusCircle,
   );
   export default {
-        name: "CourseCard",
+        name: "CourseList",
         data() {
           return {
             image: "https://sanitationsolutions.net/wp-content/uploads/2015/05/empty-image.png",
           }
         },
         components:{
-          'font-awesome-icon': FontAwesomeIcon
-        },
+      'font-awesome-icon': FontAwesomeIcon
+    },
         props:{
             id:"",
             title:"",

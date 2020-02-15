@@ -1,10 +1,10 @@
 <template>
   <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
-    <b-navbar-brand href="#">Menu Icon</b-navbar-brand>
+    <b-navbar-brand to="/courses"><font-awesome-icon :icon="['fas','th']" size="lg"/></b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#" disabled>CourseName</b-nav-item>
+        <b-nav-item href="#" disabled>{{selectedCourse.title}}</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -21,10 +21,25 @@
 </template>
 
 <script>
-
+  import { library } from '@fortawesome/fontawesome-svg-core'
+  import { faTh } from '@fortawesome/free-solid-svg-icons'
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import {mapState} from "vuex";
+  library.add(
+    faTh,
+  );
 
     export default {
-        name: "CourseNavBar"
+        name: "CourseNavBar",
+      components:{
+        'font-awesome-icon': FontAwesomeIcon
+      },
+      computed:{
+          ...mapState([
+            "selectedCourse"
+          ]),
+        }
+
     }
 </script>
 
