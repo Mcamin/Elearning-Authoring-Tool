@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
 import routes from "./routes";
-import {notEmptyObject} from '../plugins/helpers'
+import {notEmptyObject} from '@/utils/helpers'
 // configure router
 const router = new VueRouter({
     routes, // short for routes: routes

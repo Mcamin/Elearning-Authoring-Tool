@@ -3,7 +3,6 @@ import RouterPrefetch from 'vue-router-prefetch'
 import router from "./router/index";
 import './registerServiceWorker'
 import './assets/sass/index.sass'
-import axios from 'axios';
 
 //Element Ui dependencies
 import 'element-ui/lib/index.js'
@@ -15,7 +14,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import UUID from 'vue-uuid';
-Vue.use(axios);
 Vue.use(UUID);
 Vue.use(ElementUI);
 Vue.use(VueRouter);

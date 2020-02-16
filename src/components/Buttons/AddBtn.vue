@@ -7,7 +7,7 @@
 <script>
 
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import {bus} from "../../main";
+  import {bus} from "@/main";
    export default {
         name: "AddBtn",
      props:{

@@ -10,7 +10,7 @@
 
 <script>
 
-    import {checkRouter} from "../../plugins/helpers"
+    import {checkRouter} from "@/utils/helpers"
     import MainNavBar from "./Navbars/MainNavBar";
     import CourseNavBar from "./Navbars/CourseNavBar";
     import EditNavBar from "./Navbars/EditNavBar";

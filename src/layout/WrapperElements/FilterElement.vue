@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {checkRouter} from "../../plugins/helpers";
+    import {checkRouter} from "@/utils/helpers";
     import {library} from '@fortawesome/fontawesome-svg-core'
     import {faTh, faThList} from '@fortawesome/free-solid-svg-icons'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'

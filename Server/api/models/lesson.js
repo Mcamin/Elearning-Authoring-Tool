@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 
 const lessonSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  title: String,
+  title: {
+    type: String,
+    required: true
+  },
   description: String
 });
 
-module.exports = mongoose.model('Lesson',lessonSchema);
+module.exports = mongoose.model('Lesson', lessonSchema);
 

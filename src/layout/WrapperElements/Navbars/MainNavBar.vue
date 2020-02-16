@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import {checkRouter} from "@/plugins/helpers"
+  import {checkRouter} from "@/utils/helpers"
     export default {
         name: "MainNavBar",
       data(){

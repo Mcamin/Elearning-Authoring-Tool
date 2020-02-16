@@ -25,6 +25,7 @@ export default {
     components: {DeleteModal,EditorContent  },
     data() {
         return {
+          data:null,
             item:{
               title: "Css",
               type: "Modal"
@@ -36,6 +37,15 @@ export default {
     this.editor = new Editor({
       content: '<p>This is just a boring paragraph</p>',
     })
+  },
+  methods:{
+      async fetch() {
+        const {data} = await lessonRep.getAll();
+        this.data = data;
+      }
+  },
+  created(){
+      this.fetch();
   },
   beforeDestroy() {
     this.editor.destroy()

@@ -45,7 +45,7 @@
 
 <script>
     import { Container, Draggable } from 'vue-smooth-dnd'
-    import { applyDrag, generateItems } from '../../plugins/helpers'
+    import { applyDrag, generateItems } from '@/utils/helpers'
 
     export default {
         name: 'Nested',

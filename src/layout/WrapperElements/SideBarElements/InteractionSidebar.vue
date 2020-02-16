@@ -44,7 +44,7 @@
 
     import {Container } from "vue-smooth-dnd";
   import Question from "@/components/Interaction/Question"
-    import { applyDrag } from "@/plugins/helpers";
+    import { applyDrag } from "@/utils/helpers";
 
 
   export default {

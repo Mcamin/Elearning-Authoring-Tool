@@ -49,7 +49,7 @@
     import DashboardContent from "./WrapperElements/ContentWrapper.vue";
     import VuePerfectScrollbar from 'vue-perfect-scrollbar'
     import Sidebar from "./WrapperElements/Sidebar";
-    import {checkRouter} from "../plugins/helpers";
+    import {checkRouter} from "@/utils/helpers";
 
     export default {
         components: {

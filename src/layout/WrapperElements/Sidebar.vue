@@ -15,7 +15,7 @@
     import VuePerfectScrollbar from 'vue-perfect-scrollbar'
     import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
     import LibraryElements from "./SideBarElements/LibraryElements";
-    import {checkRouter} from "../../plugins/helpers";
+    import {checkRouter} from "@/utils/helpers";
     import InteractionSidebar from "@/layout/WrapperElements/SideBarElements/InteractionSidebar";
 
     export default {

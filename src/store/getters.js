@@ -1,5 +1,5 @@
 //helper function
-import {dynamicSort} from '../plugins/helpers'
+import {dynamicSort} from '@/utils/helpers'
 
 export default {
 

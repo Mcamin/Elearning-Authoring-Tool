@@ -10,7 +10,7 @@ const quizRoutes = require('./api/routes/quizzes');
 //Connect to DB
 const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'+process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(mongoURI,{ useNewUrlParser: true , useUnifiedTopology: true });
-
+mongoose.promise = global.promise;
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -31,8 +31,8 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/lessons", lessonRoutes);
-app.use("/quizzes", quizRoutes);
+app.use("/api/lessons", lessonRoutes);
+app.use("/api/quizzes", quizRoutes);
 
 // Handling Errors
 app.use((req, res, next) => {

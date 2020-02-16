@@ -32,12 +32,17 @@ router.get('/', (req, res, next) =>{
     limit: parseInt(req.body.limit, 10) || 10
   }
   Lesson.find()
+  .select('title description _id')
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
   .then(docs => {
     console.log(docs);
-    res.status(200).json(docs);
+    const response = {
+      count:docs.length,
+      lessons: docs
+    }
+    res.status(200).json(response);
   })
   .catch(err => {
     console.log(err);

@@ -20,6 +20,7 @@
   import {mapState} from "vuex";
   import {bus} from "../main";
 
+
   export default {
         name: "Library",
         components: {Accordion,FilterElement},
