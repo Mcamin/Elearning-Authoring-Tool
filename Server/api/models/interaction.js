@@ -2,13 +2,10 @@ const mongoose = require('mongoose');
 
 const interactionSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  title: String,
+  Description: String,
   questions: Array,
-  questionIndex: Object,
-
-  question: String,
-  answers: Object,
-  correctAnswers: String,
-  Feedback:Object
+  questionsIndex: Object,
 });
 
 module.exports = mongoose.model('Interaction',interactionSchema);

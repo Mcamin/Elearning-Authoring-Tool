@@ -6,29 +6,19 @@ const courseSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: false
-  },
+  description: String,
   languages: {
     type: Array,
     of: Number,
     required: true
   },
-  duration: {
-    type: Number,
-    required: true
-  },
+  duration: Number,
   tags: {
     type: Array,
     of: Number,
     required: false
   },
-  thumbnail:
-    {
-      type: String,
-      required: false,
-    },
+  thumbnail: String,
   contentIndex: Object
 });
 

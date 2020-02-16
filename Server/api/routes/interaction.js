@@ -1,47 +1,17 @@
-const express = require('express');
-
+const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
-//Get all quizzes
-router.get('/', (req, res, next) =>{
-  res.status(200).json({
-    message:'Handling GET requests to /quizzes'
-  });
-});
+const InteractionController = require('../controllers/interaction');
 
-//Get a single quiz
-router.get('/:quizId', (req, res, next) =>{
-  const id = req.params.quizId;
-  res.status(200).json({
-    message: 'this is the quiz id',
-    id:id
-  });
-});
+router.get("/", InteractionController.interactions_get_all());
 
-//Update a single quiz
-router.patch('/:quizId', (req, res, next) =>{
-  const id = req.params.quizId;
-  res.status(200).json({
-    message: 'updated the quiz',
-    id:id
-  });
-});
+router.post("/", InteractionController.interactions_create_interaction());
 
-router.delete('/:quizId', (req, res, next) =>{
-  const id = req.params.quizId;
-  res.status(200).json({
-    message: 'deleted the quiz',
-    id:id
-  });
-});
+router.get("/:interactionId", InteractionController.interactions_get_interaction());
 
-//Create a quiz
-router.post('/', (req, res, next) =>{
-  res.status(201).json({
-    message:'Handling POST requests to /quizzes'
-  });
-});
+router.patch("/:interactionId", InteractionController.interactions_update_interaction());
 
-
+router.delete("/:interactionId", InteractionController.interactions_delete_interaction());
 
 module.exports = router;
