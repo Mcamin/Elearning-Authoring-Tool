@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const moduleSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  type: {type: String, default: 'Module'},
   title: {
     type: String,
     required: true

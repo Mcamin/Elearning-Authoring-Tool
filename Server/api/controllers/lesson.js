@@ -6,6 +6,7 @@ const Lesson = require("../models/lesson");
 
 // Get lessons 10 by 10
 exports.lessons_get_all = (req, res, next) => {
+
   const pageOptions = {
     page: parseInt(req.body.page, 10) || 0,
     limit: parseInt(req.body.limit, 10) || 10
