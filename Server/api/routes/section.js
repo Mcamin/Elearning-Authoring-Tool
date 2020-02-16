@@ -15,3 +15,15 @@ router.patch("/:sectionId", SectionController.sections_update_section);
 router.delete("/:sectionId", SectionController.sections_delete_section);
 
 module.exports = router;
+/*
+// Create  :
+{
+  "title": "section 1",
+  "description": "section 1 description"
+
+}
+//Update :
+[{
+  "propName": "content",
+  "value": "section 1 content"
+}]*/

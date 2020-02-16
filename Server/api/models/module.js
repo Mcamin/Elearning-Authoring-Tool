@@ -8,10 +8,8 @@ const moduleSchema = mongoose.Schema({
     required: true
   },
   description: String,
-  contentIndex: {
-    type: Map,
-    of: mongoose.Schema.Types.ObjectId,
-  }
+  contentIndex: [{type: mongoose.Schema.Types.ObjectId, ref: 'Content', required: false}],
+  usage: [{type: mongoose.Schema.Types.ObjectId, ref: 'Parent', required: false}]
 });
 
 module.exports = mongoose.model('Module', moduleSchema);

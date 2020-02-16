@@ -17,7 +17,7 @@ router.delete("/:lessonId", LessonController.lessons_delete_lesson);
 module.exports = router;
 
 /*
-// Create :
+// Create  :
 {
 
   "title": "lesson 5",

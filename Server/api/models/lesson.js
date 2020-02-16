@@ -8,7 +8,9 @@ const lessonSchema = mongoose.Schema({
     required: true
   },
   description: String,
-  content: String
+  content: String,
+  usage: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }],
+
 });
 
 module.exports = mongoose.model('Lesson', lessonSchema);

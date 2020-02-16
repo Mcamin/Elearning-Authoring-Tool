@@ -23,6 +23,7 @@ exports.courses_get_all = (req, res, next) => {
         return {
           _id: doc._id,
           title: doc.title,
+          languages: doc.language,
           description: doc.description,
           duration: doc.duration,
           tags: doc.tags,
@@ -65,6 +66,7 @@ exports.courses_create_course = (req, res, next) => {
   const course = new Course({
     _id: mongoose.Types.ObjectId(),
     title: req.body.title,
+    languages:req.body.languages,
     description: req.body.description,
     duration: req.body.duration,
     tags: req.body.tags,
@@ -80,6 +82,7 @@ exports.courses_create_course = (req, res, next) => {
         _id: result._id,
         title: result.title,
         description: result.description,
+        languages: result.languages,
         duration: result.duration,
         tags: result.tags,
         thumbnail: result.thumbnail,

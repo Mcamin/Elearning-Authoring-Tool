@@ -8,10 +8,8 @@ const sectionSchema = mongoose.Schema({
     required: true
   },
   description: String,
-  modulesIndex: {
-    type: Map,
-    of: mongoose.Schema.Types.ObjectId,
-  }
+  modulesIndex: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }],
+  usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: false }]
 });
 
 module.exports = mongoose.model('Section', sectionSchema);

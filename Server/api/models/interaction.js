@@ -20,6 +20,7 @@ const interactionSchema = mongoose.Schema({
     }],
   }],
   questionsIndex: Object,
+  usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }]
 });
 
 module.exports = mongoose.model('Interaction',interactionSchema);
