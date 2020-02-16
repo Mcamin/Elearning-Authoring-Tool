@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
-const multer = require('multer');
-//https://stackoverflow.com/questions/35468855/multiple-schema-references-in-single-schema-array-mongoose
-const storage = multer.diskStorage({
-});
-const upload = multer({dest: 'uploads/'})
+
 const courseSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
   title: {
@@ -33,11 +29,7 @@ const courseSchema = mongoose.Schema({
       type: String,
       required: false,
     },
-  socialMediaHandles: {
-    type: Map,
-    of: Number,
-    required: true,
-  }
+  contentIndex: Object
 });
 
 module.exports = mongoose.model('Course', courseSchema);

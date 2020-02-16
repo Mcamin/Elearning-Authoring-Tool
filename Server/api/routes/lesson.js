@@ -30,7 +30,7 @@ router.get('/', (req, res, next) =>{
   const pageOptions = {
     page: parseInt(req.body.page, 10) || 0,
     limit: parseInt(req.body.limit, 10) || 10
-  }
+  };
   Lesson.find()
   .select('title description _id')
   .skip(pageOptions.page * pageOptions.limit)
@@ -41,7 +41,7 @@ router.get('/', (req, res, next) =>{
     const response = {
       count:docs.length,
       lessons: docs
-    }
+    };
     res.status(200).json(response);
   })
   .catch(err => {
@@ -59,7 +59,7 @@ router.patch('/:lessonId', (req, res, next) =>{
   Lesson.update({_id: id},{$set:updateOps})
   .exec()
   .then(result =>{
-    console.log(result)
+    console.log(result);
     res.status(200).json({result});
   })
   .catch(error => {

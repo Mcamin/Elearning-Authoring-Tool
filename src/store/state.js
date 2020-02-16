@@ -1,9 +1,9 @@
-import courses from '../data/courses';
-import sections from "../data/sections";
-import modules from "../data/modules";
-import lessons from "../data/lessons";
-import glossaries from "../data/glossaries"
-import interactions from "../data/quizzes";
+import courses from '@/data/courses';
+import sections from "@/data/sections";
+import modules from "@/data/modules";
+import lessons from "@/data/lessons";
+import glossaries from "@/data/glossaries"
+import interactions from "@/data/interaction";
 
 const CourseState = {
   currentCourse: null,
@@ -28,7 +28,7 @@ const CourseState = {
 
 
 
-export default {
+export  {
   CourseState,
   SectionState,
   ModuleState,
@@ -36,7 +36,7 @@ export default {
   InteractionState,
 
   /*TO Delete */
-  course:{
+ /* course:{
   },
   courses,
   sections,
@@ -46,5 +46,5 @@ export default {
   glossaries,
   //The Object to use to manipulate a lesson
   selectedLesson:{title:"Selected Lesson", content:"",metadata:""},
-  selectedCourse:{title:"Selected Course", content: [],metadata:""}
+  selectedCourse:{title:"Selected Course", content: [],metadata:""}*/
 }

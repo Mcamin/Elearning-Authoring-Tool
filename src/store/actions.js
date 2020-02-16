@@ -307,14 +307,16 @@ const InteractionActions = {
 
 
 
-export default {
+export  {
   CourseActions,
   SectionActions,
   ModuleActions,
   LessonActions,
   InteractionActions,
 
+}
 
+export default {
   /* TO DELETE */
   // Save course while still editing
   saveTemporaryCourse: ({commit}, course) => {
@@ -343,6 +345,5 @@ export default {
   addSectionTitle: ({commit}, secTitle) => {
     commit('appendSectionTitle', secTitle)
   }
-
 }
 

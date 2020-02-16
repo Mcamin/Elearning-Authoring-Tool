@@ -6,7 +6,8 @@ const lessonSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  description: String
+  description: String,
+  content: String
 });
 
 module.exports = mongoose.model('Lesson', lessonSchema);

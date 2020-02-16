@@ -4,15 +4,29 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-const lessonRoutes = require('./api/routes/lessons');
-const quizRoutes = require('./api/routes/interactions');
+// routes import
+const
+  lessonRoutes = require('./api/routes/lesson'),
+  interactionRoutes = require('./api/routes/interaction'),
+  moduleRoutes = require('./api/routes/module'),
+  sectionRoutes = require('./api/routes/section'),
+  courseRoutes = require('./api/routes/course');
 
 //Connect to DB
-const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'+process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
-mongoose.connect(mongoURI,{ useNewUrlParser: true , useUnifiedTopology: true });
+const mongoURI = 'mongodb+srv://' + process.env.MONGO_USR + ':' + process.env.MONGO_PW +
+      '@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.promise = global.promise;
+
+//Dev
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
+
+//Folder to store assets
+app.use('/uploads', express.static('uploads'));
+
+
+//Parsers
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Handling Cors
@@ -30,9 +44,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes which should handle requests
+// Routes
 app.use("/api/lessons", lessonRoutes);
-app.use("/api/interactions", quizRoutes);
+app.use("/api/interactions", interactionRoutes);
+app.use("/api/modules", moduleRoutes);
+app.use("/api/sections", sectionRoutes);
+app.use("/api/courses", courseRoutes);
 
 // Handling Errors
 app.use((req, res, next) => {
