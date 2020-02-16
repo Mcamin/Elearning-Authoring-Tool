@@ -1,5 +1,5 @@
 import Repository from "./repository";
-const resource = "/module"
+const resource = "/modules"
 
 
 export default {

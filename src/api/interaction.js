@@ -1,5 +1,5 @@
 import Repository from "./repository";
-const resource = "/interaction"
+const resource = "/interactions"
 
 
 export default {

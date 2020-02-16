@@ -1,5 +1,5 @@
 import Repository from "./repository";
-const resource = "/section"
+const resource = "/sections"
 
 
 export default {

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const lessonRoutes = require('./api/routes/lessons');
-const quizRoutes = require('./api/routes/quizzes');
+const quizRoutes = require('./api/routes/interactions');
 
 //Connect to DB
 const mongoURI = 'mongodb+srv://'+process.env.MONGO_USR+':'+process.env.MONGO_PW+'@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/api/lessons", lessonRoutes);
-app.use("/api/quizzes", quizRoutes);
+app.use("/api/interactions", quizRoutes);
 
 // Handling Errors
 app.use((req, res, next) => {

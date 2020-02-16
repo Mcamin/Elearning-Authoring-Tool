@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const multer = require('multer');
+//https://stackoverflow.com/questions/35468855/multiple-schema-references-in-single-schema-array-mongoose
 const storage = multer.diskStorage({
-  destination: function
 });
 const upload = multer({dest: 'uploads/'})
 const courseSchema = mongoose.Schema({

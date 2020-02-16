@@ -4,7 +4,38 @@ import modules from "../data/modules";
 import lessons from "../data/lessons";
 import glossaries from "../data/glossaries"
 import interactions from "../data/quizzes";
+
+const CourseState = {
+  currentCourse: null,
+  courses: []
+},
+  SectionState = {
+  currentSection: null,
+  sections: []
+},
+  ModuleState = {
+    currentModule: null,
+    modules:[]
+  },
+  LessonState = {
+    currentModule: null,
+    modules:[]
+  },
+  InteractionState = {
+    currentInteraction: null,
+    Interactions:[]
+  };
+
+
+
 export default {
+  CourseState,
+  SectionState,
+  ModuleState,
+  LessonState,
+  InteractionState,
+
+  /*TO Delete */
   course:{
   },
   courses,
