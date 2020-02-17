@@ -18,12 +18,12 @@ const CourseState = {
     modules:[]
   },
   LessonState = {
-    currentModule: null,
-    modules:[]
+    currentLesson: null,
+    lessons:[]
   },
   InteractionState = {
     currentInteraction: null,
-    Interactions:[]
+    interactions:[]
   };
 
 
@@ -34,17 +34,4 @@ export  {
   ModuleState,
   LessonState,
   InteractionState,
-
-  /*TO Delete */
- /* course:{
-  },
-  courses,
-  sections,
-  interactions,
-  modules,
-  lessons,
-  glossaries,
-  //The Object to use to manipulate a lesson
-  selectedLesson:{title:"Selected Lesson", content:"",metadata:""},
-  selectedCourse:{title:"Selected Course", content: [],metadata:""}*/
 }

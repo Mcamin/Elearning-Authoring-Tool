@@ -126,10 +126,10 @@ const CourseGetters = {
     getInteractionByID: state => id  =>{
       return state.interactions.filter(interaction => interaction.id=== id)[0];
     },
-  }
+  };
 
 
-export default {
+export  {
   CourseGetters,
   SectionGetters,
   ModuleGetters,

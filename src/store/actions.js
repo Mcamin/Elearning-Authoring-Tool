@@ -316,34 +316,3 @@ export  {
 
 }
 
-export default {
-  /* TO DELETE */
-  // Save course while still editing
-  saveTemporaryCourse: ({commit}, course) => {
-    commit('saveCopy', course)
-  },
-
-  updateSectionTitle: ({commit}, secTitle) => {
-    commit('createSectionTitle', secTitle)
-  },
-
-  resetCartState({commit}) {
-    commit('resetState')
-  },
-
-  addCourse: ({commit}, payload) => {
-    commit('appendCourse', payload)
-  },
-
-  addSection: ({commit}, payload) => {
-    commit('appendSection', payload)
-  },
-  saveLesson: ({commit}, payload) => {
-    commit('appendLesson', payload)
-  },
-
-  addSectionTitle: ({commit}, secTitle) => {
-    commit('appendSectionTitle', secTitle)
-  }
-}
-

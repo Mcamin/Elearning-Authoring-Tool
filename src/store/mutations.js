@@ -1,31 +1,119 @@
-//Update or mutate a state
-import getters from "./getters";
 
-export default {
+const CourseMutations = {
 
-  setSections(state,sections){
-    state.sections = sections;
+  getCourse: (state, course) => {
+    state.currentCourse= course;
   },
+  getCourses: (state, courses) => {
+    state.courses= courses;
+  },
+  createCourse: (state, newCourse) => {
+    state.currentCourse= newCourse;
+    state.courses.push(newCourse);
+  },
+  updateCourse: (state, payload) => {
+    //Loop through Payload and update Course Attributes
+  },
+  deleteCourse: (state, CourseId) => {
+    //Check if the currentCourse have the ID and empty it
+    //Check if the array of courses contain that course and delete it
+  }
 
-  createSectionTitle: (state,payload) => {
-    let temp = state.course.sections.find(
-      section => section.title === payload.oldTitle);
-    state.course.sections[state.course.sections.indexOf(temp)].title =payload.newTitle;
+};
 
+const SectionMutations = {
+  getSection: (state, section) => {
+    state.currentSection= section;
   },
-  saveCopy: (state, course) => {
-    state.course= course;
-    // make an api call (post) to save the course details
-    // in the database or save them into a local file
-},
-  appendCourse: (state, course) => {
-    state.courses.push(course);
+  getSections: (state, courses) => {
+    state.sections= courses;
+  },
+  createSection: (state, newSection) => {
+    state.currentSection= newSection;
+    state.sections.push(newSection);
+  },
+  updateSection: (state, payload) => {
+    //Loop through Payload and update Course Attributes
+  },
+  deleteSection: (state, sectionId) => {
+    //Check if the currentCourse have the ID and empty it
+    //Check if the array of courses contain that course and delete it
+  }
+};
 
+const ModuleMutations = {
+  getModule: (state, module) => {
+    state.currentModule= module;
   },
-  appendSection: (state, section) => {
-    state.sections.push(section);
+  getModules: (state, modules) => {
+    state.modules= modules;
   },
-  appendLesson: (state, lesson) => {
-    state.course.lesson = lesson
+  createModule: (state, newModule) => {
+    state.currentModule= newModule;
+    state.modules.push(newModule);
   },
+  updateModule: (state, payload) => {
+    //Loop through Payload and update Course Attributes
+  },
+  deleteModule: (state, moduleId) => {
+    //Check if the currentCourse have the ID and empty it
+    //Check if the array of courses contain that course and delete it
+  }
+};
+
+const LessonMutations = {
+  getLesson: (state, lesson) => {
+    state.currentLesson= lesson;
+  },
+  getLessons: (state, lessons) => {
+    state.lessons= lessons;
+  },
+  createLesson: (state, newLesson) => {
+    state.currentLesson= newLesson;
+    state.lessons.push(newLesson);
+  },
+  updateLesson: (state, payload) => {
+    //Loop through Payload and update Course Attributes
+  },
+  deleteLesson: (state, lessonId) => {
+    //Check if the currentCourse have the ID and empty it
+    //Check if the array of courses contain that course and delete it
+  }
+
+};
+
+const InteractionMutations = {
+  getInteraction: (state, interaction) => {
+    state.currentInteraction= interaction;
+  },
+  getLessons: (state, lessons) => {
+    state.lessons= lessons;
+  },
+  createLesson: (state, newInteraction) => {
+    state.currentInteraction= newInteraction;
+    state.interactions.push(newInteraction);
+  },
+  updateInteraction: (state, payload) => {
+    //Loop through Payload and update Course Attributes
+  },
+  deleteInteraction: (state, interactionId) => {
+    //Check if the currentCourse have the ID and empty it
+    //Check if the array of courses contain that course and delete it
+  }
+
+};
+
+/*createSectionTitle: (state,payload) => {
+  let temp = state.course.sections.find(
+    section => section.title === payload.oldTitle);
+  state.course.sections[state.course.sections.indexOf(temp)].title =payload.newTitle;*/
+
+
+
+export  {
+  InteractionMutations,
+  LessonMutations,
+  ModuleMutations,
+  SectionMutations,
+  CourseMutations
 }
