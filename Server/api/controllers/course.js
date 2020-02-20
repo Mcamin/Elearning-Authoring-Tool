@@ -23,7 +23,7 @@ exports.courses_get_all = (req, res, next) => {
         return {
           _id: doc._id,
           title: doc.title,
-          languages: doc.language,
+          languages: doc.languages,
           description: doc.description,
           duration: doc.duration,
           tags: doc.tags,

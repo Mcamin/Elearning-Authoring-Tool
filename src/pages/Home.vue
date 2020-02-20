@@ -17,7 +17,7 @@
 </template>
 <script>
 
-import CourseCard  from "../components/Cards/CourseCard";
+import CourseCard  from "../components/Cards/CourseCard__";
 
   export default {
     components: {

@@ -9,20 +9,29 @@
           url=""
         />
       </b-col>
-      <b-col md="3" v-for="(course, index) in getAllCourses" :key="index">
+      <b-col md="3" v-for="(course, index) in courses" :key="index">
         <CourseCard
-          :id="course.id"
+          :id="course._id"
           :title="course.title"
           :course-category="course.title"
           :course-languages="course.languages"
-          :url="{ name: 'edit-course', params: { id: course.id ,title: course.title} }"
-          :img="course.thumbnail.url"
+          :url="{ name: 'edit-course', params: { id: course._id ,title: course.title} }"
+          :img="course.thumbnail"
         />
       </b-col>
     </b-row>
     <b-row v-else>
       <b-col >
-        {{setView}}
+         <template v-for="(course, index) in courses" >
+           <CourseList
+             :id="course._id"
+             :title="course.title"
+             :course-category="course.title"
+             :course-languages="course.languages"
+             :url="{ name: 'edit-course', params: { id: course._id ,title: course.title} }"
+             :img="course.thumbnail"
+           />
+         </template>
       </b-col>
     </b-row>
     <NewCourseModal/>
@@ -35,28 +44,25 @@
     import FilterElement from "@/layout/WrapperElements/FilterElement"
     import {Notification} from 'element-ui'
     import {bus} from '@/main'
-    import {mapGetters} from "vuex";
+    import {mapActions,mapState} from "vuex";
+    import CourseList from "../components/Cards/CourseList";
 
     export default {
         name:"courses",
         components: {
+          CourseList,
             CourseCard,
             NewCourseModal,
             FilterElement
         },
         data() {
             return {
-                viewMode:'card-view'
+                viewMode:'card-view',
             }
         },
         computed: {
-            ...mapGetters([
-                'getAllCourses',
-                'getCoursesByCategory',
-                'ascendingCoursesSort',
-                'descendingCoursesSort'
-            ]),
-            setView () {
+          ...mapState('course', ['courses']),
+          setView () {
                 switch (this.viewMode) {
                     //Load Lessons
                     case 'card-view':
@@ -69,19 +75,20 @@
                 }
             }
         },
-
+      methods:{
+        ...mapActions('course',  { loadCourses: 'loadCourses' })
+      },
         created() {
             bus.$on('list-view', () => {
 
                 this.viewMode='list-view';
-
             });
             bus.$on('card-view', () => {
                 this.viewMode='card-view';
-                console.log( this.viewMode);
             });
+            this.loadCourses();
 
-            this.$notify({
+           /* this.$notify({
                 title: 'Dashboard',
                 message: 'This is the place to administrate courses. </br></br> Start creating a new course or select existing ones.',
                 position: 'top-left',
@@ -92,7 +99,7 @@
           },
         beforeRouteLeave (to, from, next) {
             this.$notify.closeAll();
-            next();
+            next();*/
         }
     };
 </script>

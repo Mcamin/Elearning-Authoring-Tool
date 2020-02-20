@@ -7,11 +7,11 @@ const courseSchema = mongoose.Schema({
     required: true
   },
   description: String,
-  languages: { type: String,  required: true},
+  languages: { type: Array,
+    required: true},
   duration: Number,
   tags: {
     type: Array,
-    of: Number,
     required: false
   },
   thumbnail: String,

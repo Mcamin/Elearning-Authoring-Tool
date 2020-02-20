@@ -21,8 +21,9 @@ const CourseActions = {
     async ({commit}) => {
       CourseRepository
       .getAll()
-      .then(data => {
-        commit('getCourses', data)
+      .then(response => {
+        console.log(JSON.stringify(response));
+        commit('getCourses', response.data.courses)
       })
       .catch(error => {
         console.log(error)

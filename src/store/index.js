@@ -10,12 +10,14 @@ import {CourseGetters,InteractionGetters,SectionGetters,ModuleGetters,LessonGett
 Vue.use(Vuex);
 const
   moduleCourse = {
+    namespaced:true,
     state: CourseState,
     actions: CourseActions,
     mutations: CourseMutations,
     getters: CourseGetters
   },
   moduleSection = {
+    namespaced:true,
     state: SectionState,
     actions: SectionActions,
     mutations: SectionMutations,
@@ -23,12 +25,14 @@ const
 
   },
   moduleModule = {
+    namespaced:true,
     state: ModuleState,
     actions: ModuleActions,
     mutations: ModuleMutations,
     getters: ModuleGetters
   },
   moduleLesson = {
+    namespaced:true,
     state: LessonState,
     actions: LessonActions,
     mutations: LessonMutations,
@@ -36,6 +40,7 @@ const
 
   },
   moduleInteraction = {
+    namespaced:true,
     state: InteractionState,
     actions: InteractionActions,
     mutations: InteractionMutations,
