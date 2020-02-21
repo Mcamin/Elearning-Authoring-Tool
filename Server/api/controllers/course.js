@@ -66,12 +66,14 @@ exports.courses_create_course = (req, res, next) => {
   const course = new Course({
     _id: mongoose.Types.ObjectId(),
     title: req.body.title,
-    languages:req.body.languages,
     description: req.body.description,
-    duration: req.body.duration,
+    category: req.body.category,
+    languages:req.body.languages,
     tags: req.body.tags,
-    thumbnail: req.body.thumbnail,
+    thumbnail: req.file.path,
     contentIndex: req.body.contentIndex,
+    duration: req.body.duration
+
   });
   course
   .save()
@@ -120,7 +122,7 @@ exports.courses_update_course = (req, res, next) => {
   });
 };
 
-//Delete a lesson
+//Delete a Course
 exports.courses_delete_course = (req, res, next) => {
   Course.remove({_id: req.params.courseId})
   .exec()
