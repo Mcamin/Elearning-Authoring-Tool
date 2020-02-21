@@ -99,7 +99,6 @@
 
     }, mounted() {
 
-      console.log(typeof this.loadCourses());
       if(this.loadCourses()){
         this.loading = false;
         this.error = false;

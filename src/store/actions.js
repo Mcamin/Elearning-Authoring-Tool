@@ -35,7 +35,7 @@ const CourseActions = {
   createCourse:
     async ({commit},newCourse) => {
       CourseRepository
-      .createLesson(newCourse)
+      .createCourse(newCourse)
       .then((response) => {
         commit('createCourse', newCourse)
       })

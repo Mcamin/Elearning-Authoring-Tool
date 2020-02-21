@@ -31,7 +31,7 @@ const CourseController = require('../controllers/course');
 
 router.get("/", CourseController.courses_get_all);
 
-router.post("/",upload.single('CourseImage'),CourseController.courses_create_course);
+router.post("/",upload.single('thumbnail'),CourseController.courses_create_course);
 
 router.get("/:courseId", CourseController.courses_get_course);
 

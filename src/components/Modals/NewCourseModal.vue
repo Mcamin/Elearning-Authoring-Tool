@@ -68,9 +68,10 @@
           ref="uploadImage"
           drag
           class="upload-wrapper text-center"
-          :action="uploadImagePath"
+          action=" "
           :file-list="fileList"
           :limit=1
+          :on-change="addImageToList"
           accept="image/*"
           :auto-upload="false"
           :multiple=false
@@ -106,15 +107,15 @@
     },
     data() {
       return {
-        uploadImagePath:process.env.VUE_APP_BASE_DOMAIN+"/image",
-        tag: '',
         formData: {
           title: '',
-          selectedCategory: null,
           description: '',
           tags: [],
+          selectedCategory: null,
           selectedLanguage: null,
+          image: null
         },
+        tag: '',
         fileList: [],
         languagesSelector: [
           {value: null, text: 'Please select a language'},
@@ -125,37 +126,34 @@
       }
     },
     methods: {
-      ...mapActions([
-        'createCourse'
-      ]),
+      ...mapActions('course', {createCourse: 'createCourse'}),
+      addImageToList (file, fileList) {
+        // add Raw to fileList
+        this.fileList = fileList;
+        this.formData.image=fileList[0];
+      },
       handleSubmit() {
 
-
-
-        this.$refs.uploadImage.submit();
-       /* const {title, description, tags, languageSelected, courseImage} = this.formData,
+        const {title,selectedCategory, description, tags, selectedLanguage, image} = this.formData,
           id = uuid.v1();
-        let tagstext = tags.map(tmpTag => {
+        let tagsText = tags.map(tmpTag => {
             return tmpTag.text
           }),
-          sectionID = "s-" + uuid.v1();
+          languages = [selectedLanguage];
+
+        //Create Course
         const payload = {
           id,
           title,
+          selectedCategory,
+          languages,
           description,
-          tagstext,
-          languageSelected,
-          thumbnail: {filename: "", path: courseImage},
-          contentIndex: {[sectionID]: 0},
-          content: [{
-            id: sectionID,
-            title: "New Section"
-          }]
+          tagsText,
+          image,
+          contentIndex: {},
         };
-        this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
-        this.addSection({id: sectionID, title: "New Section"});
-        this.addCourse(payload);
-        this.saveTemporaryCourse(payload);*/
+        //this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
+        this.createCourse(payload);
       },
       handleAdvancedSettings() {
         //Save form temporary in courseState and move to next page
@@ -168,6 +166,8 @@
         this.formData.selectedCategory = null;
         this.formData.selectedLanguage = null;
         this.formData.courseImage = [];
+        this.fileList = [];
+        this.tag = '';
       },
     },
     computed: {

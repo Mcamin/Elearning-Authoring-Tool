@@ -51,7 +51,6 @@ app.use("/api/interactions", interactionRoutes);
 app.use("/api/modules", moduleRoutes);
 app.use("/api/sections", sectionRoutes);
 app.use("/api/courses", courseRoutes);
-
 // Handling Errors
 app.use((req, res, next) => {
   const error = new Error("Not found");
