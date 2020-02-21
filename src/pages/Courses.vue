@@ -10,7 +10,7 @@
     <b-row v-if="setView==='card-view'">
       <b-col md="3">
         <CourseCard
-          v-b-modal="'modal-new-course'"
+          v-b-modal="'new-course-modal'"
           title="Create a new Course"
           url=""
         />

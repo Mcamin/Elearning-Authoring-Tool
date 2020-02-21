@@ -1,6 +1,7 @@
 <template>
   <b-modal
-    id="modal-new-course"
+    id="new-course-modal"
+    ref="new-course-modal"
     @show="handleReset"
     centered title="Create new course:"
     hide-footer size="lg">
@@ -53,7 +54,7 @@
         <!-- End Tags of the Course -->
 
         <!-- Language selection -->
-        <b-form-group id="input-group-languages" label="Language:" label-for="input-4">
+        <b-form-group id="input-group-languages" label="Language:" label-for="input-language">
           <b-form-select
             id="input-language"
             v-model="formData.selectedLanguage"
@@ -62,7 +63,16 @@
           />
         </b-form-group>
         <!-- End Language selection -->
-
+        <!-- Language selection -->
+        <b-form-group id="input-group-duration" label="Duration in minutes:" label-for="input-duration">
+          <b-form-input
+            id="input-duration"
+            type="number"
+            v-model="formData.duration"
+            placeholder="Course Duration"
+          />
+        </b-form-group>
+        <!-- End Language selection -->
         <!-- Upload Thumbnail -->
         <el-upload
           ref="uploadImage"
@@ -84,8 +94,7 @@
 
         <!-- Buttons -->
         <b-container fluid class="px-0 mt-3">
-          <b-row class="h-100 d-flex align-content-center mx-auto">
-            <b-button class="mr-auto" @click="handleAdvancedSettings()">Advanced Settings</b-button>
+          <b-row class="h-100 d-flex align-content-center justify-content-end  mx-auto">
             <b-button class="mx-2" @click="close()">Cancel</b-button>
             <b-button @click="handleSubmit()">Create Course</b-button>
           </b-row>
@@ -110,6 +119,7 @@
         formData: {
           title: '',
           description: '',
+          duration:null,
           tags: [],
           selectedCategory: null,
           selectedLanguage: null,
@@ -134,7 +144,7 @@
       },
       handleSubmit() {
 
-        const {title,selectedCategory, description, tags, selectedLanguage, image} = this.formData,
+        const {title,duration,selectedCategory, description, tags, selectedLanguage, image} = this.formData,
           id = uuid.v1();
         let tagsText = tags.map(tmpTag => {
             return tmpTag.text
@@ -145,22 +155,23 @@
         const payload = {
           id,
           title,
+          duration,
           selectedCategory,
           languages,
           description,
           tagsText,
           image,
-          contentIndex: {hello:"hello"},
+          contentIndex: {},
         };
-        //this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
         this.createCourse(payload);
+        this.$refs['new-course-modal'].hide();
+        this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
+        this.handleReset();
       },
-      handleAdvancedSettings() {
-        //Save form temporary in courseState and move to next page
-        this.$router.push({name: 'courseAdvancedSettings'});
-      },
+
       handleReset() {
         this.formData.title = '';
+        this.formData.duration = null;
         this.formData.description = '';
         this.formData.tags = [];
         this.formData.selectedCategory = null;
