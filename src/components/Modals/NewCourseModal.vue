@@ -4,10 +4,10 @@
         centered title="Create new course:"
         hide-footer size="lg">
             <div>
-              <b-form @submit.prevent="handleSubmit" @reset="handleReset" v-if="show">
+              <b-form @submit.prevent="handleSubmit"  v-if="show">
 
                 <!-- Title of Course-->
-                <b-form-group id="input-group-1" label="Title:" label-for="input-title">
+                <b-form-group id="input-group-title" label="Title:" label-for="input-title">
                   <b-form-input
                     id="input-title"
                     v-model="formData.title"
@@ -15,9 +15,10 @@
                     placeholder="Web Development"
                   />
                 </b-form-group>
+                <!-- End Title of Course-->
 
                 <!-- Description of Course-->
-                <b-form-group id="input-group-2" label="Description" label-for="input-description">
+                <b-form-group id="input-group-desc" label="Description" label-for="input-description">
                   <b-form-textarea
                     id="input-description"
                     v-model="formData.description"
@@ -27,9 +28,21 @@
                     placeholder="This course is..."
                   />
                 </b-form-group>
+                <!-- End Description of Course-->
 
-                <!-- Tags of Course -->
-                <b-form-group id="input-group-5" label="Tags" label-for="input-5">
+                <!-- Category selection -->
+                <b-form-group id="input-group-category" label="Category:" label-for="input-category">
+                  <b-form-select
+                    id="input-category"
+                    v-model="formData.languageSelected"
+                    :options="language"
+                    required
+                  />
+                </b-form-group>
+                <!-- End Category selection -->
+
+                <!-- Tags of the Course -->
+                <b-form-group id="input-group-tags" label="Tags" label-for="input-tags">
                   <vue-tags-input
                     v-model="tag"
                     :tags="formData.tags"
@@ -37,9 +50,10 @@
                     @tags-changed="newTags => formData.tags = newTags"
                   />
                 </b-form-group>
+                <!-- End Tags of the Course -->
 
                 <!-- Language selection -->
-                <b-form-group id="input-group-4" label="Language:" label-for="input-4">
+                <b-form-group id="input-group-languages" label="Language:" label-for="input-4">
                   <b-form-select
                     id="input-language"
                     v-model="formData.languageSelected"
@@ -47,34 +61,40 @@
                     required
                   />
                 </b-form-group>
+                <!-- End Language selection -->
 
-                <!-- Upload -->
-                <el-upload
-                  class="upload-demo"
-                  drag
-                  action="https://jsonplaceholder.typicode.com/posts/"
-                  :file-list="formData.courseImage"
-                  :limit=1
+                <!-- Upload Thumbnail -->
+                  <el-upload
+                    drag
+                    class="upload-wrapper text-center"
+                    action=""
+                    :file-list="formData.courseImage"
+                    :limit=1
                   >
-                  <i class="el-icon-upload"></i>
-                  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-                  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
-                </el-upload>
+                    <i class="el-icon-upload"></i>
+                    <div class="el-upload__text">Drop the image here or <em>click to upload</em></div>
+                    <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 1MB</div>
+                  </el-upload>
+                <!-- End Upload Thumbnail -->
 
-                <div class="create_buttons">
-                  <!-- Reset button -->
-                  <b-button type="reset">Reset</b-button>
-                  <!-- Submit button with route to /titleOfCourse -->
-                  <router-link :to="{ name: 'edit-course', params: {id: formData.id, title: formData.title } }" type="submit"  @click.native="handleSubmit"><b-button>Create</b-button></router-link>
-                </div>
+                 <!-- Buttons -->
+                <b-container fluid class="px-0 mt-3" >
+                   <b-row class="h-100 d-flex align-content-center mx-auto">
+                     <b-button class="mr-auto">Advanced Settings</b-button>
+                     <b-button class="mx-2">Cancel</b-button>
+                     <router-link :to="{ name: 'edit-course', params: {id: formData.id, title: formData.title } }" type="submit"  @click.native="handleSubmit">
+                       <b-button>Create Course</b-button>
+                     </router-link>
+                   </b-row>
+                </b-container>
+                <!-- Buttons -->
               </b-form>
             </div>
       </b-modal>
 </template>
 <script>
 
-  import {mapState, mapActions, ActionContext as store} from 'vuex';
-  import newcourse from "../../data/sections";
+  import {mapState, mapActions} from 'vuex';
   import { Input, Tag } from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
   import { uuid } from 'vue-uuid';
@@ -95,7 +115,8 @@
             inputValue: '',
             isEditing: false,
             languageSelected: null,
-            courseImage:[]
+            courseImage
+      :[]
           },
           language: [
             { value: null, text: 'Please select a language' },
@@ -108,9 +129,7 @@
       },
       methods: {
         ...mapActions([
-          'addCourse',
-          'saveTemporaryCourse',
-            'addSection'
+          'createCourse'
         ]),
         handleSubmit() {
 
@@ -172,11 +191,30 @@
         }
       },
       computed : {
-        ...mapState([
-          'courses'
-        ])
-      }
+
     };
 </script>
-<style>
+<style  lang="sass">
+  .form-control, .custom-select
+    &:focus
+      border-color: #219678
+      box-shadow: 0 0 0 0.2rem rgba(33,150,120, 0.25)
+  .vue-tags-input
+    max-width: 100%
+    .ti-tag
+      background-color: #219678
+    .ti-input
+      border-radius: 0.25rem
+      &:focus
+        border-color: #219678
+        box-shadow: 0 0 0 0.2rem rgba(33,150,120, 0.25)
+  .upload-wrapper
+      .el-upload
+        width: 100%
+        .el-upload-dragger
+          width: 100%
+          &:hover
+            border-color: #219678
+          .el-upload__text em
+            color: #219678
 </style>

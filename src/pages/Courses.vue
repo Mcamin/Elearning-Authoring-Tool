@@ -66,7 +66,7 @@
     data() {
       return {
         viewMode: 'card-view',
-        loading: true,
+        loading: false ,
         error: false
       }
     },
@@ -100,7 +100,7 @@
     }, mounted() {
 
       console.log(typeof this.loadCourses());
-      if(this.loadCourses().isFulfilled()){
+      if(this.loadCourses()){
         this.loading = false;
         this.error = false;
       }else{

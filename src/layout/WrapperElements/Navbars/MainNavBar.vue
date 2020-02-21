@@ -1,6 +1,9 @@
 <template>
   <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
-    <b-navbar-brand to="/">LOGO</b-navbar-brand>
+    <b-navbar-brand to="/">
+
+      <b-img :src="logoPath" fluid alt="Hello"/>
+    </b-navbar-brand>
     <el-divider direction="vertical" ></el-divider>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -29,18 +32,23 @@
 
 <script>
   import {checkRouter} from "@/utils/helpers"
+  import logo from "@/assets/img/logo.png"
     export default {
         name: "MainNavBar",
       data(){
           return {
+            logoPath: logo,
             title:{
               home: "DASHBOARD",
               courses: "COURSES",
-              library: "LIBRARY"
+              library: "LIBRARY",
             }
           }
       },
       computed:{
+          /**
+           * @return {string}
+           */
           IsPage(){
             if(checkRouter(this.$route.name, "library"))
             return this.title.library;
@@ -54,6 +62,9 @@
     }
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
+  .navbar-brand
+    max-height: 3.5rem
+    max-width: 3.5rem
 
 </style>
