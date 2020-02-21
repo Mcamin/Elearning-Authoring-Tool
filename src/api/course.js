@@ -2,6 +2,7 @@ import Repository from "./repository";
 const resource = "/courses";
 
 
+
 export default {
   getAll() {
     return Repository.get(`${resource}`);
@@ -14,7 +15,6 @@ export default {
   createCourse(payload){
     return Repository.post(`${resource}`,payload);
   },
-
   updateCourse(payload){
     return Repository.patch(`${resource}`,payload);
   },

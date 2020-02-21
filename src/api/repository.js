@@ -1,13 +1,13 @@
 import axios from 'axios';
-import adapter from 'axios/lib/adapters/http';
 
 
-const baseDomain = 'http://localhost:3000';
-const   baseUrl =  `${baseDomain}/api`;
+
+const baseDomain = process.env.VUE_APP_BASE_DOMAIN;
+
 
 
 export default axios.create( {
-  baseURL: baseUrl,
+  baseURL: baseDomain,
   /* other custom settings */
 });
 
