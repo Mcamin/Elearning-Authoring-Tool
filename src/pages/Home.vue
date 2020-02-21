@@ -7,7 +7,8 @@
         <b-container fluid class="px-0" >
           <b-row class="mt-5">
             <b-col><b-button class="mr-2"  pill variant="primary" :to="courses.url">{{courses.title}}</b-button>
-         <b-button  class="mx-2"  pill  variant="primary" :to="library.url">{{library.title}}</b-button></b-col>
+         <b-button  class="mx-2"  pill  variant="primary
+" :to="library.url">{{library.title}}</b-button></b-col>
           </b-row>
         </b-container>
       </b-col>
@@ -17,12 +18,11 @@
 </template>
 <script>
 
-import CourseCard  from "../components/Cards/CourseCard__";
+
+
 
   export default {
-    components: {
-        CourseCard
-    },
+
     data() {
       return{
           library: {
@@ -35,7 +35,6 @@ import CourseCard  from "../components/Cards/CourseCard__";
           }
       }
     },
-
   };
 </script>
 <style>
