@@ -19,14 +19,15 @@ const CourseActions = {
     },
   loadCourses:
     async ({commit}) => {
-      CourseRepository
+     await CourseRepository
       .getAll()
       .then(response => {
         console.log(JSON.stringify(response));
-        commit('getCourses', response.data.courses)
+        commit('getCourses', response.data.courses);
       })
       .catch(error => {
         console.log(error)
+
       })
     },
   createCourse:
