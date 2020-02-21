@@ -24,11 +24,21 @@ const CourseState = {
   InteractionState = {
     currentInteraction: null,
     interactions:[]
+  },
+
+  // Global State
+  GlobalState ={
+    languages : [],
+    // Course Categories
+    categories : []
   };
 
 
 
+
+
 export  {
+  GlobalState,
   CourseState,
   SectionState,
   ModuleState,

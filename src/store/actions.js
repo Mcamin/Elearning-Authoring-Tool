@@ -1,4 +1,6 @@
 import RepositoryFactory from "@/api"
+import languages from "@/config/languages"
+import categories from "@/config/categories"
 const CourseRepository = RepositoryFactory.get('course');
 const SectionRepository = RepositoryFactory.get('section');
 const ModuleRepository = RepositoryFactory.get('module');
@@ -65,9 +67,9 @@ const CourseActions = {
     },
 
 
-};
+},
 
-const SectionActions = {
+ SectionActions = {
   loadSection:
     async ({commit}, sectionID) => {
       SectionRepository
@@ -125,9 +127,9 @@ const SectionActions = {
     },
 
 
-};
+},
 
-const ModuleActions = {
+ ModuleActions = {
   loadModule:
     async ({commit}, moduleID) => {
       ModuleRepository
@@ -185,9 +187,9 @@ const ModuleActions = {
     },
 
 
-};
+},
 
-const LessonActions = {
+ LessonActions = {
   loadLesson:
     async ({commit}, lessonID) => {
       LessonRepository
@@ -245,9 +247,9 @@ const LessonActions = {
     },
 
 
-};
+},
 
-const InteractionActions = {
+ InteractionActions = {
   loadInteraction:
     async ({commit}, interactionID) => {
       InteractionRepository
@@ -305,11 +307,25 @@ const InteractionActions = {
     },
 
 
-};
+},
 
-
+ GlobalActions = {
+   loadCategories:
+     ({commit}) => {
+       commit('getCategories', categories);
+     },
+   loadLanguages:
+      ({commit}) => {
+        const keys =  Object.entries(languages),
+          languagesArray = keys.map(el => {
+            return el[1].name;
+          });
+        commit('getLanguages', languagesArray);
+     },
+ };
 
 export  {
+  GlobalActions,
   CourseActions,
   SectionActions,
   ModuleActions,

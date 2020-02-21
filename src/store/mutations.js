@@ -101,7 +101,17 @@ const InteractionMutations = {
     //Check if the array of courses contain that course and delete it
   }
 
+},
+ GlobalMutations = {
+  getLanguages: (state, languages) => {
+    state.languages= languages;
+  },
+
+  getCategories: (state, categories) => {
+    state.categories= categories;
+  },
 };
+
 
 /*createSectionTitle: (state,payload) => {
   let temp = state.course.sections.find(
@@ -111,6 +121,7 @@ const InteractionMutations = {
 
 
 export  {
+  GlobalMutations,
   InteractionMutations,
   LessonMutations,
   ModuleMutations,

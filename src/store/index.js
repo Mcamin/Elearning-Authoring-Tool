@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import {CourseState,InteractionState,SectionState,ModuleState,LessonState} from './state'
-import  {CourseMutations,InteractionMutations,SectionMutations,ModuleMutations,LessonMutations} from './mutations'
-import  {CourseActions,InteractionActions,SectionActions,ModuleActions,LessonActions}  from './actions'
+import {CourseState,InteractionState,SectionState,ModuleState,LessonState,GlobalState} from './state'
+import  {CourseMutations,InteractionMutations,SectionMutations,ModuleMutations,LessonMutations,GlobalMutations} from './mutations'
+import {CourseActions, InteractionActions, SectionActions, ModuleActions, LessonActions, GlobalActions} from './actions'
 import {CourseGetters,InteractionGetters,SectionGetters,ModuleGetters,LessonGetters} from './getters'
 
 
@@ -55,13 +55,15 @@ export default new Vuex.Store({
     lesson: moduleLesson,
     interaction: moduleInteraction
 
-  }
+  },
+  state: GlobalState,
+  mutations: GlobalMutations,
+  actions: GlobalActions
   /*
   store.state.a
   store.state.b
 
-  state,
-  mutations,
+
   actions,
   getters*/
 })
