@@ -19,14 +19,13 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       };
-
     formData.append('uuid',payload.id);
     formData.append('title', payload.title);
     formData.append('description', payload.description);
     formData.append('category', payload.selectedCategory);
     formData.append('languages', payload.languages);
     formData.append('tags', payload.tagsText);
-    formData.append('contentIndex', payload.contentIndex);
+    formData.append('contentIndex', JSON.stringify(payload.contentIndex));
     // The field uploaded by the file must be set to the raw parameter in the file list this.cert_path[0].raw
     formData.append('duration',  payload.duration ? payload.duration : '');
     formData.append('thumbnail', payload.image ?  payload.image.raw : '');

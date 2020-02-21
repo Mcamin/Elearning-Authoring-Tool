@@ -22,8 +22,9 @@ mongoose.promise = global.promise;
 //Dev
 app.use(morgan("dev"));
 
+
 //Folder to store assets
-app.use('/uploads', express.static('uploads'));
+app.use('/api/courses/images', express.static('uploads/courses/images'));
 
 
 //Parsers

@@ -150,7 +150,7 @@
           description,
           tagsText,
           image,
-          contentIndex: {},
+          contentIndex: {hello:"hello"},
         };
         //this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
         this.createCourse(payload);
