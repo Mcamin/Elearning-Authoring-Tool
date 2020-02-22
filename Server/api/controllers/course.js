@@ -64,7 +64,7 @@ exports.courses_get_course = (req, res, next) => {
 
 // Create a course
 exports.courses_create_course = (req, res, next) => {
-
+    let filename = req.file ? req.file.filename : '';
   const course = new Course({
     _id: mongoose.Types.ObjectId(),
     uuid: req.body.uuid,
@@ -73,7 +73,7 @@ exports.courses_create_course = (req, res, next) => {
     category: req.body.category,
     languages:req.body.languages,
     tags: req.body.tags,
-    thumbnail: req.file.filename,
+    thumbnail: filename,
     contentIndex: JSON.parse(req.body.contentIndex),
     duration: req.body.duration
 

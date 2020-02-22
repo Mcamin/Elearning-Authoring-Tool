@@ -65,6 +65,10 @@ const CourseActions = {
         console.log(error)
       })
     },
+  resetCourse:
+    ({commit}) => {
+    commit('resetCourse')
+    },
 
 
 },
@@ -125,6 +129,10 @@ const CourseActions = {
         console.log(error)
       })
     },
+   resetSection:
+     ({commit}) => {
+       commit('resetSection')
+     },
 
 
 },
@@ -185,7 +193,10 @@ const CourseActions = {
         console.log(error)
       })
     },
-
+   resetModule:
+     ({commit}) => {
+       commit('resetModule')
+     },
 
 },
 
@@ -245,6 +256,10 @@ const CourseActions = {
         console.log(error)
       })
     },
+   resetLesson:
+     ({commit}) => {
+       commit('resetLesson')
+     },
 
 
 },
@@ -305,6 +320,10 @@ const CourseActions = {
         console.log(error)
       })
     },
+   resetInteraction:
+     ({commit}) => {
+       commit('resetInteraction')
+     },
 
 
 },

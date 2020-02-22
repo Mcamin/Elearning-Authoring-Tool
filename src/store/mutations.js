@@ -17,7 +17,11 @@ const CourseMutations = {
   deleteCourse: (state, CourseId) => {
     //Check if the currentCourse have the ID and empty it
     //Check if the array of courses contain that course and delete it
-  }
+  },
+
+  resetCourse: (state) => {
+    state.currentCourse= null;
+  },
 
 };
 
@@ -38,7 +42,10 @@ const SectionMutations = {
   deleteSection: (state, sectionId) => {
     //Check if the currentCourse have the ID and empty it
     //Check if the array of courses contain that course and delete it
-  }
+  },
+  resetSection: (state) => {
+    state.currentSection= null;
+  },
 };
 
 const ModuleMutations = {
@@ -58,7 +65,10 @@ const ModuleMutations = {
   deleteModule: (state, moduleId) => {
     //Check if the currentCourse have the ID and empty it
     //Check if the array of courses contain that course and delete it
-  }
+  },
+  resetModule: (state) => {
+    state.currentModule= null;
+  },
 };
 
 const LessonMutations = {
@@ -78,7 +88,10 @@ const LessonMutations = {
   deleteLesson: (state, lessonId) => {
     //Check if the currentCourse have the ID and empty it
     //Check if the array of courses contain that course and delete it
-  }
+  },
+  resetLesson: (state) => {
+    state.currentLesson= null;
+  },
 
 };
 
@@ -86,10 +99,10 @@ const InteractionMutations = {
   getInteraction: (state, interaction) => {
     state.currentInteraction= interaction;
   },
-  getLessons: (state, lessons) => {
+  getInteractions: (state, lessons) => {
     state.lessons= lessons;
   },
-  createLesson: (state, newInteraction) => {
+  createInteraction: (state, newInteraction) => {
     state.currentInteraction= newInteraction;
     state.interactions.push(newInteraction);
   },
@@ -99,7 +112,10 @@ const InteractionMutations = {
   deleteInteraction: (state, interactionId) => {
     //Check if the currentCourse have the ID and empty it
     //Check if the array of courses contain that course and delete it
-  }
+  },
+    resetInteraction: (state) => {
+      state.currentInteraction= null;
+    },
 
 },
  GlobalMutations = {

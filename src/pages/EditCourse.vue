@@ -35,7 +35,7 @@ Add the default section to the sections -->
   import Accordion from "../components/Accordions/Accordion";
   import AddModal from "../components/Modals/AddModal";
   import AddBtn from "../components/Buttons/AddBtn";
-  import {mapGetters} from "vuex";
+  import {mapActions,mapState} from "vuex";
   import {bus} from "../main";
 
   export default {
@@ -52,22 +52,27 @@ Add the default section to the sections -->
     },
 
       methods:{
-          getCourseContentFromStore(id) {
-              return this.getCourseContent(id);
-          },
+        ...mapActions('course', {loadCourse: 'loadCourse'}),
+        ...mapActions('section', {loadSection: 'loadSection'}),
+        ...mapActions('module', {loadModule: 'loadModule'}),
+        ...mapActions('lesson', {loadLesson: 'loadLesson'}),
+        ...mapActions('interaction', {loadInteraction: 'loadInteraction'}),
+
+
           isSection(id) {
-              return id.charAt(0) == 's'
+            //  return id.charAt(0) == 's'
           },
       },
       computed: {
-          ...mapGetters([
-              'getCourseContent'
-          ]),
-          courseContentdata() {
-            return this.getCourseContentFromStore(this.$route.params.id);
-          },
+        ...mapState('course', ['currentCourse']),
+        ...mapState('section', ['currentSection','currentCourse']),
+        ...mapState('module', ['currentModule','modules']),
+        ...mapState('lesson', ['lessons']),
+        ...mapState('interaction', ['interactions']),
   },
     created() {
+      // Create a default section and add it to course if course is new
+
 
       //Trigger Modal and pass it the right parameters
       bus.$on('update-caller-id', (id) => {

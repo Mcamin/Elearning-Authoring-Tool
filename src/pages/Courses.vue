@@ -71,7 +71,7 @@
       }
     },
     computed: {
-      ...mapState('course', ['courses']),
+      ...mapState('course', ['courses','currentCourse']),
       setView() {
         switch (this.viewMode) {
           //Load Lessons
@@ -86,7 +86,7 @@
       }
     },
     methods: {
-      ...mapActions('course', {loadCourses: 'loadCourses'})
+      ...mapActions('course', {loadCourses: 'loadCourses',resetCourse:'resetCourse'})
     },
     created() {
       bus.$on('list-view', () => {
@@ -98,14 +98,16 @@
       });
 
     }, mounted() {
+       if(this.currentCourse != null)
+         this.resetCourse();
 
-      if(this.loadCourses()){
+  /*    if(this.loadCourses()){
         this.loading = false;
         this.error = false;
       }else{
         this.loading = false;
         this.error = false;
-      }
+      }*/
 
 
 
