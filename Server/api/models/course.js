@@ -20,9 +20,9 @@ const courseSchema = mongoose.Schema({
     required: false
   },
   thumbnail: String,
-  contentIndex: Object,
+  contentIndex: { type: mongoose.Schema.Types.Mixed, default: {} }
 
-},{ timestamps: true });
+},{ minimize: false,timestamps: true });
 
 module.exports = mongoose.model('Course', courseSchema);
 

@@ -36,7 +36,7 @@
       },
       computed:{
         ...mapState('course', ['currentCourse']),
-        }
+        },
 
     }
 </script>

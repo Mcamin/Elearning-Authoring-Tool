@@ -100,8 +100,8 @@
     }, mounted() {
        if(this.currentCourse != null)
          this.resetCourse();
-
-  /*    if(this.loadCourses()){
+      this.loadCourses();
+  /*    if(){
         this.loading = false;
         this.error = false;
       }else{

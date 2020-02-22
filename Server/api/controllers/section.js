@@ -60,8 +60,10 @@ exports.sections_get_section = (req, res, next) => {
 exports.sections_create_section = (req, res, next) => {
   const section = new Section({
     _id: mongoose.Types.ObjectId(),
+    uuid:req.body.uuid,
     title: req.body.title,
-    description: req.body.description
+    description: req.body.description,
+    modulesIndex: JSON.parse(req.body.modulesIndex),
   });
   section
   .save()

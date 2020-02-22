@@ -142,7 +142,7 @@
         this.fileList = fileList;
         this.formData.image=fileList[0];
       },
-      handleSubmit() {
+      async handleSubmit() {
 
         const {title,duration,selectedCategory, description, tags, selectedLanguage, image} = this.formData,
           id = uuid.v1();
@@ -153,7 +153,7 @@
 
         //Create Course
         const payload = {
-          id,
+          uuid:id,
           title,
           duration,
           selectedCategory,
@@ -163,10 +163,16 @@
           image,
           contentIndex: {},
         };
-        this.createCourse(payload);
-        this.$refs['new-course-modal'].hide();
-        this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
-        this.handleReset();
+        try{
+          await this.createCourse(payload);
+        }
+        catch (er) {
+          console.log(er);
+        } finally {
+          this.$refs['new-course-modal'].hide();
+          this.$router.push({ name: 'edit-course', params: {id: id, title: this.formData.title } });
+          this.handleReset();
+        }
       },
 
       handleReset() {

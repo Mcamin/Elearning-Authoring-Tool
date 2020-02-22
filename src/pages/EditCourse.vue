@@ -6,11 +6,11 @@ Add the default section to the sections -->
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
 
-       <template v-for="content in courseContentdata">
+       <template v-for="content in sections">
 
            <!--Render Section  -->
-          <component v-if="isSection(content.id)" is="Accordion" :accordionTitle="content.title"
-                     :accordionID="content.id" :contentArray="content.modules"/>
+          <component v-if="isSection(content.uuid)" is="Accordion" :accordionTitle="content.title"
+                     :accordionID="content.uuid" :contentArray="[]"/>
 
          <!--Render Module  -->
          <component v-else is="Accordion" :accordionTitle="content.title"
@@ -37,6 +37,7 @@ Add the default section to the sections -->
   import AddBtn from "../components/Buttons/AddBtn";
   import {mapActions,mapState} from "vuex";
   import {bus} from "../main";
+  import {uuid} from "vue-uuid";
 
   export default {
     name: "EditCourse",
@@ -50,30 +51,55 @@ Add the default section to the sections -->
       AddModal,
       AddBtn
     },
-
+    computed: {
+      ...mapState('course', ['currentCourse']),
+      ...mapState('section', ['currentSection','sections']),
+      ...mapState('module', ['currentModule','modules']),
+      ...mapState('lesson', ['lessons']),
+      ...mapState('interaction', ['interactions']),
+    },
       methods:{
-        ...mapActions('course', {loadCourse: 'loadCourse'}),
-        ...mapActions('section', {loadSection: 'loadSection'}),
+        ...mapActions('course', {loadCourse: 'loadCourse',updateCourse:'updateCourse'}),
+        ...mapActions('section', {loadSection: 'loadSection',createSection:'createSection'}),
         ...mapActions('module', {loadModule: 'loadModule'}),
         ...mapActions('lesson', {loadLesson: 'loadLesson'}),
         ...mapActions('interaction', {loadInteraction: 'loadInteraction'}),
 
+         async generateCourseContent(){
+          // Create a new section and add it to course if course is new
+
+
+          if (Object.entries(this.currentCourse.contentIndex).length  === 0)
+          {let sec_id =  uuid.v1(),
+              newSection = {
+            uuid: 's-'+sec_id,
+            title: "New Section",
+              description: "",
+                modulesIndex:"{}"
+            },
+            payload = {};
+            payload[newSection.uuid] =0;
+            await this.createSection(newSection);
+            await this.updateCourse({targetCourse:this.currentCourse.uuid,props:{contentIndex:payload}});
+
+          }
+
+          else {
+            // Load Course content
+          }
+
+
+        },
+
 
           isSection(id) {
-            //  return id.charAt(0) == 's'
+              return id.charAt(0) === 's';
           },
       },
-      computed: {
-        ...mapState('course', ['currentCourse']),
-        ...mapState('section', ['currentSection','currentCourse']),
-        ...mapState('module', ['currentModule','modules']),
-        ...mapState('lesson', ['lessons']),
-        ...mapState('interaction', ['interactions']),
-  },
+
     created() {
-      // Create a default section and add it to course if course is new
 
-
+          this.generateCourseContent();
       //Trigger Modal and pass it the right parameters
       bus.$on('update-caller-id', (id) => {
         this.callerID =id;

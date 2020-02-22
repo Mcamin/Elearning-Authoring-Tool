@@ -16,7 +16,7 @@
         <font-awesome-icon :icon="['fas', 'plus-circle']" class="addCourseIcon" size="4x" style="color:grey" />
       </div>
 
-      <b-card-img v-else :src="image" alt="Image" bottom class="h-100"></b-card-img>
+      <b-card-img v-else :src="image" alt="Image" bottom class=""></b-card-img>
 
 
     </b-card>

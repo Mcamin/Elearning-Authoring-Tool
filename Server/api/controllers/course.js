@@ -65,6 +65,7 @@ exports.courses_get_course = (req, res, next) => {
 // Create a course
 exports.courses_create_course = (req, res, next) => {
     let filename = req.file ? req.file.filename : '';
+
   const course = new Course({
     _id: mongoose.Types.ObjectId(),
     uuid: req.body.uuid,
@@ -74,7 +75,6 @@ exports.courses_create_course = (req, res, next) => {
     languages:req.body.languages,
     tags: req.body.tags,
     thumbnail: filename,
-    contentIndex: JSON.parse(req.body.contentIndex),
     duration: req.body.duration
 
   });
@@ -107,11 +107,8 @@ exports.courses_create_course = (req, res, next) => {
 // Update a course
 exports.courses_update_course = (req, res, next) => {
   const id = req.params.courseId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }
-  Course.update({ _id: id }, { $set: updateOps })
+
+  Course.updateOne({ uuid: id }, { $set: req.body })
   .exec()
   .then(result => {
     res.status(200).json({
