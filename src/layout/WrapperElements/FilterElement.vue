@@ -3,7 +3,7 @@
     <b-col class="text-right">
       <!-- Filter -->
       <span class="mx-2">Filter: </span>
-      <el-select class="mx-1" v-model="filterValue" :placeholder="filterBy[0].label">
+      <el-select @change="triggerFilter" class="mx-1" v-model="filterValue" :placeholder="filterBy[0].label">
         <el-option
           v-for="item in filterBy"
           :key="item.value"
@@ -15,7 +15,7 @@
       <span class="mx-2">Sort by: </span>
 
       <!-- Sort -->
-      <el-select class="mx-1" v-model="sortValue" :placeholder="sortBy[0].label">
+      <el-select @change="triggerSort"  class="mx-1" v-model="sortValue" :placeholder="sortBy[0].label">
         <el-option
           v-for="item in sortBy"
           :key="item.value"
@@ -102,12 +102,19 @@
 
         },
         methods: {
-            triggerListView: () => {
+            triggerListView()  {
                 bus.$emit('list-view');
             },
-            triggerCardView: () => {
+            triggerCardView ()  {
                 bus.$emit('card-view');
             },
+          triggerSort()  {
+            bus.$emit('change-sort',this.sortValue);
+          },
+          triggerFilter ()  {
+              //return Label not Value
+            bus.$emit('change-filter',this.filterValue);
+          },
         }
     }
 </script>

@@ -15,7 +15,7 @@
           url=""
         />
       </b-col>
-      <b-col md="3" v-for="(course, index) in courses" :key="index">
+      <b-col md="3" v-for="(course, index) in coursesArray" :key="index">
         <CourseCard
           :id="course._id"
           :title="course.title"
@@ -32,7 +32,7 @@
     <!-- List View -->
     <b-row v-else>
       <b-col>
-        <template v-for="(course, index) in courses">
+        <template v-for="(course, index) in coursesArray">
           <CourseList
             :id="course._id"
             :title="course.title"
@@ -55,7 +55,7 @@
   import FilterElement from "@/layout/WrapperElements/FilterElement";
   import {bus} from '@/main';
   import {mapActions, mapState} from "vuex";
-
+  import {dynamicSort} from '@/utils/helpers'
 
   export default {
     name: "courses",
@@ -69,7 +69,9 @@
       return {
         viewMode: 'card-view',
         loading: false ,
-        error: false
+        error: false,
+        sortValue:'Recent',
+        filterValue:'AllCategories',
       }
     },
     computed: {
@@ -85,6 +87,23 @@
             return 'list-view';
             break;
         }
+      },
+      coursesArray(){
+        const tempArray = [...this.courses];
+        switch (this.sortValue) {
+          case 'TitleReversed':
+            return tempArray.sort(dynamicSort("-title"));
+            break;
+          case 'Title':
+            return tempArray.sort(dynamicSort("title"));
+            break;
+          case 'Recent':
+
+            return tempArray.reverse();
+            break;
+          default:
+            break;
+        }
       }
     },
     methods: {
@@ -97,6 +116,14 @@
       });
       bus.$on('card-view', () => {
         this.viewMode = 'card-view';
+
+      });
+      bus.$on('change-sort', (val) => {
+        this.sortValue = val;
+      });
+      bus.$on('change-filter', (val) => {
+        this.filterValue = val;
+
       });
 
     }, mounted() {
