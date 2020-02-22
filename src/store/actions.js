@@ -87,8 +87,8 @@ const CourseActions = {
       async ({commit}, sectionID) => {
         await SectionRepository
           .get(sectionID)
-          .then(data => {
-            commit('getSection', data)
+          .then(response => {
+            commit('getSection', response.data.section)
           })
           .catch(error => {
             console.log(error)

@@ -62,8 +62,6 @@ Add the default section to the sections -->
         ...mapActions('course', {loadCourse: 'loadCourse',updateCourse:'updateCourse'}),
         ...mapActions('section', {loadSection: 'loadSection',createSection:'createSection'}),
         ...mapActions('module', {loadModule: 'loadModule'}),
-        ...mapActions('lesson', {loadLesson: 'loadLesson'}),
-        ...mapActions('interaction', {loadInteraction: 'loadInteraction'}),
 
          async generateCourseContent(){
           // Create a new section and add it to course if course is new
@@ -85,15 +83,22 @@ Add the default section to the sections -->
           }
 
           else {
-            // Load Course content
+             if(this.sections.length ===0){
+               const keys = Object.keys(this.currentCourse.contentIndex);
+
+               for( const key in keys)
+               { console.log(keys[key]);
+                 await   this.loadSection(keys[key]);
+               }
+             }
+
           }
 
 
         },
 
-
-          isSection(id) {
-              return id.charAt(0) === 's';
+        isSection(sec_id) {
+              return sec_id.charAt(0) === 's';
           },
       },
 

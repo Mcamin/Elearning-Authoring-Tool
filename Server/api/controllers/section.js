@@ -37,9 +37,11 @@ exports.sections_get_all = (req, res, next) => {
 
 // Get section by id
 exports.sections_get_section = (req, res, next) => {
-  Section.findById(req.params.sectionId)
+  console.log(req.params.sectionId);
+  Section.findOne({uuid: req.params.sectionId})
   .exec()
   .then(section => {
+    console.log(section);
     if (!section) {
       return res.status(404).json({
         message: "Section not found"

@@ -54,7 +54,6 @@
       ...mapActions('course', {loadCourse: 'loadCourse'}),
           async handleClick(){
             try{
-              console.log(this.id);
              await this.loadCourse(this.id);
             }
             catch (er) {

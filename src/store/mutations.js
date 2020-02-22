@@ -13,7 +13,7 @@ const CourseMutations = {
   },
   updateCourse: (state, payload) => {
     //Loop through Payload and update Course Attributes
-    for (let key in payload.props)
+    for (let key in Object.keys(payload.props))
     state.currentCourse[key] = payload.props[key];
 
   },
@@ -33,10 +33,10 @@ const CourseMutations = {
 
 const SectionMutations = {
   getSection: (state, section) => {
-    state.currentSection= section;
+    state.sections.push(section);
   },
-  getSections: (state, courses) => {
-    state.sections= courses;
+  getSections: (state, sections) => {
+    state.sections= sections;
   },
   createSection: (state, newSection) => {
     state.currentSection= newSection;
@@ -58,8 +58,8 @@ const SectionMutations = {
 };
 
 const ModuleMutations = {
-  getModule: (state, module) => {
-    state.currentModule= module;
+  getModule: (state, _module) => {
+    state.modules.push(_module);
   },
   getModules: (state, modules) => {
     state.modules= modules;
@@ -85,7 +85,7 @@ const ModuleMutations = {
 
 const LessonMutations = {
   getLesson: (state, lesson) => {
-    state.currentLesson= lesson;
+    state.lessons.push(lesson);
   },
   getLessons: (state, lessons) => {
     state.lessons= lessons;
@@ -112,7 +112,7 @@ const LessonMutations = {
 
 const InteractionMutations = {
   getInteraction: (state, interaction) => {
-    state.currentInteraction= interaction;
+    state.interactions.push(interaction);
   },
   getInteractions: (state, lessons) => {
     state.lessons= lessons;
