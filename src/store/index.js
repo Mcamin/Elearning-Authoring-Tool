@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from "vuex-persistedstate";
 
 import {CourseState,InteractionState,SectionState,ModuleState,LessonState,GlobalState} from './state'
 import  {CourseMutations,InteractionMutations,SectionMutations,ModuleMutations,LessonMutations,GlobalMutations} from './mutations'
@@ -47,7 +48,9 @@ const
     getters: InteractionGetters
   };
 export default new Vuex.Store({
-
+  plugins: [createPersistedState({
+    storage: window.sessionStorage,
+  })],
   modules: {
     course: moduleCourse,
     section: moduleSection,
