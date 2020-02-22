@@ -13,6 +13,9 @@ const CourseMutations = {
   },
   updateCourse: (state, payload) => {
     //Loop through Payload and update Course Attributes
+    for (let key in payload.props)
+    state.currentCourse[key] = payload.props[key];
+
   },
   deleteCourse: (state, CourseId) => {
     //Check if the currentCourse have the ID and empty it
@@ -21,6 +24,9 @@ const CourseMutations = {
 
   resetCourse: (state) => {
     state.currentCourse= null;
+  },
+  resetCoursesArray: (state) => {
+    state.courses= [];
   },
 
 };
@@ -37,7 +43,7 @@ const SectionMutations = {
     state.sections.push(newSection);
   },
   updateSection: (state, payload) => {
-    //Loop through Payload and update Course Attributes
+
   },
   deleteSection: (state, sectionId) => {
     //Check if the currentCourse have the ID and empty it
@@ -45,6 +51,9 @@ const SectionMutations = {
   },
   resetSection: (state) => {
     state.currentSection= null;
+  },
+  resetSectionsArray: (state) => {
+    state.sections= [];
   },
 };
 
@@ -69,6 +78,9 @@ const ModuleMutations = {
   resetModule: (state) => {
     state.currentModule= null;
   },
+  resetModulesArray: (state) => {
+    state.modules= [];
+  },
 };
 
 const LessonMutations = {
@@ -91,6 +103,9 @@ const LessonMutations = {
   },
   resetLesson: (state) => {
     state.currentLesson= null;
+  },
+  resetLessonsArray: (state) => {
+    state.lessons= [];
   },
 
 };
@@ -115,6 +130,9 @@ const InteractionMutations = {
   },
     resetInteraction: (state) => {
       state.currentInteraction= null;
+    },
+    resetInteractionsArray: (state) => {
+      state.interactions= [];
     },
 
 },

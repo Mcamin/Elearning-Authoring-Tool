@@ -13,7 +13,7 @@ exports.courses_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Course.find()
-  .select("title description duration tags thumbnail contentIndex _id")
+  .select("title description category duration tags thumbnail languages contentIndex _id uuid")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -23,9 +23,11 @@ exports.courses_get_all = (req, res, next) => {
       courses: docs.map(doc => {
         return {
           _id: doc._id,
+          uuid: doc.uuid,
           title: doc.title,
           languages: doc.languages,
           description: doc.description,
+          category: doc.category,
           duration: doc.duration,
           tags: doc.tags,
           thumbnail: doc.thumbnail,

@@ -11,10 +11,10 @@ const InteractionRepository = RepositoryFactory.get('interaction');
 const CourseActions = {
     loadCourse:
       async ({commit}, CourseID) => {
-        CourseRepository
+        await CourseRepository
           .get(CourseID)
-          .then(data => {
-            commit('getCourse', data)
+          .then(response => {
+            commit('getCourse', response.data.course)
           })
           .catch(error => {
             console.log(error)
@@ -67,10 +67,18 @@ const CourseActions = {
           })
       },
     resetCourse:
-      ({commit}) => {
-        commit('resetCourse')
+      ({commit,dispatch}) => {
+        commit('resetCourse');
+        dispatch('section/resetSectionsArray', null, { root: true });
+        dispatch('module/resetModulesArray', null, { root: true });
+        dispatch('interaction/resetInteractionsArray', null, { root: true });
+        dispatch('lesson/resetLessonsArray', null, { root: true });
+        //TODO: reset current elements also
       },
-
+    resetCoursesArray:
+      ({commit}) => {
+        commit('resetCoursesArray')
+      },
 
   },
 
@@ -133,6 +141,10 @@ const CourseActions = {
     resetSection:
       ({commit}) => {
         commit('resetSection')
+      },
+    resetSectionsArray:
+      ({commit}) => {
+        commit('resetSectionsArray')
       },
 
 
@@ -198,6 +210,10 @@ const CourseActions = {
       ({commit}) => {
         commit('resetModule')
       },
+    resetModulesArray:
+      ({commit}) => {
+        commit('resetModulesArray')
+      },
 
   },
 
@@ -260,6 +276,10 @@ const CourseActions = {
     resetLesson:
       ({commit}) => {
         commit('resetLesson')
+      },
+    resetLessonsArray:
+      ({commit}) => {
+        commit('resetLessonsArray')
       },
 
 
@@ -324,6 +344,10 @@ const CourseActions = {
     resetInteraction:
       ({commit}) => {
         commit('resetInteraction')
+      },
+    resetInteractionsArray:
+      ({commit}) => {
+        commit('resetInteractionsArray')
       },
 
 

@@ -19,9 +19,11 @@
         <CourseCard
           :id="course._id"
           :title="course.title"
-          :course-category="course.title"
+          :course-category="course.category"
+          :description="course.description"
+          :course-duration="course.duration"
           :course-languages="course.languages"
-          :url="{ name: 'edit-course', params: { id: course._id ,title: course.title} }"
+          :url="{ name: 'edit-course', params: { id: course.uuid ,title: course.title} }"
           :img="course.thumbnail"
         />
       </b-col>
@@ -71,7 +73,7 @@
       }
     },
     computed: {
-      ...mapState('course', ['courses','currentCourse']),
+      ...mapState('course', ['courses']),
       setView() {
         switch (this.viewMode) {
           //Load Lessons
@@ -98,9 +100,8 @@
       });
 
     }, mounted() {
-       if(this.currentCourse != null)
          this.resetCourse();
-      this.loadCourses();
+         this.loadCourses();
   /*    if(){
         this.loading = false;
         this.error = false;

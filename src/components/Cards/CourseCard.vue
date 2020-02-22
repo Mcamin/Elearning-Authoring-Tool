@@ -1,8 +1,7 @@
 <template>
-  <router-link :to="url" class ="course-card-wrapper" >
-    <b-card
+  <a href='#' class ="course-card-wrapper" @click="handleClick()">
+    <b-card class =" mb-3"
       no-body
-     class="mb-3"
     >
       <b-card-body>
         <b-card-title>{{title}}</b-card-title>
@@ -20,13 +19,14 @@
 
 
     </b-card>
-  </router-link>
+  </a>
 </template>
 
 <script>
   import { faPlusCircle} from '@fortawesome/free-solid-svg-icons';
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
   import { library } from "@fortawesome/fontawesome-svg-core";
+  import {mapActions} from "vuex";
   library.add(
     faPlusCircle,
   );
@@ -49,7 +49,21 @@
             courseDuration:"",
             url:"",
             img:""
-        }
+        },
+    methods:{
+      ...mapActions('course', {loadCourse: 'loadCourse'}),
+          async handleClick(){
+            try{
+              console.log(this.id);
+             await this.loadCourse(this.id);
+            }
+            catch (er) {
+              console.log(er);
+            } finally {
+              this.$router.push({ name: 'edit-course', params: {id: this.id, title: this.title } });
+            }
+          }
+    }
     }
 </script>
 
