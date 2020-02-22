@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const fs = require('fs');
+
 /*TODO: add request to populate lesson usage */
 const Course = require("../models/course");
 const Section = require("../models/section");
@@ -128,14 +129,27 @@ exports.courses_update_course = (req, res, next) => {
 //Delete a Course
 exports.courses_delete_course = (req, res, next) => {
     let filename = req.query.image;
-  if(filename == null){
-  fs.unlink(filename,  (err) =>{
-    if (err) throw err;
-    // if no error, file has been deleted successfully
-    console.log('File deleted!');
-  })}
-  Course.remove({_id: req.params.courseId})
-  .exec()
+
+
+ let deleteImage = new Promise(
+   (resolve,reject) =>{
+     if(filename != null){
+       console.log(filename);
+     fs.unlink('uploads/courses/images/'+filename,  (err) =>{
+       if (err)  reject (err);
+         resolve("file deleted");
+     });
+     }
+     else{
+       resolve(" no file to deleted");
+     }
+   }
+ );
+  deleteImage
+    .then(f =>{
+
+      Course.remove({_id: req.params.courseId}).exec()
+    })
   .then(result => {
     res.status(200).json({
       message: "Course deleted",
