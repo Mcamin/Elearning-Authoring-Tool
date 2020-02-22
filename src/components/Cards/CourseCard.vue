@@ -53,6 +53,7 @@
     methods:{
       ...mapActions('course', {loadCourse: 'loadCourse'}),
           async handleClick(){
+            if(this.id != null){
             try{
              await this.loadCourse(this.id);
             }
@@ -62,6 +63,7 @@
               this.$router.push({ name: 'edit-course', params: {id: this.id, title: this.title } });
             }
           }
+      }
     }
     }
 </script>
