@@ -51,7 +51,7 @@
 </template>
 <script>
   import CourseList from "../components/Cards/CourseList";
-  import CourseCard from "@/components/Cards/Card__";
+  import CourseCard from "@/components/Cards/CourseCard";
   import NewCourseModal from "@/components/Modals/NewCourseModal";
   import FilterElement from "@/layout/WrapperElements/FilterElement";
   import {bus} from '@/main';
