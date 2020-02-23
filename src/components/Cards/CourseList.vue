@@ -4,12 +4,12 @@
           no-body
           img-left
   >
-    <div v-if="title === 'Create a new Course'" class="card__img   d-flex justify-content-center align-items-center">
+    <div v-if="isCreateElement()" class="card__img   d-flex justify-content-center align-items-center">
       <font-awesome-icon :icon="['fas', 'plus-circle']" class="addCourseIcon" size="4x" style="color:grey" />
     </div>
 
     <b-card-img v-else :src="thumbnail" alt="Image" bottom class="card__img"></b-card-img>
-    <b-card-body>
+    <b-card-body :class="[isCreateElement() ? 'd-flex align-items-center':'' ]">
       <span class="card__category">{{courseCategory}}</span>
       <h4 class="card__title">{{title}}</h4>
       <span class=" card__lang">{{courseLanguages}}</span>
@@ -25,7 +25,7 @@
       </b-row>
     </b-card-body>
     <b-link   @click="handleClick()" class="card__info-hover d-flex justify-content-end align-items-center">
-      <div  v-if="title !== 'Create a new Course'">
+      <div  v-if="! isCreateElement()">
         <b-link @click.stop="handlePreview()"><font-awesome-icon class="card__icon" :icon="['fas', 'eye']" size="2x"/></b-link>
         <b-link @click.stop="handleDuplicate()"><font-awesome-icon class="card__icon" :icon="['fas', 'copy']" size="2x"/></b-link>
         <b-link @click.stop="handleDelete()"><font-awesome-icon class="card__icon" :icon="['fas', 'trash']" size="2x"/></b-link>
@@ -68,6 +68,9 @@
 
     methods:{
       ...mapActions('course', {loadCourse: 'loadCourse'}),
+      isCreateElement(){
+       return this.title === 'Create a new Course';
+      },
       async handleClick(){
         if(this.id != null){
           try{
@@ -81,11 +84,11 @@
         }
       },
       handleDuplicate(){console.log("duplicate")},
-      handlePreview(){console.log("jump to preview")},
+      handlePreview(){this.$router.push({ name: 'preview' });},
       handleDelete(){console.log("delete")}
     },
     computed:{
-      thumbnail () {
+      thumbnail() {
         return this.img===''? defaultImage : process.env.VUE_APP_BASE_DOMAIN+'/courses/images/'+this.img;
       }
     }
@@ -126,6 +129,10 @@
       height: 100%
       opacity: 0
       top: 0
+      .svg-inline--fa
+        color: #4e4e4e
+        &:hover
+          color: #219678
     .card__category
       text-transform: uppercase
       font-size: 13px

@@ -33,14 +33,21 @@
     <!-- List View -->
     <b-row v-else>
       <b-col>
+        <CourseList
+          v-b-modal="'new-course-modal'"
+          title="Create a new Course"
+          url=""/>
         <template v-for="(course, index) in coursesArray">
           <CourseList
             :id="course._id"
             :title="course.title"
-            :course-category="course.title"
+            :course-category="course.category"
+            :description="course.description"
+            :course-duration="course.duration"
             :course-languages="course.languages.join(', ')"
-            :url="{ name: 'edit-course', params: { id: course._id ,title: course.title} }"
+            :url="{ name: 'edit-course', params: { id: course.uuid ,title: course.title} }"
             :img="course.thumbnail"
+            nbrOfSections="0"
           />
         </template>
       </b-col>

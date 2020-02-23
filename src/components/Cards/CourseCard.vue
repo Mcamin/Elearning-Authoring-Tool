@@ -80,8 +80,10 @@ import defaultImage from '@/assets/img/nothumbnail.png'
                     }
                 }
             },
-            handleDuplicate(){console.log("duplicate")},
-            handlePreview(){console.log("jump to preview")},
+            handleDuplicate(){
+
+            },
+            handlePreview(){ this.$router.push({ name: 'preview' });},
             handleDelete(){console.log("delete")}
         },
         computed:{
@@ -117,6 +119,10 @@ import defaultImage from '@/assets/img/nothumbnail.png'
             height: 100%
             opacity: 0
             top: 0
+            .svg-inline--fa
+                color: #4e4e4e
+                &:hover
+                    color: #219678
         .card__category
             text-transform: uppercase
             font-size: 13px
