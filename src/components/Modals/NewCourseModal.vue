@@ -193,7 +193,7 @@
 
     mounted() {
       this.languagesSelector.push(...this.languages);
-      this.categoriesSelector.push(...this.categories);
+      this.categoriesSelector.push(...this.categories.map(cat => cat.label ));
     }
   }
 </script>

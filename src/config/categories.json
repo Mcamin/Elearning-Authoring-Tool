@@ -1,28 +1,35 @@
 [
-  "Development",
-  "Business",
-  "Finance & Accounting",
-  "IT & Software",
-  "Office Productivity",
-  "Design",
-  "Marketing",
-  "Lifestyle",
-  "Photography",
-  "Health & Fitness",
-  "Music",
-  "Teaching & Academics",
-  "All Marketing",
-  "Digital Marketing",
-  "Search Engine Optimization",
-  "Social Media Marketing",
-  "Branding",
-  "Marketing Fundamentals",
-  "Analytics & Automation",
-  "Public Relations",
-  "Advertising",
-  "Video & Mobile Marketing",
-  "Content Marketing",
-  "Growth Hacking",
-  "Affiliate Marketing",
-  "Product Marketing"
+  {
+    "value": "Development",
+    "label": "Development"
+  },
+  {
+  "value":   "IT & Software",
+  "label":  "IT & Software"
+  },
+  {
+    "value":   "Teaching & Academics",
+    "label":   "Teaching & Academics"
+  },
+  {
+    "value": "Digital Marketing",
+    "label": "Digital Marketing"
+  },
+  {
+    "value": "Analytics & Automation",
+    "label": "Analytics & Automation"
+  },
+  {
+    "value": "Search Engine Optimization",
+    "label": "Search Engine Optimization"
+  },
+  {
+    "value": "Social Media Marketing",
+    "label": "Social Media Marketing"
+  },
+  {
+    "value":   "Video & Mobile Marketing",
+    "label":   "Video & Mobile Marketing"
+  }
+
 ]

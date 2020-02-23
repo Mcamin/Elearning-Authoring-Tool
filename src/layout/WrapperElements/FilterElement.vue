@@ -46,6 +46,7 @@
     import {faTh, faThList} from '@fortawesome/free-solid-svg-icons'
     import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
     import {bus} from '@/main'
+    import {mapState} from "vuex";
     library.add(
         faTh,
         faThList
@@ -71,30 +72,19 @@
                         label: 'Title: A-to-Z'
                     },
                 ],
-                sortValue: 'Recent',
+              filterBy:[
+                {
+                  value: 'AllCategories',
+                  label: 'All Categories'
+                },
+              ],
+              sortValue: 'Recent',
                 filterValue: 'AllCategories'
 
             }
         },
         computed: {
-            //TODO: get the available categories from courses array
-            filterBy() {
-                // Return getAvailableCategories();
-                return [
-                    {
-                        value: 'AllCategories',
-                        label: 'All Categories'
-                    },
-                    {
-                        value: 'Development',
-                        label: 'Development'
-                    },
-                    {
-                        value: 'ITSoftware',
-                        label: 'IT & Software'
-                    },
-                ];
-            },
+          ...mapState(['categories']),
             isLibraryPage (){
                 return checkRouter(this.$route.name, "library");
             },
@@ -115,7 +105,10 @@
               //return Label not Value
             bus.$emit('change-filter',this.filterValue);
           },
-        }
+        },
+      mounted() {
+        this.filterBy.push(...this.categories);
+      }
     }
 </script>
 

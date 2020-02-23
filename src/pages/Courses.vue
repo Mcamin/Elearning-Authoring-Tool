@@ -89,7 +89,9 @@
         }
       },
       coursesArray(){
-        const tempArray = [...this.courses];
+        let tempArray = [...this.courses];
+        if(this.filterValue!== "AllCategories")
+          tempArray = tempArray.filter(el => el.category ===this.filterValue);
         switch (this.sortValue) {
           case 'TitleReversed':
             return tempArray.sort(dynamicSort("-title"));
