@@ -8,23 +8,24 @@
     <FilterElement/>
     <!-- Card View -->
     <b-row v-if="setView==='card-view'">
-      <b-col md="3">
+      <b-col md="3" class="mb-5">
         <CourseCard
           v-b-modal="'new-course-modal'"
           title="Create a new Course"
           url=""
         />
       </b-col>
-      <b-col md="3" v-for="(course, index) in coursesArray" :key="index">
+      <b-col md="3" class="mb-4" v-for="(course, index) in coursesArray" :key="index">
         <CourseCard
           :id="course._id"
           :title="course.title"
           :course-category="course.category"
           :description="course.description"
           :course-duration="course.duration"
-          :course-languages="course.languages"
+          :course-languages="course.languages.join(', ')"
           :url="{ name: 'edit-course', params: { id: course.uuid ,title: course.title} }"
           :img="course.thumbnail"
+          nbrOfSections="0"
         />
       </b-col>
     </b-row>
@@ -37,7 +38,7 @@
             :id="course._id"
             :title="course.title"
             :course-category="course.title"
-            :course-languages="course.languages"
+            :course-languages="course.languages.join(', ')"
             :url="{ name: 'edit-course', params: { id: course._id ,title: course.title} }"
             :img="course.thumbnail"
           />
@@ -50,7 +51,7 @@
 </template>
 <script>
   import CourseList from "../components/Cards/CourseList";
-  import CourseCard from "@/components/Cards/CourseCard";
+  import CourseCard from "@/components/Cards/Card__";
   import NewCourseModal from "@/components/Modals/NewCourseModal";
   import FilterElement from "@/layout/WrapperElements/FilterElement";
   import {bus} from '@/main';

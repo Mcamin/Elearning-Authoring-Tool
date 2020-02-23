@@ -10,7 +10,8 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">{{previewBtn}}</b-button>
+        <b-button  to="preview" size="sm" class="my-2 my-sm-0" type="submit">{{previewBtn}}</b-button>
+
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

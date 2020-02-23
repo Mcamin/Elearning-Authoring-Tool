@@ -14,7 +14,7 @@
         <b-nav-item href="#">SHARE</b-nav-item>
         <b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>
-        <b-button size="sm" class="my-2 my-sm-0" type="submit">PREVIEW</b-button>
+        <b-button  to="preview" size="sm" class="my-2 my-sm-0" type="submit">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

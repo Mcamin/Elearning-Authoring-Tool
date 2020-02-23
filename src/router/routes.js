@@ -10,10 +10,11 @@ import CreateNewCourse from "../pages/EditCourse";
 
 // Admin pages
 const Login = () => import(/* webpackChunkName: "Login" */ "@/pages/Login.vue");
-const Library = () => import(/* webpackChunkName: "Library" */ "@/pages/Library.vue");
 const Home = () => import(/* webpackChunkName: "Home" */ "@/pages/Home.vue");
+const Library = () => import(/* webpackChunkName: "Library" */ "@/pages/Library.vue");
 const Courses = () => import(/* webpackChunkName: "Courses" */"@/pages/Courses.vue");
 const NewCourse = () => import(/* webpackChunkName: "EditCourse" */"@/pages/EditCourse.vue");
+const Preview = () => import(/* webpackChunkName: "EditCourse" */"@/pages/Preview.vue");
 const EditInteraction = () => import(/* webpackChunkName: "EditLesson" */ "@/pages/EditInteraction.vue");
 const EditLesson = () => import(/* webpackChunkName: "EditInteraction" */ "@/pages/EditLesson.vue");
 const Playground = () => import(/* webpackChunkName: "Playground" */ "@/pages/Trash/Playground.vue");
@@ -21,7 +22,7 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/home",
+        redirect: "/playground",
         children: [
           {
             path: "home",
@@ -54,6 +55,12 @@ const routes = [
             path: "edit-interaction",
             name: "edit-interaction",
             component: EditInteraction,
+
+          },
+          {
+            path: "preview",
+            name: "preview",
+            component: Preview,
 
           },
           /*{
