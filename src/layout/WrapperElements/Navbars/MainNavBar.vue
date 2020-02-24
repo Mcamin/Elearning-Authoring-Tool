@@ -17,13 +17,17 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <!-- Profile -->
-        <b-nav-item-dropdown right>
-          <template v-slot:button-content>
-            <em>User</em>
-          </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown>
+
+      <b-nav-item-dropdown  size="lg"   right text="Right align" variant="link" toggle-class="text-decoration-none" no-caret>
+      <template v-slot:button-content>
+        <div>
+          <b-img :src="avatar"  class="avatar"/><span class="sr-only">User</span>
+        </div>
+
+      </template>
+      <b-dropdown-item href="#">Profile</b-dropdown-item>
+      <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+    </b-nav-item-dropdown>
         <!-- End Profile -->
       </b-navbar-nav>
     </b-collapse>
@@ -33,15 +37,34 @@
 <script>
   import {checkRouter} from "@/utils/helpers"
   import logo from "@/assets/img/logo.png"
+  import avatar from"@/assets/img/avatars.png"
     export default {
         name: "MainNavBar",
       data(){
           return {
+            avatar: avatar,
             logoPath: logo,
             title:{
               home: "DASHBOARD",
               courses: "COURSES",
               library: "LIBRARY",
+              options: [{
+                value: 'Option1',
+                label: 'Option1'
+              }, {
+                value: 'Option2',
+                label: 'Option2'
+              }, {
+                value: 'Option3',
+                label: 'Option3'
+              }, {
+                value: 'Option4',
+                label: 'Option4'
+              }, {
+                value: 'Option5',
+                label: 'Option5'
+              }],
+              value: ''
             }
           }
       },
@@ -63,8 +86,9 @@
 </script>
 
 <style lang="sass" scoped>
+  .avatar,
   .navbar-brand
-    max-height: 3.5rem
-    max-width: 3.5rem
-
+    max-width: 60px
+  .el-divider
+    height: 100%
 </style>

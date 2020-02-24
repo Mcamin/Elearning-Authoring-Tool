@@ -5,5 +5,10 @@ $text-color-secondary: #707070;
 $background-color: #F5F5F5;
 $primary-color: #219678;
 $secondary-color: #FFFFFF;
-$main-font: Lato,Helvetica,Arial,sans-serif
+$main-font: Lato,Helvetica,Arial,sans-serif;
 
+
+$font-size-base: 16px;
+$font-size-lg: ($font-size-base * 1.35);
+$font-size-sm: ($font-size-base * 1.1);
+$font-size-xs: ($font-size-base / 1.1);

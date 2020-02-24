@@ -115,6 +115,7 @@
       .card__img
         opacity: 0.5
     .card__img
+      background: #fff
       height: 130px
       width: 130px
       flex-shrink: 0
@@ -135,7 +136,7 @@
           color: #219678
     .card__category
       text-transform: uppercase
-      font-size: 13px
+      font-size: 11px
       letter-spacing: 2px
       font-weight: 500
       color: #868686

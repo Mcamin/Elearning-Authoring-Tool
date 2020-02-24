@@ -96,7 +96,7 @@ import defaultImage from '@/assets/img/nothumbnail.png'
 <style lang="sass">
     .course-card-wrapper
         width: 240px
-        height: 320px
+        height: 360px
         transition: all .4s cubic-bezier(0.175, 0.885, 0, 1)
         background-color: #fff
         border-radius: 12px
@@ -125,7 +125,7 @@ import defaultImage from '@/assets/img/nothumbnail.png'
                     color: #219678
         .card__category
             text-transform: uppercase
-            font-size: 13px
+            font-size: 11px
             letter-spacing: 2px
             font-weight: 500
             color: #868686

@@ -1,9 +1,9 @@
 <template>
-  <b-container fluid class="h-100">
+  <b-container fluid class="h-100 ">
       <b-row align-v="center" class="h-100">
         <b-col  md="6" sm="12">
           <div class="copyright text-center float-lg-left">
-            © <a href="https://www.fokus.fraunhofer.de/en" target="_blank" rel="noopener">Fraunhofer FOKUS {{year}}</a>
+           <a href="https://www.fokus.fraunhofer.de/en" target="_blank" rel="noopener"> ©  Fraunhofer FOKUS {{year}}</a>
           </div>
         </b-col>
        <b-col md="6" sm="12" >
@@ -42,11 +42,16 @@
 
 <style lang="sass">
   footer
+    //position: absolute
+    //bottom: 0
     background-color: #219678
     width: 100%
     color: white
     a
-      color: white
+      color: #4e4e4e
+      &:hover
+        color: #fff
+        text-decoration: unset
 
 
 </style>

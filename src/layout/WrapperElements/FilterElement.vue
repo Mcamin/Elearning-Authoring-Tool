@@ -2,8 +2,8 @@
   <b-row class=" filter-wrapper mb-4">
     <b-col class="text-right">
       <!-- Filter -->
-      <span class="mx-2">Filter: </span>
-      <el-select @change="triggerFilter" class="mx-1" v-model="filterValue" :placeholder="filterBy[0].label">
+      <span v-if="!isLibraryPage" class="mx-2">Filter: </span>
+      <el-select v-if="!isLibraryPage" @change="triggerFilter" class="mx-1" v-model="filterValue" :placeholder="filterBy[0].label">
         <el-option
           v-for="item in filterBy"
           :key="item.value"
