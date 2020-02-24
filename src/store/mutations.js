@@ -114,8 +114,8 @@ const InteractionMutations = {
   getInteraction: (state, interaction) => {
     state.interactions.push(interaction);
   },
-  getInteractions: (state, lessons) => {
-    state.lessons= lessons;
+  getInteractions: (state, interactions) => {
+    state.interactions= interactions;
   },
   createInteraction: (state, newInteraction) => {
     state.currentInteraction= newInteraction;

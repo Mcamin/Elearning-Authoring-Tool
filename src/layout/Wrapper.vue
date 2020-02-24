@@ -22,7 +22,7 @@
 
 
 
-        <el-main class=" p-0">
+        <el-main class="h-100 p-0">
           <!--Main-Wrapper-->
           <dashboard-content/>
           <!--End Main-Wrapper-->
@@ -77,7 +77,7 @@
 </script>
 
 <style lang="sass">
- .el-main
-   min-height: calc(100vh - 140px)
+ .main-content
+   height: calc(100vh - 140px)
 
 </style>

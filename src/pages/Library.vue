@@ -5,7 +5,7 @@
       <b-col  align="center" align-self="center" >
 
         <template v-for="elm in filteredElements" >
-          <Accordion :accordion-i-d="elm.id" :accordion-title="elm.title"/>
+          <Accordion :accordion-i-d="elm.uuid" :accordion-title="elm.title"/>
         </template>
         </b-col>
 
@@ -17,7 +17,7 @@
 <script>
   import Accordion from "../components/Accordions/Accordion";
   import FilterElement from "../layout/WrapperElements/FilterElement"
-  import {mapState} from "vuex";
+  import {mapActions, mapState} from "vuex";
   import {bus} from "../main";
 
 
@@ -29,22 +29,11 @@
                index: 0
             }
         },
-        created() {
-            bus.$on('render-lib-content', (key) => {
-                     this.index = key;
-            });
-        },
-      mounted(){
-        /*this.$store.dispatch('loadSections') ;*/
-      },
         computed:{
-            ...mapState([
-                'sections',
-                'modules',
-                'glossaries',
-                'interactions',
-                'lessons',
-            ]),
+          ...mapState('section', ['sections']),
+          ...mapState('module', ['modules']),
+          ...mapState('lesson', ['lessons']),
+          ...mapState('interaction', ['interactions']),
             filteredElements(){
                 switch (this.index) {
                     //Load Lessons
@@ -66,8 +55,29 @@
                 }
             }
 
-        }
-
+        },
+    methods:{
+      ...mapActions('section', {loadSections: 'loadSections',resetSectionsArray:'resetSectionsArray'}),
+      ...mapActions('module', {loadModules: 'loadModules',resetModulesArray:'resetModulesArray'}),
+      ...mapActions('lesson', {loadLessons: 'loadLessons',resetLessonsArray:'resetLessonsArray'}),
+      ...mapActions('interaction', {loadInteractions: 'loadInteractions',resetInteractionsArray:'resetInteractionsArray'})
+    },
+    mounted(){
+      /*this.$store.dispatch('loadSections') ;*/
+    },
+    created() {
+          this.resetSectionsArray();
+          this.resetModulesArray();
+          this.resetLessonsArray();
+          this.resetLessonsArray();
+          this.loadSections();
+          this.loadModules();
+          this.loadLessons();
+          this.loadInteractions();
+      bus.$on('render-lib-content', (key) => {
+        this.index = key;
+      });
+    },
     }
 </script>
 

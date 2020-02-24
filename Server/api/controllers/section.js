@@ -12,7 +12,7 @@ exports.sections_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Section.find()
-  .select("title description _id")
+  .select("title description uuid _id")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -22,6 +22,7 @@ exports.sections_get_all = (req, res, next) => {
       sections: docs.map(doc => {
         return {
           _id: doc._id,
+          uuid: doc.uuid,
           title: doc.title,
           description: doc.description
         };

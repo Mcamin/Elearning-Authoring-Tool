@@ -98,8 +98,8 @@ const CourseActions = {
       async ({commit}) => {
         await SectionRepository
           .getAll()
-          .then(data => {
-            commit('getSections', data)
+          .then(response => {
+            commit('getSections', response.data.sections)
           })
           .catch(error => {
             console.log(error)
@@ -155,8 +155,8 @@ const CourseActions = {
       async ({commit}, moduleID) => {
         await ModuleRepository
           .get(moduleID)
-          .then(data => {
-            commit('getModule', data)
+          .then(response => {
+            commit('getModule', response.data.module)
           })
           .catch(error => {
             console.log(error)
@@ -166,8 +166,8 @@ const CourseActions = {
       async ({commit}) => {
         await ModuleRepository
           .getAll()
-          .then(data => {
-            commit('getModules', data)
+          .then(response => {
+            commit('getModules', response.data.modules)
           })
           .catch(error => {
             console.log(error)
@@ -222,8 +222,8 @@ const CourseActions = {
       async ({commit}, lessonID) => {
         await LessonRepository
           .get(lessonID)
-          .then(data => {
-            commit('getLesson', data)
+          .then(response => {
+            commit('getLesson', response.data.lesson)
           })
           .catch(error => {
             console.log(error)
@@ -233,8 +233,8 @@ const CourseActions = {
       async ({commit}) => {
         await LessonRepository
           .getAll()
-          .then(data => {
-            commit('getLessons', data)
+          .then(response => {
+            commit('getLessons', response.data.lessons)
           })
           .catch(error => {
             console.log(error)
@@ -290,8 +290,8 @@ const CourseActions = {
       async ({commit}, interactionID) => {
         await InteractionRepository
           .get(interactionID)
-          .then(data => {
-            commit('getInteraction', data)
+          .then(response => {
+            commit('getInteraction', response.data.interaction)
           })
           .catch(error => {
             console.log(error)
@@ -301,8 +301,8 @@ const CourseActions = {
       async ({commit}) => {
         await InteractionRepository
           .getAll()
-          .then(data => {
-            commit('getInteractions', data)
+          .then(response => {
+            commit('getInteractions', response.data.interactions)
           })
           .catch(error => {
             console.log(error)

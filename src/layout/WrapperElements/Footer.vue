@@ -42,8 +42,8 @@
 
 <style lang="sass">
   footer
-    //position: absolute
-    //bottom: 0
+    position: fixed
+    bottom: 0
     background-color: #219678
     width: 100%
     color: white
