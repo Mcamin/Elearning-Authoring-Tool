@@ -26,6 +26,16 @@ app.use(express.static(__dirname + '/public'));
 
 app.post("*", require("body-parser").urlencoded({extended: true}));
 
+app.get('/index/:radioID', (req, res) => {
+  //const session = sessions[req.params.sessionID];
+  const sessionID = req.query.sessionID;
+  var sendMe = mod2FileRadio.toString()
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(sendMe);
+
+});
+
 app.post("/index", (req, res) => {
   var moodleData = new lti.Provider("top", "secret");
   moodleData.valid_request(req, (err, isValid) => {
@@ -48,24 +58,6 @@ app.post("/index", (req, res) => {
     res.send(sendMe);
   });   // moodleDate.valid_request
 });       // app.post("/module_2");
-
-app.get("/test", (req, res) => {
-  //var moodleData = new lti.Provider("top", "secret");
-    var sessionID = uuid();
-    //sessions[sessionID] = moodleData;
-
-    var sendMe = mod2FileTest.toString().replace("//PARAMS**GO**HERE",
-      `
-					const params = {
-						sessionID: "${sessionID}",
-					};
-				`);
-
-    res.setHeader("Content-Type", "text/html");
-    res.send(sendMe);
-           // moodleDate.valid_request
-});       // app.post("/module_2");
-
 
 app.get("/grade", (req, res) => {
   var moodleData = new lti.Provider("top", "secret");
@@ -93,7 +85,6 @@ app.get("/grade", (req, res) => {
 app.get("/grade/:sessionID/:grade", (req, res) => {
   const session = sessions[req.params.sessionID];
   var grade = req.params.grade;
-  console.log(req.params);
   var resp;
 
   if (grade < 60) {
@@ -144,7 +135,6 @@ app.post("/radio", (req, res) => {
 app.get("/radio/:sessionID/:radioresult", (req, res) => {
   const session = sessions[req.params.sessionID];
   var radio = req.params.radioresult;
-  console.log(radio);
   var resp;
   var grade;
 
@@ -162,6 +152,7 @@ app.get("/radio/:sessionID/:radioresult", (req, res) => {
 
     res.send(resp);
   });
+
 });    // app.get("/grade...")
 // start srver on localhost
 
