@@ -1,32 +1,70 @@
-/*eslint-env node*/
+const express = require('express');
+const app = express();
+const uuid = require("uuid4");
+const lti = require("ims-lti");
+const morgan = require('morgan');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const getimstool = require('./api');
 
-//------------------------------------------------------------------------------
-// node.js starter application
-//------------------------------------------------------------------------------
+var mod2FileIndex = fs.readFileSync("templates/index.html", "utf8");
+var mod2FileGrade = fs.readFileSync("templates/grade.html", "utf8");
+var mod2FileRadio = fs.readFileSync("templates/radio.html", "utf8");
+var mod2FileTest = fs.readFileSync("templates/test.html", "utf8");
 
-// This application uses express as its web server
-// for more info, see: http://expressjs.com
-var express = require('express');
-var uuid = require("uuid4");
-var lti = require("ims-lti");
+//Dev
+app.use(morgan("dev"));
 
-var fs = require('fs');
 
-var mod2FileIndex = fs.readFileSync("content/index.html", "utf8");
-var mod2FileGrade = fs.readFileSync("content/grade.html", "utf8");
-var mod2FileRadio = fs.readFileSync("content/radio.html", "utf8");
-var mod2FileTest = fs.readFileSync("content/test.html", "utf8");
 
-// create a new express server
-var app = express();
-var sessions = {};
+//Parsers
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
 
-app.post("*", require("body-parser").urlencoded({extended: true}));
+let sessions = {};
+
+app.post("/resourceType/:toolID", (req, res) => {
+     // Get the consumer key from the database
+    let imstool = getimstool(req.params.resourceType,req.params.toolID);
+    if(imstool.meta.hasOwnProperty(req.body.oauth_consumer_key))
+    { let username = req.body.oauth_consumer_key,
+      password = imstool.meta[req.body.oauth_consumer_key];
+      let moodleData = new lti.Provider(username, password);
+
+      moodleData.valid_request(req, (err, isValid) => {
+        if (!isValid) {
+          // Serve the 404 page
+          res.send("Invalid request: " + err);
+          return ;
+        }
+        var sessionID = uuid();
+        sessions[sessionID] = moodleData;
+
+        var sendMe = mod2FileIndex.toString().replace("//PARAMS**GO**HERE",
+          `
+					const params = {
+						sessionID: "${sessionID}",
+						user: "${moodleData.body.ext_user_username}"
+					};
+				`);
+
+        res.setHeader("Content-Type", "text/html");
+        res.send(sendMe);
+      });
+    }
+
+});
+
+
+
+
 
 app.post("/index", (req, res) => {
+  // Get the consumer key from the database
+  let imstool = getimstool();
   var moodleData = new lti.Provider("top", "secret");
   moodleData.valid_request(req, (err, isValid) => {
     if (!isValid) {
@@ -35,7 +73,7 @@ app.post("/index", (req, res) => {
     }
     var sessionID = uuid();
     sessions[sessionID] = moodleData;
-
+ //Use pug templates to render the page
     var sendMe = mod2FileIndex.toString().replace("//PARAMS**GO**HERE",
       `
 					const params = {
@@ -46,8 +84,8 @@ app.post("/index", (req, res) => {
 
     res.setHeader("Content-Type", "text/html");
     res.send(sendMe);
-  });   // moodleDate.valid_request
-});       // app.post("/module_2");
+  });
+});
 
 app.get("/test", (req, res) => {
   //var moodleData = new lti.Provider("top", "secret");
@@ -67,28 +105,6 @@ app.get("/test", (req, res) => {
 });       // app.post("/module_2");
 
 
-app.get("/grade", (req, res) => {
-  var moodleData = new lti.Provider("top", "secret");
-  moodleData.valid_request(req, (err, isValid) => {
-    if (!isValid) {
-      res.send("Invalid request: " + err);
-      return ;
-    }
-    var sessionID = uuid();
-    sessions[sessionID] = moodleData;
-
-    var sendMe = mod2FileGrade.toString().replace("//PARAMS**GO**HERE",
-      `
-					const params = {
-						sessionID: "${sessionID}",
-						user: "${moodleData.body.ext_user_username}"
-					};
-				`);
-
-    res.setHeader("Content-Type", "text/html");
-    res.send(sendMe);
-  });   // moodleDate.valid_request
-});       // app.post("/module_2");
 
 app.get("/grade/:sessionID/:grade", (req, res) => {
   const session = sessions[req.params.sessionID];
@@ -139,28 +155,21 @@ app.post("/radio", (req, res) => {
     res.setHeader("Content-Type", "text/html");
     res.send(sendMe);
   });   // moodleDate.valid_request
-});       // app.post("/module_2");
+});
 
-app.get("/radio/:sessionID/:radioresult", (req, res) => {
-  const session = sessions[req.params.sessionID];
-  var radio = req.params.radioresult;
-  console.log(radio);
-  var resp;
-  var grade;
-
-  if (radio === "Button Eins") {
-    resp = `${radio} is the correct answer`;
-    grade = 100;
-  } else {
-    resp = `${radio} is wrong`;
-    grade = 0;
-  }
+app.post("/assess/:sessionID/:grade", (req, res) => {
+  const session = sessions[req.params.sessionId];
+  //get the interaction from the database
+  //check the answer if correct
+  // send the Feedback to show
+  // update the grade of the resource depending on the number of quizes and interactions it has
+  let Feedbackcontent ="";
 
   session.outcome_service.send_replace_result(grade/100, (err, isValid) => {
     if (!isValid)
       resp += `<br/>Update failed ${err}`;
 
-    res.send(resp);
+    res.send(Feedbackcontent);
   });
 });    // app.get("/grade...")
 // start srver on localhost
@@ -169,6 +178,6 @@ app.get("/radio/:sessionID/:radioresult", (req, res) => {
 // Multiple Choice
 //------------------------------------------------------------------------------
 
-app.listen(3000, 'localhost', function() {
-  console.log("LTI provider server is up");
-});
+
+
+module.exports = app;

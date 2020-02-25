@@ -38,7 +38,7 @@ exports.lessons_get_all = (req, res, next) => {
 
 // Get a lesson by id
 exports.lessons_get_lesson = (req, res, next) => {
- Lesson.findById(req.params.lessonId)
+ Lesson.findOne({uuid: req.params.lessonId})
   .exec()
   .then(lesson => {
     if (!lesson) {

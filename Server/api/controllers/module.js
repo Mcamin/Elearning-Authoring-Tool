@@ -36,7 +36,7 @@ exports.modules_get_all = (req, res, next) => {
 
 // Get module by id
 exports.modules_get_module = (req, res, next) => {
-  Module.findById(req.params.moduleId)
+  Module.findOne({uuid: req.params.moduleId})
   .exec()
   .then(module => {
     if (!module) {

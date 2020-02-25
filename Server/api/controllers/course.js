@@ -45,7 +45,7 @@ exports.courses_get_all = (req, res, next) => {
 
 // Get a course by id
 exports.courses_get_course = (req, res, next) => {
-  Course.findById(req.params.courseId)
+  Course.findOne({uuid: req.params.courseId})
   .exec()
   .then(course => {
     if (!course) {

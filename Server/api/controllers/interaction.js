@@ -38,7 +38,7 @@ exports.interactions_get_all = (req, res, next) => {
 
 // Get an interaction by id
 exports.interactions_get_interaction = (req, res, next) => {
-  Interaction.findById(req.params.interactionId)
+  Interaction.findOne({uuid: req.params.interactionId})
   .exec()
   .then(interaction => {
     if (!interaction) {
