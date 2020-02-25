@@ -35,9 +35,9 @@
 </template>
 
 <script>
-  import {checkRouter} from "@/utils/helpers"
-  import logo from "@/assets/img/logo.png"
-  import avatar from"@/assets/img/avatars.png"
+   import {checkRouter} from "@/utils/helpers"
+   import logo from "@/assets/img/logo.png"
+   import avatar from"@/assets/img/avatars.png"
     export default {
         name: "MainNavBar",
       data(){
