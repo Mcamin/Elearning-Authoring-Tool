@@ -157,13 +157,17 @@ app.post("/radio", (req, res) => {
   });   // moodleDate.valid_request
 });
 
-app.post("/assess/:sessionID/:grade", (req, res) => {
-  const session = sessions[req.params.sessionId];
+app.post("/asses-quiz", (req, res) => {
+  let session = sessions[req.body.sessionId],
+    interactionId = req.body.interactionId,
+    questionId = req.body.questionID,
+    selectedAnswer = req.body.selectedAnswer,
+    feedbackcontent ="";
   //get the interaction from the database
   //check the answer if correct
   // send the Feedback to show
   // update the grade of the resource depending on the number of quizes and interactions it has
-  let Feedbackcontent ="";
+
 
   session.outcome_service.send_replace_result(grade/100, (err, isValid) => {
     if (!isValid)
