@@ -5,10 +5,11 @@ const fs = require('fs');
 
 const getimstool = require('../utils');
 
-var mod2FileIndex = fs.readFileSync("templates/index.html", "utf8");
-//var mod2FileGrade = fs.readFileSync("templates/grade.html", "utf8");
-//var mod2FileRadio = fs.readFileSync("templates/radio.html", "utf8");
+var mod2FileIndex = fs.readFileSync("./templates/index.html", "utf8");
+//var mod2FileGrade = fs.readFileSync("templates/multipleChoice.html", "utf8");
+//var mod2FileRadio = fs.readFileSync("templates/singleChoice.html", "utf8");
 //var mod2FileTest = fs.readFileSync("templates/test.html", "utf8");
+var mod2FileSingleChoice = fs.readFileSync("./templates/singleChoice.html", "utf8");
 
 
 let sessions = {};
@@ -64,7 +65,14 @@ exports.initialize_communication = (req, res) => {
 };
 
 
+exports.fetchcontent = (req,res) => {
 
+  var sendMe = mod2FileSingleChoice.toString();
+
+  res.setHeader("Content-Type", "text/html");
+  res.send(sendMe);
+
+};
 
 
 exports.sendFeedback =  (req, res) => {
@@ -114,3 +122,53 @@ exports.asses_quiz = (req, res) => {
   });
 };
 
+exports.initialize = (req, res) => {
+  // Dummy to remove
+  let imsTool = {
+    title: "Tool title",
+    meta: {top: "secret"}
+  };
+  // Get the consumer key from the database
+  //let imsTool = getimstool(req.params.resourceType,req.params.toolID);
+  if (imsTool.meta.hasOwnProperty(req.body.oauth_consumer_key)) {
+
+    let username = req.body.oauth_consumer_key,
+      password = imsTool.meta[req.body.oauth_consumer_key];
+
+    let moodleData = new lti.Provider(username, password);
+
+    moodleData.valid_request(req, (err, isValid) => {
+      if (!isValid) {
+        // Serve the 404 page
+        res.send("Invalid request: " + err);
+        return;
+      }
+      let sessionID = uuid();
+      sessions[sessionID] = moodleData;
+
+      const params = {
+						sessionID: sessionID,
+						user: moodleData.body.ext_user_username
+					};
+      var sendMe = mod2FileIndex.toString().replace("//PARAMS**GO**HERE",
+        `
+					const params = {
+						sessionID: "${sessionID}",
+						user: "${moodleData.body.ext_user_username}"
+					};
+				`);
+
+      res.setHeader("Content-Type", "text/html");
+      res.send(sendMe);
+
+    });
+    /*let sessionID = uuid();
+    const params = {
+      sessionID: sessionID,
+      user: moodleData.body.ext_user_username
+    };
+
+    res.render('start', {title:imsTool.title,params:params});*/
+  }
+
+};

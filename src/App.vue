@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="xapp">
     <router-view :key="$route.fullPath"/>
   </div>
 </template>
@@ -10,7 +10,7 @@
   import {mapActions} from "vuex";
 
   export default {
-    name: 'app',
+    name: 'xapp',
     methods: {
       ...mapActions([
         'loadCategories', 'loadLanguages'
