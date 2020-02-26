@@ -23,6 +23,7 @@ exports.playground =  (req, res) => {
 exports.initialize_communication = (req, res) => {
   // Dummy to remove
   let imsTool = {
+    title: "Tool title",
     meta: {top: "secret"}
   };
   // Get the consumer key from the database
@@ -34,7 +35,7 @@ exports.initialize_communication = (req, res) => {
 
     let moodleData = new lti.Provider(username, password);
 
-    moodleData.valid_request(req, (err, isValid) => {
+    /*moodleData.valid_request(req, (err, isValid) => {
       if (!isValid) {
         // Serve the 404 page
         res.send("Invalid request: " + err);
@@ -49,9 +50,15 @@ exports.initialize_communication = (req, res) => {
 					};
 
 
-      res.render('start', {params:params});
-    });
+      res.render('start', {title:imsTool.title,params:params});
+    });*/
+    let sessionID = uuid();
+    const params = {
+      sessionID: sessionID,
+      user: moodleData.body.ext_user_username
+    };
 
+    res.render('start', {title:imsTool.title,params:params});
   }
 
 };
