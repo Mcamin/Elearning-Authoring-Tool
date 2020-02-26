@@ -21,4 +21,4 @@ let getTool =  (resource,toolID ) => {
   };
 
 
-module.exports = getimstool;
+module.exports = getTool;

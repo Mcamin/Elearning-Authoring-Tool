@@ -1,7 +1,5 @@
 {
   "env":{
-    "MONGO_USR":"root",
-    "MONGO_PW":"qugROkHc7f26dGUe",
     "BASE_DOMAIN":"http://localhost:3000/api"
 }
 
