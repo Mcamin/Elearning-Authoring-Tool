@@ -1,0 +1,208 @@
+<template>
+  <b-card no-body class="accordion-wrapper mb-3">
+    <!--Header-->
+    <b-card-header header-tag="header" class="p-3" role="tab">
+      <b-row>
+        <!-- Left Settings -->
+        <b-col  class="text-left">
+          <h4>{{questionObject.questionText}}</h4>
+        </b-col>
+        <!-- End Left Settings -->
+        <!--Right Settings-->
+        <b-col  class="text-right">
+          <a href="#"  class="ml-2">
+            <font-awesome-icon :icon="['fas', 'trash']"  color="gray"/>
+          </a>
+          <a href="#" class="ml-2">
+            <font-awesome-icon :icon="['fas', 'cog']" color="gray" />
+          </a>
+
+          <a href="#" @click.prevent="toggleCollapse(questionObject.question_id)" class="ml-2">
+            <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']" color="gray"/>
+          </a>
+
+        </b-col>
+        <!--End Right settings -->
+      </b-row>
+    </b-card-header>
+     <!--End header -->
+
+    <!--Question content -->
+    <b-collapse :id="questionObject.question_id"   visible  :accordion="`myaccordion-${questionObject.question_id}`" role="tabpanel">
+      <b-card-body>
+        <b-container fluid>
+          <!-- Question  -->
+          <b-row>
+            <b-col class="mb-3">
+              <b-form-group
+                class="mb-0"
+                label="Question"
+                label-for="question-x"
+              >
+                <b-form-textarea
+                  id="question-x"
+                  v-model="questionObject.questionText"
+                  placeholder="Enter a question ..."
+                  rows="3"
+                  max-rows="6"
+                ></b-form-textarea>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <!-- End Question -->
+          <!-- Header-->
+          <b-row class="my-4">
+            <b-col cols="2" class="text-center" >
+              <span>Correct</span>
+            </b-col>
+            <b-col class="text-center">
+              <span>Choice Text</span>
+            </b-col>
+            <b-col cols="3" class="filter-wrapper text-right">
+              <!-- Single or Multiple dropdown -->
+              <el-select v-model="questionObject.questionType" placeholder="Multiple Choice">
+                <el-option
+                  default-first-option
+                  v-for="item in meta.options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+              <!-- End Single or Multiple dropdown -->
+            </b-col>
+          </b-row>
+          <!-- End Header-->
+          <b-row>
+            <Container @drop="onDrop" drag-handle-selector=".column-drag-handle" class="w-100">
+              <!-- Choices -->
+              <Draggable v-for="item in questionObject.answers" :key="item.id">
+                <b-card no-body class="my-2">
+                  <b-card-body class="px-0">
+                    <b-container fluid>
+                      <b-row>
+                        <b-col cols="2 d-flex flex-row align-items-center">
+                          <a class="column-drag-handle mr-5">
+                            <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
+                          </a>
+
+                          <b-form-checkbox v-if="questionObject.questionType.value === 'Multiple choice'"
+                                           v-model="item.checked"
+                          >
+                          </b-form-checkbox>
+
+                          <!-- V-if Single choice -->
+                          <b-form-radio v-else
+                                        v-model="item.checked"
+                          ></b-form-radio>
+                        </b-col>
+                        <!--Answer input -->
+                        <b-col>
+                          <b-form-input v-model="item.text" placeholder="Enter an answer"/>
+                        </b-col>
+                        <!-- End Answer input -->
+                        <!--Remove  Answer -->
+                        <b-col cols="2 " class="text-center">
+                          <a @click="removeItem(item.id)">
+                            <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
+                          </a>
+                          <!-- End Remove  Answer -->
+                        </b-col>
+                      </b-row>
+                    </b-container>
+                  </b-card-body>
+                </b-card>
+              </Draggable>
+            </Container>
+
+            <!-- Add an answer Btn -->
+            <el-button
+              @click="addItem()"
+              class="py-3 w-100"
+              style="text-align:
+        center">Add an answer
+            </el-button>
+            <!-- End an answer Btn -->
+          </b-row>
+
+
+        </b-container>
+      </b-card-body>
+    </b-collapse>
+    <!--End Question Content-->
+  </b-card>
+</template>
+
+<script>
+
+  import { library } from '@fortawesome/fontawesome-svg-core'
+  import { faBars, faTrash,faCog,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import {applyDrag} from "../../utils/helpers"
+
+
+  library.add(
+    faTrash,
+    faCog,
+    faSortUp,
+    faSortDown,
+    faBars
+  );
+  import {Container,Draggable } from "vue-smooth-dnd";
+    export default {
+      name: "QuestionAccodion",
+      components:{
+        Container,
+        Draggable,
+        'font-awesome-icon': FontAwesomeIcon,
+      },
+      props: {
+        question:{
+          Type:Object,
+        },
+      },
+      data(){
+        return{
+          meta:{
+            options: [{
+              value: 'Multiple choice',
+              label: 'Multiple choice'
+            }, {
+              value: 'Single choice',
+              label: 'Single choice'
+            },],
+            value: 'Multiple choice',
+            id: 0,
+            question_id: "question"+this.id,
+            collapsed: false,
+          },
+          questionObject: this.question
+         /* question:"",
+          items: [
+            {name: "answer", text: "First choice", id: 0, checked: false},
+          ],*/
+        }
+      },
+
+      methods:{
+        addItem() {
+          let
+            temp_id = this.id++;
+          this.items.push({text: "Enter an answer...",id: temp_id, checked: false});
+        },
+        removeItem(id) {
+          this.items.splice(id, 1);
+        },
+        onDrop(dropResult) {
+          this.items = applyDrag(this.items, dropResult);
+        },
+        toggleCollapse(id) {
+          this.$root.$emit('bv::toggle::collapse', id);
+          this.collapsed = ! this.collapsed;
+        },
+      },
+
+    }
+</script>
+
+

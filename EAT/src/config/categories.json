@@ -1,0 +1,35 @@
+[
+  {
+    "value": "Development",
+    "label": "Development"
+  },
+  {
+  "value":   "IT & Software",
+  "label":  "IT & Software"
+  },
+  {
+    "value":   "Teaching & Academics",
+    "label":   "Teaching & Academics"
+  },
+  {
+    "value": "Digital Marketing",
+    "label": "Digital Marketing"
+  },
+  {
+    "value": "Analytics & Automation",
+    "label": "Analytics & Automation"
+  },
+  {
+    "value": "Search Engine Optimization",
+    "label": "Search Engine Optimization"
+  },
+  {
+    "value": "Social Media Marketing",
+    "label": "Social Media Marketing"
+  },
+  {
+    "value":   "Video & Mobile Marketing",
+    "label":   "Video & Mobile Marketing"
+  }
+
+]

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .container-fluid.px-5.d-flex.justify-content-center.align-items-center(style="height:100vh;")
+    .row.p-5(style='background-color: #fff; border-radius:30px')
+      .col.text-center.m-5
+        h1.my-2  Invalid Request
+        h4.my-4  Please Contact your Teacher / Course Manager
+        span #{err}
