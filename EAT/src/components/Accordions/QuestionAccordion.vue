@@ -1,24 +1,26 @@
 <template>
-  <b-card no-body class="accordion-wrapper mb-3">
+  <b-card no-body class=" mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
-      <b-row>
+      <b-row >
         <!-- Left Settings -->
-        <b-col  class="text-left">
+        <b-col cols="2">
+          <a href="#" class=" question-drag-handle ml-2">
+            <font-awesome-icon :icon="['fas', 'bars']" color="gray" size="lg" />
+          </a>
+        </b-col>
+        <b-col cols="8" >
           <h4>{{questionObject.questionText}}</h4>
         </b-col>
         <!-- End Left Settings -->
         <!--Right Settings-->
-        <b-col  class="text-right">
-          <a href="#"  class="ml-2">
-            <font-awesome-icon :icon="['fas', 'trash']"  color="gray"/>
-          </a>
-          <a href="#" class="ml-2">
-            <font-awesome-icon :icon="['fas', 'cog']" color="gray" />
+        <b-col cols="2"  class="text-right">
+          <a href="#"  @click.prevent="removeQuestion" class="ml-2">
+            <font-awesome-icon :icon="['fas', 'trash']"  color="gray"  size="lg"/>
           </a>
 
           <a href="#" @click.prevent="toggleCollapse(questionObject.question_id)" class="ml-2">
-            <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']" color="gray"/>
+            <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
           </a>
 
         </b-col>
@@ -74,7 +76,7 @@
           </b-row>
           <!-- End Header-->
           <b-row>
-            <Container @drop="onDrop" drag-handle-selector=".column-drag-handle" class="w-100">
+            <Container @drop="onDrop" drag-handle-selector=".answer-drag-handle" class="w-100">
               <!-- Choices -->
               <Draggable v-for="item in questionObject.answers" :key="item.id">
                 <b-card no-body class="my-2">
@@ -82,7 +84,7 @@
                     <b-container fluid>
                       <b-row>
                         <b-col cols="2 d-flex flex-row align-items-center">
-                          <a class="column-drag-handle mr-5">
+                          <a class="answer-drag-handle mr-5">
                             <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
                           </a>
 
@@ -103,7 +105,7 @@
                         <!-- End Answer input -->
                         <!--Remove  Answer -->
                         <b-col cols="2 " class="text-center">
-                          <a @click="removeItem(item.id)">
+                          <a @click="removeAnswer(item.id)">
                             <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
                           </a>
                           <!-- End Remove  Answer -->
@@ -136,14 +138,14 @@
 <script>
 
   import { library } from '@fortawesome/fontawesome-svg-core'
-  import { faBars, faTrash,faCog,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
+  import { faBars, faTrash,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import {applyDrag} from "../../utils/helpers"
+  import {applyDrag} from "@/utils/helpers"
 
+  import {bus} from "@/main";
 
   library.add(
     faTrash,
-    faCog,
     faSortUp,
     faSortDown,
     faBars
@@ -177,10 +179,6 @@
             collapsed: false,
           },
           questionObject: this.question
-         /* question:"",
-          items: [
-            {name: "answer", text: "First choice", id: 0, checked: false},
-          ],*/
         }
       },
 
@@ -190,7 +188,11 @@
             temp_id = this.id++;
           this.items.push({text: "Enter an answer...",id: temp_id, checked: false});
         },
-        removeItem(id) {
+        removeQuestion() {
+          bus.$emit("remove-question",this.questionObject.question_id);
+        },
+
+        removeAnswer(id) {
           this.items.splice(id, 1);
         },
         onDrop(dropResult) {
@@ -198,7 +200,7 @@
         },
         toggleCollapse(id) {
           this.$root.$emit('bv::toggle::collapse', id);
-          this.collapsed = ! this.collapsed;
+          this.meta.collapsed = ! this.meta.collapsed;
         },
       },
 
