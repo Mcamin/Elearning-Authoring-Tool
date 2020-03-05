@@ -60,14 +60,21 @@
         selectedLesson(){
           switch (this.$route.name) {
             case "edit-interaction":
+              if(this.currentInteraction)
               return this.currentInteraction.title;
-
+              break;
             case "edit-lesson":
+              if(this.currentLesson)
               return this.currentLesson.title;
+              break;
             case "edit-module":
+              if(this.currentModule)
               return this.currentModule.title;
+              break;
             case "edit-section":
+              if(this.currentSection)
               return this.currentSection.title;
+              break;
             default:
               return "";
           }

@@ -1,27 +1,27 @@
 <!-- TODO:
 Add the default section to the sections -->
 <template>
-  <b-container  class="p-5 my-2" >
+  <b-container class="p-5 my-2">
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
-       <template v-if="getCourseContent.length>0" v-for="content in getCourseContent">
+        <template v-if="getCourseContent.length>0" v-for="content in getCourseContent">
 
-           <!--Render Section  -->
+          <!--Render Section  -->
           <component v-if="isSection(content.uuid)" is="Accordion" :accordionTitle="content.title"
-                     :accordionID="content.uuid" />
+                     :accordionID="content.uuid"/>
 
-         <!--Render Module  -->
-         <component v-else is="Accordion" :accordionTitle="content.title"
-                    :accordionID="content.uuid"/>
+          <!--Render Module  -->
+          <component v-else is="Accordion" :accordionTitle="content.title"
+                     :accordionID="content.uuid"/>
 
         </template>
 
 
-        <AddBtn  triggered-by="page"/>
+        <AddBtn triggered-by="page"/>
         <!--End  Add  course Accordion-->
         <!-- Add  section / module  Modal-->
-        <AddSMModal />
+        <AddSMModal/>
         <AddILModal/>
       </b-col>
     </b-row>
@@ -40,9 +40,8 @@ Add the default section to the sections -->
 
   export default {
     name: "EditCourse",
-    data(){
-      return {
-      }
+    data() {
+      return {}
     },
     components: {
       Accordion,
@@ -52,78 +51,84 @@ Add the default section to the sections -->
     },
     computed: {
       ...mapState('course', ['currentCourse']),
-      ...mapState('section', ['currentSection','sections']),
-      ...mapState('module', ['currentModule','modules']),
+      ...mapState('section', ['currentSection', 'sections']),
+      ...mapState('module', ['currentModule', 'modules']),
       ...mapState('lesson', ['lessons']),
       ...mapState('interaction', ['interactions']),
       ...mapGetters(
-        'course' , ['getCourseContent']
+        'course', ['getCourseContent']
       ),
       ...mapGetters(
-        'section' , ['getSectionByID']
+        'section', ['getSectionByID']
       ),
       ...mapGetters(
-        'module' , ['getModuleByID']
+        'module', ['getModuleByID']
       )
     },
-      methods:{
-        ...mapActions('course', {loadCourse: 'loadCourse',updateCourse:'updateCourse'}),
-        ...mapActions('section', {loadSection: 'loadSection',createSection:'createSection'}),
-        ...mapActions('module', {loadModule: 'loadModule'}),
+    methods: {
+      ...mapActions('course', {loadCourse: 'loadCourse', updateCourse: 'updateCourse'}),
+      ...mapActions('section', {loadSection: 'loadSection', createSection: 'createSection'}),
+      ...mapActions('module', {loadModule: 'loadModule'}),
+      ...mapActions('lesson', {resetLesson: 'resetLesson'}),
+      ...mapActions('interaction', {resetInteraction: 'resetInteraction'}),
 
-         async generateCourseContent(){
-          // Create a new section and add it to course if course is new
+      async generateCourseContent() {
+        // Create a new section and add it to course if course is new
 
-          if (Object.entries(this.currentCourse.contentIndex).length  === 0)
-          {let sec_id =  's-'+uuid.v1(),
-              newSection = {
-            uuid: sec_id,
-            title: "New Section",
+        if (Object.entries(this.currentCourse.contentIndex).length === 0) {
+          let sec_id = 's-' + uuid.v1(),
+            newSection = {
+              uuid: sec_id,
+              title: "New Section",
               description: "",
-                modulesIndex:{}
+              modulesIndex: {}
             },
             payload = {};
-            payload[sec_id] =0;
-            await this.createSection(newSection);
-            await this.updateCourse({
-              targetCourse:this.currentCourse.uuid,
-              props:
-                {contentIndex:payload
-                }});
-
-
-          }
-          // Load course content
-          else {
-            if (this.sections.length === 0 &&  this.modules.length === 0) {
-              //keys: 0,1,2,3 positions in contentCourse array
-              // key : uuid of the element to load
-              const keys = Object.keys(this.currentCourse.contentIndex);
-
-              for (const key in keys) {
-                if (this.isSection(keys[key]))
-                  await this.loadSection(keys[key]);
-
-                else
-                  await this.loadModule(keys[key]);
-
+          payload[sec_id] = 0;
+          await this.createSection(newSection);
+          await this.updateCourse({
+            targetCourse: this.currentCourse.uuid,
+            props:
+              {
+                contentIndex: payload
               }
+          });
+
+
+        }
+        // Load course content
+        else {
+          if (this.sections.length === 0 && this.modules.length === 0) {
+            //keys: 0,1,2,3 positions in contentCourse array
+            // key : uuid of the element to load
+            const keys = Object.keys(this.currentCourse.contentIndex);
+
+            for (const key in keys) {
+              if (this.isSection(keys[key]))
+                await this.loadSection(keys[key]);
+
+              else
+                await this.loadModule(keys[key]);
 
             }
+
           }
+        }
 
-        },
-
-        isSection(sec_id) {
-              return sec_id.charAt(0) === 's';
-          },
       },
 
+      isSection(sec_id) {
+        return sec_id.charAt(0) === 's';
+      },
+    },
+
     created() {
-           //TODO: reset those
-          //Reset currentInteraction
-          //Reset Current Lesson
-          this.generateCourseContent();
+      //TODO: reset those
+      //Reset currentInteraction
+      //Reset Current Lesson
+      this.resetInteraction();
+      this.resetLesson();
+      this.generateCourseContent();
     }
   }
 </script>
