@@ -48,7 +48,7 @@
 
           <!--Render Module Content: Quizzes and interactions-->
        <template v-if="isModule" v-for="(c,idx) in getModuleContent(this.accordionID)" >
-            <ContentCard  :contentId="c.contentId" :title="c.title"
+            <ContentCard  :contentId="c.uuid" :title="c.title"
                        :key="idx"/>
         </template>
         <AddBtn :triggered-by="this.accordionID"  />

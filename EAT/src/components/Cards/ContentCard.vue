@@ -12,7 +12,7 @@
 
         <!--Right Settings-->
         <b-col  class="text-right">
-          <a href="#"  class="ml-2">
+          <a href="#"  @click.stop="handleDelete" class="ml-2">
             <font-awesome-icon :icon="['fas', 'trash']"  color="gray" size="lg"/>
           </a>
           <a href="#" class="ml-2">
@@ -32,6 +32,7 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import {faTrash,faCog} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import {bus} from "@/main";
   library.add(
     faTrash,
     faCog,
@@ -56,6 +57,18 @@
       components: {
         'font-awesome-icon': FontAwesomeIcon,
       },
+      methods:{
+        handleDelete(){
+          console.log("hello");
+          let contentType = this.contentId.charAt(0)==='i'? "interaction":"lesson";
+          let metadata = {
+            id: this.contentId,
+            type: contentType,
+            title: this.title,
+          };
+          bus.$emit('delete-course', metadata);
+        }
+      }
     }
 </script>
 

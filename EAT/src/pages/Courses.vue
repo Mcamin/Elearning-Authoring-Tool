@@ -65,7 +65,7 @@
   import {bus} from '@/main';
   import {mapActions, mapState} from "vuex";
   import {dynamicSort} from '@/utils/helpers'
-  import DeleteModal from '@/components/Modals/DeleteCourseModal'
+  import DeleteModal from '@/components/Modals/DeleteModal'
   export default {
     name: "courses",
     components: {

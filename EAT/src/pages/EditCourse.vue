@@ -5,15 +5,15 @@ Add the default section to the sections -->
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
-        <template v-if="getCourseContent.length>0" v-for="content in getCourseContent">
+        <template v-if="getCourseContent.length>0" v-for="(content,idx) in getCourseContent">
 
           <!--Render Section  -->
-          <component v-if="isSection(content.uuid)" is="Accordion" :accordionTitle="content.title"
-                     :accordionID="content.uuid"/>
+          <component v-if="isSection(content.uuid)" :is="'Accordion'" :accordionTitle="content.title"
+                     :accordionID="content.uuid" :key="idx"/>
 
           <!--Render Module  -->
-          <component v-else is="Accordion" :accordionTitle="content.title"
-                     :accordionID="content.uuid"/>
+          <component v-else :is="'Accordion'" :accordionTitle="content.title"
+                     :accordionID="content.uuid" :key="idx"/>
 
         </template>
 
@@ -23,6 +23,7 @@ Add the default section to the sections -->
         <!-- Add  section / module  Modal-->
         <AddSMModal/>
         <AddILModal/>
+        <DeleteModal/>
       </b-col>
     </b-row>
   </b-container>
@@ -34,9 +35,9 @@ Add the default section to the sections -->
   import AddSMModal from "@/components/Modals/AddModuleSectionModal";
   import AddILModal from "@/components/Modals/AddLessonInteractionModal";
   import AddBtn from "@/components/Buttons/AddBtn";
+  import DeleteModal from "@/components/Modals/DeleteModal"
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
-  import section from "@/api/section";
 
   export default {
     name: "EditCourse",
@@ -47,7 +48,8 @@ Add the default section to the sections -->
       Accordion,
       AddSMModal,
       AddBtn,
-      AddILModal
+      AddILModal,
+      DeleteModal
     },
     computed: {
       ...mapState('course', ['currentCourse']),
