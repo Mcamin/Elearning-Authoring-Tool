@@ -10,7 +10,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto navbarstyle">
         <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
-        <b-nav-item href="#">SETTINGS</b-nav-item>
+        <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast-settings')"
+                    href="#">SETTINGS</b-nav-item>
         <b-nav-item @click="$bvToast.show('my-toast')"
                     href="#">SHARE</b-nav-item>
         <b-nav-item href="#">EXPORT</b-nav-item>
@@ -18,6 +19,21 @@
         <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
+    <b-toast id="my-toast-settings" variant="success" no-auto-hide solid class="toast-wrapper">
+      <template v-slot:toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">Edit Course settings</strong>
+          <small class="text-muted mr-2">Close</small>
+        </div>
+      </template>
+      Course Title: <b-form-input v-model="courseTitle"></b-form-input>
+      Course Description: <b-form-input v-model="courseDescription"></b-form-input>
+      <hr>
+      <div align="right">
+        <b-button size="sm" @click="hideToast('my-toast-settings')">Cancel</b-button>
+        <b-button size="sm" variant="success" @click="hideToast('my-toast-settings')">Save</b-button>
+      </div>
+    </b-toast>
     <!-- Toast for Share button -->
     <b-toast id="my-toast" variant="success" no-auto-hide solid class="toast-wrapper">
       <template v-slot:toast-title>
@@ -49,6 +65,8 @@
     export default {
       data() {
         return {
+          courseTitle: 'COURSETITLE',
+          courseDescription: 'CDESC',
           username:keygen.hex(6),
           pass: keygen.hex(9),
           ltilink: 'LINK'
@@ -69,6 +87,9 @@
         generateNewCredentials(){
           this.username = keygen.hex(6);
           this.pass = keygen.hex(9);
+        },
+        hideToast(id){
+          this.$bvToast.hide(id);
         }
       },
     }
