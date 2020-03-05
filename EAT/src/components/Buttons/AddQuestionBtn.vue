@@ -7,6 +7,8 @@
 <script>
 
   import {bus} from "@/main";
+  import keygen from 'keygen';
+
 
 
 
@@ -16,8 +18,11 @@
      methods:{
        addQuestion(){
                bus.$emit("add-question");
-         }
-     }
+                let id = keygen.url(keygen.medium),
+                  id2 = keygen.hex(12);
+               console.log(id);
+             console.log(id2);
+     }}
 
     }
 </script>

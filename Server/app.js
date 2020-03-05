@@ -13,6 +13,7 @@ const
   courseRoutes = require('./api/routes/course');
 
 //Connect to DB
+
 const mongoURI = 'mongodb+srv://' + process.env.MONGO_USR + ':' + process.env.MONGO_PW +
       '@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true,
