@@ -79,8 +79,8 @@
           <b-row>
             <Container @drop="onDrop" drag-handle-selector=".answer-drag-handle" class="w-100">
               <!-- Choices -->
-              <Draggable v-for="item in questionObject.answers" :key="item.id">
-                <b-card no-body class="my-2">
+              <Draggable v-for="item in questionObject.answers" :key="item.id" class="answer-accordion-wrapper my-2">
+                <b-card no-body>
                   <b-card-body class="px-0">
                     <b-container fluid>
                       <b-row>
@@ -121,7 +121,7 @@
             <!-- Add an answer Btn -->
             <el-button
               @click="addItem()"
-              class="py-3 w-100"
+              class="py-3 mt-2 w-100"
               style="text-align:
         center">Add an answer
             </el-button>

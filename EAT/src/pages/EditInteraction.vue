@@ -5,7 +5,7 @@
     <b-row class="my-5">
       <b-col>
         <Container @drop="onDropQuestion" drag-handle-selector=".question-drag-handle" class="w-100">
-          <Draggable v-for="question in questions" :key="question.question_id" class="accordion-wrapper mt-3">
+          <Draggable v-for="question in questions" :key="question.question_id" class="question-accordion-wrapper mt-3">
           <QuestionAccordion :question="question" />
           </Draggable>
         </Container>
