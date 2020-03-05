@@ -4,7 +4,7 @@ import NotFound from '@/pages/NotFoundPage.vue';
 import Wrapper from "@/layout/Wrapper";
 
 
-import CreateNewCourse from "../pages/EditCourse";
+//import CreateNewCourse from "../pages/EditCourse";
 
 
 
@@ -59,7 +59,7 @@ const routes = [
 
           },
           {
-            path: "preview",
+            path: "edit-course/preview/:id",
             name: "preview",
             component: Preview,
 

@@ -14,7 +14,7 @@
         <b-nav-item href="#">SHARE</b-nav-item>
         <b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>
-        <b-button  to="preview" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
+        <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -30,14 +30,18 @@
   );
 
     export default {
-        name: "CourseNavBar",
+      name: "CourseNavBar",
       components:{
         'font-awesome-icon': FontAwesomeIcon
       },
       computed:{
         ...mapState('course', ['currentCourse']),
         },
-
+      methods:{
+        handlePreview(){
+        this.$router.push({name:'preview',params:{id:this.currentCourse.uuid, title:this.currentCourse.title}});
+        }
+      }
     }
 </script>
 

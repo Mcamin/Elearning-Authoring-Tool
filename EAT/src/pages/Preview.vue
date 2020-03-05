@@ -1,5 +1,5 @@
 <template>
-
+  <h1>CourseID: </h1>
 </template>
 
 <script>
