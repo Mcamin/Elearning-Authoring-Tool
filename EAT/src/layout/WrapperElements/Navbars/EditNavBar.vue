@@ -10,12 +10,28 @@
 
       <!-- Right aligned nav items -->
 
-      <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#">Settings</b-nav-item>
-        <b-button  to="preview" size="sm" class="my-2 my-sm-0" type="submit">{{previewBtn}}</b-button>
-
+      <b-navbar-nav class="ml-auto ">
+        <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast')"
+                    href="#">SETTINGS</b-nav-item>
+        <b-button @click="handlePreview()" size="sm" class="my-2 my-sm-0" type="submit">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
+    <!-- Toast for Share button -->
+    <b-toast id="my-toast" variant="success" no-auto-hide solid class="toast-wrapper">
+      <template v-slot:toast-title>
+        <div class="d-flex flex-grow-1 align-items-baseline">
+          <strong class="mr-auto">Edit Lesson settings</strong>
+          <small class="text-muted mr-2">Close</small>
+        </div>
+      </template>
+      Lesson Title: <b-form-input v-model="lessonTitle"></b-form-input>
+      Lesson Description: <b-form-input v-model="lessonDescription"></b-form-input>
+      <hr>
+      <div align="right">
+      <b-button size="sm" @click="hideToast('my-toast')">Cancel</b-button>
+      <b-button size="sm" variant="success" @click="hideToast('my-toast')">Save</b-button>
+      </div>
+    </b-toast>
   </b-navbar>
 </template>
 
@@ -31,7 +47,8 @@
         name: "EditNavBar",
       data(){
           return {
-
+            lessonTitle: 'LTITLE',
+            lessonDescription: 'LDESC',
             previewBtn:"PREVIEW"
           }
       },
@@ -66,10 +83,28 @@
       components:{
         'font-awesome-icon': FontAwesomeIcon
       },
+      methods:{
+          hideToast(id){
+            this.$bvToast.hide(id);
+          },
+        handlePreview(){
+          this.$router.push({name:'preview',params:{id:this.$route.params.id, title:this.$route.params.title}});
+        },
+      }
 
     }
 </script>
 
 <style scoped>
 
+  .submitbtn:hover{
+    color: grey !important;
+  }
+  .navbar-dark .navbar-nav .nav-link{
+    color: white !important;
+  }
+
+  .navbar-dark .navbar-nav .nav-link:hover{
+    color: grey !important;
+  }
 </style>

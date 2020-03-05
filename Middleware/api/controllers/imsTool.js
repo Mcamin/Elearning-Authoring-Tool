@@ -28,19 +28,7 @@ const functionHelper = (object) => {
 };
 
   let course = {
-    id: "abf9cff0-454f-11ea-bf80-7bc9a6e09b90",
-    title: "Title is 43",
-    description: "This is the description of Course 0",
-    meta: {
-      top: 'secret'
-    },
-    thumbnail: "image.jpg",
-    contentIndex: {
-      section1: 0,
-      module1: 1,
-      section2: 2,
-      module2: 3,
-    },
+
     content: [
       {
         type: "section",
