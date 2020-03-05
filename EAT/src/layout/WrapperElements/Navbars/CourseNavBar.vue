@@ -11,7 +11,9 @@
       <b-navbar-nav class="ml-auto navbarstyle">
         <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
         <b-nav-item href="#">SETTINGS</b-nav-item>
-        <b-nav-item href="#">SHARE</b-nav-item>
+        <b-nav-item variant="primary"
+                    @click="toast('b-toaster-top-right')"
+                    href="#">SHARE</b-nav-item>
         <b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>
         <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
@@ -40,8 +42,17 @@
       methods:{
         handlePreview(){
         this.$router.push({name:'preview',params:{id:this.currentCourse.uuid, title:this.currentCourse.title}});
+        },
+        toast(toaster, append=false){
+          this.$bvToast.toast(`Toast ${this.counter} body content`,{
+            title: `Share course via LTI`,
+            toaster: toaster,
+            solid: true,
+            appendToast: append,
+            noAutoHide:true
+          })
         }
-      }
+      },
     }
 </script>
 
@@ -57,4 +68,14 @@
 .navbar-dark .navbar-nav .nav-link:hover{
   color: grey !important;
 }
+
+.b-toast.b-toast-solid {
+  background-color: white;
+  margin-top: 18% !important;
+}
+.toast {
+  background-color: white;
+  margin-top: 18% !important;
+}
+
 </style>
