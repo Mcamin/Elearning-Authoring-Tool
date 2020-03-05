@@ -38,6 +38,11 @@
   export default {
     name: "EditInteraction",
     components: {QuestionAccordion, AddQuestionBtn, Container, Draggable},
+    data(){
+      return{
+        intervalId:''
+      }
+    },
     computed: {
       ...mapState('interaction', ['currentInteraction']),
       ...mapState('module', ['modules']),
@@ -129,8 +134,13 @@
 
     },
      async saveInteractionInDB(){
-       const isSaved =  await this.updateInteraction();
-       console.log(isSaved.default());
+        let interActionID = this.currentInteraction.uuid,
+          interactionContent = {...this.currentInteraction};
+       const isSaved =  await this.updateInteraction({
+         targetInteraction:interActionID,
+         props:interactionContent
+       });
+       bus.$emit('element-saved',isSaved);
       }
   },
   created()
@@ -142,11 +152,12 @@
       this.removeQuestion(question_id);
     });
     // save every 5 minutes
-    setInterval(this.saveInteractionInDB ,30000);
+    this.intervalId = setInterval(this.saveInteractionInDB ,30000);
 
-
-
-  }
+  },
+    beforeDestroy () {
+      clearInterval(this.intervalId);
+    },
   }
 </script>
 

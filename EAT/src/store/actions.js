@@ -329,15 +329,16 @@ const CourseActions = {
             commit('updateInteraction', payload)
       },
     updateInteraction:
-      async (payload) => {
-        await InteractionRepository
+      async ({commit},payload) => {
+       return await InteractionRepository
           .updateInteraction(payload)
           .then(() => {
-            Promise.resolve(true);
+            commit('updateInteraction', payload);
+            return Promise.resolve(true);
           })
           .catch(error => {
-            Promise.reject(false);
             console.log(error);
+            return Promise.reject(false);
 
           })
       },
