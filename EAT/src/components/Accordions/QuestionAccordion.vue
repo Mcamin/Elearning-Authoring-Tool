@@ -44,6 +44,7 @@
               >
                 <b-form-textarea
                   id="question-x"
+                  @change="triggerUpdate"
                   v-model="questionObject.questionText"
                   placeholder="Enter a question ..."
                   rows="3"
@@ -91,6 +92,7 @@
 
                           <b-form-checkbox v-if="questionObject.questionType === 'Multiple choice'"
                                            v-model="item.checked"
+                                           @change="triggerUpdate"
                           >
                           </b-form-checkbox>
 
@@ -103,7 +105,7 @@
                         </b-col>
                         <!--Answer input -->
                         <b-col>
-                          <b-form-input v-model="item.text" placeholder="Enter an answer"/>
+                          <b-form-input @change="triggerUpdate" v-model="item.text" placeholder="Enter an answer"/>
                         </b-col>
                         <!-- End Answer input -->
                         <!--Remove  Answer -->
@@ -147,6 +149,7 @@
   import {applyDrag} from "@/utils/helpers"
   import {bus} from "@/main";
   import keygen from "keygen";
+  import {mapActions, mapState} from "vuex";
 
   library.add(
     faTrash,
@@ -183,17 +186,24 @@
           questionObject: this.question
         }
       },
+      computed:{
+        ...mapState('interaction', ['currentInteraction']),
+      },
 
       methods:{
+        ...mapActions('interaction', {updateInteractionState: 'updateInteractionState'}),
+
         setSelectedAnswer(checked) {
 
           const index = this.questionObject.answers.findIndex(x => x.id === checked);
           this.questionObject.answers.forEach( (el,idx) => {
             el.checked = idx === index;
           });
+          this.triggerUpdate();
         },
         addItem() {
           this.questionObject.answers.push({text: "",id: 'a-'+keygen.hex(6), checked: false});
+          this.triggerUpdate();
         },
         removeQuestion() {
           bus.$emit("remove-question",this.questionObject.question_id);
@@ -201,9 +211,23 @@
         removeAnswer(id) {
           const index = this.questionObject.answers.findIndex(x => x.id === id);
           this.questionObject.answers.splice( index, 1);
+          this.triggerUpdate();
         },
         onDrop(dropResult) {
           this.questionObject.answers = applyDrag( this.questionObject.answers, dropResult);
+          this.triggerUpdate();
+        },
+        triggerUpdate(){
+          let questionsArray = [...this.currentInteraction.questions],
+            foundIndex =  questionsArray.findIndex(
+              el => el.question_id ===this.questionObject.question_id );
+
+          questionsArray.splice(foundIndex, 1,this.questionObject);
+          this.updateInteractionState({
+            targetInteraction:this.currentInteraction.uuid,
+            props:{
+              questions:questionsArray
+            }});
         },
         toggleCollapse(id) {
           this.$root.$emit('bv::toggle::collapse', id);

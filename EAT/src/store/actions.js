@@ -317,29 +317,35 @@ const CourseActions = {
       async ({commit}, newInteraction) => {
         await InteractionRepository
           .createInteraction(newInteraction)
-          .then((response) => {
+          .then(() => {
             commit('createInteraction', newInteraction)
           })
           .catch(error => {
             console.log(error)
           })
       },
+    updateInteractionState:
+       ({commit}, payload) => {
+            commit('updateInteraction', payload)
+      },
     updateInteraction:
-      async ({commit}, payload) => {
+      async (payload) => {
         await InteractionRepository
           .updateInteraction(payload)
-          .then((response) => {
-            commit('updateInteraction', payload)
+          .then(() => {
+            Promise.resolve(true);
           })
           .catch(error => {
-            console.log(error)
+            Promise.reject(false);
+            console.log(error);
+
           })
       },
     deleteInteraction:
       async ({commit}, interactionID) => {
         await InteractionRepository
           .deleteInteraction(interactionID)
-          .then((response) => {
+          .then(() => {
             commit('deleteInteraction', interactionID)
           })
           .catch(error => {

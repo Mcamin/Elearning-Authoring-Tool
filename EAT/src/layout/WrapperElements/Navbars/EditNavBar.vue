@@ -9,7 +9,9 @@
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
+
       <b-navbar-nav class="ml-auto">
+        <b-nav-item href="#">Settings</b-nav-item>
         <b-button  to="preview" size="sm" class="my-2 my-sm-0" type="submit">{{previewBtn}}</b-button>
 
       </b-navbar-nav>
@@ -33,17 +35,31 @@
             previewBtn:"PREVIEW"
           }
       },
+      computed:{
+        ...mapState('interaction', ['currentInteraction']),
+        ...mapState('lesson', ['currentLesson']),
+        ...mapState('section', ['currentSection']),
+        ...mapState('module', ['currentModule']),
+        selectedLesson(){
+          switch (this.$route.name) {
+            case "edit-interaction":
+              return this.currentInteraction.title;
+
+            case "edit-lesson":
+              return this.currentLesson.title;
+            case "edit-module":
+              return this.currentModule.title;
+            case "edit-section":
+              return this.currentSection.title;
+            default:
+              return "";
+          }
+        }
+      },
       components:{
         'font-awesome-icon': FontAwesomeIcon
       },
-      computed:{
-       /* ...mapState([
-          "selectedLesson"
-        ]),*/
-        selectedLesson(){
-          return "New Lesson"
-        }
-      }
+
     }
 </script>
 

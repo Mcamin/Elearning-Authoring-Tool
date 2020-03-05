@@ -34,8 +34,9 @@
           },
         isEditContent(){
           return checkRouter(this.$route.name,'edit-lesson') ||
-            checkRouter(this.$route.name,'edit-interaction') ||
-            checkRouter(this.$route.name,'edit-glossary');
+            checkRouter(this.$route.name,'edit-interaction')||
+            checkRouter(this.$route.name,'edit-section') ||
+            checkRouter(this.$route.name,'edit-module')
         },
         isExport(){
           return checkRouter(this.$route.name,'export');

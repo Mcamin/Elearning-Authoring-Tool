@@ -169,7 +169,7 @@
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"interaction"}});
       },
       addInteractionClicked() {
-        this.$router.push({name: 'edit-interaction', params: {id: this.moduleId}});
+        this.$router.push({name: 'edit-interaction', params: {id: this.moduleId,}});
       },
       importLessonClicked () {
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"lesson"}});

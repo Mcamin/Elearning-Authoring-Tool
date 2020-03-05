@@ -44,7 +44,8 @@
     },
     methods: {
 
-      ...mapActions('interaction', {createInteraction: 'createInteraction',updateInteraction: 'updateInteraction'}),
+      ...mapActions('interaction', {createInteraction: 'createInteraction',
+        updateInteractionState: 'updateInteractionState', updateInteraction: 'updateInteraction'}),
       ...mapActions('module', {updateModule: 'updateModule'}),
 
       //  Initialize Interaction content on creation
@@ -99,7 +100,7 @@
       };
       let questionsArray = [...this.currentInteraction.questions];
         questionsArray.push(newQuestion);
-      this.updateInteraction({
+      this.updateInteractionState({
         targetInteraction:this.currentInteraction.uuid,
         props:{
           questions:questionsArray
@@ -109,7 +110,7 @@
     removeQuestion(question_id) {
       let questionsArray = [...this.currentInteraction.questions];
           questionsArray = questionsArray.filter(el => el.question_id !== question_id);
-      this.updateInteraction({
+      this.updateInteractionState({
         targetInteraction:this.currentInteraction.uuid,
         props:{
           questions:questionsArray
@@ -119,7 +120,7 @@
     onDropQuestion(dropResult) {
       let questionsArray = [...this.currentInteraction.questions];
         questionsArray = applyDrag(questionsArray, dropResult);
-      this.updateInteraction({
+      this.updateInteractionState({
         targetInteraction:this.currentInteraction.uuid,
         props:{
           questions:questionsArray
@@ -127,6 +128,10 @@
       });
 
     },
+     async saveInteractionInDB(){
+       const isSaved =  await this.updateInteraction();
+       console.log(isSaved.default());
+      }
   },
   created()
   { this.initInteractionContent();
@@ -136,6 +141,10 @@
     bus.$on("remove-question", (question_id) => {
       this.removeQuestion(question_id);
     });
+    // save every 5 minutes
+    setInterval(this.saveInteractionInDB ,30000);
+
+
 
   }
   }
