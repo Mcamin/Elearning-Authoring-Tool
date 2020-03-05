@@ -41,9 +41,9 @@
     <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
          <!--Render Section Content: Modules-->
-         <template v-if="isSection" v-for="module in getSectionContent(this.accordionID)">
-            <component is="Accordion" :accordionTitle="module.title"
-                       :accordionID="module.uuid"/>
+         <template v-if="isSection" v-for="(module, index) in getSectionContent(this.accordionID)">
+            <component :is="'Accordion'" :accordionTitle="module.title"
+                       :accordionID="module.uuid" :key="index"/>
           </template>
 
           <!--Render Module Content: Quizzes and interactions-->
@@ -53,9 +53,9 @@
           </b-link>
 
         </template>-->
-        <div v-if="isModule">
+        <!--<div v-if="isModule">
           <ContentCard/>
-        </div>
+        </div>-->
         <AddBtn :triggered-by="this.accordionID"  />
       </b-card-body>
     </b-collapse>
