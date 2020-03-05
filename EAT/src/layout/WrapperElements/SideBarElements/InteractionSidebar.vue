@@ -37,7 +37,7 @@
 
 <b-row  class="mt-auto mx-0">
    <b-col class="px-0">
-     <el-button class=" py-3 w-100"style="text-align: center">Add Question</el-button>
+     <el-button class=" py-3 w-100" style="text-align: center">Add Question</el-button>
    </b-col>
  </b-row>
  </b-container>

@@ -111,7 +111,8 @@
 
       },
       handlePreview() {
-        this.$router.push({name: 'preview'});
+        this.$router.push({name:'preview',params:{id:this.uuid, title:this.title}});
+
       },
       handleDelete() {
         let courseMeta = {
