@@ -1,23 +1,18 @@
 
 // GeneralViews
-import NotFound from '@/pages/NotFoundPage.vue';
+import NotFound from "@/pages/NotFoundPage.vue";
 import Wrapper from "@/layout/Wrapper";
+import Login  from "@/pages/Login.vue";
 
+//  pages
 
-//import CreateNewCourse from "../pages/EditCourse";
-
-
-
-// Admin pages
-const Login = () => import(/* webpackChunkName: "Login" */ "@/pages/Login.vue");
 const Home = () => import(/* webpackChunkName: "Home" */ "@/pages/Home.vue");
 const Library = () => import(/* webpackChunkName: "Library" */ "@/pages/Library.vue");
 const Courses = () => import(/* webpackChunkName: "Courses" */"@/pages/Courses.vue");
-const NewCourse = () => import(/* webpackChunkName: "EditCourse" */"@/pages/EditCourse.vue");
+const EditCourse = () => import(/* webpackChunkName: "EditCourse" */"@/pages/EditCourse.vue");
 const Preview = () => import(/* webpackChunkName: "EditCourse" */"@/pages/Preview.vue");
 const EditInteraction = () => import(/* webpackChunkName: "EditLesson" */ "@/pages/EditInteraction.vue");
 const EditLesson = () => import(/* webpackChunkName: "EditInteraction" */ "@/pages/EditLesson.vue");
-const Playground = () => import(/* webpackChunkName: "Playground" */ "@/pages/Trash/Playground.vue");
 const routes = [
     {
         path: "/",
@@ -46,12 +41,6 @@ const routes = [
             }
           },
           {
-            path: "playground",
-            name: "playground",
-            component: Playground,
-
-          },
-          {
             path: "edit-interaction/:id" +
               "",
             name: "edit-interaction",
@@ -78,7 +67,7 @@ const routes = [
           {
             path: "/edit-course/:id",
             name: "edit-course",
-            component: NewCourse,
+            component: EditCourse,
             props: true,
             meta:{
               breadcrumb:[
@@ -113,7 +102,6 @@ const routes = [
             }
 
           },
-
         ]
     },
   { path: "/login",

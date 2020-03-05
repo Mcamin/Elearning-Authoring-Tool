@@ -12,11 +12,9 @@
 
     import LibraryElements from "./SideBarElements/LibraryElements";
     import {checkRouter} from "@/utils/helpers";
-    import InteractionSidebar from "@/layout/WrapperElements/SideBarElements/InteractionSidebar";
 
     export default {
         components: {
-            InteractionSidebar,
           LibraryElements,
 
         },
