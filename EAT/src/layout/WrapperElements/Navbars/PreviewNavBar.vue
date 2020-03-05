@@ -18,6 +18,12 @@
 </template>
 
 <script>
+  import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+  import {library} from "@fortawesome/fontawesome-svg-core";
+
+  library.add(
+    faChevronLeft,
+  );
 
   export default {
       name: "PreviewNavBar",

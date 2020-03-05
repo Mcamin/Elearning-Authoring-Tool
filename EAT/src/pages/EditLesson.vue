@@ -9,20 +9,21 @@
               <b-container fluid>
                 <b-row>
                   <b-col class="mb-3">
-                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lessonTitle" ref="lesson_title"
+                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lessonTitle" ref="lessonTitle"
                            type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg"
-                                         v-if="!isEditing"/>
+                                         v-if="!isEditing" color="gray"/>
                       <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg"
-                                         v-else-if="isEditing"/>
+                                         v-else-if="isEditing" color="gray"/>
                     </a>
-                    <a class="ml-2" href="#">
+                    <!--<a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
                     </a>
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'cog']" size="lg"/>
-                    </a>
+
+                    </a>-->
                   </b-col>
                 </b-row>
                 <b-row>
@@ -195,7 +196,7 @@
         {let lessonId =  'l-'+uuid.v1(),
           newLesson = {
             uuid: lessonId,
-            title: "New Lesson____",
+            //title: "New Lesson____",
             content: "Hello world ",
           },
           payload = {};
@@ -215,7 +216,7 @@
 
       },
       toggleTitleInput() {
-        this.lesson.title = this.$refs['lesson_title'].value;
+        this.lessonTitle = this.$refs['lessonTitle'].value;
         this.isEditing = !this.isEditing;
       }
     },
