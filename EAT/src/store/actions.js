@@ -70,10 +70,13 @@ const CourseActions = {
       ({commit,dispatch}) => {
         commit('resetCourse');
         dispatch('section/resetSectionsArray', null, { root: true });
+        dispatch('section/resetSection', null, { root: true });
         dispatch('module/resetModulesArray', null, { root: true });
+        dispatch('module/resetModule', null, { root: true });
         dispatch('interaction/resetInteractionsArray', null, { root: true });
+        dispatch('interaction/resetInteraction', null, { root: true });
         dispatch('lesson/resetLessonsArray', null, { root: true });
-        //TODO: reset current elements also
+        dispatch('lesson/resetLesson', null, { root: true });
       },
     resetCoursesArray:
       ({commit}) => {
