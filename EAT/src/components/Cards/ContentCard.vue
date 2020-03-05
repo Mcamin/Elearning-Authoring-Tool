@@ -1,23 +1,15 @@
 <template>
-  <b-card no-body class="accordion-wrapper mb-3">
+  <b-card no-body class="mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
         <!-- Left Settings -->
         <b-col  class="text-left">
-          <b-container class="d-flex">
-            <label>
-              <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="secTitle"
-                     ref="section_title" v-on:keyup.enter="toggleTitleInput">
-            </label>
-            <a class="ml-2" href="#">
-              <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing" color="gray"/>
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" color="gray"/>
-            </a>
-          </b-container>
+          <h4>TITLE</h4>
         </b-col>
         <!-- End Left Settings -->
 
+        <!--Right Settings-->
         <!--Right Settings-->
         <b-col  class="text-right">
           <a href="#"  class="ml-2">
@@ -26,40 +18,11 @@
           <a href="#" class="ml-2">
             <font-awesome-icon :icon="['fas', 'cog']" color="gray" />
           </a>
-
-          <a href="#" @click.prevent="toggleCollapse(accordionID)" class="ml-2">
-            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" color="gray"/>
-          </a>
-
         </b-col>
         <!--End Right settings -->
       </b-row>
     </b-card-header>
-     <!--End header -->
 
-    <!--Content-->
-    <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
-      <b-card-body>
-         <!--Render Section Content: Modules-->
-         <template v-if="isSection" v-for="module in getSectionContent(this.accordionID)">
-            <component is="Accordion" :accordionTitle="module.title"
-                       :accordionID="module.uuid"/>
-          </template>
-
-          <!--Render Module Content: Quizzes and interactions-->
-        <!--<template v-if="index && isModule" v-for="c in getSectionContent(index)" >
-          <b-link :to="elementPage(c.id)">
-            <component is="Accordion" :accordionTitle="c.title" :accordionID="c.id"/>
-          </b-link>
-
-        </template>-->
-        <div v-if="isModule">
-          <ContentCard/>
-        </div>
-        <AddBtn :triggered-by="this.accordionID"  />
-      </b-card-body>
-    </b-collapse>
-    <!--End Content-->
   </b-card>
 </template>
 
@@ -70,8 +33,6 @@
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AddBtn from "../Buttons/AddBtn";
   import {mapActions, mapGetters, mapState} from "vuex";
-  import ContentCard from "../Cards/ContentCard";
-
   library.add(
     faPen,
     faTrash,
@@ -82,7 +43,7 @@
   );
 
     export default {
-      name: "Accordion",
+      name: "ContentCard",
       data(){
         return{
           isEditing: false,
@@ -105,11 +66,9 @@
 
       },
       components:{
-        ContentCard,
         AddBtn,
         'font-awesome-icon': FontAwesomeIcon,
       },
-
 
       methods:{
      /*   ...mapActions([
