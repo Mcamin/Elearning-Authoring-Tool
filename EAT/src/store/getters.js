@@ -8,7 +8,7 @@ const CourseGetters = {
   },
   // Get a Course by ID
   getCourseByID: state => id =>{
-    return state.courses.find(course => course.id=== id);
+    return state.courses.find(course => course.uuid=== id);
   },
     // Get Course Content
     getCourseContent:(state,getters,rootState,rootGetters ) => {
