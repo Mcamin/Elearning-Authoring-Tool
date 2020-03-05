@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
   //else
   //if(to.name==='newcourse')
   if(notEmptyObject(to.params)) {
-   if(Object.entries(to.meta).length !== 0)
+   if(to.meta['breadcrumb'])
    {
      to.meta.breadcrumb[to.meta.breadcrumb.length-1].text =   to.params.title;}
   }

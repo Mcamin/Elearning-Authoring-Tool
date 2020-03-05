@@ -4,7 +4,7 @@
 
     <b-row class="my-5">
       <b-col>
-        <Container @drop="onDropQuestion" drag-handle-selector=".question-drag-handle" class="w-100">
+        <Container  v-if="currentInteraction"  @drop="onDropQuestion" drag-handle-selector=".question-drag-handle" class="w-100">
           <!-- Question Accordion -->
           <Draggable v-for="question in  currentInteraction.questions" :key="question.question_id" class="question-accordion-wrapper mt-3">
             <QuestionAccordion :question="question"/>
@@ -151,8 +151,8 @@
     bus.$on("remove-question", (question_id) => {
       this.removeQuestion(question_id);
     });
-    // save every 5 minutes
-    this.intervalId = setInterval(this.saveInteractionInDB ,30000);
+    // save every x minute : set in .env
+    this.intervalId = setInterval(this.saveInteractionInDB ,parseInt(process.env.VUE_APP_SAVE_INTERVAL) *60000);
 
   },
     beforeDestroy () {
