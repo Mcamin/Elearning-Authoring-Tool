@@ -1,6 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
-    <b-navbar-brand href="#"><font-awesome-icon :icon="['fas','chevron-left']" size="lg"/></b-navbar-brand>
+    <b-navbar-brand href="#" @click="$router.go(-1)"><font-awesome-icon :icon="['fas','chevron-left']" size="lg"/></b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
