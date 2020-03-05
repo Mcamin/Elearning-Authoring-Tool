@@ -44,7 +44,7 @@
     },
     methods: {
 
-      ...mapActions('interaction', {createInteraction: 'createInteraction'}),
+      ...mapActions('interaction', {createInteraction: 'createInteraction',updateInteraction: 'updateInteraction'}),
 
       //  Initialize Interaction content on creation
       async initInteractionContent() {
@@ -77,7 +77,7 @@
           //update Module Index
           moduleContentIndex[id] = contentLength;
           await this.updateModule({
-            targetSection: this.$route.params.id,
+            targetModule: this.$route.params.id,
             props: {
               contentIndex: moduleContentIndex
             }
@@ -96,15 +96,37 @@
           {text: "", id: 'a-' + keygen.hex(6), checked: false},
         ]
       };
-      this.questions.push(newQuestion);
+      let questionsArray = [...this.currentInteraction.questions];
+        questionsArray.push(newQuestion);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
+      });
     },
     removeQuestion(question_id) {
-      this.questions.splice(this.questions.findIndex(x => {
-        x.question_id === question_id
-      }), 1);
+      let questionsArray = [...this.currentInteraction.questions];
+          questionsArray = questionsArray.filter(el => el.question_id !== question_id);
+          console.log(question_id);
+          console.log(questionsArray);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
+      });
     },
     onDropQuestion(dropResult) {
-      this.questions = applyDrag(this.questions, dropResult);
+      let questionsArray = [...this.currentInteraction.questions];
+        questionsArray = applyDrag(questionsArray, dropResult);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
+      });
+
     },
   },
   created()

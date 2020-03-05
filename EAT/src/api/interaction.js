@@ -16,7 +16,7 @@ export default {
   },
 
   updateInteraction(payload){
-    return Repository.patch(`${resource}`,payload);
+    return Repository.patch(`${resource}/${payload.targetInteraction}`,payload.props);
   },
   deleteInteraction(interactionID) {
     return Repository.delete(`${resource}/${interactionID}`);

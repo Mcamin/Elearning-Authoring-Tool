@@ -111,9 +111,9 @@ const LessonMutations = {
   },
   updateLesson: (state, payload) => {
     //Loop through Payload and update lesson Attributes
-    let foundIndex =  state.interactions.findIndex(
-      el => el.uuid === payload.targetSection),
-      newObj = state.interactions[foundIndex];
+    let foundIndex =  state.lessons.findIndex(
+      el => el.uuid === payload.targetLesson),
+      newObj = state.lessons[foundIndex];
 
     const entries = Object.entries(payload.props);
 
@@ -153,7 +153,7 @@ const InteractionMutations = {
   updateInteraction: (state, payload) => {
     //Loop through Payload and update interaction Attributes
     let foundIndex =  state.interactions.findIndex(
-      el => el.uuid === payload.targetSection),
+      el => el.uuid === payload.targetInteraction),
       newObj = state.interactions[foundIndex];
 
     const entries = Object.entries(payload.props);
