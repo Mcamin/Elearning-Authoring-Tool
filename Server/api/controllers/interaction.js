@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 /*TODO: add request to populate interaction usage */
-const Module = require("../models/module");
+//const Module = require("../models/module");
 const Interaction = require("../models/interaction");
 
 // Get interactions 10 by 10
@@ -11,7 +11,7 @@ exports.interactions_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Interaction.find()
-  .select("title description questions questionsIndex content _id")
+  .select("uuid title type description questions ")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -39,6 +39,7 @@ exports.interactions_get_all = (req, res, next) => {
 // Get an interaction by id
 exports.interactions_get_interaction = (req, res, next) => {
   Interaction.findOne({uuid: req.params.interactionId})
+  .select("uuid title type description questions ")
   .exec()
   .then(interaction => {
     if (!interaction) {
@@ -61,10 +62,12 @@ exports.interactions_get_interaction = (req, res, next) => {
 exports.interactions_create_interaction = (req, res, next) => {
   const interaction = new Interaction({
     _id: mongoose.Types.ObjectId(),
+    uuid: req.body.uuid,
     title: req.body.title,
     description: req.body.description,
     questions: req.body.questions,
-    questionsIndex: req.body.questionsIndex
+    shuffle: req.body.shuffle,
+    score: req.body.score
   });
   interaction
   .save()
@@ -91,11 +94,7 @@ exports.interactions_create_interaction = (req, res, next) => {
 // Update an interaction
 exports.interactions_update_interaction = (req, res, next) => {
   const id = req.params.interactionId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }
-  Interaction.update({ _id: id }, { $set: updateOps })
+  Interaction.updateOne({ uuid: id }, { $set: req.body })
   .exec()
   .then(result => {
     res.status(200).json({
@@ -112,7 +111,7 @@ exports.interactions_update_interaction = (req, res, next) => {
 
 //Delete an Interaction
 exports.interactions_delete_interaction = (req, res, next) => {
-  Interaction.remove({_id: req.params.interactionId})
+  Interaction.deleteOne({uuid: req.params.interactionId})
   .exec()
   .then(result => {
     res.status(200).json({

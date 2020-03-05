@@ -5,21 +5,21 @@
     <b-row class="my-5">
       <b-col>
         <Container @drop="onDropQuestion" drag-handle-selector=".question-drag-handle" class="w-100">
-          <Draggable v-for="question in questions" :key="question.question_id" class="question-accordion-wrapper mt-3">
-          <QuestionAccordion :question="question" />
+          <!-- Question Accordion -->
+          <Draggable v-for="question in  currentInteraction.questions" :key="question.question_id" class="question-accordion-wrapper mt-3">
+            <QuestionAccordion :question="question"/>
           </Draggable>
+          <!-- End Question Accordion -->
         </Container>
       </b-col>
     </b-row>
+    <!-- Add Question -->
     <b-row class="my-5">
       <b-col>
         <AddQuestionBtn/>
       </b-col>
     </b-row>
-    <!-- End Answers Component-->
-
-
-    <!--- End Feedback -->
+    <!-- End add Question -->
   </b-container>
 </template>
 
@@ -27,72 +27,118 @@
 
 
   import {bus} from "@/main";
-  import {Container,Draggable } from "vue-smooth-dnd";
+  import {Container, Draggable} from "vue-smooth-dnd";
   import QuestionAccordion from "@/components/Accordions/QuestionAccordion";
   import AddQuestionBtn from "@/components/Buttons/AddQuestionBtn";
   import keygen from 'keygen'
   import {applyDrag} from "@/utils/helpers";
+  import {mapActions, mapState} from "vuex";
+
+
   export default {
     name: "EditInteraction",
-    components: {QuestionAccordion, AddQuestionBtn,Container,Draggable},
-    data() {
-      return {
-        questions: [
-          {
-            question_id: 'question_1',
-            questionText: "this is the question 1",
-            questionType: "Multiple choice",
-            answers: [
-              {text: "First choice", id: 0, checked: false},
-              {text: "First choice", id: 1, checked: true},
-              {text: "First choice", id: 2, checked: false},
-            ]
-          },
-          {
-            question_id: 'question_2',
-            question: "this is the question 2",
-            questionType: "Multiple choice",
-            answers: [
-              {text: "First choice", id: 0, checked: false},
-              {text: "First choice", id: 1, checked: true},
-              {text: "First choice", id: 2, checked: true},
-            ]
-          }
-
-        ]
-      }
+    components: {QuestionAccordion, AddQuestionBtn, Container, Draggable},
+    computed: {
+      ...mapState('interaction', ['currentInteraction']),
+      ...mapState('module', ['modules']),
     },
     methods: {
-      addQuestion() {
 
-        let newQuestion =      {
-          question_id: 'q-'+keygen.hex(8),
-          questionText: "",
-          questionType: "Single choice",
-          answers: [
-            {text: "", id: 'a-'+keygen.hex(6), checked: false},
-          ]
-        };
-        this.questions.push(newQuestion);
+      ...mapActions('interaction', {createInteraction: 'createInteraction',updateInteraction: 'updateInteraction'}),
+
+      //  Initialize Interaction content on creation
+      async initInteractionContent() {
+        let
+          newInteraction = null,
+          currentModule = this.modules.find(el => el.uuid === this.$route.params.id),
+          moduleContentIndex = currentModule ? currentModule.contentIndex : {},
+          contentLength = Object.keys(moduleContentIndex).length,
+          id = 'i-' + this.$uuid.v1();
+
+        if (!this.currentInteraction) {
+          newInteraction = {
+            uuid: id,
+            title: "New Interaction",
+            type: "Interaction",
+            description: "",
+            score: 0,
+            shuffle: false,
+            questions: [{
+              question_id: 'q-' + keygen.hex(8),
+              questionText: "",
+              questionType: "Single choice",
+              answers: [
+                {text: "", id: 'a-' + keygen.hex(6), checked: false},
+              ]
+            }]
+          };
+          // Create an interaction
+          await this.createInteraction(newInteraction);
+          //update Module Index
+          moduleContentIndex[id] = contentLength;
+          await this.updateModule({
+            targetModule: this.$route.params.id,
+            props: {
+              contentIndex: moduleContentIndex
+            }
+          });
+        }
+
       },
-      removeQuestion(question_id) {
-        this.questions.splice(  this.questions.findIndex(x => {x.question_id === question_id}), 1);
-      },
-      onDropQuestion(dropResult) {
-        this.questions = applyDrag(this.questions, dropResult);
-      },
+
+    addQuestion() {
+
+      let newQuestion = {
+        question_id: 'q-' + keygen.hex(8),
+        questionText: "",
+        questionType: "Single choice",
+        answers: [
+          {text: "", id: 'a-' + keygen.hex(6), checked: false},
+        ]
+      };
+      let questionsArray = [...this.currentInteraction.questions];
+        questionsArray.push(newQuestion);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
+      });
     },
-    created() {
-      bus.$on("add-question", () => {
-        this.addQuestion();
+    removeQuestion(question_id) {
+      let questionsArray = [...this.currentInteraction.questions];
+          questionsArray = questionsArray.filter(el => el.question_id !== question_id);
+          console.log(question_id);
+          console.log(questionsArray);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
       });
-      bus.$on("remove-question", (question_id) => {
-        this.removeQuestion(question_id);
+    },
+    onDropQuestion(dropResult) {
+      let questionsArray = [...this.currentInteraction.questions];
+        questionsArray = applyDrag(questionsArray, dropResult);
+      this.updateInteraction({
+        targetInteraction:this.currentInteraction.uuid,
+        props:{
+          questions:questionsArray
+        }
       });
 
+    },
+  },
+  created()
+  { this.initInteractionContent();
+    bus.$on("add-question", () => {
+      this.addQuestion();
+    });
+    bus.$on("remove-question", (question_id) => {
+      this.removeQuestion(question_id);
+    });
 
-    }
-
+  }
   }
 </script>
 

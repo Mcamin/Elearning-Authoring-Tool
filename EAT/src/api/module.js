@@ -16,7 +16,7 @@ export default {
   },
 
   updateModule(payload){
-    return Repository.patch(`${resource}`,payload);
+    return Repository.patch(`${resource}/${payload.targetModule}`,payload.props);
   },
   deleteModule(moduleID) {
     return Repository.delete(`${resource}/${moduleID}`);

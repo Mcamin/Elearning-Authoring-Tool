@@ -96,7 +96,9 @@
 
                           <!-- V-if Single choice -->
                           <b-form-radio v-else
-                                        v-model="item.checked"
+                                        v-model="meta.selectedAnswer"
+                                        :value="item.id"
+                                        @change="setSelectedAnswer"
                           ></b-form-radio>
                         </b-col>
                         <!--Answer input -->
@@ -176,12 +178,20 @@
               label: 'Single choice'
             },],
             collapsed: false,
+            selectedAnswer:''
           },
           questionObject: this.question
         }
       },
 
       methods:{
+        setSelectedAnswer(checked) {
+
+          const index = this.questionObject.answers.findIndex(x => x.id === checked);
+          this.questionObject.answers.forEach( (el,idx) => {
+            el.checked = idx === index;
+          });
+        },
         addItem() {
           this.questionObject.answers.push({text: "",id: 'a-'+keygen.hex(6), checked: false});
         },
@@ -189,7 +199,8 @@
           bus.$emit("remove-question",this.questionObject.question_id);
         },
         removeAnswer(id) {
-          this.questionObject.answers.splice( this.questionObject.answers.findIndex(x => {x.id === id}), 1);
+          const index = this.questionObject.answers.findIndex(x => x.id === id);
+          this.questionObject.answers.splice( index, 1);
         },
         onDrop(dropResult) {
           this.questionObject.answers = applyDrag( this.questionObject.answers, dropResult);

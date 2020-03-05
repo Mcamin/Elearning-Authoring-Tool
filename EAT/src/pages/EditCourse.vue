@@ -120,7 +120,9 @@ Add the default section to the sections -->
       },
 
     created() {
-
+           //TODO: reset those
+          //Reset currentInteraction
+          //Reset Current Lesson
           this.generateCourseContent();
     }
   }

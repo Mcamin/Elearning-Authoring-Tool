@@ -1,5 +1,5 @@
 <template>
-  <h1>CourseID: </h1>
+  <h1>Generate Element Content / Add it as V-html  </h1>
 </template>
 
 <script>
