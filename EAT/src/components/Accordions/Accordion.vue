@@ -47,15 +47,10 @@
           </template>
 
           <!--Render Module Content: Quizzes and interactions-->
-        <!--<template v-if="index && isModule" v-for="c in getSectionContent(index)" >
-          <b-link :to="elementPage(c.id)">
-            <component is="Accordion" :accordionTitle="c.title" :accordionID="c.id"/>
-          </b-link>
-
-        </template>-->
-        <!--<div v-if="isModule">
-          <ContentCard/>
-        </div>-->
+       <template v-if="isModule" v-for="(c,idx) in getModuleContent(this.accordionID)" >
+            <ContentCard  :contentId="c.contentId" :title="c.title"
+                       :key="idx"/>
+        </template>
         <AddBtn :triggered-by="this.accordionID"  />
       </b-card-body>
     </b-collapse>
@@ -70,8 +65,7 @@
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AddBtn from "../Buttons/AddBtn";
   import {mapActions, mapGetters, mapState} from "vuex";
-  import ContentCard from "../Cards/ContentCard";
-
+  import ContentCard from "@/components/Cards/ContentCard";
   library.add(
     faPen,
     faTrash,
@@ -142,6 +136,7 @@
             if(this.isSection)
             { const keys = Object.keys(this.sections.find(el => el.uuid === this.accordionID).modulesIndex);
             for (const key in keys) {
+              //TODO: check if the module if in the array
                 await this.loadModule(keys[key]);
             }}
 
@@ -150,6 +145,9 @@
         computed:{
           ...mapGetters(
             'section' , ['getSectionContent']
+          ),
+          ...mapGetters(
+            'module' , ['getModuleContent']
           ),
           ...mapState(
             'section' , ['sections']

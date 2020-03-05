@@ -1,4 +1,5 @@
 //helper function
+import {dynamicSort} from "@/utils/helpers";
 
 const CourseGetters = {
   // Get all Courses
@@ -128,6 +129,22 @@ const CourseGetters = {
     getModuleByID: state => uuid =>{
       return state.modules.find(module => module.uuid=== uuid);
     },
+    getModuleContent:(state,getters,rootState,rootGetters ) =>uuid => {
+      let contentArray = [];
+      if(uuid.charAt(0)==='m')
+      {
+        const keys = Object.keys(state.modules.find(el =>  el.uuid === uuid).contentIndex);
+        for( const key in keys)
+        {if(keys[key].charAt(0)==='l')
+          contentArray[key] = rootGetters['lesson/getLessonByID'](keys[key]);
+        else
+          contentArray[key] = rootGetters['interaction/getInteractionByID'](keys[key]);
+        }
+      }
+      if(!contentArray.includes(undefined))
+        return contentArray;
+      else return [];
+    }
   },
 
   LessonGetters = {
@@ -139,8 +156,8 @@ const CourseGetters = {
     },
 
     // Get a lesson by ID
-    getLessonByID: state => id =>{
-      return state.lessons.find(lesson => lesson.id=== id);
+    getLessonByID: state => uuid =>{
+      return state.lessons.find(lesson => lesson.uuid === uuid);
     },
 
   },
@@ -154,8 +171,8 @@ const CourseGetters = {
     },
 
     // Get an Interaction by ID
-    getInteractionByID: state => id  =>{
-      return state.interactions.find(interaction => interaction.id=== id);
+    getInteractionByID: state => uuid  =>{
+      return state.interactions.find(interaction => interaction.uuid === uuid);
     },
   };
 
