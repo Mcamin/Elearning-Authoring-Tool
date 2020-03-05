@@ -13,6 +13,7 @@
           <h4>{{questionObject.questionText}}</h4>
         </b-col>
         <!-- End Left Settings -->
+
         <!--Right Settings-->
         <b-col cols="2"  class="text-right">
           <a href="#"  @click.prevent="removeQuestion" class="ml-2">
@@ -30,7 +31,7 @@
      <!--End header -->
 
     <!--Question content -->
-    <b-collapse :id="questionObject.question_id"   visible  :accordion="`myaccordion-${questionObject.question_id}`" role="tabpanel">
+    <b-collapse :id="questionObject.question_id"   visible  :accordion="`accordion-${questionObject.question_id}`" role="tabpanel">
       <b-card-body>
         <b-container fluid>
           <!-- Question  -->
@@ -88,7 +89,7 @@
                             <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
                           </a>
 
-                          <b-form-checkbox v-if="questionObject.questionType.value === 'Multiple choice'"
+                          <b-form-checkbox v-if="questionObject.questionType === 'Multiple choice'"
                                            v-model="item.checked"
                           >
                           </b-form-checkbox>
@@ -140,9 +141,10 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import { faBars, faTrash,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import {Container,Draggable } from "vue-smooth-dnd";
   import {applyDrag} from "@/utils/helpers"
-
   import {bus} from "@/main";
+  import keygen from "keygen";
 
   library.add(
     faTrash,
@@ -150,9 +152,9 @@
     faSortDown,
     faBars
   );
-  import {Container,Draggable } from "vue-smooth-dnd";
+
     export default {
-      name: "QuestionAccodion",
+      name: "QuestionAccordion",
       components:{
         Container,
         Draggable,
@@ -173,9 +175,6 @@
               value: 'Single choice',
               label: 'Single choice'
             },],
-            value: 'Multiple choice',
-            id: 0,
-            question_id: "question"+this.id,
             collapsed: false,
           },
           questionObject: this.question
@@ -184,19 +183,16 @@
 
       methods:{
         addItem() {
-          let
-            temp_id = this.id++;
-          this.items.push({text: "Enter an answer...",id: temp_id, checked: false});
+          this.questionObject.answers.push({text: "",id: 'a-'+keygen.hex(6), checked: false});
         },
         removeQuestion() {
           bus.$emit("remove-question",this.questionObject.question_id);
         },
-
         removeAnswer(id) {
-          this.items.splice(id, 1);
+          this.questionObject.answers.splice( this.questionObject.answers.findIndex(x => {x.id === id}), 1);
         },
         onDrop(dropResult) {
-          this.items = applyDrag(this.items, dropResult);
+          this.questionObject.answers = applyDrag( this.questionObject.answers, dropResult);
         },
         toggleCollapse(id) {
           this.$root.$emit('bv::toggle::collapse', id);
