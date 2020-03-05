@@ -55,18 +55,17 @@
 
         accordionID:{
           Type:String,
-          required: true,
+
           Description:"the element uuid"
         },
         accordionTitle:{
           Type:String,
-          required: true,
+
           Description:"The element title received from the parent component"
         },
 
       },
       components:{
-        AddBtn,
         'font-awesome-icon': FontAwesomeIcon,
       },
 

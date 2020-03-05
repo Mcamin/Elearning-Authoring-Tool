@@ -87,11 +87,7 @@ exports.modules_create_module = (req, res, next) => {
 // Update a module
 exports.modules_update_module = (req, res, next) => {
   const id = req.params.moduleId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }
-  Module.update({ _id: id }, { $set: updateOps })
+  Module.updateOne({ uuid: id }, { $set: req.body })
   .exec()
   .then(result => {
     res.status(200).json({

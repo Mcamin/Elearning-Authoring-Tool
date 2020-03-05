@@ -45,6 +45,7 @@
     methods: {
 
       ...mapActions('interaction', {createInteraction: 'createInteraction',updateInteraction: 'updateInteraction'}),
+      ...mapActions('module', {updateModule: 'updateModule'}),
 
       //  Initialize Interaction content on creation
       async initInteractionContent() {
@@ -108,8 +109,6 @@
     removeQuestion(question_id) {
       let questionsArray = [...this.currentInteraction.questions];
           questionsArray = questionsArray.filter(el => el.question_id !== question_id);
-          console.log(question_id);
-          console.log(questionsArray);
       this.updateInteraction({
         targetInteraction:this.currentInteraction.uuid,
         props:{
