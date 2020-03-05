@@ -1,5 +1,4 @@
 //helper function
-import {dynamicSort} from '@/utils/helpers'
 
 const CourseGetters = {
   // Get all Courses
