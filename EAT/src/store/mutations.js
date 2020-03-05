@@ -110,11 +110,25 @@ const LessonMutations = {
     state.lessons.push(newLesson);
   },
   updateLesson: (state, payload) => {
-    //Loop through Payload and update Course Attributes
+    //Loop through Payload and update lesson Attributes
+    let foundIndex =  state.interactions.findIndex(
+      el => el.uuid === payload.targetSection),
+      newObj = state.interactions[foundIndex];
+
+    const entries = Object.entries(payload.props);
+
+    for (const [key,value] of entries)
+    {
+      newObj[key] =value;
+    }
+    state.lessons.splice(foundIndex, 1,newObj);
+    state.currentLesson = newObj;
   },
   deleteLesson: (state, lessonId) => {
-    //Check if the currentCourse have the ID and empty it
-    //Check if the array of courses contain that course and delete it
+    if(state.currentLesson && state.currentLesson === lessonId )
+      state.currentLesson = null;
+    state.lessons =  state.lessons.filter(el => {
+      return el.uuid !== lessonId;});
   },
   resetLesson: (state) => {
     state.currentLesson= null;
@@ -137,12 +151,27 @@ const InteractionMutations = {
     state.interactions.push(newInteraction);
   },
   updateInteraction: (state, payload) => {
-    //Loop through Payload and update Course Attributes
+    //Loop through Payload and update interaction Attributes
+    let foundIndex =  state.interactions.findIndex(
+      el => el.uuid === payload.targetSection),
+      newObj = state.interactions[foundIndex];
+
+    const entries = Object.entries(payload.props);
+
+    for (const [key,value] of entries)
+    {
+      newObj[key] =value;
+    }
+    state.interactions.splice(foundIndex, 1,newObj);
+    state.currentInteraction = newObj;
   },
   deleteInteraction: (state, interactionId) => {
-    //Check if the currentCourse have the ID and empty it
-    //Check if the array of courses contain that course and delete it
+    if(state.currentInteraction && state.currentInteraction === interactionId )
+        state.currentInteraction = null;
+    state.interactions =  state.interactions.filter(el => {
+         return el.uuid !== interactionId;});
   },
+
     resetInteraction: (state) => {
       state.currentInteraction= null;
     },
