@@ -25,7 +25,6 @@ const CourseActions = {
         await CourseRepository
           .getAll()
           .then(response => {
-            // console.log(JSON.stringify(response));
             commit('getCourses', response.data.courses);
           })
           .catch(error => {
@@ -118,7 +117,6 @@ const CourseActions = {
           .createSection(newSection)
           .then((response) => {
             commit('createSection', newSection);
-           // dispatch('course/updateCourseContent', newSection, {root:true});
 
           })
           .catch(error => {
@@ -139,7 +137,6 @@ const CourseActions = {
       },
     deleteSectionReference:
        ({commit}, sectionID) => {
-         //Dispatch course update
             commit('deleteSection', sectionID);
       },
     deleteSection:
@@ -194,8 +191,6 @@ const CourseActions = {
           .createModule(newModule)
           .then((response) => {
             commit('createModule', newModule);
-            //TODO: add it only if it directly creaed in course
-           // dispatch('course/updateCourseContent', newModule, {root:true});
           })
           .catch(error => {
             console.log(error)
@@ -218,7 +213,6 @@ const CourseActions = {
       },
     deleteModuleReference:
       ({commit}, moduleID) => {
-        // Check where the module is used and remove its reference
         commit('deleteModule', moduleID);
       },
     deleteModule:
@@ -384,7 +378,7 @@ const CourseActions = {
       },
     deleteInteractionReference:
       ({commit}, interactionId) => {
-        // Check in which module the interaction is
+
         commit('deleteInteraction', interactionId);
       },
     deleteInteraction:

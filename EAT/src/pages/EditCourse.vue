@@ -33,6 +33,7 @@ Add the default section to the sections -->
         <AddILModal/>
         <DeleteModal/>
         <EditModal/>
+        <GenerateTokenModal/>
       </b-col>
     </b-row>
   </b-container>
@@ -48,6 +49,7 @@ Add the default section to the sections -->
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
   import EditModal from "@/components/Modals/EditModal";
+  import GenerateTokenModal from "@/components/Modals/GenerateTokenModal";
 
   export default {
     name: "EditCourse",
@@ -55,6 +57,7 @@ Add the default section to the sections -->
       return {}
     },
     components: {
+      GenerateTokenModal,
       EditModal,
       Accordion,
       AddSMModal,

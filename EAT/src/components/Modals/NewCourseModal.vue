@@ -111,6 +111,7 @@
   import {uuid} from 'vue-uuid';
 
   export default {
+    name: 'NewCourseModal',
     components: {
       VueTagsInput,
     },
