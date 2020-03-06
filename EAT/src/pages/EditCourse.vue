@@ -32,6 +32,7 @@ Add the default section to the sections -->
         <AddSMModal/>
         <AddILModal/>
         <DeleteModal/>
+        <EditModal/>
       </b-col>
     </b-row>
   </b-container>
@@ -46,6 +47,7 @@ Add the default section to the sections -->
   import DeleteModal from "@/components/Modals/DeleteModal"
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
+  import EditModal from "@/components/Modals/EditModal";
 
   export default {
     name: "EditCourse",
@@ -53,6 +55,7 @@ Add the default section to the sections -->
       return {}
     },
     components: {
+      EditModal,
       Accordion,
       AddSMModal,
       AddBtn,

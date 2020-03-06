@@ -55,30 +55,6 @@
         </b-row>
         <!-- End Add Module -->
 
-        <!-- Add Module -->
-        <b-row class="mb-3 mt-3">
-          <b-col>
-            <a @click.prevent="importModuleClicked()">
-              <b-card no-body>
-                <b-card-body>
-                  <b-row>
-                    <b-col cols="2" class="d-flex justify-content-center align-items-center">
-                      <font-awesome-icon :icon="['fas', 'list-ul']" size="2x"/>
-                    </b-col>
-                    <b-col>
-                      <b-card-title>{{strings.importModule.title}}</b-card-title>
-                      <b-card-text>
-                        {{strings.importModule.description}}
-                      </b-card-text>
-                    </b-col>
-                  </b-row>
-
-                </b-card-body>
-              </b-card>
-            </a>
-          </b-col>
-        </b-row>
-        <!-- End Add Module -->
 
         <!-- Import Section/Module -->
         <b-row v-if="sectionId===''" class="mb-3 mt-3">
@@ -112,6 +88,32 @@
           </b-col>
         </b-row>
         <!-- End Import Section/Module -->
+
+        <!-- Import Module -->
+        <b-row v-else class="mb-3 mt-3">
+          <b-col>
+            <a @click.prevent="importModuleClicked()">
+              <b-card no-body>
+                <b-card-body>
+                  <b-row>
+                    <b-col cols="2" class="d-flex justify-content-center align-items-center">
+                      <font-awesome-icon :icon="['fas', 'file-upload']" size="2x"/>
+                    </b-col>
+                    <b-col>
+                      <b-card-title>{{strings.importModule.title}}</b-card-title>
+                      <b-card-text>
+                        {{strings.importModule.description}}
+                      </b-card-text>
+                    </b-col>
+                  </b-row>
+
+                </b-card-body>
+              </b-card>
+            </a>
+          </b-col>
+        </b-row>
+        <!-- End Import Module -->
+
       </b-container>
       <!-- Add Form-->
       <b-container v-if="stepper===2" fluid>

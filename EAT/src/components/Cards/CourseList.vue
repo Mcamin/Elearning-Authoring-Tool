@@ -114,11 +114,11 @@
       handleDelete() {
         let courseMeta = {
           id: this.uuid,
-          type: 'course',
+          type: 'Course',
           title: this.title,
           img: this.img
         };
-        bus.$emit('delete-course', courseMeta);
+        bus.$emit('delete-modal', courseMeta);
       }
     },
     computed:{

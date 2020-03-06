@@ -49,19 +49,19 @@
       ...mapActions('interaction', {deleteInteraction: 'deleteInteraction'}),
       removeItem() {
         switch (this.item.type) {
-          case "course":
+          case "Course":
             this.deleteCourse(this.item);
             break;
-          case "section":
+          case "Section":
             this.deleteSection(this.item.id);
             break;
-          case "module":
+          case "Module":
             this.deleteModule(this.item.id);
             break;
-          case "lesson":
+          case "Lesson":
             this.deleteLesson(this.item.id);
             break;
-          case "interaction":
+          case "Interaction":
             this.deleteInteraction(this.item.id);
             break;
         }
@@ -72,7 +72,7 @@
     },
 
     created() {
-      bus.$on('delete-course', (item) => {
+      bus.$on('delete-modal', (item) => {
         this.item = item;
         this.$bvModal.show('delete-modal');
       });
