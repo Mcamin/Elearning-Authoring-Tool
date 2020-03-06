@@ -112,7 +112,6 @@
         ...mapActions('lesson', {loadLesson : 'loadLesson'}),
         ...mapActions('interaction', {loadInteraction : 'loadInteraction'}),
           toggleTitleInput(){
-
             this.secTitle = this.$refs['section_title'].value;
             this.isEditing = !this.isEditing;
           },
