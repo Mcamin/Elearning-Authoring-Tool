@@ -64,8 +64,11 @@ const SectionMutations = {
 
   },
   deleteSection: (state, sectionId) => {
-    //Check if the currentCourse have the ID and empty it
-    //Check if the array of courses contain that course and delete it
+    if (state.currentSection && state.currentSection.uuid === sectionId)
+      state.currentSection = null;
+    state.sections = state.sections.filter(el => {
+      return el.uuid !== sectionId;
+    });
   },
   resetSection: (state) => {
     state.currentSection = null;
@@ -104,10 +107,15 @@ const ModuleMutations = {
     state.modules.splice(foundIndex, 1, newObj);
 
   },
+
   deleteModule: (state, moduleId) => {
-    //Check if the currentCourse have the ID and empty it
-    //Check if the array of courses contain that course and delete it
+    if (state.currentModule && state.currentModule.uuid === moduleId)
+      state.currentModule = null;
+    state.modules = state.modules.filter(el => {
+      return el.uuid !== moduleId;
+    });
   },
+
   resetModule: (state) => {
     state.currentModule = null;
   },
@@ -147,7 +155,7 @@ const LessonMutations = {
     state.currentLesson = newObj;
   },
   deleteLesson: (state, lessonId) => {
-    if (state.currentLesson && state.currentLesson === lessonId)
+    if (state.currentLesson && state.currentLesson.uuid === lessonId)
       state.currentLesson = null;
     state.lessons = state.lessons.filter(el => {
       return el.uuid !== lessonId;
@@ -194,7 +202,7 @@ const InteractionMutations = {
     },
 
     deleteInteraction: (state, interactionId) => {
-      if (state.currentInteraction && state.currentInteraction === interactionId)
+      if (state.currentInteraction && state.currentInteraction.uuid === interactionId)
         state.currentInteraction = null;
       state.interactions = state.interactions.filter(el => {
         return el.uuid !== interactionId;

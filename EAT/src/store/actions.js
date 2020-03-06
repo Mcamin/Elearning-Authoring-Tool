@@ -137,6 +137,11 @@ const CourseActions = {
             console.log(error)
           })
       },
+    deleteSectionReference:
+       ({commit}, sectionID) => {
+         //Dispatch course update
+            commit('deleteSection', sectionID);
+      },
     deleteSection:
       async ({commit}, sectionID) => {
         await SectionRepository
@@ -210,6 +215,11 @@ const CourseActions = {
           .catch(error => {
             console.log(error)
           })
+      },
+    deleteModuleReference:
+      ({commit}, moduleID) => {
+        // Check where the module is used and remove its reference
+        commit('deleteModule', moduleID);
       },
     deleteModule:
       async ({commit}, moduleID) => {
@@ -289,6 +299,11 @@ const CourseActions = {
 
           })
       },
+    deleteLessonReference:
+      ({commit}, lessonId) => {
+        // Check in which module the lesson is
+        commit('deleteLesson', lessonId);
+      },
     deleteLesson:
       async ({commit}, lessonID) => {
         await LessonRepository
@@ -367,6 +382,11 @@ const CourseActions = {
             return Promise.reject(false);
 
           })
+      },
+    deleteInteractionReference:
+      ({commit}, interactionId) => {
+        // Check in which module the interaction is
+        commit('deleteInteraction', interactionId);
       },
     deleteInteraction:
       async ({commit}, interactionID) => {

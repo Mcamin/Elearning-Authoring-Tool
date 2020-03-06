@@ -4,17 +4,8 @@
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
         <!-- Left Settings -->
-        <b-col  class="text-left">
-          <b-container class="d-flex">
-            <label>
-              <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="secTitle"
-                     ref="section_title" v-on:keyup.enter="toggleTitleInput">
-            </label>
-            <a class="ml-2" href="">
-              <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing" color="gray"/>
-              <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" color="gray"/>
-            </a>
-          </b-container>
+        <b-col  class="text-left m-2">
+          <h4>{{accordionTitle}}</h4>
         </b-col>
         <!-- End Left Settings -->
 
@@ -81,9 +72,7 @@
       name: "Accordion",
       data(){
         return{
-          isEditing: false,
           collapsed: false,
-          secTitle: this.accordionTitle
         }
       },
       props: {
@@ -112,11 +101,7 @@
         ...mapActions('module', {loadModule : 'loadModule'}),
         ...mapActions('lesson', {loadLesson : 'loadLesson'}),
         ...mapActions('interaction', {loadInteraction : 'loadInteraction'}),
-          toggleTitleInput(){
 
-            this.secTitle = this.$refs['section_title'].value;
-            this.isEditing = !this.isEditing;
-          },
         toggleCollapse(id) {
           this.$root.$emit('bv::toggle::collapse', id);
           this.collapsed = ! this.collapsed;

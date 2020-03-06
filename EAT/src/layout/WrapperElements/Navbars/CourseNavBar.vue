@@ -52,7 +52,7 @@
       Username: <b-form-input v-model="username"></b-form-input>
       Password: <b-form-input v-model="pass"></b-form-input>
       <hr>
-      <b-button size="sm" @click="generateNewCredentials()">Generate new credentials</b-button>
+      <b-button size="sm" @click="generateNewCredentials">Generate new credentials</b-button>
     </b-toast>
   </b-navbar>
 </template>
@@ -79,7 +79,7 @@
           pass: keygen.hex(9),
           ltilink: 'LINK',
           tag: '',
-          tags: this.currentCourse.tags,
+          tags: [],
         }
       },
 
