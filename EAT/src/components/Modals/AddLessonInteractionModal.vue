@@ -175,7 +175,8 @@
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"lesson"}});
       },
       addLessonClicked() {
-        this.$router.push({name: 'edit-lesson', params: {id: this.moduleId}});
+        let newLessonID = 'l-' + this.$uuid.v1();
+        this.$router.push({name: 'edit-lesson', params: {id: newLessonID}});
       }
 
 

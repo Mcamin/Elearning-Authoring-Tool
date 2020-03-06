@@ -11,7 +11,7 @@ exports.interactions_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Interaction.find()
-  .select("uuid title type description questions ")
+  .select("uuid title type description questions score shuffle ")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -39,7 +39,7 @@ exports.interactions_get_all = (req, res, next) => {
 // Get an interaction by id
 exports.interactions_get_interaction = (req, res, next) => {
   Interaction.findOne({uuid: req.params.interactionId})
-  .select("uuid title type description questions ")
+  .select("uuid title type description questions score shuffle ")
   .exec()
   .then(interaction => {
     if (!interaction) {
@@ -75,11 +75,13 @@ exports.interactions_create_interaction = (req, res, next) => {
     res.status(201).json({
       message: "Interaction stored",
       createdInteraction: {
-        _id: result._id,
+        uuid: result.uuid,
+        type: result.type,
         title: result.title,
+        score: result.score,
+        shuffle:result.shuffle,
         description: result.description,
         questions: result.questions,
-        questionsIndex: result.questionsIndex
       }
     });
   })

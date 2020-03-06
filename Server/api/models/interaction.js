@@ -20,7 +20,6 @@ const interactionSchema = mongoose.Schema({
        type: String
      }],*/
   }],
-  questionsIndex: Object,
   usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }]
 },{timestamps: true });
 

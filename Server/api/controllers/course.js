@@ -13,7 +13,7 @@ exports.courses_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Course.find()
-  .select("title description category duration tags thumbnail languages contentIndex _id uuid")
+  .select("title description category duration tags thumbnail languages contentIndex  uuid")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -46,6 +46,7 @@ exports.courses_get_all = (req, res, next) => {
 // Get a course by id
 exports.courses_get_course = (req, res, next) => {
   Course.findOne({uuid: req.params.courseId})
+  .select("title description category duration tags thumbnail languages contentIndex  uuid")
   .exec()
   .then(course => {
     if (!course) {
@@ -80,14 +81,14 @@ exports.courses_create_course = (req, res, next) => {
     duration: req.body.duration
 
   });
-
   course
   .save()
   .then(result => {
     res.status(201).json({
       message: "Course stored",
       createdCourse: {
-        _id: result._id,
+        uuid: result.uuid,
+        category:result.category,
         title: result.title,
         description: result.description,
         languages: result.languages,

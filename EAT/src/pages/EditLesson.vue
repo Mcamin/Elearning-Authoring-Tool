@@ -154,11 +154,9 @@
   import {faCog, faPen, faSave, faTrash} from '@fortawesome/free-solid-svg-icons'
   import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
   import {VueEditor} from "vue2-editor";
-  import {Button, Input, Tag} from 'element-ui'
   import VueTagsInput from '@johmun/vue-tags-input';
-  import {bus} from "../main";
-  import {mapActions, mapGetters} from "vuex";
-  import {uuid} from "vue-uuid";
+  import {mapActions, mapState} from "vuex";
+  import keygen from "keygen";
 
   library.add(
     faPen,
@@ -171,49 +169,59 @@
     name: "AddLesson",
     data() {
       return {
+        intervalId: '',
         tag: '',
         content:'',
         tags: [],
         inputVisible: false,
-        inputValue: '',
         isEditing: false,
         lessonTitle: 'LessonTitle'
 
       }
     },
     computed:{
-      ...mapGetters(
-        'module' , ['getModuleByID']
-      )
+      ...mapState('lesson', ['currentLesson', 'lessons']),
+      ...mapState('module' , ['modules'])
+
     },
     methods: {
-      ...mapActions('lesson', {createLesson:'createLesson'}),
+      ...mapActions('lesson', {createLesson:'createLesson',
+        setSelectedLesson: 'setSelectedLesson',
+        updateLessonState: 'updateLessonState',
+        updateLesson: 'updateLesson'}),
       ...mapActions('module', {updateModule:'updateModule'}),
-      async generateLessonContent(){
-        // Create a new section and add it to course if course is new
+      //  Initialize Lesson content on creation
+      async initLessonContent() {
+        let
+          newLesson = null,
+          id = this.$route.params.id,
+          currentModule = this.modules.find(el => el.contentIndex.hasOwnProperty(id)),
+          moduleContentIndex = currentModule ? currentModule.contentIndex : {},
+          contentLength = Object.keys(moduleContentIndex).length,
+          foundLesson = this.lessons.findIndex(el => {
+            return el.uuid === id
+          });
 
-        if (Object.entries(this.getModuleByID(this.$route.params.id).contentIndex).length  === 0)
-        {let lessonId =  'l-'+uuid.v1(),
+        if (foundLesson === -1) {
           newLesson = {
-            uuid: lessonId,
-            //title: "New Lesson____",
-            content: "Hello world ",
-          },
-          payload = {};
-          payload[lessonId] = 0;
+            uuid: id,
+            title: "New Lesson",
+            type: "Lesson",
+            description: "",
+          };
+          // Create a lesson
           await this.createLesson(newLesson);
+          //update Module Index
+          moduleContentIndex[id] = contentLength;
           await this.updateModule({
-            targetModule:this.$route.params.id,
-            props:
-              {contentIndex:payload
-              }});
-
-
+            targetModule: currentModule.uuid,
+            props: {
+              contentIndex: moduleContentIndex
+            }
+          });
+        } else {
+          this.setSelectedLesson(id);
         }
-        // Load lesson content
-        else {
-        }
-
       },
       toggleTitleInput() {
         this.lessonTitle = this.$refs['lessonTitle'].value;
@@ -223,14 +231,16 @@
     components: {
       'font-awesome-icon': FontAwesomeIcon,
       VueEditor,
-      Tag,
-      Input,
-      Button,
       VueTagsInput,
     },
-  created(){
-    this.generateLessonContent();
-  }
+    created(){
+      this.initLessonContent();
+      // save every x minute : set in .env
+      this.intervalId = setInterval(this.saveInteractionInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
+    },
+    beforeDestroy() {
+      clearInterval(this.intervalId);
+    },
   };
 </script>
 

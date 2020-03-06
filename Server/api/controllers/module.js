@@ -11,7 +11,7 @@ exports.modules_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Module.find()
-  .select("title description contentIndex _id")
+  .select("title description contentIndex type uuid")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -37,6 +37,7 @@ exports.modules_get_all = (req, res, next) => {
 // Get module by id
 exports.modules_get_module = (req, res, next) => {
   Module.findOne({uuid: req.params.moduleId})
+  .select("title description contentIndex type uuid")
   .exec()
   .then(module => {
     if (!module) {
@@ -62,7 +63,7 @@ exports.modules_create_module = (req, res, next) => {
     uuid:req.body.uuid,
     title: req.body.title,
     description: req.body.description,
-    modulesIndex: req.body.contentIndex,
+    contentIndex: req.body.contentIndex,
   });
   module
   .save()
@@ -70,9 +71,10 @@ exports.modules_create_module = (req, res, next) => {
     res.status(201).json({
       message: "Module stored",
       createdModule: {
-        _id: result._id,
+        uuid: result.uuid,
         title: result.title,
-        description: result.description
+        description: result.description,
+        contentIndex: result.contentIndex
       }
     });
   })
@@ -104,7 +106,7 @@ exports.modules_update_module = (req, res, next) => {
 
 //Delete a module
 exports.modules_delete_module = (req, res, next) => {
-  Section.remove({_id: req.params.moduleId})
+  Section.deleteOne({uuid: req.params.moduleId})
   .exec()
   .then(result => {
     res.status(200).json({

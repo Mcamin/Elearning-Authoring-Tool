@@ -82,6 +82,7 @@ Add the default section to the sections -->
             newSection = {
               uuid: sec_id,
               title: "New Section",
+              type:'Section',
               description: "",
               modulesIndex: {}
             },

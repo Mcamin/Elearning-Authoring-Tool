@@ -266,6 +266,7 @@
           switch (this.elementType) {
             case 'section':
                id = 's-'+uuid.v1();
+               payload.type= "Section";
               payload.uuid = id;
               payload.modulesIndex = {};
               await this.createSection(payload);
@@ -283,6 +284,7 @@
             case 'module':
                id = 'm-'+uuid.v1();
               payload.uuid = id;
+              payload.type= "Module";
               payload.contentIndex = {};
                await this.createModule(payload);
               indexObject[id] = contentLength;

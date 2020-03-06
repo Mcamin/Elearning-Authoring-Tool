@@ -12,7 +12,7 @@ exports.sections_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Section.find()
-  .select("title description modulesIndex uuid _id")
+  .select("title description modulesIndex uuid type ")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -41,6 +41,7 @@ exports.sections_get_all = (req, res, next) => {
 exports.sections_get_section = (req, res, next) => {
 
   Section.findOne({uuid: req.params.sectionId})
+  .select("title description modulesIndex uuid type ")
   .exec()
   .then(section => {
     if (!section) {
@@ -74,9 +75,10 @@ exports.sections_create_section = (req, res, next) => {
     res.status(201).json({
       message: "Section stored",
       createdSection: {
-        _id: result._id,
+        uuid: result.uuid,
         title: result.title,
-        description: result.description
+        description: result.description,
+        modulesIndex: result.modulesIndex
       }
     });
   })
@@ -110,7 +112,7 @@ exports.sections_update_section = (req, res, next) => {
 
 //Delete a section
 exports.sections_delete_section = (req, res, next) => {
-  Section.remove({_id: req.params.sectionId})
+  Section.deleteOne({uuid: req.params.sectionId})
   .exec()
   .then(result => {
     res.status(200).json({

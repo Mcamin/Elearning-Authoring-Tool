@@ -70,7 +70,6 @@
           foundInteraction = this.interactions.findIndex(el => {
             return el.uuid === id
           });
-
         if (foundInteraction === -1) {
           newInteraction = {
             uuid: id,
@@ -93,7 +92,7 @@
           //update Module Index
           moduleContentIndex[id] = contentLength;
           await this.updateModule({
-            targetModule: this.$route.params.id,
+            targetModule: currentModule.uuid,
             props: {
               contentIndex: moduleContentIndex
             }
