@@ -116,7 +116,7 @@
   import {faTasks, faUpload, faBookOpen} from '@fortawesome/free-solid-svg-icons'
   import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
   import {bus} from "@/main";
-
+  import {mapActions} from "vuex"
 
   library.add(
     faTasks,
@@ -160,6 +160,7 @@
     },
 
     methods: {
+      ...mapActions('module',{setSelectedModule:'setSelectedModule'}),
       resetParams() {
         this.elementType = '';
         this.moduleId = '';
@@ -168,24 +169,29 @@
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"interaction"}});
       },
       addInteractionClicked() {
-        let newInteractionID = 'i-' + this.$uuid.v1();
-        this.$router.push({name: 'edit-interaction', params: {id: newInteractionID}});
+        this.setSelectedModule(this.moduleId).then( () =>
+          {
+            let newInteractionID = 'i-' + this.$uuid.v1();
+            this.$router.push({name: 'edit-interaction', params: {id: newInteractionID}});
+          }
+        );
       },
       importLessonClicked () {
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"lesson"}});
       },
       addLessonClicked() {
-        let newLessonID = 'l-' + this.$uuid.v1();
-        this.$router.push({name: 'edit-lesson', params: {id: newLessonID}});
+        this.setSelectedModule(this.moduleId).then( () =>
+          {
+            let newLessonID = 'l-' + this.$uuid.v1();
+            this.$router.push({name: 'edit-lesson', params: {id: newLessonID}});
+          }
+        );
       }
-
-
 
     },
     mounted() {
       this.$root.$on('bv::modal::hidden', (bvEvent, modalId) => {
         this.resetParams();
-
       })
     },
     created(){
@@ -196,6 +202,3 @@
     }
   }
 </script>
-<style lang="css">
-
-</style>

@@ -47,7 +47,7 @@
     },
     computed: {
       ...mapState('interaction', ['currentInteraction', 'interactions']),
-      ...mapState('module', ['modules']),
+      ...mapState('module', ['currentModule']),
     },
     methods: {
 
@@ -55,7 +55,8 @@
         createInteraction: 'createInteraction',
         setSelectedInteraction: 'setSelectedInteraction',
         updateInteractionState: 'updateInteractionState',
-        updateInteraction: 'updateInteraction'
+        updateInteraction: 'updateInteraction',
+        loadInteraction: 'loadInteraction'
       }),
       ...mapActions('module', {updateModule: 'updateModule'}),
 
@@ -64,13 +65,13 @@
         let
           newInteraction = null,
           id = this.$route.params.id,
-          currentModule = this.modules.find(el => el.contentIndex.hasOwnProperty(id)),
-          moduleContentIndex = currentModule ? currentModule.contentIndex : {},
+          hasElement = this.currentModule.contentIndex.hasOwnProperty(id),
+          moduleContentIndex = this.currentModule.contentIndex,
           contentLength = Object.keys(moduleContentIndex).length,
           foundInteraction = this.interactions.findIndex(el => {
             return el.uuid === id
           });
-        if (foundInteraction === -1) {
+        if (!hasElement) {
           newInteraction = {
             uuid: id,
             title: "New Interaction",
@@ -92,13 +93,20 @@
           //update Module Index
           moduleContentIndex[id] = contentLength;
           await this.updateModule({
-            targetModule: currentModule.uuid,
+            targetModule: this.currentModule.uuid,
             props: {
               contentIndex: moduleContentIndex
             }
           });
         } else {
-          this.setSelectedInteraction(id);
+          if(foundInteraction!==-1)
+            this.setSelectedInteraction(id);
+          else
+          { await this.loadInteraction(id).then(()=>{
+            this.setSelectedInteraction(id);
+          })
+
+          }
         }
       },
 

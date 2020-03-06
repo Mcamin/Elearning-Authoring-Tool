@@ -70,7 +70,7 @@ Add the default section to the sections -->
     methods: {
       ...mapActions('course', {loadCourse: 'loadCourse', updateCourse: 'updateCourse'}),
       ...mapActions('section', {loadSection: 'loadSection', createSection: 'createSection'}),
-      ...mapActions('module', {loadModule: 'loadModule'}),
+      ...mapActions('module', {loadModule: 'loadModule',resetModule:'resetModule'}),
       ...mapActions('lesson', {resetLesson: 'resetLesson'}),
       ...mapActions('interaction', {resetInteraction: 'resetInteraction'}),
 
@@ -126,9 +126,7 @@ Add the default section to the sections -->
     },
 
     created() {
-      //TODO: reset those
-      //Reset currentInteraction
-      //Reset Current Lesson
+      this.resetModule();
       this.resetInteraction();
       this.resetLesson();
       this.generateCourseContent();

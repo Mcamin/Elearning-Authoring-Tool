@@ -1,5 +1,5 @@
 <template>
-  <a href=""  @click="handleClick">
+  <a href=""  @click.prevent="handleClick()">
   <b-card no-body class="mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
@@ -32,7 +32,7 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import {faTrash,faCog} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import {mapState,mapActions} from 'vuex'
+  import {mapActions} from 'vuex'
   import {bus} from "@/main";
   library.add(
     faTrash,
@@ -53,14 +53,28 @@
           Type: String,
           Description: "The element title received from the parent component"
         },
-
+        moduleId:{
+          Type: String,
+          Description: "the id of the module containing the element "
+        }
       },
       components: {
         'font-awesome-icon': FontAwesomeIcon,
       },
       methods:{
+        ...mapActions('module',{setSelectedModule:'setSelectedModule'}),
         handleClick() {
-            this.$router.push({name: 'edit-interaction', params: {id: this.contentId,}});
+          this.setSelectedModule(this.moduleId).then( () =>
+            {
+              let contentType = this.contentId.charAt(0)==='i'? "interaction":"lesson";
+
+              if(contentType === 'interaction')
+                this.$router.push({name: 'edit-interaction', params: {id: this.contentId}});
+              else
+                this.$router.push({name: 'edit-lesson', params: {id: this.contentId}});
+            }
+          );
+
         },
         handleDelete(){
           let contentType = this.contentId.charAt(0)==='i'? "interaction":"lesson";
@@ -72,9 +86,7 @@
           bus.$emit('delete-course', metadata);
         }
       },
-      computed: {
-        ...mapState('interaction',['interactions'])
-      }
+
     }
 </script>
 

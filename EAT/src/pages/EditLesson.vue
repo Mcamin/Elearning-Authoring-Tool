@@ -156,7 +156,6 @@
   import {VueEditor} from "vue2-editor";
   import VueTagsInput from '@johmun/vue-tags-input';
   import {mapActions, mapState} from "vuex";
-  import keygen from "keygen";
 
   library.add(
     faPen,
@@ -181,46 +180,57 @@
     },
     computed:{
       ...mapState('lesson', ['currentLesson', 'lessons']),
-      ...mapState('module' , ['modules'])
+      ...mapState('module' , ['currentModule'])
 
     },
     methods: {
-      ...mapActions('lesson', {createLesson:'createLesson',
+      ...mapActions('lesson', {
+        createLesson:'createLesson',
         setSelectedLesson: 'setSelectedLesson',
         updateLessonState: 'updateLessonState',
-        updateLesson: 'updateLesson'}),
+        updateLesson: 'updateLesson',
+        loadLesson:'loadLesson'}),
       ...mapActions('module', {updateModule:'updateModule'}),
       //  Initialize Lesson content on creation
       async initLessonContent() {
         let
           newLesson = null,
           id = this.$route.params.id,
-          currentModule = this.modules.find(el => el.contentIndex.hasOwnProperty(id)),
-          moduleContentIndex = currentModule ? currentModule.contentIndex : {},
+          hasElement = this.currentModule.contentIndex.hasOwnProperty(id),
+          moduleContentIndex = this.currentModule.contentIndex,
           contentLength = Object.keys(moduleContentIndex).length,
           foundLesson = this.lessons.findIndex(el => {
             return el.uuid === id
           });
 
-        if (foundLesson === -1) {
+        if (!hasElement) {
           newLesson = {
             uuid: id,
             title: "New Lesson",
             type: "Lesson",
             description: "",
+            tags:[],
+            content:""
           };
           // Create a lesson
           await this.createLesson(newLesson);
           //update Module Index
           moduleContentIndex[id] = contentLength;
           await this.updateModule({
-            targetModule: currentModule.uuid,
+
+            targetModule: this.currentModule.uuid,
             props: {
               contentIndex: moduleContentIndex
             }
           });
         } else {
+          if(foundLesson!==-1)
           this.setSelectedLesson(id);
+          else
+          {  await this.loadLesson(id).then(()=>{
+            this.setSelectedInteraction(id);
+          });
+          }
         }
       },
       toggleTitleInput() {
