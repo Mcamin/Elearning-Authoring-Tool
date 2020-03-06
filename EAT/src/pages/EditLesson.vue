@@ -273,9 +273,10 @@
       }
     },
     created(){
-      this.initLessonContent();
+      this.initLessonContent().then(()=>{
+        this.selectedLesson = this.currentLesson
+      });
       // save every x minute : set in .env
-       this.selectedLesson = this.currentLesson
       this.meta.intervalId = setInterval(this.saveLessonInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
     },
     beforeDestroy() {
