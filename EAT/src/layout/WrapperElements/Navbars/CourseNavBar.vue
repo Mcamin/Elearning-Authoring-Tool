@@ -28,6 +28,12 @@
       </template>
       Course Title: <b-form-input v-model="currentCourse.title" ref="courseTitle"></b-form-input>
       Course Description: <b-form-input v-model="currentCourse.description" ref="courseDescription"></b-form-input>
+      <!--<vue-tags-input
+        :allow-edit-tags="true"
+        :tags="tags"
+        @tags-changed="newTags => tags = newTags"
+        v-model="tag"
+      />-->
       <hr>
       <div align="right">
         <b-button size="sm" @click="hideToast('my-toast-settings')">Cancel</b-button>
@@ -57,6 +63,8 @@
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import {mapState} from "vuex";
   import keygen from 'keygen'
+  import VueTagsInput from '@johmun/vue-tags-input';
+
 
   library.add(
     faTh,
@@ -69,13 +77,16 @@
           courseDescription: 'CDESC',
           username:keygen.hex(6),
           pass: keygen.hex(9),
-          ltilink: 'LINK'
+          ltilink: 'LINK',
+          tag: '',
+          tags: this.currentCourse.tags,
         }
       },
 
       name: "CourseNavBar",
       components:{
-        'font-awesome-icon': FontAwesomeIcon
+        'font-awesome-icon': FontAwesomeIcon,
+        VueTagsInput
       },
       computed:{
         ...mapState('course', ['currentCourse']),
