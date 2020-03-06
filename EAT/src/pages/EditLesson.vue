@@ -271,10 +271,11 @@
     created(){
       this.initLessonContent();
       // save every x minute : set in .env
-      //this.intervalId = setInterval(this.saveLessonInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
+      this.meta.intervalId = setInterval(this.saveLessonInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
     },
     beforeDestroy() {
       clearInterval(this.meta.intervalId);
+      this.saveLessonInDB();
     },
   };
 </script>
