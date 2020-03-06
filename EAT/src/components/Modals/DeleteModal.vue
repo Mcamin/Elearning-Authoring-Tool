@@ -22,7 +22,7 @@
 
 <script>
   import {bus} from "@/main";
-  import {mapActions} from "vuex";
+  import {mapActions, mapState} from "vuex";
 
   export default {
     name: "DeleteModal",
@@ -35,8 +35,12 @@
       }
     },
     computed: {
+     ...mapState('course', ['currentCourse']),
+      ...mapState('section', ['sections']),
+      ...mapState('lesson', ['lessons']),
+      ...mapState('interaction', ['interactions']),
+      ...mapState('module', ['modules']),
       message() {
-        console.log(this);
           switch (this.item.type) {
             case 'Course':
               return `Are you sure you want to remove the ${this.item.type} <b>${this.item.title}'</b> completely?`;
@@ -53,27 +57,100 @@
       }
     },
     methods: {
-      ...mapActions('course', {deleteCourse: 'deleteCourse'}),
-      ...mapActions('section', {deleteSectionReference: 'deleteSectionReference'}),
-      ...mapActions('module', {deleteModuleReference: 'deleteModuleReference'}),
+      ...mapActions('course', {deleteCourse: 'deleteCourse',updateCourse:'updateCourse'}),
+      ...mapActions('section', {deleteSectionReference: 'deleteSectionReference',updateSection:'updateSection'}),
+      ...mapActions('module', {deleteModuleReference: 'deleteModuleReference',updateModule:'updateModule'}),
       ...mapActions('lesson', {deleteLessonReference: 'deleteLessonReference'}),
       ...mapActions('interaction', {deleteInteractionReference: 'deleteInteractionReference'}),
       removeItem() {
+
+        let index = null,
+          target = null;
         switch (this.item.type) {
           case "Course":
             this.deleteCourse(this.item);
             break;
           case "Section":
-            this.deleteSectionReference(this.item.id);
+                index = this.currentCourse.contentIndex;
+                if(index.hasOwnProperty(this.item.id))
+                {delete index[this.item.id];
+             this.updateCourse({
+              targetCourse: this.currentCourse.uuid,
+              props:
+                {contentIndex: index
+                }
+            });
+             this.deleteSectionReference(this.item.id);
+                }
             break;
           case "Module":
+            target = this.sections.find(el => {
+              if(el.modulesIndex.hasOwnProperty(this.item.id))
+                return el;
+            });
+            if(target== null)
+            {index = this.currentCourse.contentIndex;
+              if(index.hasOwnProperty(this.item.id))
+              delete index[this.item.id];
+              this.updateCourse({
+                targetCourse: this.currentCourse.uuid,
+                props:
+                  {contentIndex: index
+                  }
+              });
+
+            }
+            else
+            {index = target.modulesIndex;
+              if(index.hasOwnProperty(this.item.id))
+                delete index[this.item.id];
+              this.updateSection({
+                targetSection: target.uuid,
+                props:
+                  {modulesIndex: index
+                  }
+              });
+            }
             this.deleteModuleReference(this.item.id);
             break;
           case "Lesson":
-            this.deleteLessonReference(this.item.id);
+            target = this.modules.find(el => {
+              if(el.contentIndex.hasOwnProperty(this.item.id))
+              return el
+             });
+
+            if(target != null)
+            { index = target.contentIndex;
+            if( index.hasOwnProperty(this.item.id))
+            {delete index[this.item.id];
+              this.updateModule({
+                targetModule: target.uuid,
+                props:
+                  {contentIndex: index
+                  }
+              });
+              this.deleteLessonReference(this.item.id);
+            }
+            }
             break;
           case "Interaction":
-            this.deleteInteractionReference(this.item.id);
+            target = this.modules.find(el => {
+              if(el.contentIndex.hasOwnProperty(this.item.id))
+              return el;
+            });
+            if(target != null)
+            { index = target.contentIndex;
+              if( index.hasOwnProperty(this.item.id))
+              {delete index[this.item.id];
+                this.updateModule({
+                  targetModule: target.uuid,
+                  props:
+                    {contentIndex: index
+                    }
+                });
+                this.deleteInteractionReference(this.item.id);
+              }
+            }
             break;
         }
 

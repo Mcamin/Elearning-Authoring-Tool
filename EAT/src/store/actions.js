@@ -301,7 +301,6 @@ const CourseActions = {
       },
     deleteLessonReference:
       ({commit}, lessonId) => {
-        // Check in which module the lesson is
         commit('deleteLesson', lessonId);
       },
     deleteLesson:
