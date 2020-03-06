@@ -4,9 +4,11 @@
 
     <b-row class="my-5">
       <b-col>
-        <Container  v-if="currentInteraction"  @drop="onDropQuestion" drag-handle-selector=".question-drag-handle" class="w-100">
+        <Container v-if="currentInteraction" @drop="onDropQuestion" drag-handle-selector=".question-drag-handle"
+                   class="w-100">
           <!-- Question Accordion -->
-          <Draggable v-for="question in  currentInteraction.questions" :key="question.question_id" class="question-accordion-wrapper mt-3">
+          <Draggable v-for="question in  currentInteraction.questions" :key="question.question_id"
+                     class="question-accordion-wrapper mt-3">
             <QuestionAccordion :question="question"/>
           </Draggable>
           <!-- End Question Accordion -->
@@ -38,31 +40,38 @@
   export default {
     name: "EditInteraction",
     components: {QuestionAccordion, AddQuestionBtn, Container, Draggable},
-    data(){
-      return{
-        intervalId:''
+    data() {
+      return {
+        intervalId: ''
       }
     },
     computed: {
-      ...mapState('interaction', ['currentInteraction']),
+      ...mapState('interaction', ['currentInteraction', 'interactions']),
       ...mapState('module', ['modules']),
     },
     methods: {
 
-      ...mapActions('interaction', {createInteraction: 'createInteraction',
-        updateInteractionState: 'updateInteractionState', updateInteraction: 'updateInteraction'}),
+      ...mapActions('interaction', {
+        createInteraction: 'createInteraction',
+        setSelectedInteraction: 'setSelectedInteraction',
+        updateInteractionState: 'updateInteractionState',
+        updateInteraction: 'updateInteraction'
+      }),
       ...mapActions('module', {updateModule: 'updateModule'}),
 
       //  Initialize Interaction content on creation
       async initInteractionContent() {
         let
           newInteraction = null,
-          currentModule = this.modules.find(el => el.uuid === this.$route.params.id),
+          id = this.$route.params.id,
+          currentModule = this.modules.find(el => el.contentIndex.hasOwnProperty(id)),
           moduleContentIndex = currentModule ? currentModule.contentIndex : {},
           contentLength = Object.keys(moduleContentIndex).length,
-          id = 'i-' + this.$uuid.v1();
+          foundInteraction = this.interactions.findIndex(el => {
+            return el.uuid === id
+          });
 
-        if (!this.currentInteraction) {
+        if (foundInteraction === -1) {
           newInteraction = {
             uuid: id,
             title: "New Interaction",
@@ -89,73 +98,74 @@
               contentIndex: moduleContentIndex
             }
           });
+        } else {
+          this.setSelectedInteraction(id);
         }
-
       },
 
-    addQuestion() {
+      addQuestion() {
 
-      let newQuestion = {
-        question_id: 'q-' + keygen.hex(8),
-        questionText: "",
-        questionType: "Single choice",
-        answers: [
-          {text: "", id: 'a-' + keygen.hex(6), checked: false},
-        ]
-      };
-      let questionsArray = [...this.currentInteraction.questions];
+        let newQuestion = {
+          question_id: 'q-' + keygen.hex(8),
+          questionText: "",
+          questionType: "Single choice",
+          answers: [
+            {text: "", id: 'a-' + keygen.hex(6), checked: false},
+          ]
+        };
+        let questionsArray = [...this.currentInteraction.questions];
         questionsArray.push(newQuestion);
-      this.updateInteractionState({
-        targetInteraction:this.currentInteraction.uuid,
-        props:{
-          questions:questionsArray
-        }
-      });
-    },
-    removeQuestion(question_id) {
-      let questionsArray = [...this.currentInteraction.questions];
-          questionsArray = questionsArray.filter(el => el.question_id !== question_id);
-      this.updateInteractionState({
-        targetInteraction:this.currentInteraction.uuid,
-        props:{
-          questions:questionsArray
-        }
-      });
-    },
-    onDropQuestion(dropResult) {
-      let questionsArray = [...this.currentInteraction.questions];
+        this.updateInteractionState({
+          targetInteraction: this.currentInteraction.uuid,
+          props: {
+            questions: questionsArray
+          }
+        });
+      },
+      removeQuestion(question_id) {
+        let questionsArray = [...this.currentInteraction.questions];
+        questionsArray = questionsArray.filter(el => el.question_id !== question_id);
+        this.updateInteractionState({
+          targetInteraction: this.currentInteraction.uuid,
+          props: {
+            questions: questionsArray
+          }
+        });
+      },
+      onDropQuestion(dropResult) {
+        let questionsArray = [...this.currentInteraction.questions];
         questionsArray = applyDrag(questionsArray, dropResult);
-      this.updateInteractionState({
-        targetInteraction:this.currentInteraction.uuid,
-        props:{
-          questions:questionsArray
-        }
-      });
+        this.updateInteractionState({
+          targetInteraction: this.currentInteraction.uuid,
+          props: {
+            questions: questionsArray
+          }
+        });
 
-    },
-     async saveInteractionInDB(){
+      },
+      async saveInteractionInDB() {
         let interActionID = this.currentInteraction.uuid,
           interactionContent = {...this.currentInteraction};
-       const isSaved =  await this.updateInteraction({
-         targetInteraction:interActionID,
-         props:interactionContent
-       });
-       bus.$emit('element-saved',isSaved);
+        const isSaved = await this.updateInteraction({
+          targetInteraction: interActionID,
+          props: interactionContent
+        });
+        bus.$emit('element-saved', isSaved);
       }
-  },
-  created()
-  { this.initInteractionContent();
-    bus.$on("add-question", () => {
-      this.addQuestion();
-    });
-    bus.$on("remove-question", (question_id) => {
-      this.removeQuestion(question_id);
-    });
-    // save every x minute : set in .env
-    this.intervalId = setInterval(this.saveInteractionInDB ,parseInt(process.env.VUE_APP_SAVE_INTERVAL) *60000);
+    },
+    created() {
+      this.initInteractionContent();
+      bus.$on("add-question", () => {
+        this.addQuestion();
+      });
+      bus.$on("remove-question", (question_id) => {
+        this.removeQuestion(question_id);
+      });
+      // save every x minute : set in .env
+      this.intervalId = setInterval(this.saveInteractionInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
 
-  },
-    beforeDestroy () {
+    },
+    beforeDestroy() {
       clearInterval(this.intervalId);
     },
   }

@@ -115,9 +115,8 @@
   import {library} from '@fortawesome/fontawesome-svg-core'
   import {faTasks, faUpload, faBookOpen} from '@fortawesome/free-solid-svg-icons'
   import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-  import {mapActions, mapState} from "vuex";
-  import {uuid} from "vue-uuid";
   import {bus} from "@/main";
+
 
   library.add(
     faTasks,
@@ -169,7 +168,8 @@
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"interaction"}});
       },
       addInteractionClicked() {
-        this.$router.push({name: 'edit-interaction', params: {id: this.moduleId,}});
+        let newInteractionID = 'i-' + this.$uuid.v1();
+        this.$router.push({name: 'edit-interaction', params: {id: newInteractionID}});
       },
       importLessonClicked () {
         this.$router.push({name: 'import', params: {id: this.moduleId,importType:"lesson"}});

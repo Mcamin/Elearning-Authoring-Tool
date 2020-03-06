@@ -316,6 +316,10 @@ const CourseActions = {
             console.log(error)
           })
       },
+    setSelectedInteraction:
+      ({commit}, interactionId) => {
+        commit('setSelectedInteraction', interactionId)
+      },
     createInteraction:
       async ({commit}, newInteraction) => {
         await InteractionRepository

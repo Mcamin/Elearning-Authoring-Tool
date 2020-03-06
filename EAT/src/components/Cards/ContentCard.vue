@@ -1,5 +1,5 @@
 <template>
-  <a href="#">
+  <a href=""  @click="handleClick">
   <b-card no-body class="mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
@@ -32,6 +32,7 @@
   import { library } from '@fortawesome/fontawesome-svg-core'
   import {faTrash,faCog} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  import {mapState,mapActions} from 'vuex'
   import {bus} from "@/main";
   library.add(
     faTrash,
@@ -58,8 +59,10 @@
         'font-awesome-icon': FontAwesomeIcon,
       },
       methods:{
+        handleClick() {
+            this.$router.push({name: 'edit-interaction', params: {id: this.contentId,}});
+        },
         handleDelete(){
-          console.log("hello");
           let contentType = this.contentId.charAt(0)==='i'? "interaction":"lesson";
           let metadata = {
             id: this.contentId,
@@ -68,6 +71,9 @@
           };
           bus.$emit('delete-course', metadata);
         }
+      },
+      computed: {
+        ...mapState('interaction',['interactions'])
       }
     }
 </script>

@@ -146,6 +146,9 @@ const InteractionMutations = {
   getInteractions: (state, interactions) => {
     state.interactions= interactions;
   },
+    setSelectedInteraction: (state, interactionId) => {
+      state.currentInteraction= state.interactions.find(el => { return el.uuid === interactionId});
+    },
   createInteraction: (state, newInteraction) => {
     state.currentInteraction= newInteraction;
     state.interactions.push(newInteraction);
