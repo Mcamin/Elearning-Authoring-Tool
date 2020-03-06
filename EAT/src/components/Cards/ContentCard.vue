@@ -1,5 +1,5 @@
 <template>
-  <a href=""  @click.prevent="handleClick()">
+  <b-link   @click="handleClick()">
   <b-card no-body class="mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
@@ -12,19 +12,19 @@
 
         <!--Right Settings-->
         <b-col  class="text-right">
-          <a href="#"  @click.stop="handleDelete" class="ml-2">
+          <b-link href=""  @click.stop="handleDelete()" class="ml-2">
             <font-awesome-icon :icon="['fas', 'trash']"  color="gray" size="lg"/>
-          </a>
-          <a href="#" class="ml-2">
+          </b-link>
+          <b-link href="" class="ml-2" @click.stop="handleEdit()">
             <font-awesome-icon :icon="['fas', 'cog']" color="gray"  size="lg"/>
-          </a>
+          </b-link>
         </b-col>
         <!--End Right settings -->
       </b-row>
     </b-card-header>
 
   </b-card>
-  </a>
+  </b-link>
 </template>
 
 <script>
@@ -77,13 +77,21 @@
 
         },
         handleDelete(){
-          let contentType = this.contentId.charAt(0)==='i'? "interaction":"lesson";
-          let metadata = {
+          let contentType = this.contentId.charAt(0)==='i'? "Interaction":"Lesson",
+           metadata = {
             id: this.contentId,
             type: contentType,
             title: this.title,
           };
-          bus.$emit('delete-course', metadata);
+          bus.$emit('delete-modal', metadata);
+        },
+        handleEdit(){
+          let contentType = this.contentId.charAt(0)==='i'? "Interaction":"Lesson",
+           metadata = {
+            id: this.contentId,
+            type: contentType,
+          };
+          bus.$emit('edit-modal', metadata);
         }
       },
 

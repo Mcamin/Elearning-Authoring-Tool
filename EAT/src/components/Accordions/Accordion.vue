@@ -10,7 +10,7 @@
               <input :class="{view: !isEditing}" :disabled="!isEditing"  type="text" :value="secTitle"
                      ref="section_title" v-on:keyup.enter="toggleTitleInput">
             </label>
-            <a class="ml-2" href="#">
+            <a class="ml-2" href="">
               <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg" v-if="!isEditing" color="gray"/>
               <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg" v-else-if="isEditing" color="gray"/>
             </a>
@@ -20,15 +20,15 @@
 
         <!--Right Settings-->
         <b-col  class="text-right">
-          <a href="#"  class="ml-2">
-            <font-awesome-icon :icon="['fas', 'trash']"  color="gray"/>
-          </a>
-          <a href="#" class="ml-2">
-            <font-awesome-icon :icon="['fas', 'cog']" color="gray" />
-          </a>
+          <b-link  @click.stop="handleDelete()"  class="ml-2">
+            <font-awesome-icon :icon="['fas', 'trash']"  color="gray" size="lg"/>
+          </b-link>
+          <b-link @click.stop="handleEdit()" class="ml-2">
+            <font-awesome-icon :icon="['fas', 'cog']" color="gray" size="lg" />
+          </b-link>
 
-          <a href="#" @click.prevent="toggleCollapse(accordionID)" class="ml-2">
-            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" color="gray"/>
+          <a href="" @click.prevent="toggleCollapse(accordionID)" class="ml-2" >
+            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
           </a>
 
         </b-col>
@@ -67,6 +67,7 @@
   import AddBtn from "../Buttons/AddBtn";
   import {mapActions, mapGetters, mapState} from "vuex";
   import ContentCard from "@/components/Cards/ContentCard";
+  import {bus} from "@/main";
   library.add(
     faPen,
     faTrash,
@@ -119,12 +120,26 @@
           this.$root.$emit('bv::toggle::collapse', id);
           this.collapsed = ! this.collapsed;
         },
-          elementPage(id){
-              if (id.charAt(0) === 'q')
-                  return '/edit-interaction';
-              else
-                  return '/edit-lesson';
-          },
+
+        handleDelete(){
+          let contentType = this.accordionID.charAt(0)==='s'? "Section":"Module",
+            metadata = {
+              id: this.accordionID,
+              type: contentType,
+              title: this.accordionTitle,
+            };
+          bus.$emit('delete-modal', metadata);
+        },
+        handleEdit(){
+          let contentType = this.accordionID.charAt(0)==='s'? "Section":"Module",
+            metadata = {
+              id: this.accordionID,
+              type: contentType,
+            };
+          bus.$emit('edit-modal', metadata);
+        },
+
+
         async loadSectionContent(){
 
             //keys: 0,1,2,3 positions in contentCourse array

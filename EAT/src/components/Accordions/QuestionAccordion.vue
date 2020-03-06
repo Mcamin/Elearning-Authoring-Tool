@@ -5,7 +5,7 @@
       <b-row >
         <!-- Left Settings -->
         <b-col cols="2">
-          <a href="#" class=" question-drag-handle ml-2">
+          <a href="" class=" question-drag-handle ml-2">
             <font-awesome-icon :icon="['fas', 'bars']" color="gray" size="lg" />
           </a>
         </b-col>
@@ -16,11 +16,11 @@
 
         <!--Right Settings-->
         <b-col cols="2"  class="text-right">
-          <a href="#"  @click.prevent="removeQuestion" class="ml-2">
+          <a href=""  @click.prevent="removeQuestion" class="ml-2">
             <font-awesome-icon :icon="['fas', 'trash']"  color="gray"  size="lg"/>
           </a>
 
-          <a href="#" @click.prevent="toggleCollapse(questionObject.question_id)" class="ml-2">
+          <a href="" @click.prevent="toggleCollapse(questionObject.question_id)" class="ml-2">
             <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
           </a>
 

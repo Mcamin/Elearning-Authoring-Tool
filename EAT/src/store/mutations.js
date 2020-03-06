@@ -91,7 +91,18 @@ const ModuleMutations = {
     state.modules.push(newModule);
   },
   updateModule: (state, payload) => {
-    //Loop through Payload and update Course Attributes
+    //Loop through Payload and update Section Attributes
+    let foundIndex = state.modules.findIndex(
+      el => el.uuid === payload.targetModule),
+      newObj = state.modules[foundIndex];
+
+    const entries = Object.entries(payload.props);
+
+    for (const [key, value] of entries) {
+      newObj[key] = value;
+    }
+    state.modules.splice(foundIndex, 1, newObj);
+
   },
   deleteModule: (state, moduleId) => {
     //Check if the currentCourse have the ID and empty it
