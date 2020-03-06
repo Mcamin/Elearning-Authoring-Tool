@@ -174,6 +174,7 @@
     },
     beforeDestroy() {
       clearInterval(this.intervalId);
+      this.saveInteractionInDB();
     },
   }
 </script>

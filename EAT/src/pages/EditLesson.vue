@@ -3,19 +3,19 @@
     <b-row class="mt-5 mx-5">
       <b-col class="mb-4 mx-auto">
         <!--HTML Card-->
-        <b-card class="mb-5" no-body>
+        <b-card class="mb-5" no-body v-if="currentLesson">
           <b-card-body>
             <b-card-text>
               <b-container fluid>
                 <b-row>
                   <b-col class="mb-3">
-                    <input :class="{view: !isEditing}" :disabled="!isEditing" :value="lessonTitle" ref="lessonTitle"
+                    <input :class="{view: !meta.isEditing}" :disabled="!meta.isEditing" :value="currentLesson.title" ref="lessonTitle"
                            type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
-                      <font-awesome-icon :icon="['fas', 'pen']" @click="isEditing = !isEditing" size="lg"
-                                         v-if="!isEditing" color="gray"/>
+                      <font-awesome-icon :icon="['fas', 'pen']" @click="meta.isEditing = !meta.isEditing" size="lg"
+                                         v-if="!meta.isEditing" color="gray"/>
                       <font-awesome-icon :icon="['fas', 'save']" @click="toggleTitleInput" size="lg"
-                                         v-else-if="isEditing" color="gray"/>
+                                         v-else-if="meta.isEditing" color="gray"/>
                     </a>
                     <!--<a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
@@ -31,15 +31,15 @@
                     <div>
                       <vue-tags-input
                         :allow-edit-tags="true"
-                        :tags="tags"
-                        @tags-changed="newTags => tags = newTags"
-                        v-model="tag"
+                        :tags="currentLesson.tags"
+                        @tags-changed="newTags => currentLesson.tags = newTags"
+                        v-model="meta.tag"
                       />
                     </div>
                   </b-col>
                 </b-row>
               </b-container>
-              <vue-editor v-model="content"></vue-editor>
+              <vue-editor  v-model="content"></vue-editor>
             </b-card-text>
           </b-card-body>
         </b-card>
@@ -156,6 +156,7 @@
   import {VueEditor} from "vue2-editor";
   import VueTagsInput from '@johmun/vue-tags-input';
   import {mapActions, mapState} from "vuex";
+  import {bus} from "@/main";
 
   library.add(
     faPen,
@@ -165,23 +166,21 @@
   );
 
   export default {
-    name: "AddLesson",
+    name: "EditLesson",
     data() {
       return {
-        intervalId: '',
-        tag: '',
-        content:'',
-        tags: [],
-        inputVisible: false,
-        isEditing: false,
-        lessonTitle: 'LessonTitle'
+        meta:{
+          intervalId: '',
+          tag: '',
+          isEditing: false,
+        },
+        content:''
 
       }
     },
     computed:{
       ...mapState('lesson', ['currentLesson', 'lessons']),
-      ...mapState('module' , ['currentModule'])
-
+      ...mapState('module' , ['currentModule']),
     },
     methods: {
       ...mapActions('lesson', {
@@ -190,6 +189,7 @@
         updateLessonState: 'updateLessonState',
         updateLesson: 'updateLesson',
         loadLesson:'loadLesson'}),
+
       ...mapActions('module', {updateModule:'updateModule'}),
       //  Initialize Lesson content on creation
       async initLessonContent() {
@@ -233,23 +233,49 @@
           }
         }
       },
+
+
       toggleTitleInput() {
         this.lessonTitle = this.$refs['lessonTitle'].value;
-        this.isEditing = !this.isEditing;
+        this.meta.isEditing = !this.meta.isEditing;
+      },
+
+      async saveLessonInDB() {
+        let lessonID = this.currentLesson.uuid,
+          lessonContent = {...this.currentLesson};
+        const isSaved = await this.updateLesson({
+          targetInteraction: lessonID,
+          props: lessonContent
+        });
+        bus.$emit('element-saved', isSaved);
       }
     },
+
     components: {
       'font-awesome-icon': FontAwesomeIcon,
       VueEditor,
       VueTagsInput,
     },
+    watch:{
+      content:{
+        handler:function(val){
+        this.updateLessonState({
+          targetLesson: this.currentLesson.uuid,
+          props: {
+            content: val
+          }
+        });},
+        deep: true
+      }
+    },
     created(){
       this.initLessonContent();
       // save every x minute : set in .env
-      this.intervalId = setInterval(this.saveInteractionInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
+      this.meta.intervalId = setInterval(this.saveLessonInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
     },
     beforeDestroy() {
-      clearInterval(this.intervalId);
+      clearInterval(this.meta.intervalId);
+      this.saveLessonInDB();
     },
   };
 </script>
