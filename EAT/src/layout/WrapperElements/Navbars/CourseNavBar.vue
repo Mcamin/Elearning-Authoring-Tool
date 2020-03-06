@@ -26,12 +26,12 @@
           <small class="text-muted mr-2">Close</small>
         </div>
       </template>
-      Course Title: <b-form-input v-model="courseTitle"></b-form-input>
-      Course Description: <b-form-input v-model="courseDescription"></b-form-input>
+      Course Title: <b-form-input v-model="currentCourse.title" ref="courseTitle"></b-form-input>
+      Course Description: <b-form-input v-model="currentCourse.description" ref="courseDescription"></b-form-input>
       <hr>
       <div align="right">
         <b-button size="sm" @click="hideToast('my-toast-settings')">Cancel</b-button>
-        <b-button size="sm" variant="success" @click="hideToast('my-toast-settings')">Save</b-button>
+        <b-button size="sm" variant="success" @click="saveTitleDesc('my-toast-settings')">Save</b-button>
       </div>
     </b-toast>
     <!-- Toast for Share button -->
@@ -65,7 +65,7 @@
     export default {
       data() {
         return {
-          courseTitle: 'COURSETITLE',
+          courseTitle: '',
           courseDescription: 'CDESC',
           username:keygen.hex(6),
           pass: keygen.hex(9),
@@ -90,6 +90,11 @@
         },
         hideToast(id){
           this.$bvToast.hide(id);
+        },
+        saveTitleDesc(id){
+            this.courseTitle = this.$refs['courseTitle'].value;
+            this.courseDescription = this.$refs['courseDescription'].value;
+            this.$bvToast.hide(id);
         }
       },
     }
