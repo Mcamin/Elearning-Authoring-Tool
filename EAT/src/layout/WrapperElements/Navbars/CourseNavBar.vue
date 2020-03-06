@@ -28,12 +28,12 @@
       </template>
       Course Title: <b-form-input v-model="currentCourse.title" ref="courseTitle"></b-form-input>
       Course Description: <b-form-input v-model="currentCourse.description" ref="courseDescription"></b-form-input>
-      <vue-tags-input
+      <!--<vue-tags-input
         :allow-edit-tags="true"
         :tags="tags"
         @tags-changed="newTags => tags = newTags"
         v-model="tag"
-      />
+      />-->
       <hr>
       <div align="right">
         <b-button size="sm" @click="hideToast('my-toast-settings')">Cancel</b-button>

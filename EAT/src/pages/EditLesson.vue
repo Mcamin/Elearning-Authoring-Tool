@@ -29,12 +29,12 @@
                 <b-row>
                   <b-col class="mb-5">
                     <div>
-                      <!--<vue-tags-input
+                      <vue-tags-input
                         :allow-edit-tags="true"
                         :tags="currentLesson.tags"
                         @tags-changed="newTags => currentLesson.tags = newTags"
                         v-model="meta.tag"
-                      />-->
+                      />
                     </div>
                   </b-col>
                 </b-row>
