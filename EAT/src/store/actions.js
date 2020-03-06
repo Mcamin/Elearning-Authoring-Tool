@@ -87,7 +87,7 @@ const CourseActions = {
 
   SectionActions = {
     loadSection:
-      async ({commit,dispatch}, sectionID) => {
+      async ({commit}, sectionID) => {
         await SectionRepository
           .get(sectionID)
           .then(response => {
@@ -108,8 +108,12 @@ const CourseActions = {
             console.log(error)
           })
       },
+    setSelectedSection:
+      ({commit}, sectionId) => {
+        commit('setSelectedSection', sectionId)
+      },
     createSection:
-      async ({commit,dispatch }, newSection) => {
+      async ({commit }, newSection) => {
         await SectionRepository
           .createSection(newSection)
           .then((response) => {
@@ -158,7 +162,7 @@ const CourseActions = {
 
   ModuleActions = {
     loadModule:
-      async ({commit,dispatch}, moduleID) => {
+      async ({commit}, moduleID) => {
         await ModuleRepository
           .get(moduleID)
           .then(response => {
@@ -180,7 +184,7 @@ const CourseActions = {
           })
       },
     createModule:
-      async ({commit,dispatch}, newModule) => {
+      async ({commit}, newModule) => {
         await ModuleRepository
           .createModule(newModule)
           .then((response) => {
@@ -191,6 +195,10 @@ const CourseActions = {
           .catch(error => {
             console.log(error)
           })
+      },
+    setSelectedModule:
+      ({commit}, moduleId) => {
+        commit('setSelectedModule', moduleId)
       },
     updateModule:
       async ({commit}, payload) => {
@@ -259,15 +267,26 @@ const CourseActions = {
             console.log(error)
           })
       },
+    setSelectedLesson:
+      ({commit}, lessonId) => {
+        commit('setSelectedLesson', lessonId)
+      },
+    updateLessonState:
+      ({commit}, payload) => {
+        commit('updateLesson', payload)
+      },
     updateLesson:
-      async ({commit}, payload) => {
-        await LessonRepository
+      async ({commit},payload) => {
+        return await LessonRepository
           .updateLesson(payload)
-          .then((response) => {
-            commit('updateLesson', payload)
+          .then(() => {
+            commit('updateLesson', payload);
+            return Promise.resolve(true);
           })
           .catch(error => {
-            console.log(error)
+            console.log(error);
+            return Promise.reject(false);
+
           })
       },
     deleteLesson:
@@ -316,10 +335,6 @@ const CourseActions = {
             console.log(error)
           })
       },
-    setSelectedInteraction:
-      ({commit}, interactionId) => {
-        commit('setSelectedInteraction', interactionId)
-      },
     createInteraction:
       async ({commit}, newInteraction) => {
         await InteractionRepository
@@ -330,6 +345,10 @@ const CourseActions = {
           .catch(error => {
             console.log(error)
           })
+      },
+    setSelectedInteraction:
+      ({commit}, interactionId) => {
+        commit('setSelectedInteraction', interactionId)
       },
     updateInteractionState:
        ({commit}, payload) => {

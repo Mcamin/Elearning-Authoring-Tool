@@ -1,36 +1,34 @@
-
 const CourseMutations = {
   getCourse: (state, course) => {
-    state.currentCourse= course;
+    state.currentCourse = course;
   },
   getCourses: (state, courses) => {
-    state.courses= courses;
+    state.courses = courses;
   },
   createCourse: (state, newCourse) => {
-    state.currentCourse= newCourse;
+    state.currentCourse = newCourse;
     state.courses.push(newCourse);
   },
   updateCourse: (state, payload) => {
     //Loop through Payload and update Course Attributes
     const entries = Object.entries(payload.props);
-    let newObj =  state.currentCourse;
-    for (const [key,value] of entries)
-    {
-      newObj[key] =value;
+    let newObj = state.currentCourse;
+    for (const [key, value] of entries) {
+      newObj[key] = value;
     }
-    state.currentCourse =  {...newObj};
+    state.currentCourse = {...newObj};
   },
   deleteCourse: (state, courseId) => {
     let
-    index = state.courses.findIndex(x => x.uuid ===courseId);
-    state.courses.splice(index,1);
+      index = state.courses.findIndex(x => x.uuid === courseId);
+    state.courses.splice(index, 1);
   },
 
   resetCourse: (state) => {
-    state.currentCourse= null;
+    state.currentCourse = null;
   },
   resetCoursesArray: (state) => {
-    state.courses= [];
+    state.courses = [];
   },
 
 };
@@ -40,24 +38,28 @@ const SectionMutations = {
     state.sections.push(section);
   },
   getSections: (state, sections) => {
-    state.sections= sections;
+    state.sections = sections;
+  },
+  setSelectedSection: (state, sectionId) => {
+    state.currentSection = state.sections.find(el => {
+      return el.uuid === sectionId
+    });
   },
   createSection: (state, newSection) => {
     state.sections.push(newSection);
   },
   updateSection: (state, payload) => {
     //Loop through Payload and update Section Attributes
-    let foundIndex =  state.sections.findIndex(
+    let foundIndex = state.sections.findIndex(
       el => el.uuid === payload.targetSection),
       newObj = state.sections[foundIndex];
 
     const entries = Object.entries(payload.props);
 
-    for (const [key,value] of entries)
-    {
-      newObj[key] =value;
+    for (const [key, value] of entries) {
+      newObj[key] = value;
     }
-    state.sections.splice(foundIndex, 1,newObj);
+    state.sections.splice(foundIndex, 1, newObj);
 
 
   },
@@ -66,10 +68,10 @@ const SectionMutations = {
     //Check if the array of courses contain that course and delete it
   },
   resetSection: (state) => {
-    state.currentSection= null;
+    state.currentSection = null;
   },
   resetSectionsArray: (state) => {
-    state.sections= [];
+    state.sections = [];
   },
 };
 
@@ -78,8 +80,13 @@ const ModuleMutations = {
     state.modules.push(_module);
   },
   getModules: (state, modules) => {
-    state.modules= modules;
+    state.modules = modules;
   },
+  setSelectedModule: (state, moduleId) => {
+    state.currentModule = state.modules.find(el => {
+      return el.uuid === moduleId
+    });
+    },
   createModule: (state, newModule) => {
     state.modules.push(newModule);
   },
@@ -91,10 +98,10 @@ const ModuleMutations = {
     //Check if the array of courses contain that course and delete it
   },
   resetModule: (state) => {
-    state.currentModule= null;
+    state.currentModule = null;
   },
   resetModulesArray: (state) => {
-    state.modules= [];
+    state.modules = [];
   },
 };
 
@@ -103,95 +110,103 @@ const LessonMutations = {
     state.lessons.push(lesson);
   },
   getLessons: (state, lessons) => {
-    state.lessons= lessons;
+    state.lessons = lessons;
   },
   createLesson: (state, newLesson) => {
-    state.currentLesson= newLesson;
+    state.currentLesson = newLesson;
     state.lessons.push(newLesson);
+  },
+  setSelectedLesson: (state, lessonId) => {
+    state.currentLesson = state.lessons.find(el => {
+      return el.uuid === lessonId
+    });
   },
   updateLesson: (state, payload) => {
     //Loop through Payload and update lesson Attributes
-    let foundIndex =  state.lessons.findIndex(
+    let foundIndex = state.lessons.findIndex(
       el => el.uuid === payload.targetLesson),
       newObj = state.lessons[foundIndex];
 
     const entries = Object.entries(payload.props);
 
-    for (const [key,value] of entries)
-    {
-      newObj[key] =value;
+    for (const [key, value] of entries) {
+      newObj[key] = value;
     }
-    state.lessons.splice(foundIndex, 1,newObj);
+    state.lessons.splice(foundIndex, 1, newObj);
     state.currentLesson = newObj;
   },
   deleteLesson: (state, lessonId) => {
-    if(state.currentLesson && state.currentLesson === lessonId )
+    if (state.currentLesson && state.currentLesson === lessonId)
       state.currentLesson = null;
-    state.lessons =  state.lessons.filter(el => {
-      return el.uuid !== lessonId;});
+    state.lessons = state.lessons.filter(el => {
+      return el.uuid !== lessonId;
+    });
   },
   resetLesson: (state) => {
-    state.currentLesson= null;
+    state.currentLesson = null;
   },
   resetLessonsArray: (state) => {
-    state.lessons= [];
+    state.lessons = [];
   },
 
 };
 
 const InteractionMutations = {
-  getInteraction: (state, interaction) => {
-    state.interactions.push(interaction);
-  },
-  getInteractions: (state, interactions) => {
-    state.interactions= interactions;
-  },
-    setSelectedInteraction: (state, interactionId) => {
-      state.currentInteraction= state.interactions.find(el => { return el.uuid === interactionId});
+    getInteraction: (state, interaction) => {
+      state.interactions.push(interaction);
     },
-  createInteraction: (state, newInteraction) => {
-    state.currentInteraction= newInteraction;
-    state.interactions.push(newInteraction);
-  },
-  updateInteraction: (state, payload) => {
-    //Loop through Payload and update interaction Attributes
-    let foundIndex =  state.interactions.findIndex(
-      el => el.uuid === payload.targetInteraction),
-      newObj = state.interactions[foundIndex];
+    getInteractions: (state, interactions) => {
+      state.interactions = interactions;
+    },
+    setSelectedInteraction: (state, interactionId) => {
+      state.currentInteraction = state.interactions.find(el => {
+        return el.uuid === interactionId
+      });
+    },
+    createInteraction: (state, newInteraction) => {
+      state.currentInteraction = newInteraction;
+      state.interactions.push(newInteraction);
+    },
+    updateInteraction: (state, payload) => {
+      //Loop through Payload and update interaction Attributes
+      let foundIndex = state.interactions.findIndex(
+        el => el.uuid === payload.targetInteraction),
+        newObj = state.interactions[foundIndex];
 
-    const entries = Object.entries(payload.props);
+      const entries = Object.entries(payload.props);
 
-    for (const [key,value] of entries)
-    {
-      newObj[key] =value;
-    }
-    state.interactions.splice(foundIndex, 1,newObj);
-    state.currentInteraction = newObj;
-  },
-  deleteInteraction: (state, interactionId) => {
-    if(state.currentInteraction && state.currentInteraction === interactionId )
+      for (const [key, value] of entries) {
+        newObj[key] = value;
+      }
+      state.interactions.splice(foundIndex, 1, newObj);
+      state.currentInteraction = newObj;
+    },
+
+    deleteInteraction: (state, interactionId) => {
+      if (state.currentInteraction && state.currentInteraction === interactionId)
         state.currentInteraction = null;
-    state.interactions =  state.interactions.filter(el => {
-         return el.uuid !== interactionId;});
-  },
+      state.interactions = state.interactions.filter(el => {
+        return el.uuid !== interactionId;
+      });
+    },
 
     resetInteraction: (state) => {
-      state.currentInteraction= null;
+      state.currentInteraction = null;
     },
     resetInteractionsArray: (state) => {
-      state.interactions= [];
+      state.interactions = [];
     },
 
-},
- GlobalMutations = {
-  getLanguages: (state, languages) => {
-    state.languages= languages;
   },
+  GlobalMutations = {
+    getLanguages: (state, languages) => {
+      state.languages = languages;
+    },
 
-  getCategories: (state, categories) => {
-    state.categories= categories;
-  },
-};
+    getCategories: (state, categories) => {
+      state.categories = categories;
+    },
+  };
 
 
 /*createSectionTitle: (state,payload) => {
@@ -200,8 +215,7 @@ const InteractionMutations = {
   state.course.sections[state.course.sections.indexOf(temp)].title =payload.newTitle;*/
 
 
-
-export  {
+export {
   GlobalMutations,
   InteractionMutations,
   LessonMutations,
