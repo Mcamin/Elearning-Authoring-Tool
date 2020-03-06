@@ -9,7 +9,7 @@
               <b-container fluid>
                 <b-row>
                   <b-col class="mb-3">
-                    <input :class="{view: !meta.isEditing}" :disabled="!meta.isEditing" :value="currentLesson.title" ref="lessonTitle"
+                    <input :class="{view: !meta.isEditing}" :disabled="!meta.isEditing" :value="selectedLesson.title" ref="lessonTitle"
                            type="text" v-on:keyup.enter="toggleTitleInput">
                     <a class="ml-2" href="#">
                       <font-awesome-icon :icon="['fas', 'pen']" @click="meta.isEditing = !meta.isEditing" size="lg"
@@ -31,15 +31,15 @@
                     <div>
                       <vue-tags-input
                         :allow-edit-tags="true"
-                        :tags="currentLesson.tags"
-                        @tags-changed="newTags => currentLesson.tags = newTags"
+                        :tags="selectedLesson.tags"
+                        @tags-changed="updateTags"
                         v-model="meta.tag"
                       />
                     </div>
                   </b-col>
                 </b-row>
               </b-container>
-              <vue-editor  v-model="content"></vue-editor>
+              <vue-editor  v-model="selectedLesson.content"></vue-editor>
             </b-card-text>
           </b-card-body>
         </b-card>
@@ -174,8 +174,7 @@
           tag: '',
           isEditing: false,
         },
-        content:''
-
+        selectedLesson:{}
       }
     },
     computed:{
@@ -233,18 +232,25 @@
           }
         }
       },
-
-
+      updateTags(newTags){
+        this.selectedLesson.tags = newTags;
+        this.updateLessonState({
+          targetLesson: this.selectedLesson.uuid,
+          props: {
+            tags: newTags
+          }
+        });
+      },
       toggleTitleInput() {
-        this.lessonTitle = this.$refs['lessonTitle'].value;
+        this.selectedLesson.title = this.$refs['lessonTitle'].value;
         this.meta.isEditing = !this.meta.isEditing;
       },
 
       async saveLessonInDB() {
-        let lessonID = this.currentLesson.uuid,
-          lessonContent = {...this.currentLesson};
+        let lessonID = this.selectedLesson.uuid,
+          lessonContent = {...this.selectedLesson};
         const isSaved = await this.updateLesson({
-          targetInteraction: lessonID,
+          targetLesson: lessonID,
           props: lessonContent
         });
         bus.$emit('element-saved', isSaved);
@@ -257,13 +263,11 @@
       VueTagsInput,
     },
     watch:{
-      content:{
+      selectedLesson:{
         handler:function(val){
         this.updateLessonState({
-          targetLesson: this.currentLesson.uuid,
-          props: {
-            content: val
-          }
+          targetLesson: this.selectedLesson.uuid,
+          props: val
         });},
         deep: true
       }
@@ -271,6 +275,7 @@
     created(){
       this.initLessonContent();
       // save every x minute : set in .env
+       this.selectedLesson = this.currentLesson
       this.meta.intervalId = setInterval(this.saveLessonInDB, parseInt(process.env.VUE_APP_SAVE_INTERVAL) * 60000);
     },
     beforeDestroy() {

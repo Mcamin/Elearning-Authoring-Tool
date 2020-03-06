@@ -16,7 +16,7 @@ export default {
   },
 
   updateLesson(payload){
-    return Repository.patch(`${resource}`,payload);
+    return Repository.patch(`${resource}/${payload.targetLesson}`,payload.props);
   },
   deleteLesson(lessonID) {
     return Repository.delete(`${resource}/${lessonID}`);
