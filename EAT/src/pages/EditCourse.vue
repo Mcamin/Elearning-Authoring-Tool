@@ -2,6 +2,16 @@
 Add the default section to the sections -->
 <template>
   <b-container class="p-5 my-2">
+    <div>
+      <b-card>
+        <b-card-text>
+          <h4>{{currentCourse.title}}</h4>
+        </b-card-text>
+        <b-card-text>{{currentCourse.description}}</b-card-text>
+        <b>Tags</b> <p v-for="item in currentCourse.tags">{{ item }}</p>
+      </b-card>
+    </div>
+    <hr>
     <b-row align-v="center" align-h="center">
       <b-col align-self="center" class="h-100">
         <!-- Add  course Accordion-->
@@ -16,8 +26,6 @@ Add the default section to the sections -->
                      :accordionID="content.uuid" :key="idx"/>
 
         </template>
-
-
         <AddBtn triggered-by="page"/>
         <!--End  Add  course Accordion-->
         <!-- Add  section / module  Modal-->
