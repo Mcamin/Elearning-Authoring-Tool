@@ -41,14 +41,14 @@
     <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
          <!--Render Section Content: Modules-->
-         <template v-if="isSection" v-for="(module, index) in getSectionContent(this.accordionID)">
-            <component :is="'Accordion'" :accordionTitle="module.title"
+         <template  v-for="(module, index) in getSectionContent(this.accordionID)">
+            <component v-if="isSection" :is="'Accordion'" :accordionTitle="module.title"
                        :accordionID="module.uuid" :key="index"/>
           </template>
 
           <!--Render Module Content: Quizzes and interactions-->
-       <template v-if="isModule" v-for="(c,idx) in getModuleContent(this.accordionID)" >
-            <ContentCard  :contentId="c.uuid" :title="c.title"
+       <template v-for="(c,idx) in getModuleContent(this.accordionID)" >
+            <ContentCard  v-if="isModule" :contentId="c.uuid" :title="c.title"
                        :key="idx"/>
         </template>
         <AddBtn :triggered-by="this.accordionID"  />
@@ -106,17 +106,13 @@
 
 
       methods:{
-     /*   ...mapActions([
-          'updateSectionTitle'
-        ]),*/
+
         ...mapActions('module', {loadModule : 'loadModule'}),
+        ...mapActions('lesson', {loadLesson : 'loadLesson'}),
+        ...mapActions('interaction', {loadInteraction : 'loadInteraction'}),
           toggleTitleInput(){
-            /*const payload = {
-              oldTitle:this.secTitle,
-              newTitle:this.$refs['section_title'].value,
-            };*/
+
             this.secTitle = this.$refs['section_title'].value;
-            //this.updateSectionTitle(payload);
             this.isEditing = !this.isEditing;
           },
         toggleCollapse(id) {
@@ -136,11 +132,30 @@
             if(this.isSection)
             { const keys = Object.keys(this.sections.find(el => el.uuid === this.accordionID).modulesIndex);
             for (const key in keys) {
-              //TODO: check if the module if in the array
+              let moduleFound = this.modules.findIndex( (el) => {return el.uuid === keys[key]});
+              if (moduleFound === -1)
                 await this.loadModule(keys[key]);
             }}
+            else{
+              const keys = Object.keys(this.modules.find(el => el.uuid === this.accordionID).contentIndex);
+              for (const key in keys) {
+                if(keys[key].charAt(0)=== 'i') {
+                  let interactionFound = this.interactions.findIndex((el) => {
+                    return el.uuid === keys[key]
+                  });
+                  if (interactionFound === -1)
+                    await this.loadInteraction(keys[key]);
+                } else
+                {let lessonFound = this.lessons.findIndex( (el) => {
+                  return el.uuid === keys[key]
+                });
 
+                    if (lessonFound === -1)
+                      await this.loadLesson(keys[key]);}
+              }
+            }
         }
+
       },
         computed:{
           ...mapGetters(
@@ -151,6 +166,15 @@
           ),
           ...mapState(
             'section' , ['sections']
+          ),
+          ...mapState(
+            'module' , ['modules']
+          ),
+          ...mapState(
+            'lesson' , ['lessons']
+          ),
+          ...mapState(
+            'interaction' , ['interactions']
           ),
             isSection() {
                 return this.accordionID.charAt(0) === 's'

@@ -16,9 +16,17 @@ const
 
 const mongoURI = 'mongodb+srv://' + process.env.MONGO_USR + ':' + process.env.MONGO_PW +
       '@cluster0-nylix.mongodb.net/test?retryWrites=true&w=majority';
+
 mongoose.connect(mongoURI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true,
+}, (err,db) => {
+  if (err) {
+    console.log('Unable to connect to the server. Please start the server. ', err);
+  } else {
+    console.log('Connected to Server successfully!');
+  }
 });
 mongoose.promise = global.promise;
+
 
 //Dev
 app.use(morgan("dev"));

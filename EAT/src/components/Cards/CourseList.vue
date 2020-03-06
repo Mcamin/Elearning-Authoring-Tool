@@ -38,11 +38,11 @@
 
 
   import {library} from '@fortawesome/fontawesome-svg-core'
-  import {faTrash,faEye,faCopy, faEllipsisV, faClock, faBookOpen} from '@fortawesome/free-solid-svg-icons'
+  import {faTrash,faEye,faCopy, faPlusCircle, faClock, faBookOpen} from '@fortawesome/free-solid-svg-icons'
   import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 
   library.add(
-    faEllipsisV,
+    faPlusCircle,
     faClock,
     faBookOpen,
     faTrash,
@@ -124,7 +124,7 @@
     computed:{
       ...mapState('course', ['courses']),
       thumbnail() {
-        return this.img===''? defaultImage : process.env.VUE_APP_BASE_DOMAIN+'/courses/images/'+this.img;
+        return this.img ? process.env.VUE_APP_BASE_DOMAIN + '/courses/images/' + this.img : defaultImage;
       }
     }
   };
