@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Message: {{ this.$route.params.id }}</h1>
+    <h1>Course Title: {{ currentCourse.title }}</h1>
     <b-container class="p-5 my-2">
       <div v-for="item in getCourseContent">
         <b-card >
@@ -46,7 +46,7 @@
             </div>
           </b-card-text>
           <b-card-text></b-card-text>
-          <b>Tags</b>
+          <b-button @click="handleSubmit" size="sm" class="my-2 my-sm-0" type="submit">SUBMIT</b-button>
         </b-card>
       </div>
     </b-container>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
 
   export default {
     name: "Preview",
@@ -68,6 +68,8 @@
       ...mapGetters(
         'module' , ['getModuleContent']
       ),
+      ...mapState('course', ['currentCourse']),
+
     }
     }
 </script>
