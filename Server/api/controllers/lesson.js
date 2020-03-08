@@ -12,7 +12,7 @@ exports.lessons_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
  Lesson.find()
-  .select("title description content uuid type tags ")
+  .select("title description tokens content uuid type tags ")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -26,7 +26,8 @@ exports.lessons_get_all = (req, res, next) => {
           description: doc.description,
           content: doc.content,
           type: doc.type,
-          tags: doc.tags
+          tags: doc.tags,
+          tokens: doc.tokens
         };
       })
     });
@@ -41,7 +42,7 @@ exports.lessons_get_all = (req, res, next) => {
 // Get a lesson by id
 exports.lessons_get_lesson = (req, res, next) => {
  Lesson.findOne({uuid: req.params.lessonId})
-   .select("title description content uuid type tags")
+   .select("title description tokens content uuid type tags")
   .exec()
   .then(lesson => {
     if (!lesson) {
@@ -81,7 +82,8 @@ exports.lessons_create_lesson = (req, res, next) => {
         title: result.title,
         description: result.description,
         content: result.content,
-        tags: result.tags
+        tags: result.tags,
+        tokens: result.tokens
       }
     });
   })

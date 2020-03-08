@@ -4,7 +4,7 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="#" disabled>{{currentCourse.title}}</b-nav-item>
+        <b-nav-item href="" disabled>{{currentCourse.title}}</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -14,8 +14,8 @@
                     href="#">SETTINGS</b-nav-item>
         <b-nav-item @click.prevent="triggerLTI"
                     href="#">SHARE</b-nav-item>
-        <b-nav-item href="#">EXPORT</b-nav-item>
-        <b-nav-item href="#">PUBLISH</b-nav-item>
+        <!--<b-nav-item href="#">EXPORT</b-nav-item>
+        <b-nav-item href="#">PUBLISH</b-nav-item>-->
         <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
@@ -35,13 +35,12 @@
   );
 
     export default {
+      name: "CourseNavBar",
       data() {
         return {
           courseTitle: '',
         }
       },
-
-      name: "CourseNavBar",
       components:{
         'font-awesome-icon': FontAwesomeIcon,
       },

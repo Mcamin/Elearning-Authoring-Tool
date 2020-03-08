@@ -12,7 +12,7 @@ exports.sections_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Section.find()
-  .select("title description modulesIndex uuid type")
+  .select("title description tokens modulesIndex uuid type")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -25,7 +25,8 @@ exports.sections_get_all = (req, res, next) => {
           title: doc.title,
           type: doc.type,
           description: doc.description,
-          modulesIndex: doc.modulesIndex
+          modulesIndex: doc.modulesIndex,
+          tokens: doc.tokens
         };
       })
     });
@@ -41,7 +42,7 @@ exports.sections_get_all = (req, res, next) => {
 exports.sections_get_section = (req, res, next) => {
 
   Section.findOne({uuid: req.params.sectionId})
-  .select("title description modulesIndex uuid type ")
+  .select("title description modulesIndex tokens uuid type ")
   .exec()
   .then(section => {
     if (!section) {
@@ -79,7 +80,8 @@ exports.sections_create_section = (req, res, next) => {
         title: result.title,
         type: result.type,
         description: result.description,
-        modulesIndex: result.modulesIndex
+        modulesIndex: result.modulesIndex,
+        tokens: result.tokens
       }
     });
   })

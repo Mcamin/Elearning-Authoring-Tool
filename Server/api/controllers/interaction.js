@@ -11,7 +11,7 @@ exports.interactions_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Interaction.find()
-  .select("uuid title type description questions score shuffle ")
+  .select("uuid title type description tokens questions score shuffle ")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -28,6 +28,7 @@ exports.interactions_get_all = (req, res, next) => {
           type: doc.type,
           score: doc.score,
           shuffle:doc.shuffle,
+          tokens: doc.tokens
         };
       })
     });
@@ -42,7 +43,7 @@ exports.interactions_get_all = (req, res, next) => {
 // Get an interaction by id
 exports.interactions_get_interaction = (req, res, next) => {
   Interaction.findOne({uuid: req.params.interactionId})
-  .select("uuid title type description questions score shuffle ")
+  .select("uuid title type description tokens questions score shuffle ")
   .exec()
   .then(interaction => {
     if (!interaction) {
@@ -85,6 +86,7 @@ exports.interactions_create_interaction = (req, res, next) => {
         shuffle:result.shuffle,
         description: result.description,
         questions: result.questions,
+        tokens: result.tokens
       }
     });
   })

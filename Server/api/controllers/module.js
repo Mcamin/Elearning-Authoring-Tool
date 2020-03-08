@@ -11,7 +11,7 @@ exports.modules_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Module.find()
-  .select("title description contentIndex type uuid")
+  .select("title description tokens contentIndex type uuid")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -24,7 +24,8 @@ exports.modules_get_all = (req, res, next) => {
           title: doc.title,
           type: doc.type,
           description: doc.description,
-          contentIndex: doc.contentIndex
+          contentIndex: doc.contentIndex,
+          tokens: doc.tokens
 
         };
       })
@@ -40,7 +41,7 @@ exports.modules_get_all = (req, res, next) => {
 // Get module by id
 exports.modules_get_module = (req, res, next) => {
   Module.findOne({uuid: req.params.moduleId})
-  .select("title description contentIndex type uuid")
+  .select("title description tokens contentIndex type uuid")
   .exec()
   .then(module => {
     if (!module) {
@@ -78,7 +79,8 @@ exports.modules_create_module = (req, res, next) => {
         title: result.title,
         type: result.type,
         description: result.description,
-        contentIndex: result.contentIndex
+        contentIndex: result.contentIndex,
+        tokens: result.tokens
       }
     });
   })

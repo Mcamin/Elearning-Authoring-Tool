@@ -13,7 +13,7 @@ exports.courses_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Course.find()
-  .select("title description category duration tags thumbnail languages contentIndex  uuid")
+  .select("title description tokens category duration tags thumbnail languages contentIndex  uuid")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -31,6 +31,7 @@ exports.courses_get_all = (req, res, next) => {
           tags: doc.tags,
           thumbnail: doc.thumbnail,
           contentIndex: doc.contentIndex,
+          tokens: doc.tokens
         };
       })
     });
@@ -45,7 +46,7 @@ exports.courses_get_all = (req, res, next) => {
 // Get a course by id
 exports.courses_get_course = (req, res, next) => {
   Course.findOne({uuid: req.params.courseId})
-  .select("title description category duration tags thumbnail languages contentIndex  uuid")
+  .select("title description category duration tokens tags thumbnail languages contentIndex  uuid")
   .exec()
   .then(course => {
     if (!course) {
@@ -93,6 +94,7 @@ exports.courses_create_course = (req, res, next) => {
         languages: result.languages,
         duration: result.duration,
         tags: result.tags,
+        tokens: result.tokens,
         thumbnail: result.thumbnail,
         contentIndex: result.contentIndex,
       }
