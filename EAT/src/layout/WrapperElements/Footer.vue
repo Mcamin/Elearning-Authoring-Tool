@@ -47,11 +47,6 @@
     background-color: #219678
     width: 100%
     color: white
-    a
-      color: #4e4e4e
-      &:hover
-        color: #fff
-        text-decoration: unset
 
 
 </style>

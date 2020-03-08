@@ -22,6 +22,6 @@ const interactionSchema = mongoose.Schema({
   }],
   tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }]
-},{timestamps: true });
+},{ minimize: false,timestamps: true });
 
 module.exports = mongoose.model('Interaction',interactionSchema);

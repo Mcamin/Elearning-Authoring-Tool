@@ -1,40 +1,41 @@
-<!-- TODO:
-Add the default section to the sections -->
 <template>
-  <b-container class="p-5 my-2">
-    <div>
-      <b-card>
-        <b-card-text>
-          <h4>{{currentCourse.title}}</h4>
-        </b-card-text>
-        <b-card-text>{{currentCourse.description}}</b-card-text>
-        <b>Tags</b> <p v-for="item in currentCourse.tags">{{ item }}</p>
-      </b-card>
-    </div>
-    <hr>
-    <b-row align-v="center" align-h="center">
-      <b-col align-self="center" class="h-100">
-        <!-- Add  course Accordion-->
-        <template v-if="getCourseContent.length>0" v-for="(content,idx) in getCourseContent">
-
+  <b-container class=" pb-5 mt-5">
+    <SettingsCard/>
+    <!-- Course Content -->
+    <b-row class="course-content-wrapper my-4 pt-4">
+      <b-col   align-self="center" class="h-100">
+        <Container v-if="getCourseContent.length>0" @drop="onDropSectionModule" drag-handle-selector=".course-content-drag-handle"
+                   class="w-100">
+        <template v-for="(content,idx) in getCourseContent">
           <!--Render Section  -->
+          <Draggable  class="section-module-wrapper mt-3">
           <component v-if="isSection(content.uuid)" :is="'Accordion'" :accordionTitle="content.title"
                      :accordionID="content.uuid" :key="idx"/>
-
           <!--Render Module  -->
           <component v-else :is="'Accordion'" :accordionTitle="content.title"
                      :accordionID="content.uuid" :key="idx"/>
+          </Draggable>
 
         </template>
-        <AddBtn triggered-by="page"/>
-        <!--End  Add  course Accordion-->
-        <!-- Add  section / module  Modal-->
-        <AddSMModal/>
-        <AddILModal/>
-        <DeleteModal/>
-        <EditModal/>
-        <GenerateTokenModal/>
+        </Container>
       </b-col>
+    </b-row>
+    <!-- End Course Content -->
+    <b-row class="add-btn-row">
+      <AddBtn triggered-by="page"/>
+    </b-row>
+
+    <b-row class="modals">
+      <!-- Add  section / module  Modal-->
+      <AddSMModal/>
+      <!-- Add  interaction / Lesson  Modal-->
+      <AddILModal/>
+      <!-- Delete Modal-->
+      <DeleteModal/>
+      <!-- Edit Modal-->
+      <EditModal/>
+      <!-- Generate Tokens Modal-->
+      <GenerateTokenModal/>
     </b-row>
   </b-container>
 </template>
@@ -42,63 +43,59 @@ Add the default section to the sections -->
 <script>
 
   import Accordion from "@/components/Accordions/Accordion";
+  import GenerateTokenModal from "@/components/Modals/GenerateTokenModal";
   import AddSMModal from "@/components/Modals/AddModuleSectionModal";
   import AddILModal from "@/components/Modals/AddLessonInteractionModal";
+  import DeleteModal from "@/components/Modals/DeleteModal";
+  import EditModal from "@/components/Modals/EditModal";
   import AddBtn from "@/components/Buttons/AddBtn";
-  import DeleteModal from "@/components/Modals/DeleteModal"
+  import {Container, Draggable} from "vue-smooth-dnd";
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
-  import EditModal from "@/components/Modals/EditModal";
-  import GenerateTokenModal from "@/components/Modals/GenerateTokenModal";
-
+  import SettingsCard from "@/components/Cards/Settings";
   export default {
     name: "EditCourse",
-    data() {
-      return {}
-    },
     components: {
-      GenerateTokenModal,
-      EditModal,
+      SettingsCard,
       Accordion,
-      AddSMModal,
       AddBtn,
+      GenerateTokenModal,
+      AddSMModal,
       AddILModal,
-      DeleteModal
+      EditModal,
+      DeleteModal,
+      Container,
+      Draggable
     },
+
     computed: {
       ...mapState('course', ['currentCourse']),
-      ...mapState('section', ['currentSection', 'sections']),
-      ...mapState('module', ['currentModule', 'modules']),
-      ...mapState('lesson', ['lessons']),
-      ...mapState('interaction', ['interactions']),
-      ...mapGetters(
-        'course', ['getCourseContent']
-      ),
-      ...mapGetters(
-        'section', ['getSectionByID']
-      ),
-      ...mapGetters(
-        'module', ['getModuleByID']
-      )
+      ...mapState('section', ['sections']),
+      ...mapState('module', ['modules']),
+      ...mapGetters('course', ['getCourseContent']),
     },
     methods: {
       ...mapActions('course', {loadCourse: 'loadCourse', updateCourse: 'updateCourse'}),
       ...mapActions('section', {loadSection: 'loadSection', createSection: 'createSection'}),
-      ...mapActions('module', {loadModule: 'loadModule',resetModule:'resetModule'}),
+      ...mapActions('module', {loadModule: 'loadModule', resetModule: 'resetModule'}),
       ...mapActions('lesson', {resetLesson: 'resetLesson'}),
       ...mapActions('interaction', {resetInteraction: 'resetInteraction'}),
 
+      /**
+       * Initialize the Course Content
+       * @returns {Promise<void>}
+       */
       async generateCourseContent() {
-        // Create a new section and add it to course if course is new
 
         if (Object.entries(this.currentCourse.contentIndex).length === 0) {
           let sec_id = 's-' + uuid.v1(),
             newSection = {
               uuid: sec_id,
               title: "New Section",
-              type:'Section',
+              type: 'Section',
               description: "",
-              modulesIndex: {}
+              modulesIndex: {},
+              tokens:{}
             },
             payload = {};
           payload[sec_id] = 0;
@@ -137,7 +134,11 @@ Add the default section to the sections -->
       isSection(sec_id) {
         return sec_id.charAt(0) === 's';
       },
+      onDropSectionModule(){
+
+      },
     },
+
 
     created() {
       this.resetModule();

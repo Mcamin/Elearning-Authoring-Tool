@@ -4,35 +4,24 @@
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
         <!-- Left Settings -->
-
-        <b-col cols="8"   class=" m-2 ">
-          <a href="" class="question-drag-handle mx-2">
-            <font-awesome-icon :icon="['fas', 'bars']"  size="lg" />
-          </a>
-          <h4 class="d-inline  mx-2">{{accordionTitle}}</h4>
+        <b-col  class="text-left m-2">
+          <h4>{{accordionTitle}}</h4>
         </b-col>
-
-
         <!-- End Left Settings -->
 
         <!--Right Settings-->
-        <b-col  class="text-right m-2">
-          <b-link  @click.stop="handleDelete()"  class="mx-2" v-b-tooltip.hover title="Delete">
-            <font-awesome-icon :icon="['fas', 'trash']"  size="lg"/>
+        <b-col  class="text-right">
+          <b-link  @click.stop="handleDelete()"  class="ml-2">
+            <font-awesome-icon :icon="['fas', 'trash']"  color="gray" size="lg"/>
           </b-link>
-          <b-link @click.stop="handleEdit()" class="mx-2" v-b-tooltip.hover title="Edit">
-            <font-awesome-icon :icon="['fas', 'cog']"  size="lg" />
-          </b-link>
-          <b-link @click.stop="handleShare()" class="mx-2"  v-b-tooltip.hover title="Share">
-            <font-awesome-icon :icon="['fas', 'share-alt']" size="lg" />
-          </b-link>
-          <b-link @click.stop="handlePreview()" class="mx-2"  v-b-tooltip.hover title="Preview">
-            <font-awesome-icon :icon="['fas', 'eye']"  size="lg" />
+          <b-link @click.stop="handleEdit()" class="ml-2">
+            <font-awesome-icon :icon="['fas', 'cog']" color="gray" size="lg" />
           </b-link>
 
           <a href="" @click.prevent="toggleCollapse(accordionID)" class="ml-2" >
-            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']"  size="lg"/>
+            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
           </a>
+
         </b-col>
         <!--End Right settings -->
       </b-row>
@@ -40,12 +29,12 @@
      <!--End header -->
 
     <!--Content-->
-    <b-collapse :id="`${accordionID}`"     :accordion="`acc-${accordionID}`" role="tabpanel">
+    <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
       <b-card-body>
          <!--Render Section Content: Modules-->
          <template  v-for="(module, index) in getSectionContent(this.accordionID)">
             <component v-if="isSection" :is="'Accordion'" :accordionTitle="module.title"
-                       :accordionID="module.uuid" class=".section-content-drag-handle" :key="index"/>
+                       :accordionID="module.uuid" :key="index"/>
           </template>
 
           <!--Render Module Content: Quizzes and interactions-->
@@ -64,31 +53,30 @@
 <script>
 
   import { library } from '@fortawesome/fontawesome-svg-core'
-  import {faBars,faEye, faShareAlt, faTrash,faCog,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
+  import { faPen, faTrash,faCog,faSortUp,faSortDown, faSave} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AddBtn from "../Buttons/AddBtn";
   import {mapActions, mapGetters, mapState} from "vuex";
   import ContentCard from "@/components/Cards/ContentCard";
   import {bus} from "@/main";
   library.add(
-    faShareAlt,
+    faPen,
     faTrash,
     faCog,
     faSortUp,
     faSortDown,
-    faEye,
-    faBars
-
+    faSave
   );
 
     export default {
-      name: "Accordion",
+      name: "ContentAccordion",
       data(){
         return{
           collapsed: false,
         }
       },
       props: {
+
         accordionID:{
           Type:String,
           required: true,
@@ -106,6 +94,7 @@
         AddBtn,
         'font-awesome-icon': FontAwesomeIcon,
       },
+
 
       methods:{
 
@@ -135,19 +124,8 @@
             };
           bus.$emit('edit-modal', metadata);
         },
-        handleShare() {
-          let elmType = 'Module';
-          if(this.isSection)
-             elmType = 'Section';
-          let metadata ={
-            id: this.accordionID,
-            type: elmType
-          };
-          bus.$emit('token-modal', metadata);
-        },
-        handlePreview(){
 
-        },
+
         async loadSectionContent(){
 
             //keys: 0,1,2,3 positions in contentCourse array
@@ -215,4 +193,10 @@
 </script>
 
 <style scoped>
+  .view {
+    border-color: transparent;
+    background-color: initial;
+    color: initial
+  }
+
 </style>

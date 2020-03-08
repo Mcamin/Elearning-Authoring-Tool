@@ -12,7 +12,7 @@
         <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
         <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast-settings')"
                     href="#">SETTINGS</b-nav-item>
-        <b-nav-item @click.prevent="triggerLTI"
+        <b-nav-item @click.prevent="handleShare"
                     href="#">SHARE</b-nav-item>
         <!--<b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>-->
@@ -51,7 +51,7 @@
         handlePreview(){
           this.$router.push({name:'preview',params:{id:this.currentCourse.uuid, title:this.currentCourse.title}});
         },
-        triggerLTI(){
+        handleShare(){
           let metadata ={
             id: this.currentCourse.uuid,
             type: "Course"
