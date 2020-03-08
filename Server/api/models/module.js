@@ -10,6 +10,7 @@ const moduleSchema = mongoose.Schema({
   },
   description: String,
   contentIndex:  { type: mongoose.Schema.Types.Mixed, default: {} },
+  tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   usage: [{type: mongoose.Schema.Types.ObjectId, ref: 'Parent', required: false}]
 },{ minimize: false,timestamps: true });
 

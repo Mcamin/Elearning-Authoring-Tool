@@ -20,11 +20,14 @@ exports.interactions_get_all = (req, res, next) => {
       count: docs.length,
       interactions: docs.map(doc => {
         return {
-          _id: doc._id,
           title: doc.title,
           description: doc.description,
           questions: doc.questions,
-          questionsIndex:doc.questionsIndex
+          questionsIndex:doc.questionsIndex,
+          uuid: doc.uuid,
+          type: doc.type,
+          score: doc.score,
+          shuffle:doc.shuffle,
         };
       })
     });

@@ -20,7 +20,8 @@ const courseSchema = mongoose.Schema({
     required: false
   },
   thumbnail: String,
-  contentIndex: { type: mongoose.Schema.Types.Mixed, default: {} }
+  contentIndex: { type: mongoose.Schema.Types.Mixed, default: {} },
+  tokens: { type: mongoose.Schema.Types.Mixed, default: {} }
 
 },{ minimize: false,timestamps: true });
 

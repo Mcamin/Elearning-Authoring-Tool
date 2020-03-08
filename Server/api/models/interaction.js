@@ -20,6 +20,7 @@ const interactionSchema = mongoose.Schema({
        type: String
      }],*/
   }],
+  tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }]
 },{timestamps: true });
 

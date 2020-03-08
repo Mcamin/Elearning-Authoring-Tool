@@ -12,7 +12,7 @@ exports.sections_get_all = (req, res, next) => {
     limit: parseInt(req.body.limit, 10) || 10
   };
   Section.find()
-  .select("title description modulesIndex uuid type ")
+  .select("title description modulesIndex uuid type")
   .skip(pageOptions.page * pageOptions.limit)
   .limit(pageOptions.limit)
   .exec()
@@ -21,9 +21,9 @@ exports.sections_get_all = (req, res, next) => {
       count: docs.length,
       sections: docs.map(doc => {
         return {
-          _id: doc._id,
           uuid: doc.uuid,
           title: doc.title,
+          type: doc.type,
           description: doc.description,
           modulesIndex: doc.modulesIndex
         };
@@ -77,6 +77,7 @@ exports.sections_create_section = (req, res, next) => {
       createdSection: {
         uuid: result.uuid,
         title: result.title,
+        type: result.type,
         description: result.description,
         modulesIndex: result.modulesIndex
       }

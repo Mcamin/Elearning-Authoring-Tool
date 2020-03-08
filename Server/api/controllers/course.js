@@ -22,7 +22,6 @@ exports.courses_get_all = (req, res, next) => {
       count: docs.length,
       courses: docs.map(doc => {
         return {
-          _id: doc._id,
           uuid: doc.uuid,
           title: doc.title,
           languages: doc.languages,

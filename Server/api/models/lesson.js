@@ -17,6 +17,7 @@ const lessonSchema = mongoose.Schema({
     type: Array,
     required: false
   },
+  tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   usage: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Module', required: false }],
 
 },{ minimize: false,timestamps: true });

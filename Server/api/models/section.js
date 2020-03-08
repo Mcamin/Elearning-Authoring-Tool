@@ -10,6 +10,7 @@ const sectionSchema = mongoose.Schema({
   },
   description: String,
   modulesIndex:  { type: mongoose.Schema.Types.Mixed, default: {} },
+  tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   usage:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Course', required: false }]
 },{ minimize: false,timestamps: true });
 

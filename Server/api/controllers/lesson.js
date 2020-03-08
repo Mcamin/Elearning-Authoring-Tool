@@ -21,10 +21,12 @@ exports.lessons_get_all = (req, res, next) => {
       count: docs.length,
      lessons: docs.map(doc => {
         return {
-          _id: doc._id,
+          uuid: doc.uuid,
           title: doc.title,
           description: doc.description,
-          content: doc.content
+          content: doc.content,
+          type: doc.type,
+          tags: doc.tags
         };
       })
     });

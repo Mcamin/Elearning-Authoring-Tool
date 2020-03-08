@@ -20,9 +20,12 @@ exports.modules_get_all = (req, res, next) => {
       count: docs.length,
       modules: docs.map(doc => {
         return {
-          _id: doc._id,
+          uuid: doc.uuid,
           title: doc.title,
-          description: doc.description
+          type: doc.type,
+          description: doc.description,
+          contentIndex: doc.contentIndex
+
         };
       })
     });
@@ -73,6 +76,7 @@ exports.modules_create_module = (req, res, next) => {
       createdModule: {
         uuid: result.uuid,
         title: result.title,
+        type: result.type,
         description: result.description,
         contentIndex: result.contentIndex
       }
