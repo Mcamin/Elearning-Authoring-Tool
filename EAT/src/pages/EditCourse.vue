@@ -4,17 +4,14 @@
     <!-- Course Content -->
     <b-row class="course-content-wrapper my-4 pt-4">
       <b-col   align-self="center" class="h-100">
-        <Container v-if="getCourseContent.length>0" @drop="onDropSectionModule" drag-handle-selector=".course-content-drag-handle"
+        <Container group-name="1"  v-if="getCourseContent.length>0" @drop="onDropSectionModule" drag-handle-selector=".section-module-drag-handle"
                    class="w-100">
         <template v-for="(content,idx) in getCourseContent">
           <!--Render Section  -->
-          <Draggable  class="section-module-wrapper mt-3">
-          <component v-if="isSection(content.uuid)" :is="'Accordion'" :accordionTitle="content.title"
-                     :accordionID="content.uuid" :key="idx"/>
+
+          <component v-if="isSection(content.uuid)" :is="'Accordion'" :element="content" :key="idx"/>
           <!--Render Module  -->
-          <component v-else :is="'Accordion'" :accordionTitle="content.title"
-                     :accordionID="content.uuid" :key="idx"/>
-          </Draggable>
+          <component v-else :is="'Accordion'"  :element="content" :key="idx"/>
 
         </template>
         </Container>
@@ -49,10 +46,11 @@
   import DeleteModal from "@/components/Modals/DeleteModal";
   import EditModal from "@/components/Modals/EditModal";
   import AddBtn from "@/components/Buttons/AddBtn";
-  import {Container, Draggable} from "vue-smooth-dnd";
+  import {Container} from "vue-smooth-dnd";
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
   import SettingsCard from "@/components/Cards/Settings";
+  import {applyDrag} from "@/utils/helpers";
   export default {
     name: "EditCourse",
     components: {
@@ -65,7 +63,6 @@
       EditModal,
       DeleteModal,
       Container,
-      Draggable
     },
 
     computed: {
@@ -134,7 +131,20 @@
       isSection(sec_id) {
         return sec_id.charAt(0) === 's';
       },
-      onDropSectionModule(){
+      onDropSectionModule(dropResult){
+          let questionsArray = [...this.getCourseContent],
+            payload = {};
+          questionsArray = applyDrag(questionsArray, dropResult);
+          payload = questionsArray.reduce((obj, item,index) => {
+            obj[item.uuid] = index;
+            return obj
+          }, {});
+          this.updateCourse({
+            targetCourse: this.currentCourse.uuid,
+            props: {
+              contentIndex: payload
+            }
+          });
 
       },
     },

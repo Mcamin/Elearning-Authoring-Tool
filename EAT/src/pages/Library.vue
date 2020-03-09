@@ -5,7 +5,7 @@
       <b-col  align="center" align-self="center" >
 
         <template v-for="elm in filteredElements" >
-          <Accordion :accordion-i-d="elm.uuid" :accordion-title="elm.title"/>
+          <Accordion :element="elm"/>
         </template>
         </b-col>
 

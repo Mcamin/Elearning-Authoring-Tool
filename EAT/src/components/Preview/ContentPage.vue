@@ -8,7 +8,7 @@
                 <font-awesome-icon :icon="['fas', 'chevron-circle-left']"  size="4x" />
               </a>
             </b-col>
-            <b-col cols="10" class="h-100 " v-html="content" >
+            <b-col cols="10" class="h-100 overflow-auto " v-html="content" >
               <!--Start Page-->
               <!--Content Page -->
               <!-- Exercise page-->

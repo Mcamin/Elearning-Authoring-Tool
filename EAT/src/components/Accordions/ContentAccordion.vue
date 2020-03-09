@@ -29,7 +29,7 @@
             <b-link @click.stop="handlePreview()" class="mx-2" v-b-tooltip.hover title="Preview">
               <font-awesome-icon :icon="['fas', 'eye']" size="lg"/>
             </b-link>
-            <b-link  @click.prevent="toggleCollapse(element.uuid)" class="ml-2" >
+            <b-link  @click.stop="toggleCollapse(element.uuid)" class="ml-2" >
               <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']"  size="lg"/>
             </b-link>
           </b-col>
@@ -105,6 +105,7 @@
 
     methods: {
       ...mapActions('module',{setSelectedModule:'setSelectedModule'}),
+
       handleClick() {
         this.setSelectedModule(this.moduleId).then( () =>
           {
