@@ -1,7 +1,7 @@
 <template>
     <b-container fluid class="d-flex h-100 justify-content-center align-items-center">
       <b-row  class="w-75 h-100 py-4">
-        <b-col class="h-100 ">
+        <b-col style="max-height: 680px" class="h-100">
           <!--Start Page-->
           <!-- <StartPage></StartPage>
         <ContentPagePreview :content="DummyContent"/>-->
