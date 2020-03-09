@@ -1,202 +1,155 @@
 <template>
-  <b-card no-body class="mb-3">
-    <!--Header-->
-    <b-card-header header-tag="header" class="p-3" role="tab">
-      <b-row>
-        <!-- Left Settings -->
-        <b-col  class="text-left m-2">
-          <h4>{{accordionTitle}}</h4>
-        </b-col>
-        <!-- End Left Settings -->
+  <Draggable class="lesson-interaction-wrapper mt-3">
+    <b-link   @click.prevent="handleClick()">
+    <b-card no-body class="mb-3">
+      <!--Header-->
+      <b-card-header header-tag="header" class="p-3" role="tab">
+        <b-row>
+          <!-- Left Settings -->
+          <b-col class="text-left m-2">
+            <a href="" class="content-drag-handle mx-2">
+              <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
+            </a>
+            <h4 class="d-inline  mx-2">{{element.title}}</h4>
+            <b-badge>{{element.type}}</b-badge>
+          </b-col>
+          <!-- End Left Settings -->
 
-        <!--Right Settings-->
-        <b-col  class="text-right">
-          <b-link  @click.stop="handleDelete()"  class="ml-2">
-            <font-awesome-icon :icon="['fas', 'trash']"  color="gray" size="lg"/>
-          </b-link>
-          <b-link @click.stop="handleEdit()" class="ml-2">
-            <font-awesome-icon :icon="['fas', 'cog']" color="gray" size="lg" />
-          </b-link>
+          <!--Right Settings-->
+          <b-col class="text-right">
+            <b-link @click.stop="handleDelete()" class="mx-2" v-b-tooltip.hover title="Delete">
+              <font-awesome-icon :icon="['fas', 'trash']" size="lg"/>
+            </b-link>
+            <b-link @click.stop="handleEdit()" class="mx-2" v-b-tooltip.hover title="Edit">
+              <font-awesome-icon :icon="['fas', 'cog']" size="lg"/>
+            </b-link>
+            <b-link @click.stop="handleShare()" class="mx-2" v-b-tooltip.hover title="Share">
+              <font-awesome-icon :icon="['fas', 'share-alt']" size="lg"/>
+            </b-link>
+            <b-link @click.stop="handlePreview()" class="mx-2" v-b-tooltip.hover title="Preview">
+              <font-awesome-icon :icon="['fas', 'eye']" size="lg"/>
+            </b-link>
+            <b-link  @click.prevent="toggleCollapse(element.uuid)" class="ml-2" >
+              <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']"  size="lg"/>
+            </b-link>
+          </b-col>
+          <!--End Right settings -->
+        </b-row>
+      </b-card-header>
+      <!--End header -->
 
-          <a href="" @click.prevent="toggleCollapse(accordionID)" class="ml-2" >
-            <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
-          </a>
-
-        </b-col>
-        <!--End Right settings -->
-      </b-row>
-    </b-card-header>
-     <!--End header -->
-
-    <!--Content-->
-    <b-collapse :id="`${accordionID}`"   visible  :accordion="`myaccordion-${accordionID}`" role="tabpanel">
-      <b-card-body>
-         <!--Render Section Content: Modules-->
-         <template  v-for="(module, index) in getSectionContent(this.accordionID)">
-            <component v-if="isSection" :is="'Accordion'" :accordionTitle="module.title"
-                       :accordionID="module.uuid" :key="index"/>
-          </template>
-
-          <!--Render Module Content: Quizzes and interactions-->
-       <template v-for="(c,idx) in getModuleContent(this.accordionID)" >
-
-            <ContentCard  v-if="isModule" :contentId="c.uuid" :title="c.title" :module-id="accordionID"
-                       :key="idx"/>
-        </template>
-        <AddBtn :triggered-by="this.accordionID"  />
-      </b-card-body>
-    </b-collapse>
-    <!--End Content-->
-  </b-card>
+      <!--Content-->
+      <b-collapse :id="`${element.uuid}`" visible :accordion="`lesson-interaction-${element.uuid}`" role="tabpanel">
+        <b-card-body>
+          {{element.description}}
+        </b-card-body>
+      </b-collapse>
+      <!--End Content-->
+    </b-card>
+    </b-link>
+  </Draggable>
 </template>
 
 <script>
-
-  import { library } from '@fortawesome/fontawesome-svg-core'
-  import { faPen, faTrash,faCog,faSortUp,faSortDown, faSave} from '@fortawesome/free-solid-svg-icons'
-  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-  import AddBtn from "../Buttons/AddBtn";
-  import {mapActions, mapGetters, mapState} from "vuex";
-  import ContentCard from "@/components/Cards/ContentCard";
-  import {bus} from "@/main";
-  library.add(
-    faPen,
+  import {Draggable} from "vue-smooth-dnd"
+  import {library} from '@fortawesome/fontawesome-svg-core'
+  import {
+    faShareAlt,
     faTrash,
     faCog,
     faSortUp,
     faSortDown,
-    faSave
+    faEye,
+    faBars
+  } from '@fortawesome/free-solid-svg-icons'
+  import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
+
+  import {bus} from "@/main";
+  import {mapActions} from "vuex";
+
+  library.add(
+    faShareAlt,
+    faTrash,
+    faCog,
+    faSortUp,
+    faSortDown,
+    faEye,
+    faBars
   );
 
-    export default {
-      name: "ContentAccordion",
-      data(){
-        return{
-          collapsed: false,
-        }
+  export default {
+    name: "ContentAccordion",
+    data() {
+      return {
+        collapsed: false,
+      }
+    },
+    props: {
+      element: {
+        type: Object,
+        required:true,
+        Description: "The Object containing infos about the element to render",
       },
-      props: {
+      moduleId:{
+        type:String,
+        required:true,
+        Description: "The id of the module containing the element",
+      }
 
-        accordionID:{
-          Type:String,
-          required: true,
-          Description:"the element uuid"
-        },
-        accordionTitle:{
-          Type:String,
-          required: true,
-          Description:"The element title received from the parent component"
-        },
-
-      },
-      components:{
-        ContentCard,
-        AddBtn,
-        'font-awesome-icon': FontAwesomeIcon,
-      },
+    },
+    components: {
+      'font-awesome-icon': FontAwesomeIcon,
+      Draggable
+    },
 
 
-      methods:{
+    methods: {
+      ...mapActions('module',{setSelectedModule:'setSelectedModule'}),
+      handleClick() {
+        this.setSelectedModule(this.moduleId).then( () =>
+          {
 
-        ...mapActions('module', {loadModule : 'loadModule'}),
-        ...mapActions('lesson', {loadLesson : 'loadLesson'}),
-        ...mapActions('interaction', {loadInteraction : 'loadInteraction'}),
-
-        toggleCollapse(id) {
-          this.$root.$emit('bv::toggle::collapse', id);
-          this.collapsed = ! this.collapsed;
-        },
-
-        handleDelete(){
-          let contentType = this.accordionID.charAt(0)==='s'? "Section":"Module",
-            metadata = {
-              id: this.accordionID,
-              type: contentType,
-              title: this.accordionTitle,
-            };
-          bus.$emit('delete-modal', metadata);
-        },
-        handleEdit(){
-          let contentType = this.accordionID.charAt(0)==='s'? "Section":"Module",
-            metadata = {
-              id: this.accordionID,
-              type: contentType,
-            };
-          bus.$emit('edit-modal', metadata);
-        },
-
-
-        async loadSectionContent(){
-
-            //keys: 0,1,2,3 positions in contentCourse array
-            // key : uuid of the element to load
-            if(this.isSection)
-            { const keys = Object.keys(this.sections.find(el => el.uuid === this.accordionID).modulesIndex);
-            for (const key in keys) {
-              let moduleFound = this.modules.findIndex( (el) => {return el.uuid === keys[key]});
-              if (moduleFound === -1)
-                await this.loadModule(keys[key]);
-            }}
-            else{
-              const keys = Object.keys(this.modules.find(el => el.uuid === this.accordionID).contentIndex);
-              for (const key in keys) {
-                if(keys[key].charAt(0)=== 'i') {
-                  let interactionFound = this.interactions.findIndex((el) => {
-                    return el.uuid === keys[key]
-                  });
-                  if (interactionFound === -1)
-                    await this.loadInteraction(keys[key]);
-                } else
-                {let lessonFound = this.lessons.findIndex( (el) => {
-                  return el.uuid === keys[key]
-                });
-
-                    if (lessonFound === -1)
-                      await this.loadLesson(keys[key]);}
-              }
-            }
-        }
+            if(this.element.type === 'Interaction')
+              this.$router.push({name: 'edit-interaction', params: {id: this.element.uuid}});
+            else
+              this.$router.push({name: 'edit-lesson', params: {id: this.element.uuid}});
+          }
+        );
 
       },
-        computed:{
-          ...mapGetters(
-            'section' , ['getSectionContent']
-          ),
-          ...mapGetters(
-            'module' , ['getModuleContent']
-          ),
-          ...mapState(
-            'section' , ['sections']
-          ),
-          ...mapState(
-            'module' , ['modules']
-          ),
-          ...mapState(
-            'lesson' , ['lessons']
-          ),
-          ...mapState(
-            'interaction' , ['interactions']
-          ),
-            isSection() {
-                return this.accordionID.charAt(0) === 's'
-             },
-            isModule() {
-                return  this.accordionID.charAt(0) === 'm'
-            },
-        },
+      toggleCollapse(id) {
+        this.$root.$emit('bv::toggle::collapse', id);
+        this.collapsed = !this.collapsed;
+      },
+      handleShare() {
 
-        created() {
-          this.loadSectionContent();
-        }
+      },
+      handleDelete() {
+        let metadata = {
+          id: this.element.uuid,
+          type: this.element.type,
+          title: this.element.title,
+        };
+        bus.$emit('delete-modal', metadata);
+      },
+      handleEdit() {
+        let metadata = {
+          id: this.element.uuid,
+          type: this.element.type,
+        };
+        bus.$emit('edit-modal', metadata);
+      },
+      handlePreview() {
+        this.$router.push({name: 'preview', params: {id: this.element.uuid}});
+      }
 
-    }
+
+    },
+
+  }
 </script>
 
 <style scoped>
-  .view {
-    border-color: transparent;
-    background-color: initial;
-    color: initial
-  }
+
 
 </style>

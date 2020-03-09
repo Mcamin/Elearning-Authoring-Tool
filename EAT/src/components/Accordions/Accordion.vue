@@ -30,9 +30,9 @@
             <font-awesome-icon :icon="['fas', 'eye']"  size="lg" />
           </b-link>
 
-          <a href="" @click.prevent="toggleCollapse(accordionID)" class="ml-2" >
+          <b-link  @click.prevent="toggleCollapse(accordionID)" class="ml-2" >
             <font-awesome-icon :icon="['fas', collapsed ? 'sort-up' : 'sort-down']"  size="lg"/>
-          </a>
+          </b-link>
         </b-col>
         <!--End Right settings -->
       </b-row>
@@ -40,7 +40,7 @@
      <!--End header -->
 
     <!--Content-->
-    <b-collapse :id="`${accordionID}`"     :accordion="`acc-${accordionID}`" role="tabpanel">
+    <b-collapse :id="`${accordionID}`"    visible  :accordion="`acc-${accordionID}`" role="tabpanel">
       <b-card-body>
          <!--Render Section Content: Modules-->
          <template  v-for="(module, index) in getSectionContent(this.accordionID)">
@@ -49,11 +49,16 @@
           </template>
 
           <!--Render Module Content: Quizzes and interactions-->
-       <template v-for="(c,idx) in getModuleContent(this.accordionID)" >
 
-            <ContentCard  v-if="isModule" :contentId="c.uuid" :title="c.title" :module-id="accordionID"
-                       :key="idx"/>
-        </template>
+
+         <Container @drop="onDropContent" drag-handle-selector=".content-drag-handle">
+           <template v-for="(c,idx) in getModuleContent(this.accordionID)" >
+           <ContentAccordion v-if="isModule"  :element="c" :module-id="accordionID"
+                             :key="idx"/>
+           </template>
+         </Container>
+
+
         <AddBtn :triggered-by="this.accordionID"  />
       </b-card-body>
     </b-collapse>
@@ -62,14 +67,15 @@
 </template>
 
 <script>
-
+  import {Container} from 'vue-smooth-dnd'
   import { library } from '@fortawesome/fontawesome-svg-core'
   import {faBars,faEye, faShareAlt, faTrash,faCog,faSortUp,faSortDown} from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import AddBtn from "../Buttons/AddBtn";
   import {mapActions, mapGetters, mapState} from "vuex";
-  import ContentCard from "@/components/Cards/ContentCard";
   import {bus} from "@/main";
+  import ContentAccordion from "@/components/Accordions/ContentAccordion";
+  import {applyDrag} from "@/utils/helpers";
   library.add(
     faShareAlt,
     faTrash,
@@ -102,12 +108,19 @@
 
       },
       components:{
-        ContentCard,
+        ContentAccordion,
+        Container,
         AddBtn,
         'font-awesome-icon': FontAwesomeIcon,
       },
 
       methods:{
+        onDropContent(dropResult) {
+          console.log(dropResult);
+          //let questionsArray = [...this.currentInteraction.questions];
+         // questionsArray = applyDrag(questionsArray, dropResult);
+
+          },
 
         ...mapActions('module', {loadModule : 'loadModule'}),
         ...mapActions('lesson', {loadLesson : 'loadLesson'}),
