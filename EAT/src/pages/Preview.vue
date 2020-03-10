@@ -5,9 +5,9 @@
         <!--Start Page
        <StartPage></StartPage>-->
 
-      <ContentPagePreview v-if="element.type==='Lesson' " :content="element.content"/>-->
-        <!--<Interaction/>
-         Content Page -->
+      <ContentPagePreview v-if="element.type==='Lesson' " :content="element.content"/>
+        <Interaction v-else :interaction="element"/>
+        <!-- Content Page -->
         <!-- Exercise page-->
       </b-col>
     </b-row>
@@ -16,39 +16,33 @@
 </template>
 
 <script>
-  import {mapGetters, mapState} from "vuex";
+  import {mapGetters} from "vuex";
   import ContentPagePreview from "@/components/Preview/ContentPage";
-  import StartPage from "@/components/Preview/StartPage";
   import Interaction from "@/components/Preview/Interaction";
 
   export default {
     name: "Preview",
     data() {
       return {
-        DummyContent: "<h1>Content goes here</h1>",
+        currentQuestion:{},
         element: {},
         elementToRender: {},
         startClicked: false
       }
     },
-    components: {Interaction, StartPage, ContentPagePreview},
+    components: {Interaction, ContentPagePreview},
     computed: {
 
       ...mapGetters(
-        'course', ['getCourseContent']
-      ),
+        'course', ['getCourseContent']),
       ...mapGetters(
-        'module', ['getModuleContent']
-      ),
+        'module', ['getModuleContent']),
       ...mapGetters(
-        'module', ['getSectionContent']
-      ),
+        'module', ['getSectionContent']),
       ...mapGetters(
-        'interaction', ['getInteractionByID']
-      ),
+        'interaction', ['getInteractionByID']),
       ...mapGetters(
-        'lesson', ['getLessonByID']
-      )
+        'lesson', ['getLessonByID'])
 
     },
     methods: {},
@@ -62,6 +56,8 @@
           break;
         case 'i':
             this.element = this.getInteractionByID(this.$route.params.id);
+            this.currentQuestion = this.element.questions[0];
+            this.currentIndex = 0;
           //load interaction
           break;
         case 'l':

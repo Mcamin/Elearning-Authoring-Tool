@@ -1,7 +1,5 @@
 <template>
-  <b-container class="h-100" style="background:url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80');
-            background-repeat: no-repeat;
-            background-size: cover;">
+  <b-container class="h-100 border border-light rounded">
     <b-row class="h-100">
             <b-col  class="d-flex justify-content-center align-items-center" cols="1">
               <a href="" class=" question-drag-handle ml-2">

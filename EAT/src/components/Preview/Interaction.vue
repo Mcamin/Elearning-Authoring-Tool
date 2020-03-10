@@ -3,39 +3,38 @@
             background-repeat: no-repeat;
             background-size: cover;">
     <b-row class="h-100 d-flex">
-      <b-col  class="d-flex justify-content-center align-items-center" cols="1">
-        <a href="" class=" question-drag-handle ml-2">
+      <b-col    class="d-flex justify-content-center align-items-center" cols="1">
+        <b-link @click.prevent="stepBack()" :class="[isFirstPage ? 'd-none' : '', 'ml-2']">
           <font-awesome-icon :icon="['fas', 'chevron-circle-left']"  size="4x" />
-        </a>
+        </b-link>
       </b-col>
       <b-col cols="10" class="h-100 p-5 d-flex flex-column justify-content-center ">
         <section >
-          <h2 style="color:white">Question goes here
+          <h2 style="color:white">{{currentQuestion.questionText}}
           </h2>
         </section>
 
         <section class="ml-5 mt-5 h-50" >
-          <b-form-checkbox-group
-            id="checkbox-group-1"
+          <b-form-checkbox
+            v-for="answer in currentQuestion.answers"
             v-model="selected"
-            :options="options"
-            name="flavour-1"
-            stacked
-            size="lg"
-            class="mb-3"
-          ></b-form-checkbox-group>
+            :key="answer.text"
+            :value="answer.id"
+            name="flavour-3a"
+          >
+            {{ answer.text }}</b-form-checkbox>
           <!-- V-if Single choice -->
           <div class="text-right mt-5">
-            <b-button>OK</b-button>
+            <b-button @click.prevent="evaluate">OK</b-button>
           </div>
         </section>
 
 
       </b-col>
       <b-col class="d-flex justify-content-center align-items-center" cols="1">
-        <a href="" class=" question-drag-handle ml-2">
+        <b-link @click.prevent="stepForward()"  :disabled='!evaluated' :class="[isLastPage ? 'd-none' : '', 'ml-2']">
           <font-awesome-icon :icon="['fas', 'chevron-circle-right']"  size="4x" />
-        </a>
+        </b-link>
       </b-col>
     </b-row>
   </b-container>
@@ -52,22 +51,71 @@
       components:{
         'font-awesome-icon': FontAwesomeIcon
       },
-      data(){return {
-        selected: [], // Must be an array reference!
-        options: [
-          { text: 'Orange', value: 'orange' },
-          { text: 'Apple', value: 'apple' },
-          { text: 'Pineapple', value: 'pineapple' },
-          { text: 'Grape', value: 'grape' }
-        ]
-      }
+      props:{
+        interaction:{
+          type: Object,
+          required: true,
+          description: "The question to render"
         }
+      },
+      data(){return {
+        currentQuestion: this.interaction.questions[0],
+        selected: [], // the selected answers
+        evaluated : true, // used to check if exercise is assessed
+        currentIndex: 0 // index of question in the interaction to track navigation
+      }
+        },
+      methods:{
+          stepBack(){
+            if(!this.isFirstPage)
+              this.currentQuestion = this.interaction.questions[this.currentIndex-1];
+            this.currentIndex --;
+          },
+        stepForward(){
+          if(!this.isLastPage)
+            this.currentQuestion = this.interaction.questions[this.currentIndex+1];
+          this.currentIndex ++;
+        },
+          evaluate(){
+
+            switch (this.currentQuestion.questionType) {
+              case "Multiple choice":
+                console.log(this.selected);
+                break;
+                case "Single Choice":
+                  break;
+            }
+          },
+        loadNextQuestion(){
+         if(this.evaluated)
+           //set next button to active
+           this.evaluated= false;
+        }
+      },
+      computed:{
+        /**
+         * Navigation control : to hide back button
+         * @returns {boolean}
+         */
+          isFirstPage() {
+            return this.currentIndex === 0
+          },
+        /**
+         *  Navigation control : to hide next button last question is reached
+         * @returns {boolean}
+         */
+        isLastPage(){
+            return this.currentIndex === (this.interaction.questions.length-1);
+        },
+
+      }
 
     }
 </script>
 
 <style scoped>
-.custom-checkbox{
-  margin-top: 20px;
-}
+  a.disabled {
+    pointer-events: none;
+    color: rgba(33, 150, 120, 0.51);
+  }
 </style>
