@@ -18,7 +18,7 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/playground",
+        redirect: "/login",
         children: [
           {
             path: "home",

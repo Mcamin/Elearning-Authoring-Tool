@@ -2,12 +2,12 @@
 // EAT colors
 
 $green: #388A6B;
-$teal:  #219678;
+$teal: #219678;
 
 $primary: $teal;
 $secondary: #707070;
-$body-bg:                   $white ;
-$body-color:                $gray-900 ;
+$body-bg: $white;
+$body-color: $gray-700;
 
 $theme-colors: (
   "primary": $primary,
@@ -15,27 +15,30 @@ $theme-colors: (
 );
 
 
-$navbar-dark-color: rgba($secondary, 1) ;
+$navbar-dark-color: rgba($white, 1);
 
 
-$text-color-secondary: #707070;
+$navbar-dark-brand-color:         $secondary;
 $background-color: #F5F5F5;
-$font-family-base: Lato,Helvetica,Arial,sans-serif;
+$font-family-base: Lato, Helvetica, Arial, sans-serif;
 
 
-$font-size-base: 1rem;
-$font-size-lg: ($font-size-base * 1.35);
-$font-size-sm: ($font-size-base * 1.1);
-$font-size-xs: ($font-size-base / 1.1);
+$input-btn-padding-y: .400rem;
+$input-btn-padding-x: 2rem;
+
+$btn-padding-y: $input-btn-padding-y;
+$btn-padding-x: $input-btn-padding-x;
 
 
-$input-btn-padding-y:         .400rem;
-$input-btn-padding-x:         2rem;
+$border-radius: 1.5rem;
 
-$btn-padding-y:               $input-btn-padding-y;
-$btn-padding-x:               $input-btn-padding-x;
+$btn-border-radius: $border-radius;
 
 
-$border-radius:               1.5rem;
+// Tooltips
+$tooltip-bg: $primary;
 
-$btn-border-radius:        $border-radius;
+// Links
+$link-color:   theme-color("secondary");
+$link-hover-color:  $white;
+$link-hover-decoration: none;

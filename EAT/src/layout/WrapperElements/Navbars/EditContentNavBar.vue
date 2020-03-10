@@ -4,34 +4,20 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-navbar-brand href="#" @click="$router.go(-1)"><font-awesome-icon :icon="['fas','chevron-left']" size="lg"/></b-navbar-brand>
-        <b-nav-item href="#" disabled>{{lessonTitle}}</b-nav-item>
+        <b-navbar-brand href="#" @click="$router.go(-1)"><font-awesome-icon :icon="['fas','chevron-left']" size="2x"/>
+
+        </b-navbar-brand>
+        <el-divider direction="vertical" ></el-divider>
+        <b-nav-item  disabled class="font-weight-bolder"><h2>{{selectedLesson}}</h2></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
 
       <b-navbar-nav class="ml-auto ">
-        <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast')"
-                    href="#">SETTINGS</b-nav-item>
-        <b-button @click="handlePreview()" size="sm" class="my-2 my-sm-0" type="submit">PREVIEW</b-button>
+        <b-nav-item >SETTINGS</b-nav-item>
+        <b-button @click="handlePreview()">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
-    <!-- Toast for Share button -->
-    <b-toast id="my-toast" variant="success" no-auto-hide solid class="toast-wrapper">
-      <template v-slot:toast-title>
-        <div class="d-flex flex-grow-1 align-items-baseline">
-          <strong class="mr-auto">Edit Lesson settings</strong>
-          <small class="text-muted mr-2">Close</small>
-        </div>
-      </template>
-      Lesson Title: <b-form-input v-model="lessonTitle"></b-form-input>
-      Lesson Description: <b-form-input v-model="lessonDescription"></b-form-input>
-      <hr>
-      <div align="right">
-      <b-button size="sm" @click="hideToast('my-toast')">Cancel</b-button>
-      <b-button size="sm" variant="success" @click="hideToast('my-toast')">Save</b-button>
-      </div>
-    </b-toast>
   </b-navbar>
 </template>
 
@@ -44,7 +30,7 @@
     faChevronLeft,
   );
     export default {
-        name: "EditNavBar",
+        name: "EditContentNavBar",
       data(){
           return {
             lessonTitle: 'LTITLE',
@@ -84,9 +70,6 @@
         'font-awesome-icon': FontAwesomeIcon
       },
       methods:{
-          hideToast(id){
-            this.$bvToast.hide(id);
-          },
         handlePreview(){
           this.$router.push({name:'preview',params:{id:this.$route.params.id}});
         },

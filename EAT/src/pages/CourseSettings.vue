@@ -7,7 +7,3 @@
         name: "CourseSettings"
     }
 </script>
-
-<style scoped>
-
-</style>

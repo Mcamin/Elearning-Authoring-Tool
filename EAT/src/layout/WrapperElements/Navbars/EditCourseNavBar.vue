@@ -1,10 +1,13 @@
 <template>
   <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
-    <b-navbar-brand to="/courses"><font-awesome-icon :icon="['fas','th']" size="lg"/></b-navbar-brand>
+    <b-navbar-brand to="/courses"><font-awesome-icon :icon="['fas','th']" size="2x"/>
+
+    </b-navbar-brand>
+    <el-divider direction="vertical" ></el-divider>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="" disabled>{{currentCourse.title}}</b-nav-item>
+        <b-nav-item class="font-weight-bolder" disabled><h3>{{currentCourse.title}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

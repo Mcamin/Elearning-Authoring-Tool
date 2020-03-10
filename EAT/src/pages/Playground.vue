@@ -11,7 +11,3 @@
         name: "Playground"
     }
 </script>
-
-<style scoped>
-
-</style>

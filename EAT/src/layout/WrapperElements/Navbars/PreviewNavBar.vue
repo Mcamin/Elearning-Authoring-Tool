@@ -11,7 +11,7 @@
       <b-navbar-nav class="ml-auto">
         <!-- PREVIEW  -->
 
-        <b-button @click="handleClick" size="sm" class="my-2 my-sm-0" type="submit">BACK</b-button>
+        <b-button @click="handleClick">BACK</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -36,6 +36,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>

@@ -159,6 +159,3 @@
   }
 </script>
 
-<style>
-
-</style>

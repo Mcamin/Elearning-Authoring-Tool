@@ -7,9 +7,9 @@
         <!-- Left Settings -->
         <b-col cols="8"   class=" m-2 ">
           <div class="d-inline-block ">
-            <a :class="[element.type ==='Module' && inSection ? 'module-drag-handle':'section-module-drag-handle', 'mx-2'] ">
+            <b-link :class="[element.type ==='Module' && inSection ? 'module-drag-handle':'section-module-drag-handle', 'mx-2'] ">
               <font-awesome-icon :icon="['fas', 'bars']"  size="lg" />
-            </a>
+            </b-link>
           </div>
 
 

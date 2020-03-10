@@ -3,6 +3,7 @@
     <b-navbar-brand to="/">
 
       <b-img :src="logoPath" fluid alt="Hello"/>
+
     </b-navbar-brand>
     <el-divider direction="vertical" ></el-divider>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -25,8 +26,8 @@
         </div>
 
       </template>
-      <b-dropdown-item href="#">Profile</b-dropdown-item>
-      <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+      <b-dropdown-item href="">Profile</b-dropdown-item>
+      <b-dropdown-item href="">Sign Out</b-dropdown-item>
     </b-nav-item-dropdown>
         <!-- End Profile -->
       </b-navbar-nav>
@@ -48,23 +49,6 @@
               home: "DASHBOARD",
               courses: "COURSES",
               library: "LIBRARY",
-              options: [{
-                value: 'Option1',
-                label: 'Option1'
-              }, {
-                value: 'Option2',
-                label: 'Option2'
-              }, {
-                value: 'Option3',
-                label: 'Option3'
-              }, {
-                value: 'Option4',
-                label: 'Option4'
-              }, {
-                value: 'Option5',
-                label: 'Option5'
-              }],
-              value: ''
             }
           }
       },

@@ -7,11 +7,16 @@
         <b-row>
           <!-- Left Settings -->
           <b-col class="text-left m-2">
-            <a href="" class="content-drag-handle mx-2">
+            <div class="d-inline-block">
+            <b-link  class="content-drag-handle mx-2">
               <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
-            </a>
-            <h4 class="d-inline  mx-2">{{element.title}}</h4>
-          <b-badge variant="primary" pill>{{element.type}}</b-badge>
+            </b-link>
+            </div>
+            <div class="d-inline-block content-description">
+              <h4 class="d-inline  mx-2">{{element.title}}</h4>
+              <b-badge variant="primary" pill>{{element.type}}</b-badge>
+            </div>
+
           </b-col>
           <!-- End Left Settings -->
 

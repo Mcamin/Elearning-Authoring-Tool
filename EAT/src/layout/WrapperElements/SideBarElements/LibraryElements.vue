@@ -31,21 +31,7 @@
 </script>
 
 <style lang="sass">
-  .library-menu-wrapper
-    .el-menu-item-group__title
-      color: #504D4D
-      font-weight: bold
-      font-size: 16px
-    .el-menu-item
-      color: #504D4D
-      font-size: 16px
-      &:hover
-        background-color: rgba(33, 150, 120, 0.31)
-        color: #fff
-      &:focus
-        background-color: transparent
-    .el-menu-item.is-active
-      color: #219678 !important
+
 
 
 </style>
