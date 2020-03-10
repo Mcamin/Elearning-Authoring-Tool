@@ -1,0 +1,15 @@
+extends layout
+block scripts
+  script(type="text/javascript").
+    let params = !{params},
+            nextPage = !{nextPage};
+
+block content
+  .container-fluid.px-5.d-flex.justify-content-center.align-items-center(style="background:url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80');height:100vh;background-repeat: no-repeat; background-size: cover;")
+    .row.p-5(style='background-color: #fff; border-radius:30px')
+      .col.text-center.m-5
+        h1.my-2  #{title}
+        h4.my-4  #{description}
+        button.btn.btn-primary.mt-5.px-5(type='button', onclick='handleStartClicked(nextPage)')
+          span(style='font-size: 24px') Start
+

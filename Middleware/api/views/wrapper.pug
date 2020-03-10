@@ -1,0 +1,11 @@
+.container-fluid(style="height:100vh;")
+  .row.h-100
+    .col-1.d-flex.justify-content-center.align-items-center
+      a(class='button' href='#' onclick='previousPage()')
+        i.fas.fa-chevron-circle-left.fa-4x
+
+    .col.m-5.p-4
+      block main
+    .col-1.d-flex.justify-content-center.align-items-center
+      a(class='button' href='#' onclick='nextPage()')
+        i.fas.fa-chevron-circle-right.fa-4x

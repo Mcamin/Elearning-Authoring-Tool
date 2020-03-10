@@ -1,0 +1,11 @@
+extends wrapper
+block main
+  .container.h-100.m-5.p-4
+    .row.mb-4
+      h4 #{question}
+    .row.h-75.form-check
+      .custom-control.custom-checkbox.my-4
+        each val in #{answers}
+          input.custom-control-input(id =val.id type='radio' name=val.name)
+          label.custom-control-label(for=val.id) val.text
+      button#OK.btn.btn-primary.my-1.float-right(onclick='judge()') OK
