@@ -7,13 +7,13 @@
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item class="font-weight-bolder" disabled><h3>{{currentCourse.title}}</h3></b-nav-item>
+        <b-nav-item class="font-weight-bolder mt-2" disabled><h3>{{currentCourse.title}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto navbarstyle">
         <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
-        <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast-settings')"
+        <b-nav-item
                     href="#">SETTINGS</b-nav-item>
         <b-nav-item @click.prevent="handleShare"
                     href="#">SHARE</b-nav-item>

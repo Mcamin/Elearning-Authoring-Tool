@@ -9,3 +9,8 @@ body {
   background-color: $body-bg;
   overflow: hidden
 }
+
+a.disabled {
+  pointer-events: none;
+  color: rgba(33, 150, 120, 0.51);
+}

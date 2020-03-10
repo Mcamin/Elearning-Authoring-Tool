@@ -11,7 +11,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <!-- Breadcrumb -->
       <b-navbar-nav>
-        <b-nav-item href="#" disabled>{{IsPage}}</b-nav-item>
+        <b-nav-item  class="font-weight-bolder mt-2" disabled><h3>{{IsPage}}</h3></b-nav-item>
       </b-navbar-nav>
       <!-- End Breadcrumb -->
 

@@ -329,9 +329,5 @@
     }
   }
 </script>
-<style scoped>
-.addsec{
-  margin-left:2px !important;
-}
 
-</style>
+

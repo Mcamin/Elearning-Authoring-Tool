@@ -21,7 +21,3 @@
         name: "StartPage"
     }
 </script>
-
-<style scoped>
-
-</style>

@@ -4,7 +4,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item class="font-weight-bolder" disabled>Export Course</b-nav-item>
+        <b-nav-item class="font-weight-bolder mt-2" disabled>Export Course</b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

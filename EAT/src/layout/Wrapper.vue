@@ -74,7 +74,4 @@
     };
 </script>
 
-<style lang="sass">
-  .main-content
-    height: calc(100vh - 140px)
-</style>
+

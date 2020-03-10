@@ -5,15 +5,15 @@
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row>
         <!-- Left Settings -->
-        <b-col cols="8"   class=" m-2 ">
-          <div class="d-inline-block ">
+        <b-col   class="text-left m-2 d-flex align-items-center  ">
+          <div class="d-inline-block  mr-2">
             <b-link :class="[element.type ==='Module' && inSection ? 'module-drag-handle':'section-module-drag-handle', 'mx-2'] ">
               <font-awesome-icon :icon="['fas', 'bars']"  size="lg" />
             </b-link>
           </div>
 
 
-          <div class="d-inline-block ml-4">
+          <div class="d-inline-block ">
             <h4 >{{element.title}}</h4>
             <b-badge variant="primary" pill>{{element.type}}</b-badge>
             <p>{{element.description}}</p></div>
@@ -21,7 +21,7 @@
         <!-- End Left Settings -->
 
         <!--Right Settings-->
-        <b-col  class="text-right m-2">
+        <b-col  class="text-right ">
           <b-link  @click.stop="handleDelete()"  class="mx-2" v-b-tooltip.hover title="Delete">
             <font-awesome-icon :icon="['fas', 'trash']"  size="lg"/>
           </b-link>

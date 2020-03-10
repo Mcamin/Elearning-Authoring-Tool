@@ -8,7 +8,7 @@
 
         </b-navbar-brand>
         <el-divider direction="vertical" ></el-divider>
-        <b-nav-item  disabled class="font-weight-bolder"><h2>{{selectedLesson}}</h2></b-nav-item>
+        <b-nav-item  disabled class="font-weight-bolder mt-2"><h3>{{selectedLesson}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

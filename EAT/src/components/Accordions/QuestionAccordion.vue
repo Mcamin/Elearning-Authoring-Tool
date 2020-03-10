@@ -4,12 +4,12 @@
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row >
         <!-- Left Settings -->
-        <b-col cols="2">
+        <b-col cols="2" m-2 d-flex align-items-center>
           <a href="" class=" question-drag-handle ml-2">
             <font-awesome-icon :icon="['fas', 'bars']"  size="lg" />
           </a>
         </b-col>
-        <b-col cols="8" >
+        <b-col cols="8" class="text-left" >
           <h4>{{questionObject.questionText}}</h4>
         </b-col>
         <!-- End Left Settings -->

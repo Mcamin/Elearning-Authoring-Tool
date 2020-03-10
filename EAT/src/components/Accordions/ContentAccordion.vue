@@ -6,14 +6,14 @@
       <b-card-header header-tag="header" class="p-3" role="tab">
         <b-row>
           <!-- Left Settings -->
-          <b-col class="text-left m-2">
-            <div class="d-inline-block">
+          <b-col class="text-left m-2 d-flex align-items-center" >
+            <div class="d-inline-block mr-2 "  >
             <b-link  class="content-drag-handle mx-2">
               <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
             </b-link>
             </div>
-            <div class="d-inline-block content-description">
-              <h4 class="d-inline  mx-2">{{element.title}}</h4>
+            <div class="d-inline-block  content-description">
+              <h4>{{element.title}}</h4>
               <b-badge variant="primary" pill>{{element.type}}</b-badge>
             </div>
 

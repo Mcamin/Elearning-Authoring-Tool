@@ -4,7 +4,7 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="" disabled>{{this.$route.params.id}}</b-nav-item>
+        <b-nav-item  class="font-weight-bolder mt-2" disabled><h3>{{this.$route.params.id}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->

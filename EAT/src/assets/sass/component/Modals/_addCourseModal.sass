@@ -1,3 +1,28 @@
+.bv-no-focus-ring
+  .vue-tags-input
+    max-width: 100%
+    .ti-input
+      border-radius: 0.25rem
+      .ti-tag
+        background-color: #219678
+    &:focus
+      border-color: #219678
+      box-shadow: 0 0 0 0.2rem rgba(33, 150, 120, 0.25)
+.form-control, .custom-select
+  &:focus
+    border-color: #219678
+    box-shadow: 0 0 0 0.2rem rgba(33, 150, 120, 0.25)
+
+.upload-wrapper
+  .el-upload
+    width: 100%
+    .el-upload-dragger
+      width: 100%
+      &:hover
+        border-color: #219678
+      .el-upload__text em
+        color: #219678
+
 .add-course-modal
   .modal-content
     background-color: lightgray

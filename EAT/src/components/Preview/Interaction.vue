@@ -113,9 +113,4 @@
     }
 </script>
 
-<style scoped>
-  a.disabled {
-    pointer-events: none;
-    color: rgba(33, 150, 120, 0.51);
-  }
-</style>
+
