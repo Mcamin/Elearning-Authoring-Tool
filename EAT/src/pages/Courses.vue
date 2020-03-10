@@ -25,7 +25,8 @@
           :course-languages="course.languages.join(', ')"
           :url="{ name: 'edit-course', params: { id: course.uuid ,title: course.title} }"
           :img="course.thumbnail"
-          nbrOfSections="0"
+          :nbrOfSections="getContentLength(course)"
+          :key="index"
         />
       </b-col>
     </b-row>
@@ -47,7 +48,8 @@
             :course-languages="course.languages.join(', ')"
             :url="{ name: 'edit-course', params: { id: course.uuid ,title: course.title} }"
             :img="course.thumbnail"
-            nbrOfSections="0"
+            :nbrOfSections="getContentLength(course)"
+            :key="index"
           />
         </template>
       </b-col>
@@ -66,6 +68,7 @@
   import {mapActions, mapState} from "vuex";
   import {dynamicSort} from '@/utils/helpers'
   import DeleteModal from '@/components/Modals/DeleteModal'
+
   export default {
     name: "courses",
     components: {
@@ -78,57 +81,59 @@
     data() {
       return {
         viewMode: 'card-view',
-        loading: false ,
+        loading: false,
         error: false,
-        sortValue:'Recent',
-        filterValue:'AllCategories',
+        sortValue: 'Recent',
+        filterValue: 'AllCategories',
       }
     },
     computed: {
       ...mapState('course', ['courses']),
       setView() {
         switch (this.viewMode) {
-          //Load Lessons
           case 'card-view':
             return 'card-view';
-            break;
-          //Load Interactions
           case 'list-view':
             return 'list-view';
-            break;
+          default:
+            return 'card-view';
         }
       },
-      coursesArray(){
+      coursesArray() {
         let tempArray = [...this.courses];
-        if(this.filterValue!== "AllCategories")
-          tempArray = tempArray.filter(el => el.category ===this.filterValue);
+        if (this.filterValue !== "AllCategories")
+          tempArray = tempArray.filter(el => el.category === this.filterValue);
         switch (this.sortValue) {
           case 'TitleReversed':
             return tempArray.sort(dynamicSort("-title"));
-            break;
           case 'Title':
             return tempArray.sort(dynamicSort("title"));
-            break;
           case 'Recent':
-
             return tempArray.reverse();
-            break;
           default:
-            break;
+            return tempArray;
         }
       }
     },
     methods: {
-      ...mapActions('course', {loadCourses: 'loadCourses',resetCourse:'resetCourse'})
+      ...mapActions('course', {loadCourses: 'loadCourses', resetCourse: 'resetCourse'}),
+      getContentLength(course){
+        let contentLength = Object.keys(course.contentIndex).length;
+        return Object.keys(course.contentIndex).map((item) => {
+             let total = 0;
+          if (item.charAt(0) === 's')
+            total++;
+          return total
+        },0);
+
+      },
     },
     created() {
       bus.$on('list-view', () => {
-
         this.viewMode = 'list-view';
       });
       bus.$on('card-view', () => {
         this.viewMode = 'card-view';
-
       });
       bus.$on('change-sort', (val) => {
         this.sortValue = val;
@@ -139,18 +144,15 @@
       });
 
     }, mounted() {
-         this.resetCourse();
-         this.loadCourses();
-  /*    if(){
-        this.loading = false;
-        this.error = false;
-      }else{
-        this.loading = false;
-        this.error = false;
-      }*/
-
-
-
+      this.resetCourse();
+      this.loadCourses();
+      /*    if(){
+            this.loading = false;
+            this.error = false;
+          }else{
+            this.loading = false;
+            this.error = false;
+          }*/
 
 
     }

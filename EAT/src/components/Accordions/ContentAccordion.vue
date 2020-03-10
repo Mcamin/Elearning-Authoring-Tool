@@ -92,7 +92,6 @@
       },
       moduleId:{
         type:String,
-        required:true,
         Description: "The id of the module containing the element",
       }
 
