@@ -47,7 +47,7 @@
           </b-form>
           <b-container fluid class="px-0 mt-3">
             <b-row class="h-100 ml-2">
-              <b-button class="float-right" @click="generateNewCredentials()">Generate new credentials</b-button>
+              <b-button variant="primary" class="float-right" @click="generateNewCredentials()">Generate new credentials</b-button>
             </b-row>
           </b-container>
         </b-row>

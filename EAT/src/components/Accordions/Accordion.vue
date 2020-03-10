@@ -15,8 +15,8 @@
 
           <div class="d-inline-block ">
             <h4 >{{element.title}}</h4>
-            <b-badge variant="primary" pill>{{element.type}}</b-badge>
-            <p>{{element.description}}</p></div>
+            <b-badge variant="primary" class="px-2 mt-2 py-2" pill>{{element.type}}</b-badge>
+            <p class="mt-4">{{element.description}}</p></div>
         </b-col>
         <!-- End Left Settings -->
 
@@ -187,8 +187,8 @@
           };
           bus.$emit('token-modal', metadata);
         },
-        handlePreview(){
-
+        handlePreview() {
+          this.$router.push({name: 'preview', params: {id: this.element.uuid,title:this.element.title}});
         },
         async loadSectionContent(){
 

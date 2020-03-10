@@ -13,8 +13,8 @@
             </b-link>
             </div>
             <div class="d-inline-block  content-description">
-              <h4>{{element.title}}</h4>
-              <b-badge variant="primary" pill>{{element.type}}</b-badge>
+              <h4 class="mt-4">{{element.title}}</h4>
+              <b-badge variant="primary" class="px-2 py-2"  pill>{{element.type}}</b-badge>
             </div>
 
           </b-col>
@@ -145,7 +145,7 @@
         bus.$emit('edit-modal', metadata);
       },
       handlePreview() {
-        this.$router.push({name: 'preview', params: {id: this.element.uuid}});
+        this.$router.push({name: 'preview', params: {id: this.element.uuid,title:this.element.title}});
       }
 
 

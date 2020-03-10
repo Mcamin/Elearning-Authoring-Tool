@@ -1,6 +1,6 @@
 <template>
   <b-container class=" pb-5 mt-5">
-    <SettingsCard/>
+    <SettingsCard :meta="courseMeta"/>
     <!-- Course Content -->
     <b-row class="course-content-wrapper my-4 pt-4">
       <b-col   align-self="center" class="h-100">
@@ -49,7 +49,7 @@
   import {Container} from "vue-smooth-dnd";
   import {mapActions, mapGetters, mapState} from "vuex";
   import {uuid} from "vue-uuid";
-  import SettingsCard from "@/components/Cards/Settings";
+  import SettingsCard from "@/components/Cards/SettingsCard";
   import {applyDrag} from "@/utils/helpers";
   export default {
     name: "EditCourse",
@@ -70,6 +70,13 @@
       ...mapState('section', ['sections']),
       ...mapState('module', ['modules']),
       ...mapGetters('course', ['getCourseContent']),
+      courseMeta(){
+        return {
+          title: this.currentCourse.title,
+          description: this.currentCourse.description,
+          tags: this.currentCourse.tags
+        }
+      }
     },
     methods: {
       ...mapActions('course', {loadCourse: 'loadCourse', updateCourse: 'updateCourse'}),

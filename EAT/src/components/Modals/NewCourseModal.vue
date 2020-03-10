@@ -95,8 +95,8 @@
         <!-- Buttons -->
         <b-container fluid class="px-0 mt-3">
           <b-row class="h-100 d-flex align-content-center justify-content-end  mx-auto">
-            <b-button @click="handleSubmit()">Create Course</b-button>
-            <b-button class="mx-2" @click="close()">Cancel</b-button>
+            <b-button variant="primary"  @click="handleSubmit()">Create Course</b-button>
+            <b-button variant="primary" class="mx-2" @click="close()">Cancel</b-button>
           </b-row>
         </b-container>
         <!-- Buttons -->
