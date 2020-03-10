@@ -12,9 +12,6 @@
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto navbarstyle">
-        <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
-        <b-nav-item
-                    href="#">SETTINGS</b-nav-item>
         <b-nav-item @click.prevent="handleShare"
                     href="#">SHARE</b-nav-item>
         <!--<b-nav-item href="#">EXPORT</b-nav-item>

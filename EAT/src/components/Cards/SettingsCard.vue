@@ -6,7 +6,7 @@
           <h1 v-if="meta.title" class="mt-1 mb-2 text-white font-weight-bold">{{meta.title}}</h1>
           <h5 class="mt-4" v-if="meta.description">{{meta.description}}</h5>
           <h5 class="mt-4" v-if="meta.tags">
-            <b-badge pill variant="secondary" class="px-3 py-2" v-for="(tag,index) in meta.tags" :key="index">{{tag}}
+            <b-badge pill variant="secondary" class="mx-1 px-3 py-2" v-for="(tag,index) in meta.tags" :key="index">{{tag}}
             </b-badge>
           </h5>
 

@@ -1,5 +1,6 @@
 <template>
-  <b-container  class="h-100">
+  <b-container  class="h-100 mt-5">
+    <SettingsCard :meta="lessonMeta"/>
     <b-row class="mt-5 mx-5">
       <b-col class="mb-4 mx-auto">
         <!--HTML Card-->
@@ -43,107 +44,6 @@
             </b-card-text>
           </b-card-body>
         </b-card>
-        <!--Metadata Card-->
-       <!-- <b-card class="mb-5" no-body>
-          <b-card-body>
-            <b-card-text>
-              <b-container fluid>
-                <b-row>
-                  <b-col class="mb-3">
-                    <h6>Metadata</h6>
-                    <span class="font-italic">Before publishing the course, meta data need to be inserted.</span>
-                  </b-col>
-                </b-row>
-                <b-row>
-                  <b-col class="mb-2">
-                    <b-card no-body>
-                      <b-tabs card>
-                        <b-tab no-body title="LIFECYCLE">
-                          <b-container>
-                            <b-row>
-                              <b-col>
-                                <b-card class="my-3" no-body>
-                                  <b-card-body>
-                                    <b-card-text>
-                                      <b-container>
-                                        <b-row>
-                                          <b-col class="mb-3">
-                                            <h5>Structure</h5>
-                                            <span>Description</span>
-                                          </b-col>
-                                          <b-col class="mb-3">
-                                            <span>SOURCE</span><br>
-                                            <b-dropdown class="mt-2" id="dropdown-1" text="SLHw">
-                                              <b-dropdown-item>First Action</b-dropdown-item>
-                                              <b-dropdown-item>Second Action</b-dropdown-item>
-                                              <b-dropdown-item>Third Action</b-dropdown-item>
-                                            </b-dropdown>
-                                          </b-col>
-                                          <b-col class="mb-3">
-                                            <span>STATE</span><br>
-                                            <b-dropdown class="mt-2" id="dropdown-1" text="SLHw">
-                                              <b-dropdown-item>First Action</b-dropdown-item>
-                                              <b-dropdown-item>Second Action</b-dropdown-item>
-                                              <b-dropdown-item>Third Action</b-dropdown-item>
-                                            </b-dropdown>
-                                          </b-col>
-                                        </b-row>
-                                      </b-container>
-                                    </b-card-text>
-                                  </b-card-body>
-                                </b-card>
-                              </b-col>
-                            </b-row>
-                            <b-row>
-                              <b-col>
-                                <b-card class="my-3" no-body>
-                                  <b-card-body>
-                                    <b-card-text>
-                                      <b-container>
-                                        <b-row>
-                                          <b-col class="mb-3">
-                                            <h5>Structure</h5>
-                                            <span>Description</span>
-                                          </b-col>
-                                          <b-col class="mb-3">
-                                            <span>SOURCE</span><br>
-                                            <b-dropdown class="mt-2" id="dropdown-1" text="SLHw">
-                                              <b-dropdown-item>First Action</b-dropdown-item>
-                                              <b-dropdown-item>Second Action</b-dropdown-item>
-                                              <b-dropdown-item>Third Action</b-dropdown-item>
-                                            </b-dropdown>
-                                          </b-col>
-                                          <b-col class="mb-3">
-                                            <span>STATE</span><br>
-                                            <b-dropdown class="mt-2" id="dropdown-1" text="SLHw">
-                                              <b-dropdown-item>First Action</b-dropdown-item>
-                                              <b-dropdown-item>Second Action</b-dropdown-item>
-                                              <b-dropdown-item>Third Action</b-dropdown-item>
-                                            </b-dropdown>
-                                          </b-col>
-                                        </b-row>
-                                      </b-container>
-                                    </b-card-text>
-                                  </b-card-body>
-                                </b-card>
-                              </b-col>
-                            </b-row>
-                          </b-container>
-                        </b-tab>
-                        <b-tab no-body title="TECHNICAL">
-                        </b-tab>
-                        <b-tab no-body title="EDUCATIONAL">
-                        </b-tab>
-                        <b-tab title="ANNOTATION">
-                        </b-tab>
-                      </b-tabs>
-                    </b-card>
-                  </b-col>
-                </b-row>
-              </b-container>
-            </b-card-text>
-          </b-card-body>
-        </b-card>-->
       </b-col>
     </b-row>
   </b-container>
@@ -157,7 +57,7 @@
   import VueTagsInput from '@johmun/vue-tags-input';
   import {mapActions, mapState} from "vuex";
   import {bus} from "@/main";
-
+  import SettingsCard from "@/components/Cards/SettingsCard";
   library.add(
     faPen,
     faTrash,
@@ -167,6 +67,12 @@
 
   export default {
     name: "EditLesson",
+    components: {
+      'font-awesome-icon': FontAwesomeIcon,
+      VueEditor,
+      VueTagsInput,
+      SettingsCard
+    },
     data() {
       return {
         meta:{
@@ -180,6 +86,9 @@
     computed:{
       ...mapState('lesson', ['currentLesson', 'lessons']),
       ...mapState('module' , ['currentModule']),
+      lessonMeta(){
+        return {title:this.currentLesson.title,description: this.currentLesson.description,tags:this.currentLesson.tags}
+      },
     },
     methods: {
       ...mapActions('lesson', {
@@ -233,11 +142,13 @@
         }
       },
       updateTags(newTags){
-        this.selectedLesson.tags = newTags;
+        console.log(newTags);
+        let tagsArray = newTags.map(a => a.text);
+          this.selectedLesson.tags =tagsArray;
         this.updateLessonState({
           targetLesson: this.selectedLesson.uuid,
           props: {
-            tags: newTags
+            tags: this.selectedLesson.tags
           }
         });
       },
@@ -257,11 +168,6 @@
       }
     },
 
-    components: {
-      'font-awesome-icon': FontAwesomeIcon,
-      VueEditor,
-      VueTagsInput,
-    },
     watch:{
       selectedLesson:{
         handler:function(val){

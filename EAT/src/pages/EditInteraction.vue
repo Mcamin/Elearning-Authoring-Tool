@@ -1,7 +1,7 @@
 <template>
 
-  <b-container>
-
+  <b-container  class="h-100 mt-5">
+    <SettingsCard :meta="interactionMeta"/>
     <b-row class="my-5">
       <b-col>
         <Container v-if="currentInteraction" @drop="onDropQuestion" drag-handle-selector=".question-drag-handle"
@@ -27,7 +27,7 @@
 
 <script>
 
-
+ import SettingsCard from "@/components/Cards/SettingsCard";
   import {bus} from "@/main";
   import {Container, Draggable} from "vue-smooth-dnd";
   import QuestionAccordion from "@/components/Accordions/QuestionAccordion";
@@ -39,7 +39,7 @@
 
   export default {
     name: "EditInteraction",
-    components: {QuestionAccordion, AddQuestionBtn, Container, Draggable},
+    components: {QuestionAccordion, AddQuestionBtn, Container, Draggable,SettingsCard},
     data() {
       return {
         intervalId: ''
@@ -48,6 +48,12 @@
     computed: {
       ...mapState('interaction', ['currentInteraction', 'interactions']),
       ...mapState('module', ['currentModule']),
+      interactionMeta(){
+        return {
+          title: this.currentInteraction.title,
+          description : this.currentInteraction.description
+        }
+      }
     },
     methods: {
 

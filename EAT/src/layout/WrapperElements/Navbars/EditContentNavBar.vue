@@ -14,7 +14,6 @@
       <!-- Right aligned nav items -->
 
       <b-navbar-nav class="ml-auto ">
-        <b-nav-item >SETTINGS</b-nav-item>
         <b-button @click="handlePreview()">PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>

@@ -46,7 +46,9 @@
       <!--Content-->
       <b-collapse :id="`${element.uuid}`" visible :accordion="`lesson-interaction-${element.uuid}`" role="tabpanel">
         <b-card-body>
-          {{element.description}}
+          <div class="pl-5 content-description ">
+          <h5>{{element.description}}</h5>
+          </div>
         </b-card-body>
       </b-collapse>
       <!--End Content-->
