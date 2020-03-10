@@ -12,8 +12,8 @@
 
     import {checkRouter} from "@/utils/helpers"
     import MainNavBar from "./Navbars/MainNavBar";
-    import CourseNavBar from "./Navbars/CourseNavBar";
-    import EditNavBar from "./Navbars/EditNavBar";
+    import CourseNavBar from "./Navbars/EditCourseNavBar";
+    import EditNavBar from "./Navbars/EditContentNavBar";
     import ExportNavBar from "./Navbars/ExportNavBar";
     import PreviewNavBar from "./Navbars/PreviewNavBar";
 
@@ -49,8 +49,3 @@
       }
     }
 </script>
-
-<style lang="css" >
-
-
-</style>

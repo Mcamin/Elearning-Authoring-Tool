@@ -145,8 +145,8 @@
           </b-form>
           <b-container fluid class="px-0 mt-3">
             <b-row class="h-100 addsec">
-              <b-button class="float-right" @click="handleSubmit()">Add</b-button>
-              <b-button class=" float-right mx-2" @click="close()">Cancel</b-button>
+              <b-button variant="primary" class="float-right" @click="handleSubmit()">Add</b-button>
+              <b-button variant="primary"  class=" float-right mx-2" @click="close()">Cancel</b-button>
             </b-row>
           </b-container>
         </b-row>
@@ -329,9 +329,5 @@
     }
   }
 </script>
-<style scoped>
-.addsec{
-  margin-left:2px !important;
-}
 
-</style>
+

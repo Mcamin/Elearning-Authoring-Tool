@@ -1,15 +1,15 @@
 <template>
-  <b-card no-body class=" mb-3">
+  <b-card no-body class="mb-3">
     <!--Header-->
     <b-card-header header-tag="header" class="p-3" role="tab">
       <b-row >
         <!-- Left Settings -->
-        <b-col cols="2">
+        <b-col cols="2" m-2 d-flex align-items-center>
           <a href="" class=" question-drag-handle ml-2">
-            <font-awesome-icon :icon="['fas', 'bars']" color="gray" size="lg" />
+            <font-awesome-icon :icon="['fas', 'bars']"  size="lg" />
           </a>
         </b-col>
-        <b-col cols="8" >
+        <b-col cols="8" class="text-left" >
           <h4>{{questionObject.questionText}}</h4>
         </b-col>
         <!-- End Left Settings -->
@@ -17,11 +17,11 @@
         <!--Right Settings-->
         <b-col cols="2"  class="text-right">
           <a href=""  @click.prevent="removeQuestion" class="ml-2">
-            <font-awesome-icon :icon="['fas', 'trash']"  color="gray"  size="lg"/>
+            <font-awesome-icon :icon="['fas', 'trash']"    size="lg"/>
           </a>
 
           <a href="" @click.prevent="toggleCollapse(questionObject.question_id)" class="ml-2">
-            <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']" color="gray" size="lg"/>
+            <font-awesome-icon :icon="['fas', meta.collapsed ? 'sort-up' : 'sort-down']"  size="lg"/>
           </a>
 
         </b-col>

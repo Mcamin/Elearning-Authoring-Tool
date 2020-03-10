@@ -4,8 +4,9 @@
     <b-row  align-h="center"   align-content="center">
       <b-col  align="center" align-self="center" >
 
-        <template v-for="elm in filteredElements" >
-          <Accordion :accordion-i-d="elm.uuid" :accordion-title="elm.title"/>
+        <template v-for="(elm,index) in filteredElements" >
+          <Accordion v-if="elm.type==='Section' || elm.type=== 'Module'" :element="elm" :key="index"/>
+          <ContentAccordion v-else :element="elm"></ContentAccordion>
         </template>
         </b-col>
 
@@ -19,11 +20,12 @@
   import FilterElement from "../layout/WrapperElements/FilterElement"
   import {mapActions, mapState} from "vuex";
   import {bus} from "../main";
+  import ContentAccordion from "@/components/Accordions/ContentAccordion";
 
 
   export default {
         name: "Library",
-        components: {Accordion,FilterElement},
+        components: {ContentAccordion, Accordion,FilterElement},
         data(){
             return {
                index: 0
@@ -39,17 +41,13 @@
                     //Load Lessons
                     case '1':
                         return this.lessons;
-                        break;
                     //Load Interactions
                     case '2':
                         return this.interactions;
-                        break;
                     case '3':
                         return this.modules;
-                        break;
                     case '4':
                         return this.sections;
-                        break;
                     default:
                         return  this.lessons;
                 }
@@ -81,6 +79,4 @@
     }
 </script>
 
-<style scoped>
-
-</style>
+<

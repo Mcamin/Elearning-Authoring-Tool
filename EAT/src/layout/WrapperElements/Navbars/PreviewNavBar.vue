@@ -4,14 +4,14 @@
 
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="" disabled>{{this.$route.params.title}}</b-nav-item>
+        <b-nav-item  class="font-weight-bolder mt-2" disabled><h3>{{this.$route.params.title}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <!-- PREVIEW  -->
 
-        <b-button @click="handleClick" size="sm" class="my-2 my-sm-0" type="submit">BACK</b-button>
+        <b-button @click="handleClick">BACK</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -36,6 +36,3 @@
     }
 </script>
 
-<style scoped>
-
-</style>

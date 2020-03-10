@@ -8,17 +8,15 @@
         </b-col>
        <b-col md="6" sm="12" >
          <b-nav align="center" class="float-lg-right" >
-         <b-nav-item  href="/"> <font-awesome-icon :icon="['fab','facebook']" size="lg"/></b-nav-item>
-         <b-nav-item  href="/"> <font-awesome-icon :icon="['fab','twitter']" size="lg"/></b-nav-item>
+         <b-nav-item  href="#"> <font-awesome-icon :icon="['fab','facebook']" size="lg"/></b-nav-item>
+         <b-nav-item  href="#"> <font-awesome-icon :icon="['fab','twitter']" size="lg"/></b-nav-item>
        </b-nav>
        </b-col>
       </b-row>
     </b-container>
 
 </template>
-<style>
 
-</style>
 <script>
     import { library } from '@fortawesome/fontawesome-svg-core'
     import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
@@ -40,18 +38,3 @@
     };
 </script>
 
-<style lang="sass">
-  footer
-    position: fixed
-    bottom: 0
-    background-color: #219678
-    width: 100%
-    color: white
-    a
-      color: #4e4e4e
-      &:hover
-        color: #fff
-        text-decoration: unset
-
-
-</style>

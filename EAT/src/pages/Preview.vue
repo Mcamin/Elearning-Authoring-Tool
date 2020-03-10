@@ -1,79 +1,74 @@
 <template>
-  <div>
-    <h1>Course Title: {{ currentCourse.title }}</h1>
-    <b-container class="p-5 my-2">
-      <div v-for="item in getCourseContent">
-        <b-card >
-          <b-card-text>
-            <h1>Section Title: {{item.title}}</h1>
-            <h4>Section Description: {{item.description}}</h4>
-            <div v-if="item.type === 'Section'" v-for="(mkey,val) in item.modulesIndex">
-              <b-card>
-                <!--{{val}}-->
-                <div v-for="c in getModuleContent(val)">
-                    <div v-if="c.type === 'Lesson'">Lesson Title: {{c.title}} <br/>
-                      Lesson Description: {{c.description}} </div><br/>
+  <b-container fluid class="d-flex h-100 justify-content-center align-items-center">
+    <b-row class="w-75 h-100 py-4 d-flex align-items-center">
+      <b-col style="max-height: 680px" class="h-100 ">
+        <!--Start Page
+       <StartPage></StartPage>-->
 
-                  <!-- HTML rendering of Lesson content -->
-                  <p v-html="c.content"></p>
-                  <hr>
-                  <div v-if="c.type === 'Interaction'">
-                    {{c.title}}
+      <ContentPagePreview v-if="element.type==='Lesson' " :content="element.content"/>
+        <Interaction v-else :interaction="element"/>
+        <!-- Content Page -->
+        <!-- Exercise page-->
+      </b-col>
+    </b-row>
+  </b-container>
 
-                    <!-- Go through questions -->
-                    <div v-for="question in c.questions">
-                      <b>{{question.questionText}} : {{question.questionType}}</b>
-
-                      <!-- V-if Multiple choice -->
-                      <b-row v-if="question.questionType === 'Multiple choice'">
-                      <b-form-checkbox v-model="answer.checked" @change="triggerUpdate">
-                        {{answer.text}}
-                      </b-form-checkbox>
-                      </b-row>
-
-                      <!-- V-if Single choice -->
-                      <b-form-group v-else>
-                      <b-row v-for="answer in question.answers">
-                        <b-form-radio v-model="selected"
-                                      name="some-radios"
-                                      :value="answer.id">{{answer.text}}</b-form-radio>
-                      </b-row>
-                      </b-form-group>
-                    </div>
-                  </div>
-                </div>
-              </b-card>
-            </div>
-          </b-card-text>
-          <b-card-text></b-card-text>
-          <b-button @click="handleSubmit" size="sm" class="my-2 my-sm-0" type="submit">SUBMIT</b-button>
-        </b-card>
-      </div>
-    </b-container>
-  </div>
 </template>
 
 <script>
-  import {mapGetters, mapState} from "vuex";
+  import {mapGetters} from "vuex";
+  import ContentPagePreview from "@/components/Preview/ContentPage";
+  import Interaction from "@/components/Preview/Interaction";
 
   export default {
     name: "Preview",
     data() {
-      return {}
+      return {
+        currentQuestion:{},
+        element: {},
+        elementToRender: {},
+        startClicked: false
+      }
     },
-    computed:{
-      ...mapGetters(
-        'course', ['getCourseContent']
-      ),
-      ...mapGetters(
-        'module' , ['getModuleContent']
-      ),
-      ...mapState('course', ['currentCourse']),
+    components: {Interaction, ContentPagePreview},
+    computed: {
 
+      ...mapGetters(
+        'course', ['getCourseContent']),
+      ...mapGetters(
+        'module', ['getModuleContent']),
+      ...mapGetters(
+        'module', ['getSectionContent']),
+      ...mapGetters(
+        'interaction', ['getInteractionByID']),
+      ...mapGetters(
+        'lesson', ['getLessonByID'])
+
+    },
+    methods: {},
+    created() {
+      switch (this.$route.params.id.charAt(0)) {
+        case 's':
+          // load section content
+          break;
+        case'm':
+          // load module content
+          break;
+        case 'i':
+            this.element = this.getInteractionByID(this.$route.params.id);
+            this.currentQuestion = this.element.questions[0];
+            this.currentIndex = 0;
+          //load interaction
+          break;
+        case 'l':
+          //load lesson
+          this.element = this.getLessonByID(this.$route.params.id);
+          break;
+        default:
+        //load course content
+
+      }
     }
-    }
+  }
 </script>
 
-<style scoped>
-
-</style>

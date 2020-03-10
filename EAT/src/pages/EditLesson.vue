@@ -286,10 +286,3 @@
   };
 </script>
 
-<style scoped>
-  .view {
-    border-color: transparent;
-    background-color: initial;
-    color: initial
-  }
-</style>

@@ -5,6 +5,7 @@ import Wrapper from "@/layout/Wrapper";
 import Login  from "@/pages/Login.vue";
 
 //  pages
+const Playground = () => import(/* webpackChunkName: "Home" */ "@/pages/Playground.vue");
 
 const Home = () => import(/* webpackChunkName: "Home" */ "@/pages/Home.vue");
 const Library = () => import(/* webpackChunkName: "Library" */ "@/pages/Library.vue");
@@ -17,7 +18,7 @@ const routes = [
     {
         path: "/",
         component: Wrapper,
-        redirect: "/home",
+        redirect: "/login",
         children: [
           {
             path: "home",
@@ -39,6 +40,13 @@ const routes = [
                 {text: 'Courses',active:true},
               ]
             }
+          },
+          {
+            path: "playground" +
+              "",
+            name: "playground",
+            component: Playground,
+
           },
           {
             path: "edit-interaction/:id" +
@@ -68,7 +76,6 @@ const routes = [
             path: "/edit-course/:id",
             name: "edit-course",
             component: EditCourse,
-            props: true,
             meta:{
               breadcrumb:[
                 {text: 'Home',to:{name:'home'}},

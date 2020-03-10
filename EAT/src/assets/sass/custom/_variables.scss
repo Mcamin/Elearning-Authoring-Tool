@@ -1,0 +1,44 @@
+@import 'node_modules/bootstrap/scss/variables';
+// EAT colors
+
+$green: #388A6B;
+$teal: #219678;
+
+$primary: $teal;
+$secondary: #707070;
+$body-bg: $white;
+$body-color: $gray-700;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary
+);
+
+
+$navbar-dark-color: rgba($white, 1);
+
+
+$navbar-dark-brand-color:         $secondary;
+$background-color: #F5F5F5;
+$font-family-base: Lato, Helvetica, Arial, sans-serif;
+
+
+$input-btn-padding-y: .400rem;
+$input-btn-padding-x: 2rem;
+
+$btn-padding-y: $input-btn-padding-y;
+$btn-padding-x: $input-btn-padding-x;
+
+
+$border-radius: 1.5rem;
+
+$btn-border-radius: $border-radius;
+
+
+// Tooltips
+$tooltip-bg: $primary;
+
+// Links
+$link-color:   theme-color("secondary");
+$link-hover-color:  $white;
+$link-hover-decoration: none;

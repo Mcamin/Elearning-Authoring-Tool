@@ -1,33 +1,25 @@
-.accordion-wrapper.card
-  background: $secondary-color
+.section-module-wrapper, .question-accordion-wrapper, .lesson-interaction-wrapper
   box-shadow: 5px 5px 15px #7070706e
   border-radius: 5px
-  border: 0
-.smooth-dnd-draggable-wrapper.question-accordion-wrapper
-  background: $secondary-color
-  box-shadow: 5px 5px 15px #7070706e
-  border-radius: 5px
-  border: 1px solid rgba(0, 0, 0, 0.125)
-  display: -webkit-box
-  flex-direction: column
-  background-clip: border-box
   .card
     border: 0
+    .card-header
+      background-color: transparent
+      border: 0
+  a
+    color: rgba(128, 128, 128, 0.5)
+    &:hover
+      color: $primary
 
-.smooth-dnd-draggable-wrapper.answer-accordion-wrapper
-  background: $secondary-color
-  border-radius: 5px
+.lesson-interaction-wrapper
+  .content-description
+    color: $body-color
+    text-decoration: unset
+
+
+.answer-accordion-wrapper
   border: 1px solid rgba(0, 0, 0, 0.125)
-  display: -webkit-box
-  flex-direction: column
-  background-clip: border-box
-  .card
-    border: 0
 
-.card-header
-    background-color: transparent
-    border: 0
-#qrow
-  margin-bottom: 0px !important
+
 
 

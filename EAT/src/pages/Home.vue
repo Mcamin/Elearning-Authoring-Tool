@@ -2,7 +2,7 @@
   <b-container fluid class="h-100 home-wrapper px-0">
     <b-row class="d-flex align-items-center h-100 pl-4 mx-0">
       <b-col  cols="6" class="">
-       <h1 class="primary-color"> Welcome to the Elearning <br> Authoring Tool</h1>
+       <h1 class="text-primary"> Welcome to the Elearning <br> Authoring Tool</h1>
         <h4>Create an Engaging Course or <br> Start Adding Content to the Library</h4>
         <b-container fluid class="px-0" >
           <b-row class="mt-5">
@@ -37,5 +37,4 @@
     },
   };
 </script>
-<style>
-</style>
+

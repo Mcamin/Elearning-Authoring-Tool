@@ -1,22 +1,25 @@
 <template>
   <b-navbar toggleable="lg" type="dark"  sticky class="px-lg-4">
-    <b-navbar-brand to="/courses"><font-awesome-icon :icon="['fas','th']" size="lg"/></b-navbar-brand>
+    <b-navbar-brand to="/courses"><font-awesome-icon :icon="['fas','th']" size="2x"/>
+
+    </b-navbar-brand>
+    <el-divider direction="vertical" ></el-divider>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="" disabled>{{currentCourse.title}}</b-nav-item>
+        <b-nav-item class="font-weight-bolder mt-2" disabled><h3>{{currentCourse.title}}</h3></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto navbarstyle">
         <!-- EDIT COURSE | EDIT LESSON | EDIT QUIZ | EDIT MODULE | EDIT SECTION  -->
-        <b-nav-item id="edit-btn" @click="$bvToast.show('my-toast-settings')"
+        <b-nav-item
                     href="#">SETTINGS</b-nav-item>
-        <b-nav-item @click.prevent="triggerLTI"
+        <b-nav-item @click.prevent="handleShare"
                     href="#">SHARE</b-nav-item>
         <!--<b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>-->
-        <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
+        <b-button @click="handlePreview()" >PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -51,7 +54,7 @@
         handlePreview(){
           this.$router.push({name:'preview',params:{id:this.currentCourse.uuid, title:this.currentCourse.title}});
         },
-        triggerLTI(){
+        handleShare(){
           let metadata ={
             id: this.currentCourse.uuid,
             type: "Course"
@@ -61,23 +64,3 @@
       },
     }
 </script>
-
-<style scoped>
-
-.submitbtn:hover{
-  color: grey !important;
-}
-.navbar-dark .navbar-nav .nav-link{
-  color: white !important;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover{
-  color: grey !important;
-}
-
-.toaster{
-  background-color: white;
-  margin-top: 18% !important;
-}
-
-</style>

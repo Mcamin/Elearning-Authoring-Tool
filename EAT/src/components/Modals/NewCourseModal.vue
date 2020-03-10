@@ -95,8 +95,8 @@
         <!-- Buttons -->
         <b-container fluid class="px-0 mt-3">
           <b-row class="h-100 d-flex align-content-center justify-content-end  mx-auto">
-            <b-button @click="handleSubmit()">Create Course</b-button>
-            <b-button class="mx-2" @click="close()">Cancel</b-button>
+            <b-button variant="primary"  @click="handleSubmit()">Create Course</b-button>
+            <b-button variant="primary" class="mx-2" @click="close()">Cancel</b-button>
           </b-row>
         </b-container>
         <!-- Buttons -->
@@ -198,29 +198,3 @@
     }
   }
 </script>
-<style lang="sass">
-.bv-no-focus-ring
-  .vue-tags-input
-    max-width: 100%
-    .ti-input
-      border-radius: 0.25rem
-      .ti-tag
-        background-color: #219678
-    &:focus
-      border-color: #219678
-      box-shadow: 0 0 0 0.2rem rgba(33, 150, 120, 0.25)
-.form-control, .custom-select
-  &:focus
-    border-color: #219678
-    box-shadow: 0 0 0 0.2rem rgba(33, 150, 120, 0.25)
-
-.upload-wrapper
-  .el-upload
-    width: 100%
-    .el-upload-dragger
-      width: 100%
-      &:hover
-        border-color: #219678
-      .el-upload__text em
-        color: #219678
-</style>
