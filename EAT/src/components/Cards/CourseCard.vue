@@ -84,7 +84,7 @@
           } catch (er) {
             console.log(er);
           } finally {
-            this.$router.push({name: 'edit-course', params: {id: this.uuid, title: this.title}});
+            this.$router.push({name: 'edit-course', params: {id: this.uuid}});
           }
         }
       },

@@ -16,7 +16,7 @@
                     href="#">SHARE</b-nav-item>
         <!--<b-nav-item href="#">EXPORT</b-nav-item>
         <b-nav-item href="#">PUBLISH</b-nav-item>-->
-        <b-button @click="handlePreview()" class="my-2 my-sm-0 submitbtn" type="submit">PREVIEW</b-button>
+        <b-button @click="handlePreview()" >PREVIEW</b-button>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -61,23 +61,3 @@
       },
     }
 </script>
-
-<style scoped>
-
-.submitbtn:hover{
-  color: grey !important;
-}
-.navbar-dark .navbar-nav .nav-link{
-  color: white !important;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover{
-  color: grey !important;
-}
-
-.toaster{
-  background-color: white;
-  margin-top: 18% !important;
-}
-
-</style>

@@ -2,9 +2,9 @@ import VueRouter from "vue-router";
 import RouterPrefetch from 'vue-router-prefetch'
 import router from "./router/index";
 import './registerServiceWorker'
-import './assets/sass/index.sass'
-
 import 'element-ui/lib/index.js'
+import './assets/sass/index.scss'
+
 
 import BootstrapVue from 'bootstrap-vue';
 import ElementUI from 'element-ui';

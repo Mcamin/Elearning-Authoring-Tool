@@ -20,27 +20,3 @@
 
   }
 </script>
-
-<style scoped>
-  .btn-wrapper.btn {
-    background: transparent;
-    border: 1px dashed darkcyan;
-    padding: 10px 0;
-    color: darkcyan;
-
-  }
-
-  .btn-wrapper.btn:hover {
-    background: rgb(80, 213, 183);
-    border: 0px;
-    padding: 10px 0;
-    color: white;
-
-  }
-
-  .fa-plus-circle {
-    color: darkcyan;
-  }
-
-
-</style>

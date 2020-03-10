@@ -23,6 +23,4 @@
     }
 </script>
 
-<style scoped>
 
-</style>

@@ -46,30 +46,3 @@
 
     }
 </script>
-
-<style scoped>
-  .btn-wrapper.btn{
-    background: transparent;
-    border: 1px dashed darkcyan;
-    padding: 10px 0;
-
-  }
-  .btn-wrapper.btn:hover{
-    background: rgb(80,213,183);
-    border: 0px ;
-    padding: 10px 0;
-
-  }
-  .btn-wrapper.btn:hover > .fa-plus-circle{
-    color: white;
-  }
-  .fa-plus-circle{
-    color:darkcyan;
-  }
-
-  .view {
-    border-color: transparent;
-    background-color: initial;
-    color: initial
-  }
-</style>

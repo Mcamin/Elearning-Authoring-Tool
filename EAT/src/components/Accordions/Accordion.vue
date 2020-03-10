@@ -15,7 +15,7 @@
 
           <div class="d-inline-block ml-4">
             <h4 >{{element.title}}</h4>
-            <b-badge>{{element.type}}</b-badge>
+            <b-badge variant="primary" pill>{{element.type}}</b-badge>
             <p>{{element.description}}</p></div>
         </b-col>
         <!-- End Left Settings -->
@@ -244,6 +244,3 @@
 
     }
 </script>
-
-<style scoped>
-</style>

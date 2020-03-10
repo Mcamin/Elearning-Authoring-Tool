@@ -84,11 +84,3 @@
 
     }
 </script>
-
-<style lang="sass" scoped>
-  .avatar,
-  .navbar-brand
-    max-width: 60px
-  .el-divider
-    height: 100%
-</style>

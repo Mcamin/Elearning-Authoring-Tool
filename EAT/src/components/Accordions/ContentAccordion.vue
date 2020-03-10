@@ -11,7 +11,7 @@
               <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
             </a>
             <h4 class="d-inline  mx-2">{{element.title}}</h4>
-            <b-badge>{{element.type}}</b-badge>
+          <b-badge variant="primary" pill>{{element.type}}</b-badge>
           </b-col>
           <!-- End Left Settings -->
 
@@ -148,8 +148,3 @@
 
   }
 </script>
-
-<style scoped>
-
-
-</style>

@@ -88,23 +88,11 @@
             this.$bvToast.hide(id);
           },
         handlePreview(){
-          this.$router.push({name:'preview',params:{id:this.$route.params.id, title:this.$route.params.title}});
+          this.$router.push({name:'preview',params:{id:this.$route.params.id}});
         },
       }
 
     }
 </script>
 
-<style scoped>
 
-  .submitbtn:hover{
-    color: grey !important;
-  }
-  .navbar-dark .navbar-nav .nav-link{
-    color: white !important;
-  }
-
-  .navbar-dark .navbar-nav .nav-link:hover{
-    color: grey !important;
-  }
-</style>
